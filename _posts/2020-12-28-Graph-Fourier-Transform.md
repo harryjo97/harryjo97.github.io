@@ -33,6 +33,7 @@ Fourier transform 은 주어진 신호를 서로 다른 frequency 를 가지는 
 > Fourier transform
 
 임의의 실수 $$\xi$$ 에 대한 integrable function $$ f : \mathbb{R} \rightarrow \mathbb{C} $$ 의 Fourier transform 은 다음과 같이 정의합니다.
+
 $$
 \hat{f}(\xi) = \langle f, e^{2\pi i\xi t} \rangle = \int_{\mathbb{R}} f(t) e^{-2\pi i\xi t}dt \tag{$1$}
 $$
@@ -41,6 +42,7 @@ $$
 > Inverse Fourier transform
 
 Fourier transform 의 역과정인 inverse Fourier transform 은 다음과 같습니다.
+
 $$
 f(x) = \int_{\mathbb{R}} \hat{f}(\xi)e^{2\pi i\xi t}d\xi \tag{$2$}
 $$
@@ -51,6 +53,7 @@ $$
 > Laplacian operator
 
 Complex exponentials $$ e^{2\pi i \xi t}$$ 들은 1 차원 Laplacian operator $$ \Delta $$ 의 eigenfunction 으로
+
 $$
 \Delta(e^{2\pi i \xi t}) = \frac{\partial^2}{\partial t^2}e^{2\pi i \xi t} 
 = -(2\pi\xi)^2 e^{2\pi i \xi t}
@@ -79,6 +82,7 @@ $$
 $$
 
 $$L$$ 의 eigenvector 들을 column 으로 가지는 행렬 $$U$$ 에 대해
+
 $$
 U = \begin{bmatrix}
 \bigg| & \bigg| & & \bigg| \\
@@ -86,7 +90,9 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 \bigg| & \bigg| & & \bigg|
 \end{bmatrix}
 $$
+
 $$(3)$$ 을 vector 의 형태로 표현하면,
+
 $$
 \hat{f} = U^Tf
 $$
@@ -95,18 +101,17 @@ $$
 > Inverse graph Fourier transform
 
 Graph Laplacian $$L$$ 의 eigenvector 들은 orthonormal[^1] 하기 때문에, $$(2)$$ 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.
+
 $$
 f(i) = \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l(i) 
 \tag{$4$}
 $$
 
 
-
-
-
 > Parseval relation
 
 Classical Fourier transform 에서와 마찬가지로 Parseval relation[^2] 을 만족합니다.
+
 $$
 \begin{align}
 	\langle f, h\rangle 
