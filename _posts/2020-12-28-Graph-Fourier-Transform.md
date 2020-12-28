@@ -1,6 +1,6 @@
 ---
 title: Graph Fourier Transform
-description: based on paper
+description: .
 date: 2020-12-28 10:00:00 +0900
 category:
 - GNN
@@ -8,11 +8,7 @@ category:
 
 
 
-
-
-## Introduction
-
-
+Graph Fourier Transform 이해하기
 
 
 
@@ -24,7 +20,7 @@ $$
 $$
 
 
-![](../assets/post/Graph-Fourier-Transform/fourier.jpg)
+![](/assets/post/Graph-Fourier-Transform/fourier.jpg)
 
 
 

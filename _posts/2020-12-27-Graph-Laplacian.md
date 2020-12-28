@@ -6,20 +6,13 @@ category:
 - GNN
 ---
 
-## Introduction
+
+
+Spectral Graph Theory 를 통해 Graph Laplacian 이해하기 
 
 
 
-포스트의 구성은 다음과 같습니다.
-
-1. Adjacency Matrix, Degree Matrix 
-2. Unnormalized Graph Laplacian
-3. Graph Laplacian as Operator
-4. Other Graph Laplacians
-
-
-
-## Adjacency Matrix, Degree Matrix 
+## 1. Adjacency Matrix, Degree Matrix 
 
 
 
@@ -46,7 +39,7 @@ W_{ij} =
 $$
 
 
-## Unnormalized Graph Laplacian
+## 2. Unnormalized Graph Laplacian
 
 
 
@@ -140,7 +133,33 @@ $$
 
 
 
-## Graph Laplacian as Operator
+## 3. Other Graph Laplacians 
+
+
+
+> Normalized graph Laplacian
+
+Normalized graph Laplacian $$L^{norm}$$ 은 다음과 같이 정의합니다.
+$$
+L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
+$$
+$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 [Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트에서 설명한 eigenvalue 와 eigenvector 들에 대한 성질이 동일하게 적용됩니다.
+
+하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 eigenvector 들도 다르고, 다음의 포스트에서 설명할 graph Laplacian 을 이용한 transformation 의 결과 또한 다릅니다.
+
+
+
+> Random walk graph Laplacian
+
+Random walk graph Laplacian $$L^{rw}$$ 는 다음과 같이 정의합니다. 
+$$
+L^{rw} = D^{-1}L = I - D^{-1}W
+$$
+$$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다. 
+
+
+
+## 4. Graph Laplacian as Operator
 
 
 
@@ -259,30 +278,6 @@ edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문
 따라서 graph Laplacian $$L$$ 은 operator 의 관점에서, 그래프에서 정의된 함수가 얼마나 "매끄러운지"를 알려줍니다. 
 
 
-
-## Other Graph Laplacians 
-
-
-
-#### Normalized graph Laplacian
-
-Normalized graph Laplacian $$L^{norm}$$ 은 다음과 같이 정의합니다.
-$$
-L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
-$$
-$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 [Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트에서 설명한 eigenvalue 와 eigenvector 들에 대한 성질이 동일하게 적용됩니다.
-
-하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 eigenvector 들도 다르고, 다음의 포스트에서 설명할 graph Laplacian 을 이용한 transformation 의 결과 또한 다릅니다.
-
-
-
-#### Random walk graph Laplacian
-
-Random walk graph Laplacian $$L^{rw}$$ 는 다음과 같이 정의합니다. 
-$$
-L^{rw} = D^{-1}L = I - D^{-1}W
-$$
-$$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다. 
 
 
 
