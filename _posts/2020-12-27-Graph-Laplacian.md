@@ -16,7 +16,7 @@ Spectral Graph Theory 이용한 Graph Laplacian 의 이해.
 
 
 
-주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$ |V| = N < \infty $$ 을 가정합니다. $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타내고,  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미합니다. 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 으로 설정합니다. $$W$$ 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ symmetric matrix 입니다.
+주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$\vert V\vert= N < \infty $$ 을 가정합니다. $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타내고,  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미합니다. 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 으로 설정합니다. $$W$$ 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ symmetric matrix 입니다.
 
 
 
