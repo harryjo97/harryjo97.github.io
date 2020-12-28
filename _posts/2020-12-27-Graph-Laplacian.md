@@ -8,7 +8,7 @@ category:
 
 
 
-Spectral Graph Theory 를 통해 Graph Laplacian 이해하기 
+Spectral Graph Theory 이용한 Graph Laplacian 의 이해.
 
 
 
@@ -16,8 +16,7 @@ Spectral Graph Theory 를 통해 Graph Laplacian 이해하기
 
 
 
-주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 
-이 포스트에서는 $$ |V| = N < \infty $$ 을 가정합니다. $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타내고,  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미합니다. 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 으로 설정합니다. $$W$$ 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ symmetric matrix 입니다.
+주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$ |V| = N < \infty $$ 을 가정합니다. $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타내고,  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미합니다. 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 으로 설정합니다. $$W$$ 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ symmetric matrix 입니다.
 
 
 
@@ -39,11 +38,16 @@ W_{ij} =
 $$
 
 
+
 ## 2. Unnormalized Graph Laplacian
 
 
 
-주어진 undirected weighted graph $$ G = (V,E,W) $$ 에 대해  unnormalized graph Laplacian[^2] 은 $$ L = D-W $$ 로 정의합니다. 여기서 $$D$$ 는 위에서 정의한 degree matrix 입니다. 
+주어진 undirected weighted graph $$ G = (V,E,W) $$ 에 대해  unnormalized graph Laplacian[^2] 은
+$$
+L = D-W
+$$
+로 정의합니다. $$D$$ 는 앞서 정의한 degree matrix 입니다. 
 
 아래의 그림은 그래프 (labeled) 에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 의 예시입니다.
 
@@ -76,7 +80,7 @@ $$
 
 
 
-> eigenvalue, eigenvector
+> Eigenvalue and eigenvector
 
 $$L$$ 이 real symmetric, positive semi-definite matrix 이므로, $$L$$ 은 non-negative real eigenvalue 들을 가집니다. 
 
@@ -90,7 +94,7 @@ $$
 
 
 
-> 0 as eigenvalue
+> Zero as eigenvalue
 
 특히 $$u_0 = \frac{1}{\sqrt{N}}\begin{pmatrix} 1 & 1 & \cdots & 1 \end{pmatrix}^T$$ 에 대해 
 $$
@@ -100,7 +104,7 @@ $$
 
 
 
-> multiplicity of eigenvalue 0
+> Multiplicity of eigenvalue zero
 
 $$L$$ 이 positive semi-definite 임을 증명하는 과정에서 $$(\dagger)$$ 의 결과를 이용하면,
 $$
@@ -129,7 +133,7 @@ sub-Laplacian $$L_i$$ 들로 이루어진 block matrix 로 볼 수 있습니다.
 $$
 0 = \lambda_0 < \lambda_1 \leq \cdots \leq \lambda_{N-1}
 $$
-으로 나타낼 수 있습니다. $$L$$ 의 spectrum[^4]을 연구하는 분야가 spectral graph theory  입니다. Spectral graph theory 에서 다루는 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트에서 자세히 설명하겠습니다.
+으로 나타낼 수 있습니다. $$L$$ 의 spectrum[^4]을 연구하는 분야가 spectral graph theory  입니다. Spectral graph theory 에서 다루는 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트를 통해 자세히 설명하겠습니다.
 
 
 
@@ -143,9 +147,9 @@ Normalized graph Laplacian $$L^{norm}$$ 은 다음과 같이 정의합니다.
 $$
 L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
 $$
-$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 [Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트에서 설명한 eigenvalue 와 eigenvector 들에 대한 성질이 동일하게 적용됩니다.
+$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 [Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. 그렇기 때문에, 다음의 포스트에서 설명할 graph Fourier transform 의 결과 또한 달라집니다.
 
-하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 eigenvector 들도 다르고, 다음의 포스트에서 설명할 graph Laplacian 을 이용한 transformation 의 결과 또한 다릅니다.
+Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 에 속한다는 것입니다. 특히, 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다.   
 
 
 
@@ -155,7 +159,7 @@ Random walk graph Laplacian $$L^{rw}$$ 는 다음과 같이 정의합니다.
 $$
 L^{rw} = D^{-1}L = I - D^{-1}W
 $$
-$$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다. 
+여기서 $$D^{-1}W$$ 는 random walk matrix 로 그래프 $$G$$ 에서의 Markov random walk 를 나타내어 줍니다. $$L^{rw}$$ 는 $$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다. 
 
 
 
@@ -163,23 +167,22 @@ $$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만,
 
 
 
-이 파트에서는 graph Laplacian 과 Laplacian operator $$\Delta$$ 의 관계에 대해 설명하려고 합니다. 
+마지막 파트에서는 graph Laplacian 과 Laplacian operator $$\Delta$$ 의 관계에 대해 설명하려고 합니다. $$\Delta$$ 는 $$n$$ 차원 Euclidean space 에서 정의된 second-order differential operator 로 $$f$$ 의 gradient $$\nabla f$$ 에 대한 divergence 로 정의됩니다.
 
-Graph Laplacian 에서 살짝 벗어나서, Laplacian 이란 같은 이름을 가지는 operator $$\Delta$$ 에 대해  얘기해 보겠습니다. $$\Delta$$ 는 $$n$$ 차원 Euclidean space 에서 정의된 second-order differential operator 로 $$f$$ 의 gradient $$\nabla f$$ 에 대한 divergence 로 정의됩니다.
 $$
 \Delta f = div(\nabla f)
 $$
-이 개념을 그래프에 적용하려고 하면,  그래프에서의 function, gradient, 그리고 divergence 크게 3 가지를 해결해야 합니다.
+이를 그래프에 적용하기 위해서는 그래프에서의 function, gradient, 그리고 divergence 크게 세 가지를 정의해야 합니다.
 
 
 
-> function for graph
+> Function for graph
 
 그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가진다고 자연스럽게 생각 할 수 있습니다. 이 때 feature space 를 $$N$$ 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 $$f : V \rightarrow \mathbb{R}^N$$ 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph Signal 이라고 합니다. 자세한 설명은 [The Emerging Field of Signal Processing on Graphs](https://arxiv.org/pdf/1211.0053.pdf) 을 참고하시면 큰 도움이 될 것 같습니다. 
 
 
 
-> gradient for graph
+> Gradient for graph
 
 Euclidean space 에서의 gradient 는 함수의 방향에 따른 도함수를 의미합니다. 그래프와 같이 이산적인 경우에는 도함수를 함수값의 difference 로 해석할 수 있습니다. Euclidean space 에서의 방향의 개념을 그래프에서의 edge 로 생각한다면, edge $$e = (i,j)$$ 에 대한 함수 $$f$$ 의 gradient 를 $$f(i)-f(j)$$  로 정의할 수 있습니다.
 
@@ -191,7 +194,7 @@ $$
 즉 gradient 를 edge 들에 대한 함수로 해석할 수 있습니다.
 
 
-> divergence for graph
+> Divergence for graph
 
 Euclidean space 에서의 divergence 는 한 점에 대한 "vector field" 의 "net outward flux" 를 의미합니다.  그래프에서의 vector field 는 gradient 이고 edge 들에 대한 함수입니다. 
 
@@ -205,7 +208,7 @@ div(g) = Kg
 $$
 
 
-> graph Laplacian
+> Graph Laplacian (unnormalized)
 
 위의 결과들을 종합하면 그래프에서의 Laplacian operator 는 다음과 같습니다.
 $$
@@ -279,7 +282,11 @@ edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문
 
 
 
+## 5.  Next
 
+
+
+다음 포스트에서는 graph Fourier transform 에 대해 설명하겠습니다.
 
 
 
