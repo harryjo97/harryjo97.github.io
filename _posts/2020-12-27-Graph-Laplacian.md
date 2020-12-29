@@ -24,11 +24,19 @@ $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edg
 
 쉽게 생각할 수 있는 weighted adjacency matrix 로 adjacency matrix[^1] 가 있습니다. Adjacency matrix 는 $$i$$ 와 $$j$$ 를 연결하는 edge 가 있다면 $$W_{ij} = 1$$, 없다면 $$W_{ij}=0$$ 입니다. 아래는 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다. 
 
-![](/assets/post/Graph-Laplacian/adjacency.gif)
+
+
+<p align='center'>
+    <img src = '/assets/post/Graph-Laplacian/adjacency.gif' style = 'max-width: 100%; height: auto'>
+</p>
+
+
 
 주어진 weighted adjacency matrix $$W$$ 에 대해 degree matrix  $$D$$ 는 
 
-$$D_{ii} = \sum^{N}_{j=1} W_{ij}$$ 
+$$
+D_{ii} = \sum^{N}_{j=1} W_{ij}
+$$
 
 를 만족하는 diagonal matrix 로 정의합니다. 쉽게 말해, $$D_{ii}$$ 는 vertex $$i$$ 를 끝점으로 가지는 edge 들의 weight 를 모두 더한 값과 같습니다. 위의 예시처럼 edge 마다 weight 를 1로 설정한다면, degree matrix 의 diagonal element 는 각 vertex 의 degree 를 의미하기 때문에 degree matrix 라는 명칭이 붙었습니다.
 
@@ -44,6 +52,7 @@ W_{ij} =
 \end{cases}
 $$
 
+&nbsp;
 
 ## 2. Unnormalized Graph Laplacian
 
@@ -59,7 +68,11 @@ $$
 
 아래의 그림은 그래프 (labeled) 에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 의 예시입니다.
 
-![](/assets/post/Graph-Laplacian/graph-eg.jpg)
+
+
+<p align='center'>
+    <img src = '/assets/post/Graph-Laplacian/graph-eg.jpg' style = 'max-width: 100%; height: auto'>
+</p>
 
 
 
@@ -156,6 +169,10 @@ $$
 
 
 
+&nbsp;
+
+
+
 ## 3. Other Graph Laplacians 
 
 
@@ -183,6 +200,10 @@ L^{rw} = D^{-1}L = I - D^{-1}W
 $$
 
 여기서 $$D^{-1}W$$ 는 random walk matrix 로 그래프 $$G$$ 에서의 Markov random walk 를 나타내어 줍니다. $$L^{rw}$$ 는 $$L$$, $$L^{norm}$$ 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다. 
+
+
+
+&nbsp;
 
 
 
@@ -219,6 +240,8 @@ $$
 즉 gradient 를 edge 들에 대한 함수로 해석할 수 있습니다.
 
 
+
+
 > Divergence for graph
 
 Euclidean space 에서의 divergence 는 한 점에 대한 "vector field" 의 "net outward flux" 를 의미합니다.  그래프에서의 vector field 는 gradient 이고 edge 들에 대한 함수입니다. 
@@ -234,6 +257,8 @@ $$
 $$
 div(g) = Kg
 $$
+
+
 
 
 > Graph Laplacian (unnormalized)
@@ -324,11 +349,23 @@ edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문
 
 
 
+&nbsp;
+
+
+
 ## 5.  Next
 
 
 
 다음 포스트에서는 graph Fourier transform 에 대해 설명하겠습니다.
+
+
+
+&nbsp;
+
+&nbsp;
+
+
 
 
 
