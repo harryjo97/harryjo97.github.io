@@ -2,8 +2,11 @@
 title: Graph Fourier Transform
 description: with Graph Signal Processing
 date: 2020-12-28 22:00:00 +0900
-category:
-- GNN
+category: 
+- theory
+tag:
+- gnn
+- Graph Fourier Transform
 ---
 
 

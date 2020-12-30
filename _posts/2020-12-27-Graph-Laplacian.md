@@ -3,7 +3,10 @@ title: Graph Laplacian
 description : with Spectral Graph Theory
 date: 2020-12-27 22:00:00 +0900
 category: 
-- GNN
+- theory
+tag:
+- gnn
+- Graph Laplacian
 ---
 
 
