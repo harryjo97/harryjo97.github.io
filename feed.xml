@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2020-12-31T00:06:53+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">GNN review</title><subtitle>공부한 내용을 정리하는 블로그입니다.</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Graph Convoloution and Polynomial Approximation</title><link href="https://harryjo97.github.io/theory/Graph-Convoloution-and-Polynomial-Approximation/" rel="alternate" type="text/html" title="Graph Convoloution and Polynomial Approximation" /><published>2020-12-30T15:00:00+09:00</published><updated>2020-12-30T15:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Convoloution-and-Polynomial-Approximation</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Convoloution-and-Polynomial-Approximation/">&lt;p&gt;based on the paper &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on Graphs via Spectral Graph Theory&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;0-graph-fourier-transform&quot;&gt;0. Graph Fourier Transform&lt;/h2&gt;
+
+&lt;p&gt;Graph Fourier transform 에 대해 자세히 설명한 &lt;a href=&quot;https://harryjo97.github.io/theory/Graph-Fourier-Transform/&quot;&gt;포스트&lt;/a&gt; 를 보고 오시면, graph convolution 을 이해하는데 큰 도움이 될 것입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-classical-convolution&quot;&gt;1. Classical Convolution&lt;/h2&gt;
+
+&lt;h2 id=&quot;2-graph-convolution&quot;&gt;2. Graph Convolution&lt;/h2&gt;
+
+&lt;h2 id=&quot;3-spectral-graph-wavelet-transform&quot;&gt;3. Spectral Graph Wavelet Transform&lt;/h2&gt;
+
+&lt;p&gt;kernel function \(g:\mathbb{R}^+ \rightarrow \mathbb{R}^+\) bandpass filter&lt;/p&gt;
+
+&lt;p&gt;\(g(0) = 0\) and \(\lim_{x\rightarrow\infty}g(x) = 0\)&lt;/p&gt;
+
+&lt;p&gt;wavelet operator \(T_g = g(L)\) 를 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\widehat{T_gf}(\lambda_l) = g(\lambda_l)\hat{f}(\lambda_l)\]
+
+&lt;h2 id=&quot;4-polynomial-approximation&quot;&gt;4. Polynomial Approximation&lt;/h2&gt;
+
+\[\hat{f}_{out}(\lambda_l) = \hat{g}_t(\lambda_l)\hat{f}_{in}(\lambda_l)\]
+
+\[f_{out} = U\hat{f}_{out}
+= U\hat{g}_t^T\hat{f}_{in} 
+= U\hat{g}_t^TU^T (U\hat{f}_{in})
+= U\hat{g}_t^TU^T\;f_{in}\]
+
+&lt;h2 id=&quot;4-next&quot;&gt;4. Next&lt;/h2&gt;
+
+&lt;p&gt;다음 포스트에서는 &lt;a href=&quot;https://arxiv.org/pdf/1609.02907.pdf&quot;&gt;Semi-Supervised Classification with Graph Convolutional Networks&lt;/a&gt; 의 paper review 를 하겠습니다.&lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph convolution" /><category term="Polynomial approximation" /><summary type="html">based on the paper Wavelets on Graphs via Spectral Graph Theory</summary></entry><entry><title type="html">Graph Fourier Transform</title><link href="https://harryjo97.github.io/theory/Graph-Fourier-Transform/" rel="alternate" type="text/html" title="Graph Fourier Transform" /><published>2020-12-28T22:00:00+09:00</published><updated>2020-12-28T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Fourier-Transform</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Fourier-Transform/">&lt;p&gt;Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.&lt;/p&gt;
+
+&lt;h2 id=&quot;0-graph-laplacian&quot;&gt;0. Graph Laplacian&lt;/h2&gt;
+
+&lt;p&gt;Graph Laplacian 에 대해 자세히 설명한 &lt;a href=&quot;https://harryjo97.github.io/gnn/Graph-Laplacian/&quot;&gt;포스트&lt;/a&gt; 를 보고 오시면, graph Fourier Transform 을 이해하는데 큰 도움이 될 것입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-classical-fourier-transform&quot;&gt;1. Classical Fourier Transform&lt;/h2&gt;
+
+&lt;p&gt;Fourier transform 은 주어진 신호 (함수) 를 서로 다른 frequency 를 가지는 주기 함수들로 분해하는 변환입니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Fourier-Transform/fourier.jpg&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;Graph Fourier transform 과 구분 짓기 위해 “Classical” Fourier transform 이라고 부르겠습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Fourier transform&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;임의의 실수 \(\xi\) 에 대한 integrable function \(f : \mathbb{R} \rightarrow \mathbb{C}\) 의 Fourier transform 은 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\hat{f}(\xi) = \langle f, e^{2\pi i\xi t} \rangle = \int_{\mathbb{R}} f(t) e^{-2\pi i\xi t}dt \tag{$1$}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Inverse Fourier transform&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Fourier transform 의 역과정인 inverse Fourier transform 은 다음과 같습니다.&lt;/p&gt;
+
+\[f(x) = \int_{\mathbb{R}} \hat{f}(\xi)e^{2\pi i\xi t}d\xi \tag{$2$}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Laplacian operator&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Fourier transform 에 등장하는 complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 는 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 입니다.&lt;/p&gt;
+
+\[\Delta(e^{2\pi i \xi t}) = \frac{\partial^2}{\partial t^2}e^{2\pi i \xi t} 
+= -(2\pi\xi)^2 e^{2\pi i \xi t}\]
+
+&lt;p&gt;그렇기 때문에 Classical Fourier transform 은 Laplacian operator \(\Delta\) 의 eigenfunction 들의 합으로 분해하는 것입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-graph-fourier-transform&quot;&gt;2. Graph Fourier Transform&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Graph Fourier transform&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://harryjo97.github.io/gnn/Graph-Laplacian/&quot;&gt;포스트&lt;/a&gt; 의 4번째 파트에서 설명했듯이, Euclidean space 의 Laplacian operator \(\Delta\) 는 그래프에서의 graph Laplacian \(L\) 에 해당합니다. 즉 그래프에서도 graph Laplacian \(L\) 을 사용해 Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 이 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 \(f \in\mathbb{R}^N\) 를 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) 들의 합으로 분해하는 변환입니다.&lt;/p&gt;
+
+&lt;p&gt;\(f\)에서 \(u_l\) 이 차지하는 부분은 두 vector 의 inner product 로 얻을 수 있습니다. 따라서, \((1)\) 과 같이 graph Fourier transform 을 정의할 수 있습니다.
+\(\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{\ast}_l(i) 
+\tag{$3$}\)&lt;/p&gt;
+
+&lt;p&gt;여기서 \(f\) 에 대한 Fourier transform 의 결과인 \(\hat{f}\) 는 \(L\) 의 spectrum 에서만 정의되는 함수입니다. \(\hat{f}\) 을 다음과 같이 \(\mathbb{R}^N\) 의 vector 로 보겠습니다.&lt;/p&gt;
+
+\[\hat{f} 
+= \begin{bmatrix}
+\hat{f}(\lambda_0) \\
+\vdots \\
+\hat{f}(\lambda_{N-1})
+\end{bmatrix}\]
+
+&lt;p&gt;\(L\) 의 eigenvector 들을 column 으로 가지는 행렬 \(U\) 에 대해&lt;/p&gt;
+
+\[U = \begin{bmatrix}
+\bigg| &amp;amp; \bigg| &amp;amp; &amp;amp; \bigg| \\
+u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
+\bigg| &amp;amp; \bigg| &amp;amp; &amp;amp; \bigg|
+\end{bmatrix}\]
+
+&lt;p&gt;\((3)\) 을 다음과 같이 표현할 수 있습니다.&lt;/p&gt;
+
+\[\hat{f} 
+= \begin{bmatrix}
+\hat{f}(\lambda_0) \\
+\vdots \\
+\hat{f}(\lambda_{N-1})
+\end{bmatrix}
+= \begin{bmatrix}
+- &amp;amp; u_0^{\ast} &amp;amp; - \\
+
+&amp;amp; \vdots &amp;amp; \\
+- &amp;amp; u_{N-1}^{\ast} &amp;amp; -
+\end{bmatrix}
+\begin{bmatrix}
+f(1) \\
+\vdots \\
+f(N)
+\end{bmatrix}
+= U^{\ast}f\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Inverse graph Fourier transform&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\(\hat{f}(\lambda_l)\) 은 그래프에서의 함수 \(f\) 의 \(u_l\) 에 대한 성분으로 이해할 수 있습니다. \(\left\{ u_l \right\}^{N-1}_{l=0}\) 은 \(\mathbb{R}^N\) 의 orthonormal basis&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; 를 이루기 때문에, Fourier transform 의 결과인 \(\hat{f}\) 으로 부터 원래의 함수 \(f\) 를 얻어내려면 각 성분들을 모두 더해주면 됩니다. 따라서 \((2)\) 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
+
+\[f(i) = \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l(i) 
+\tag{$4$}\]
+
+&lt;p&gt;\((4)\) 를 \(\mathbb{R}^N\) 의 vector 로 표현하면,&lt;/p&gt;
+
+\[f 
+= \begin{bmatrix}
+f(1) \\
+\vdots \\
+f(N)
+\end{bmatrix}
+= \begin{bmatrix}
+\bigg| &amp;amp; \bigg| &amp;amp; &amp;amp; \bigg| \\
+u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
+\bigg| &amp;amp; \bigg| &amp;amp; &amp;amp; \bigg|
+\end{bmatrix} 
+\begin{bmatrix}
+\hat{f}(\lambda_0) \\
+\vdots \\
+\hat{f}(\lambda_{N-1})
+\end{bmatrix}
+= U\hat{f}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Parseval relation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Classical Fourier transform 에서와 마찬가지로 Parseval relation&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; 을 만족합니다.&lt;/p&gt;
+
+\[\begin{align}
+	\langle f, h\rangle 
+	&amp;amp;= \langle \sum^{N-1}_{l=0}\hat{f}(\lambda_l)u_l, \sum^{N-1}_{l'=0}\hat{g}(\lambda_{l'})u_{l'} \rangle \\
+	&amp;amp;= \sum_{l, l'} \hat{f}(\lambda_l)\hat{g}(\lambda_{l'})\langle u_l, u_{l'} \rangle \\
+	&amp;amp;= \sum_{l} \hat{f}(\lambda_l)\hat{g}(\lambda_l) = \langle \hat{f}, \hat{g} \rangle
+\end{align}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;3-fourier-domain&quot;&gt;3. Fourier Domain&lt;/h2&gt;
+
+&lt;p&gt;Fourier domain&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-next&quot;&gt;4. Next&lt;/h2&gt;
+
+&lt;p&gt;다음 포스트에서는 graph Fourier transform 을 사용한 graph Convolution 과 polynomial approximation 에 대해 설명하겠습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;\(L\) 의 eigenvalue \(\lambda_l\) 에 대한 eigenvector 를 \(u_l\) 이라 하겠습니다. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Eigenvector 들을 unit vector 로 설정하면 orthonormal 하게 됩니다. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;\(\langle f, h \rangle = \langle \hat{f}, \hat{g} \rangle\) 의 identity 를 의미합니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;frequency domain, spectral domain 등의 이름으로도 불립니다. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph Fourier Transform" /><summary type="html">Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-27T22:00:00+09:00</published><updated>2020-12-27T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Spectral Graph Theory 이용한 Graph Laplacian 의 이해.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-adjacency-matrix-degree-matrix&quot;&gt;1. Adjacency Matrix, Degree Matrix&lt;/h2&gt;
+
+&lt;p&gt;주어진 undirected weighted graph \(G = (V,E,W)\) 는 vertices 의 집합 \(V\), edges 의 집합 \(E\), 그리고 weighted adjacency matrix \(W\) 로 이루어집니다. 이 포스트에서는 \(\vert V\vert= N &amp;lt; \infty\) 을 가정합니다.&lt;/p&gt;
+
+&lt;p&gt;\(E\) 의 원소 \(e = (i,j)\) 는 vertex \(i\) 와 \(j\) 를 연결하는 edge 를 나타내고,  \(W_{ij}\) 는 edge \(e = (i,j)\) 의 weight 을 의미합니다. 만약 \(i\) 와 \(j\)를 연결하는 edge 가 없다면 \(W_{ij}=0\) 으로 설정합니다. \(W\) 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, \(W\) 는 \(N\times N\) symmetric matrix 입니다.&lt;/p&gt;
+
+&lt;p&gt;쉽게 생각할 수 있는 weighted adjacency matrix 로 adjacency matrix&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; 가 있습니다. Adjacency matrix 는 \(i\) 와 \(j\) 를 연결하는 edge 가 있다면 \(W_{ij} = 1\), 없다면 \(W_{ij}=0\) 입니다. 아래는 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Laplacian/adjacency.gif&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;주어진 weighted adjacency matrix \(W\) 에 대해 degree matrix  \(D\) 는&lt;/p&gt;
+
+\[D_{ii} = \sum^{N}_{j=1} W_{ij}\]
+
+&lt;p&gt;를 만족하는 diagonal matrix 로 정의합니다. 쉽게 말해, \(D_{ii}\) 는 vertex \(i\) 를 끝점으로 가지는 edge 들의 weight 를 모두 더한 값과 같습니다. 위의 예시처럼 edge 마다 weight 를 1로 설정한다면, degree matrix 의 diagonal element 는 각 vertex 의 degree 를 의미하기 때문에 degree matrix 라는 명칭이 붙었습니다.&lt;/p&gt;
+
+&lt;p&gt;그래프의 edge weight 가 주어지지 않은 경우에는 threshold Gaussian kernel weighting function을 사용해 아래와 같이 weighted adjacency matrix \(W\) 를 정의할 수 있습니다. 그래프를 사용한 semi-supervised learning 에서는 \(dist(i,j)\) 로 vertex \(i\) 와 \(j\) 의 feature vector 사이의 Euclidean distance 를 사용합니다.&lt;/p&gt;
+
+\[W_{ij} = 
+\begin{cases}
+\exp \left( \frac{dist(i,j)^2}{2\theta^2} \right) &amp;amp;\mbox{ if }\; dist(i,j)\leq k \\
+0 &amp;amp;\mbox{ otherwise }
+\end{cases}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;2-unnormalized-graph-laplacian&quot;&gt;2. Unnormalized Graph Laplacian&lt;/h2&gt;
+
+&lt;p&gt;주어진 undirected weighted graph \(G = (V,E,W)\) 에 대해  unnormalized graph Laplacian&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; 은&lt;/p&gt;
+
+\[L = D-W\]
+
+&lt;p&gt;로 정의합니다. \(D\) 는 앞서 정의한 degree matrix 입니다.&lt;/p&gt;
+
+&lt;p&gt;아래의 그림은 그래프 (labeled) 에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 의 예시입니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Laplacian/graph-eg.jpg&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Real symmetric matrix&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Undirected weighted graph \(G\) 에 대해 \(W\) 와 \(D\) 는 real symmetric matrix 이므로, \(L=D-W\) 또한 real symmetric matrix 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Positive semi-definite&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;임의의 \(x\in\mathbb{R}^N\) 에 대해,&lt;/p&gt;
+
+\[\begin{align}
+x^TLx 
+&amp;amp;= x^TDx - x^TWx = \sum_{i} D_{ii}x_i^2 - \sum_{i,j}x_iW_{ij}x_j \\
+&amp;amp;= \frac{1}{2} \left( 2\sum_{i} D_{ii}x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
+&amp;amp;\overset{\mathrm{(1)}}{=} \frac{1}{2}\left( 2\sum_{i}\left\{\sum_{j}W_{ij}\right\} x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
+&amp;amp;\overset{\mathrm{(2)}}{=} \frac{1}{2}\left( \sum_{i,j}W_{ij}x_i^2 + \sum_{i,j}W_{ij}x_j^2  - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
+&amp;amp;= \frac{1}{2}\sum_{i,j} W_{ij}(x_i-x_j)^2 \geq 0 \tag{$\dagger$}
+\end{align}\]
+
+&lt;p&gt;을 만족합니다. 유도 과정에서의 (1) 은 degree matrix 의 정의를 사용하였고, (2) 는 \(W\) 가 symmetric 이기 때문에 성립합니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 \(L\) 은 positive semi-definite matrix 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Eigenvalue and eigenvector&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\(L\) 이 real symmetric, positive semi-definite matrix 이므로, \(L\) 은 non-negative real eigenvalue 들을 가집니다.&lt;/p&gt;
+
+&lt;p&gt;서로 다른 eigenvalue \(\lambda\), \(\mu\) 와 이에 해당하는 eigenvector \(u\), \(v\) 에 대해&lt;/p&gt;
+
+\[\lambda u^Tv = (\lambda u)^Tv = (Lu)^Tv = u^TLv = u^T(\mu v) = \mu u^Tv\]
+
+&lt;p&gt;이기 때문에 \(u^Tv = 0\) 이어야 하고, \(u\) 와 \(v\) 는 orthogonal 합니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 \(L\) 의 eigenvector 들은 서로 orthogonal 합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Zero as eigenvalue&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;특히 \(u_0 = \frac{1}{\sqrt{N}}\begin{pmatrix} 1 &amp;amp; 1 &amp;amp; \cdots &amp;amp; 1 \end{pmatrix}^T\) 에 대해&lt;/p&gt;
+
+\[Lu_0 = (D-W)u_0 = \mathbf{0}\]
+
+&lt;p&gt;을 만족하기 때문에 \(L\) 은 0 을 eigenvalue 로 가지며, 0 에 해당하는 eigenvector&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; 는 \(u_0\) 입니다. 여기서 기억해야 할 점은, 주어진 그래프와 상관 없이 \(L\) 은 0 을 eigenvalue 로 가지고, eigenvector \(u_0 = \frac{1}{\sqrt{N}}\begin{pmatrix} 1 &amp;amp; 1 &amp;amp; \cdots &amp;amp; 1 \end{pmatrix}^T\) 또한 변하지 않는다는 것입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Multiplicity of eigenvalue zero&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\(L\) 이 positive semi-definite 임을 증명하는 과정에서 \((\dagger)\) 의 결과를 이용하면,&lt;/p&gt;
+
+\[0 = u^TLu = \sum_{i,j}W_{ij}(u(i) - u(j))^2\]
+
+&lt;p&gt;\(W_{ij}\neq 0\) 인 모든 vertices \(i\) 와 \(j\) , 즉 edge로 연결된 \(i\) 와 \(j\) 에 대해 \(u(i) = u(j)\)를 만족합니다 (#) .&lt;/p&gt;
+
+&lt;p&gt;따라서 \(k\) 개의 connected components 를 가지는 그래프 \(G\) 의 graph Laplacian \(L\) 은&lt;/p&gt;
+
+\[L = \begin{bmatrix}
+L_1 &amp;amp; &amp;amp; &amp;amp; \\
+ &amp;amp; L_2 &amp;amp; &amp;amp; \\
+ &amp;amp; &amp;amp; \ddots &amp;amp; \\
+ &amp;amp; &amp;amp; &amp;amp; L_k
+\end{bmatrix}\]
+
+&lt;p&gt;sub-Laplacian \(L_i\) 들로 이루어진 block matrix 로 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector \(u\) 는 (#)으로 인해 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 1개의 0 eigenvalue 를 가집니다.  그렇기 때문에 \(L\) 은 정확히 \(k\) 개의 0 eigenvalue 들을 가집니다.&lt;/p&gt;
+
+&lt;p&gt;정리하면, graph Laplacian \(L\) 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 \(G\) 의 connected components 의 개수와 일치합니다.&lt;/p&gt;
+
+&lt;p&gt;주어진 그래프를 connected 라고 가정하고 \(L\) 의 eigenvalue 들을&lt;/p&gt;
+
+\[0 = \lambda_0 &amp;lt; \lambda_1 \leq \cdots \leq \lambda_{N-1}\]
+
+&lt;p&gt;으로 나타낼 수 있습니다. \(L\) 의 spectrum&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;을 연구하는 분야가 spectral graph theory  입니다. Spectral graph theory 에서 다루는 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트를 통해 자세히 설명하겠습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;3-other-graph-laplacians&quot;&gt;3. Other Graph Laplacians&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Normalized graph Laplacian&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Normalized graph Laplacian \(L^{norm}\) 은 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}\]
+
+&lt;p&gt;\(L\) 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 &lt;a href=&quot;#unnormalized-graph-laplacian&quot;&gt;Unnormalized Graph Laplacian&lt;/a&gt; 파트에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 \(L\) 과 \(L^{norm}\) 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. \(L\) 의 eigenvalue 0 에 대한 eigenvector \(u_0\) 는 그래프에 상관 없이 일정하지만, \(L^{norm}\) 의 경우 그래프에 따라 변합니다. 그렇기 때문에, 다음의 포스트에서 설명할 graph Fourier transform 의 결과 또한 달라집니다.&lt;/p&gt;
+
+&lt;p&gt;Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 \([0,2]\) 에 속한다는 것입니다. 특히, 그래프 \(G\) 가 bipartite graph 일 때만 \(L^{norm}\) 의 가장 큰 eigenvalue 가 2가 됩니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Random walk graph Laplacian&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Random walk graph Laplacian \(L^{rw}\) 는 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[L^{rw} = D^{-1}L = I - D^{-1}W\]
+
+&lt;p&gt;여기서 \(D^{-1}W\) 는 random walk matrix 로 그래프 \(G\) 에서의 Markov random walk 를 나타내어 줍니다. \(L^{rw}\) 는 \(L\), \(L^{norm}\) 과 마찬가지로 positive semi-definite matrix 이지만, symmetric 이 보장되지 않습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;4-graph-laplacian-as-operator&quot;&gt;4. Graph Laplacian as Operator&lt;/h2&gt;
+
+&lt;p&gt;마지막 파트에서는 graph Laplacian 과 Laplacian operator \(\Delta\) 의 관계에 대해 설명하려고 합니다. \(\Delta\) 는 \(n\) 차원 Euclidean space 에서 정의된 second-order differential operator 로 \(f\) 의 gradient \(\nabla f\) 에 대한 divergence 로 정의됩니다.&lt;/p&gt;
+
+\[\Delta f = div(\nabla f)\]
+
+&lt;p&gt;이를 그래프에 적용하기 위해서는 그래프에서의 function, gradient, 그리고 divergence 크게 세 가지를 정의해야 합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Function for graph&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가진다고 자연스럽게 생각 할 수 있습니다. 이 때 feature space 를 \(N\) 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 \(f : V \rightarrow \mathbb{R}^N\) 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph Signal 이라고 합니다. 자세한 설명은 &lt;a href=&quot;https://arxiv.org/pdf/1211.0053.pdf&quot;&gt;The Emerging Field of Signal Processing on Graphs&lt;/a&gt; 을 참고하시면 큰 도움이 될 것 같습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Gradient for graph&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Euclidean space 에서의 gradient 는 함수의 방향에 따른 도함수를 의미합니다. 그래프와 같이 이산적인 경우에는 도함수를 함수값의 difference 로 해석할 수 있습니다. Euclidean space 에서의 방향의 개념을 그래프에서의 edge 로 생각한다면, edge \(e = (i,j)\) 에 대한 함수 \(f\) 의 gradient 를 \(f(i)-f(j)\)  로 정의할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;edge 의 시작점에 \(+1\), 끝점에 \(-1\) 을 부여하는 incidence matrix \(K\) 를 통해 그래프의 모든 edge 에 대해 gradient 를 표현하면,&lt;/p&gt;
+
+\[\nabla f = K^T f\]
+
+&lt;p&gt;즉 gradient 를 edge 들에 대한 함수로 해석할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Divergence for graph&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Euclidean space 에서의 divergence 는 한 점에 대한 “vector field” 의 “net outward flux” 를 의미합니다.  그래프에서의 vector field 는 gradient 이고 edge 들에 대한 함수입니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 vertex \(i\) 에 대한 gradient 의 “net outward flux” 는 \(i\) 와 연결된 edge 들에 대한 gradient 함수값의 합이라고 생각할 수 있습니다. 이를 vertex \(i\) 에 대해&lt;/p&gt;
+
+\[\sum_{e=(i,j)\in E} g(e) - \sum_{e' = (j,i)\in E} g(e') = \sum_{e\in E}K_{ie}g\]
+
+&lt;p&gt;정리하면, gradient \(g\) 에 대한 divergence 를 다음과 같이 표현됩니다.&lt;/p&gt;
+
+\[div(g) = Kg\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Graph Laplacian (unnormalized)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위의 결과들을 종합하면 그래프에서의 Laplacian operator 는 다음과 같습니다.&lt;/p&gt;
+
+\[\Delta f = div(\nabla f) = KK^T f\]
+
+&lt;p&gt;이 때 행렬 \(KK^T\) 를 살펴 보면,&lt;/p&gt;
+
+\[(KK^T)_{ij} = \sum^E_{s=1} K_{is}K^T_{sj}\]
+
+&lt;p&gt;이제 off-diagonal 의 원소와 diagonal 의 원소를 나눠서 계산해보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;만약 \(i\neq j\) 라면,&lt;/p&gt;
+
+\[K_{is}K^T_{sj} = \begin{cases}
+-1 &amp;amp;\mbox{ if }\; e_s = (i,j)  \\
+0 &amp;amp;\mbox{ otherwise }
+\end{cases}\]
+
+&lt;p&gt;만약 \(i=j\) 라면,&lt;/p&gt;
+
+\[K_{is}K^T_{si} = \begin{cases}
+1 &amp;amp;\mbox{ if }\; i\; \mbox{ in edge }\; e_s\\
+0 &amp;amp;\mbox{ otherwise }
+\end{cases}\]
+
+&lt;p&gt;따라서,&lt;/p&gt;
+
+\[(KK^T)_{ij} = \begin{cases}
+-1 &amp;amp;\mbox{ if }\; i\neq j \\
+deg(i) &amp;amp;\mbox{ if }\; i=j
+\end{cases}\]
+
+&lt;p&gt;결론적으로 \(KK^T\) 는 그래프의 adjacency matrix \(W\) 에 대한 unnormalized graph Laplacian \(L = D-W\) 와 일치합니다. 그렇기 때문에 그래프에서의 Laplacian operator 는&lt;/p&gt;
+
+\[\Delta f = Lf\]
+
+&lt;p&gt;으로 정의할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이를 weighted graph 에 적용하면, 임의의 \(f\in\mathbb{R}^N\) 에 대해 weighted graph 의 graph Laplacian 은&lt;/p&gt;
+
+\[(Lf)(i) 
+= \left( (D-W)
+\begin{bmatrix}
+f(1) \\ \vdots \\ f(N) 
+\end{bmatrix} 
+\right)(i)
+= \sum_{i\sim j} W_{ij} (f(i)-f(j))\]
+
+&lt;p&gt;를 만족하는 difference operator 입니다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로, graph Laplacian 의 의미에 대해서 얘기해보겠습니다. Laplacian operator 는 second-order differential operator 로 함수가 얼마나 “매끄러운지” &lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;를 알려줍니다. 이를 그래프 관점에서 보면, “매끄러운” 함수란 edge 로 연결된 점들에 대한 함숫값이 많이 변하지 않는다는 것입니다. edge 의 양 끝점의 함숫값의 차이가 작아야 한다는 것을 Mean Square Error 의 형태를 사용하면&lt;/p&gt;
+
+\[\sum_{e=(i,j)\in E} W_{ij} (f(i)-f(j))^2\]
+
+&lt;p&gt;로 표현할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#unnormalized-graph-laplacian&quot;&gt;Unnormalized Graph Laplacian&lt;/a&gt; 파트의 \((\dagger)\) 를 다시 보면,&lt;/p&gt;
+
+\[f^TLf = \frac{1}{2} \sum_{i,j} W_{ij}(f(i)-f(j))^2\]
+
+&lt;p&gt;edge 가 없는 두 vertex \(i\) 와 \(j\) 에 대해 \(W_{ij}=0\) 이기 때문에 위의 두 식은 동일합니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 graph Laplacian \(L\) 은 operator 의 관점에서, 그래프에서 정의된 함수가 얼마나 “매끄러운지”를 알려줍니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;5--next&quot;&gt;5.  Next&lt;/h2&gt;
+
+&lt;p&gt;다음 포스트에서는 graph Fourier transform 에 대해 설명하겠습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;adjacency matrix 는 보통 \(A\) 로 나타내며, edge 의 weight 가 0 또는 1 입니다. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;combinatorial graph Laplacian 으로도 불립니다. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;\(u_0\) 는 유일한 eigenvector 가 아닐 수 있습니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;eigenvalue 들을 spectrum 이라고 부릅니다. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;“smooth” &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph Laplacian" /><summary type="html">Spectral Graph Theory 이용한 Graph Laplacian 의 이해.</summary></entry></feed>
