@@ -27,14 +27,14 @@ Graph Laplacian 에 대해 자세히 설명한 [포스트](https://harryjo97.git
 
 
 
-Fourier transform 은 주어진 신호 (함수) 를 서로 다른 frequency 를 가지는 주기 함수들로 분해하는 변환입니다.  
+Fourier transform 은 주어진 신호 (함수) 를 서로 다른 frequency 를 가지는 정현파들로 분해하는 변환입니다.  
 
 
 
 <p align='center'>
     <img src = '/assets/post/Graph-Fourier-Transform/fourier.jpg' style = 'max-width: 100%; height: auto'>
 </p>
-Graph Fourier transform 과 구분 짓기 위해 "Classical" Fourier transform 이라고 부르겠습니다.
+Graph Fourier transform 과 구분 짓기 위해 이를 "Classical" Fourier transform 이라고 부르겠습니다.
 
 
 
@@ -46,6 +46,10 @@ Graph Fourier transform 과 구분 짓기 위해 "Classical" Fourier transform �
 $$
 \hat{f}(\xi) = \langle f, e^{2\pi i\xi t} \rangle = \int_{\mathbb{R}} f(t) e^{-2\pi i\xi t}dt \tag{$1$}
 $$
+
+
+
+$$(1)$$ 의 정의를 살펴보면, Fourier transform 은 time domain $$t\in\mathbb{R}$$ 에서 정의된 함수 $$f(t)$$ 를 frequency domain $$\xi\in\mathbb{C}$$ 에서 정의된 함수 $$\hat{f}(\xi)$$ 로 변환시켜줍니다.
 
 
 
@@ -197,11 +201,11 @@ $$
 
 
 
-## 3. Fourier Domain
+## 3. Why Do We Need Fourier Transform?
 
 
 
-Fourier domain[^4]
+
 
 
 
@@ -222,4 +226,3 @@ Fourier domain[^4]
 [^1]:$$L$$ 의 eigenvalue $$ \lambda_l $$ 에 대한 eigenvector 를 $$ u_l $$ 이라 하겠습니다.
 [^2]: Eigenvector 들을 unit vector 로 설정하면 orthonormal 하게 됩니다.
 [^3]: $$ \langle f, h \rangle = \langle \hat{f}, \hat{g} \rangle$$ 의 identity 를 의미합니다.
-[^4]: frequency domain, spectral domain 등의 이름으로도 불립니다.

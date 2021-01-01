@@ -1,5 +1,5 @@
 ---
-title: Graph Convoloution and Polynomial Approximation
+title: Graph Convoloution and Spectral Graph Wavelet Transform
 description: based on "Wavelets on Graphs via Spectral Graph Theory"
 date: 2020-12-30 15:00:00 +0900
 category:
@@ -7,7 +7,6 @@ category:
 tag:
 - gnn
 - Graph convolution
-- Polynomial approximation
 ---
 
 
@@ -64,26 +63,12 @@ $$
 
 
 
-## 4. Polynomial Approximation
-
-
-
-
-$$
-\hat{f}_{out}(\lambda_l) = \hat{g}_t(\lambda_l)\hat{f}_{in}(\lambda_l)
-$$
-
-$$
-f_{out} = U\hat{f}_{out}
-= U\hat{g}_t^T\hat{f}_{in} 
-= U\hat{g}_t^TU^T (U\hat{f}_{in})
-= U\hat{g}_t^TU^T\;f_{in}
-$$
-
-
-
 
 ## 4. Next
 
-다음 포스트에서는 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) 의 paper review 를 하겠습니다.
+다음 포스트에서는 
+
+
+
+Polynomial approximation
 
