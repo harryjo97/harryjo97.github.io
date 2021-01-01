@@ -1,17 +1,17 @@
 ---
 title: Graph Laplacian
 description : with Spectral Graph Theory
-date: 2020-12-27 22:00:00 +0900
+date: 2020-12-30 22:00:00 +0900
 category: 
 - theory
 tag:
 - gnn
-- Graph Laplacian
+- graph laplacian
 ---
 
 
 
-Spectral Graph Theory 이용한 Graph Laplacian 의 이해.
+Spectral Graph Theory 를 이용한 Graph Laplacian 의 이해.
 
 
 

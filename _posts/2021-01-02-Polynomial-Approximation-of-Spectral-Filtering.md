@@ -1,15 +1,28 @@
 ---
-title: Polynomial Approximation
+title: Polynomial Approximation of Spectral Filtering
 description: based on "Wavelets on Graphs via Spectral Graph Theory"
-date: 2021-01-01 11:00:00 +0900
+date: 2021-01-01 23:00:00 +0900
 category:
 - theory
 tag:
 - gnn
-- Polynomial approximation
+- polynomial approximation
+- spectral filtering
 ---
 
-##0. 
+
+
+Polynomial approximation of spectral filtering using Chebyshev polynomial.
+
+
+
+## 0. Graph Convolution and Filtering
+
+Graph convolution 과 filtering 에 대해 자세히 설명한 [포스트](https://harryjo97.github.io/theory/Graph-Convolution-and-Filtering/) 를 보고 오시면, 이번 포스트를 이해하는데 큰 도움이 될 것입니다.
+
+Spectral Graph Wavelet Transform 에 대해 더 공부하고 싶은 분들은 [Wavelets on Graphs via Spectral Graph Theory](https://arxiv.org/pdf/0912.3848.pdf) 를 참고하기 바랍니다.
+
+
 
 ## 1. Polynomial Approximation
 
@@ -33,6 +46,7 @@ $$
 
 
 Inverse Fourier transform 을 통해 $$f_{out}$$ 을 복원하면
+
 $$
 \begin{align}
 
@@ -70,22 +84,18 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 \end{bmatrix}
 = U\hat{g}_t(\Lambda)U^T\;f_{in} \tag{$1$}
 
-\end{align} 
+\end{align}
 $$
 
 
 
 즉 filter $$g_{\theta}$$ 의 결과를 확인하기 위해서는  graph Laplacian $$L$$ 의 eigenvector 가 모두 필요합니다. 하지만, eigenvalue 와 eigenvector 를 계산하기 위해 많이 사용하는 QR decomposition 의 computational complexity 가 $$O(N^3)$$ 이므로 vertices 가 수천개 이상인 그래프에서는 적용하기에는 힘듭니다.
 
-따라서, 그래프의 크기가 큰 경우에는 $$(1)$$ 을 근사할 수 있는 효율적인 방법이 필요합니다.  
+따라서, 그래프의 크기가 큰 경우에는 $$(1)$$ 을 근사할 수 있는 효율적인 방법이 필요합니다.  $$(\ast)$$
 
 
 
 [Hammond et al.](https://arxiv.org/pdf/0912.3848.pdf) 에서는 (truncated) Chebyshev polynomial 을 이용한 polynomial approximation 을  제시합니다. 
-
-
-
-Lanczos algorithm 
 
 
 
@@ -127,6 +137,16 @@ $$p(x)$$ 가 $$M$$ 차 다항식이라면,
 $$(3)$$ 의 approximation error 는 $$p(x)$$ 가 $$M$$ 차 minimax polynomial 일 때 최소가 됩니다.
 
 
-## 4. Next
+
+## 2. Lanczos Algorithm 
+
+$$(\ast)$$ 의 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다.  
+
+[LanczosNet: Multi-Scale Deep Graph Convolutional Networks](https://arxiv.org/pdf/1901.01484.pdf) 의 paper review 를 통해 더 자세히 설명하겠습니다.
+
+
+
+
+## 3. Next
 
 다음 포스트에서는 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) 의 paper review 를 하겠습니다.
