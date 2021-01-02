@@ -217,7 +217,7 @@ $$
 
 
 <p align='center'>
-    <img src = '/assets/post/Graph-Fourier-Transform/transform-diagram.png' style = 'max-width: 50%; height: auto'>
+    <img src = '/assets/post/Graph-Fourier-Transform/transform-diagram.PNG' style = 'max-width: 50%; height: auto'>
 </p>
 
 

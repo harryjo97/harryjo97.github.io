@@ -40,7 +40,7 @@ $$
 $$f_{out}$$ 의 Fourier transform 을 보면
 
 $$
-\hat{f}_{out}(\lambda_l) = \hat{g}_t(\lambda_l)\hat{f}_{in}(\lambda_l)
+\hat{f}_{out}(\lambda_l) = \hat{g}_{\theta}(\lambda_l)\hat{f}_{in}(\lambda_l)
 $$
 
 
@@ -51,7 +51,7 @@ $$
 \begin{align}
 
 f_{out} 
-&= \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l
+&= \sum^{N-1}_{l=0} \hat{f}_{out}(\lambda_l)u_l
 = 
 \begin{bmatrix}
 \big| & \big| & \cdots & \big| \\
@@ -65,24 +65,24 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 \end{bmatrix} 
 = U
 \begin{bmatrix}
-\hat{g}(\lambda_0)\hat{f}_{in}(\lambda_0) \\
+\hat{g}_{\theta}(\lambda_0)\hat{f}_{in}(\lambda_0) \\
 \vdots \\
-\hat{g}(\lambda_{N-1})\hat{f}_{in}(\lambda_{N-1})
+\hat{g}_{\theta}(\lambda_{N-1})\hat{f}_{in}(\lambda_{N-1})
 \end{bmatrix} \\
 \\
 &= U
 \begin{bmatrix}
-\hat{g}(\lambda_0) & 0 & \cdots & 0 \\
-0 & \hat{g}(\lambda_1) & \cdots & 0 \\
+\hat{g}_{\theta}(\lambda_0) & 0 & \cdots & 0 \\
+0 & \hat{g}_{\theta}(\lambda_1) & \cdots & 0 \\
 \vdots &  & \ddots & \\
-0 & 0 & 0 & \hat{g}(\lambda_{N-1})
+0 & 0 & 0 & \hat{g}_{\theta}(\lambda_{N-1})
 \end{bmatrix}
 \begin{bmatrix}
 \hat{f}_{in}(\lambda_0) \\
 \vdots \\
 \hat{f}_{in}(\lambda_{N-1})
 \end{bmatrix}
-= U\hat{g}_t(\Lambda)U^T\;f_{in} \tag{$1$}
+= U\hat{g}_{\theta}(\Lambda)U^T\;f_{in} \tag{$1$}
 
 \end{align}
 $$
