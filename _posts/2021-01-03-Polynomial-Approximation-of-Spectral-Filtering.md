@@ -1,7 +1,7 @@
 ---
 title: Polynomial Approximation of Spectral Filtering
 description: based on "Wavelets on Graphs via Spectral Graph Theory"
-date: 2021-01-01 23:00:00 +0900
+date: 2021-01-03 23:00:00 +0900
 category:
 - theory
 tag:
