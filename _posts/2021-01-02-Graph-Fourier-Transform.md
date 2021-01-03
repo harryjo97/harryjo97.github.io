@@ -93,7 +93,7 @@ Complex exponentials $$ \left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}} $$ 
 $$f$$에서 $$u_l$$ 성분은 두 vector 의 inner product 로 계산할 수 있습니다. 따라서, $$(1)$$ 과 같이 graph Fourier transform 을 정의할 수 있습니다.
 
 $$
-\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{\ast}_l(i) 
+\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{T}_l(i) 
 \tag{$3$}
 $$
 
@@ -129,17 +129,17 @@ $$
 \hat{f}(\lambda_{N-1})
 \end{bmatrix}
 = \begin{bmatrix}
-- & u_0^{\ast} & - \\
+- & u_0^{T} & - \\
 
 & \vdots & \\
-- & u_{N-1}^{\ast} & -
+- & u_{N-1}^{T} & -
 \end{bmatrix}
 \begin{bmatrix}
 f(1) \\
 \vdots \\
 f(N)
 \end{bmatrix}
-= U^{\ast}f
+= U^{T}f
 $$
 
 > Inverse graph Fourier transform
