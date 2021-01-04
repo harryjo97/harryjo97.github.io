@@ -5,6 +5,7 @@ date: 2021-01-01 19:00:00 +0900
 category: 
 - theory
 tag:
+- gnn
 - fourier transform
 - graph fourier transform
 ---

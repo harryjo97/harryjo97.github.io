@@ -1,119 +1,301 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-01-01T14:03:06+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">GNN review</title><subtitle>공부한 내용을 정리하는 블로그입니다.</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Polynomial Approximation</title><link href="https://harryjo97.github.io/theory/Polynomial-Approximation/" rel="alternate" type="text/html" title="Polynomial Approximation" /><published>2021-01-01T11:00:00+09:00</published><updated>2021-01-01T11:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Polynomial-Approximation</id><content type="html" xml:base="https://harryjo97.github.io/theory/Polynomial-Approximation/">&lt;p&gt;##0.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-01-04T20:46:45+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">GNN review</title><subtitle>공부한 내용을 정리하는 블로그입니다.</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Polynomial Approximation of Spectral Filtering</title><link href="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/" rel="alternate" type="text/html" title="Polynomial Approximation of Spectral Filtering" /><published>2021-01-04T20:00:00+09:00</published><updated>2021-01-04T20:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/">&lt;p&gt;Truncated Chebyshev expansion 을 통한 spectral filtering 의 polynomial approximation.&lt;/p&gt;
 
-&lt;h2 id=&quot;1-polynomial-approximation&quot;&gt;1. Polynomial Approximation&lt;/h2&gt;
+&lt;h2 id=&quot;0-graph-convolution-and-spectral-filtering&quot;&gt;0. Graph Convolution and Spectral Filtering&lt;/h2&gt;
 
-&lt;p&gt;Filter \(g_{\theta}\) 를 거친 입력 신호 \(f_{in}\) 의 결과 \(f_{out}\) 을 계산하기 위해서는&lt;/p&gt;
+&lt;p&gt;Graph convolution 과 spectral filtering 에 대해 자세히 설명한 &lt;a href=&quot;https://harryjo97.github.io/theory/Graph-Convolution-and-Filtering/&quot;&gt;포스트&lt;/a&gt; 를 보고 오시면, 이번 포스트를 이해하는데 큰 도움이 될 것입니다. Graph signal processing 과 spectral graph wavelet transform 에 대해 더 공부하고 싶다면 &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on Graphs via Spectral Graph Theory&lt;/a&gt; 를 참고하기 바랍니다.&lt;/p&gt;
 
-\[f_{out} = g_{\theta} \ast f_{in}\]
+&lt;h2 id=&quot;1-chebyshev-polynomial&quot;&gt;1. Chebyshev Polynomial&lt;/h2&gt;
 
-&lt;p&gt;\(f_{out}\) 의 Fourier transform 을 보면&lt;/p&gt;
+&lt;p&gt;Chebyshev polynomial 은 다음과 같이 점화식&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;으로 정의됩니다.&lt;/p&gt;
 
-\[\hat{f}_{out}(\lambda_l) = \hat{g}_t(\lambda_l)\hat{f}_{in}(\lambda_l)\]
+\[T_k(x) = 2xT_{k-1}(x) - T_{k-2}(x)
+\;\; \text{ with } \;\; T_0(x) = 1 ,\; T_1(x) = x
+\tag{a}\]
 
-&lt;p&gt;Inverse Fourier transform 을 통해 \(f_{out}\) 을 복원하면
-$$
-\begin{align}&lt;/p&gt;
+&lt;p&gt;특히 Chebyshev polynomial 은 \(L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\)&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; 의 orthogonal basis 를 이루기 때문에 \(h\in L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\) 에 대해 uniformly convergent 한 Chebyshev expansion 이 존재합니다.&lt;/p&gt;
 
-&lt;p&gt;f_{out} 
-&amp;amp;= \sum^{N-1}&lt;em&gt;{l=0} \hat{f}(\lambda_l)u_l
-= 
-\begin{bmatrix}
-\big| &amp;amp; \big| &amp;amp; \cdots &amp;amp; \big| &lt;br /&gt;
-u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u&lt;/em&gt;{N-1} &lt;br /&gt;
-\big| &amp;amp; \big| &amp;amp; \cdots &amp;amp; \big|
-\end{bmatrix}
-\begin{bmatrix}
-\hat{f}&lt;em&gt;{out}(\lambda_0) &lt;br /&gt;
-\vdots &lt;br /&gt;
-\hat{f}&lt;/em&gt;{out}(\lambda_{N-1})
-\end{bmatrix} 
-= U
-\begin{bmatrix}
-\hat{g}(\lambda_0)\hat{f}&lt;em&gt;{in}(\lambda_0) &lt;br /&gt;
-\vdots &lt;br /&gt;
-\hat{g}(\lambda&lt;/em&gt;{N-1})\hat{f}&lt;em&gt;{in}(\lambda&lt;/em&gt;{N-1})
-\end{bmatrix} &lt;br /&gt;
-&lt;br /&gt;
-&amp;amp;= U
-\begin{bmatrix}
-\hat{g}(\lambda_0) &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &lt;br /&gt;
-0 &amp;amp; \hat{g}(\lambda_1) &amp;amp; \cdots &amp;amp; 0 &lt;br /&gt;
-\vdots &amp;amp;  &amp;amp; \ddots &amp;amp; &lt;br /&gt;
-0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \hat{g}(\lambda_{N-1})
-\end{bmatrix}
-\begin{bmatrix}
-\hat{f}&lt;em&gt;{in}(\lambda_0) &lt;br /&gt;
-\vdots &lt;br /&gt;
-\hat{f}&lt;/em&gt;{in}(\lambda_{N-1})
-\end{bmatrix}
-= U\hat{g}&lt;em&gt;t(\Lambda)U^T\;f&lt;/em&gt;{in} \tag{$1$}&lt;/p&gt;
+\[h(x) = \frac{1}{2}c_0 + \sum^{\infty}_{k=1} c_kT_k(x)
+\tag{b}\]
 
-&lt;p&gt;\end{align} 
-$$&lt;/p&gt;
+&lt;p&gt;\((b)\) 에서 Chebyshev coefficeint \(c_k\) 는 다음과 같이 계산할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;즉 filter \(g_{\theta}\) 의 결과를 확인하기 위해서는  graph Laplacian \(L\) 의 eigenvector 가 모두 필요합니다. 하지만, eigenvalue 와 eigenvector 를 계산하기 위해 많이 사용하는 QR decomposition 의 computational complexity 가 \(O(N^3)\) 이므로 vertices 가 수천개 이상인 그래프에서는 적용하기에는 힘듭니다.&lt;/p&gt;
+\[c_k = \frac{2}{\pi}\int^1_{-1} \frac{T_k(x)h(x)}{\sqrt{1-x^2}}dx\]
 
-&lt;p&gt;따라서, 그래프의 크기가 큰 경우에는 \((1)\) 을 근사할 수 있는 효율적인 방법이 필요합니다.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Hammond et al.&lt;/a&gt; 에서는 (truncated) Chebyshev polynomial 을 이용한 polynomial approximation 을  제시합니다.&lt;/p&gt;
+&lt;h2 id=&quot;2-polynomial-approximation-and-localization&quot;&gt;2. Polynomial Approximation and Localization&lt;/h2&gt;
 
-&lt;p&gt;Lanczos algorithm&lt;/p&gt;
+&lt;p&gt;입력 신호 \(f_{in}\) 의 filter \(g\) 에 대한 spectral filtering 의 결과 \(f_{out}\) 은 다음과 같습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Lemma 6.1.&lt;/strong&gt;&lt;/p&gt;
+\[\begin{align}
 
-&lt;p&gt;주어진 그래프의 graph Laplacian \(L\) 과 주어진 filter \(g_{\theta}\) 에 대해
-polynomial approximant \(p\) 가 다음의 조건을 만족한다고 가정합니다.
-\(\left\vert g(\theta x) - p(x) \right\vert \leq B &amp;lt; \infty
+f_{out} 
+= U\hat{g}(\Lambda)U^T\;f_{in} \tag{$1$}
+
+\end{align}\]
+
+&lt;p&gt;이 포스트에서는 편의상 \(\hat{g}\) 을 \(g_{\theta}\) 로 대신 쓰겠습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Localization of graph Laplacian&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;그래프 \(G\) 의 vertex \(i\) 와 \(j\) 에 대해, \(d_G(i,j)\) 를 \(i\) 와 \(j\) 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다.&lt;/p&gt;
+
+&lt;p&gt;이 때, 그래프 \(G\) 의 vertex \(i, \;j\) 와 \(d_G(i,j)\)  보다 작은 모든 \(s\) 에 대해 다음이 성립합니다.&lt;/p&gt;
+
+\[\left(L^s\right)_{ij} = 0
+\tag{$2$}\]
+
+&lt;p&gt;증명 과정에 대해 자세히 알고 싶다면,  &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on Graphs via Spectral Graph Theory&lt;/a&gt; 의 lemma 5.4 를 참고하기 바랍니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Localized filter in vertex domain&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;만약 \(g_{\theta}\) 가 order \(K\) polynomial 이라면, \(g_{\theta}(x) = \sum^K_{k=0} a_k x^k\) 를 \((1)\) 에 넣어 정리할 수 있습니다.&lt;/p&gt;
+
+\[\begin{align}
+f_{out}
+&amp;amp;= U\left(\sum^{N-1}_{k=0} a_k\Lambda^k \right)U^T f_{in} \\
+&amp;amp;= \sum^{K}_{k=0} a_k\left( U\Lambda U^T \right)^k f_{in} 
+= g_{\theta}(L)f_{in}
+\tag{3}
+\end{align}\]
+
+&lt;p&gt;\((3)\) 에서 볼 수 있듯이, graph Laplacian \(L\) 의 eigenvector 를 계산하지 않고도 spectral filtering 의 결과를 구할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;특히 vertex \(i\) 에 대한 spectral filtering 의 결과는 다음과 같습니다.&lt;/p&gt;
+
+\[f_{out}(i) 
+= (g_{\theta}(L) f_{in})(i) 
+= \sum^{K}_{k=0}\sum^{N}_{j=1} a_{k} \left(L^k\right)_{ij} f_{in}(j) 
+\tag{$4$}\]
+
+&lt;p&gt;graph Laplacian 의 localization \((2)\) 를 사용하면, \((4)\) 를  vertex \(i\) 의 \(K\) - hop local neighborhood \(N(i,K)\) 에 대해 표현할 수 있습니다.&lt;/p&gt;
+
+\[\begin{align}
+f_{out}(i) 
+&amp;amp;= \sum^{N}_{j=1} \sum^{K}_{k=d_G(i,j)} a_k\left(L^k\right)_{ij} f_{in}(j) \\
+\\
+&amp;amp;= \sum_{j\in N(i,K)} b_{ij} f_{in}(j)
+\end{align}\]
+
+&lt;p&gt;즉 \(f_{out}(i)\) 는 \(i\) 의 K - localized neighborhood 의 vertices \(j\) 에 대해 \(f_{in}(j)\) 들의 합으로 표현할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;따라서, spectral filter \(g_{\theta}\) 가 order \(K\) polynomial 이라면 filter 가 vertex domain 에서 \(K\) - localized 된다는 것을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;3-truncated-chebyshev-expansion&quot;&gt;3. Truncated Chebyshev Expansion&lt;/h2&gt;
+
+&lt;p&gt;\((1)\) 을 계산하기 위해서는  graph Laplacian \(L\) 의 eigenvector 를 모두 찾아야 합니다. \(N\) 개의 node 를 가지는 그래프에 대해서, QR decomposition 의 computational complexity 가 \(O(N^3)\) 이기 때문에, node 가 수천개 수만개 이상인 그래프에 대해서는 직접 \((1)\) 을 계산하기는 힘듭니다.&lt;/p&gt;
+
+&lt;p&gt;따라서, 그래프의 크기가 큰 경우에는 \((1)\) 을 근사할 수 있는 효율적인 방법이 필요합니다 \((\ast)\).&lt;/p&gt;
+
+&lt;p&gt;\(g_{\theta}\) 를 근사할 수 있는 polynomial 을 찾을 수 있다면, 위와 같이 vertex domain 에서의 localization 또한 얻을 수 있습니다. 따라서, 저희의 목표는 \((1)\) 을 효율적으로 근사할 수 있는 \(g_{\theta}\) 의 polynomial approximant \(p\) 를 찾는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;만약 \(p\) 가 \(L\) 의 spectrum 에 대한 upper bound \(\lambda_{max}\)&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; 에 대해 다음의 조건을 만족한다면,&lt;/p&gt;
+
+\[\left\vert g_{\theta}(x) - p(x) \right\vert \leq B &amp;lt; \infty
 \;\;\text{ for all }\;\; x\in [0,\lambda_{max}]
-\tag{$2$}\)&lt;/p&gt;
+\tag{$5$}\]
 
-&lt;p&gt;\(\lambda_{max}\) 는 \(L\) 의 spectrum 에 대한 upper bound 입니다. \(\lambda_{max} \geq \lambda_{N-1}\)&lt;/p&gt;
-
-&lt;p&gt;\(\tilde{f}_{out} = p(L)f\) 에 대해 다음의 부등식이 성립합니다.
-\(\vert f_{out}(i)- \tilde{f}_{out}(i) \vert \leq B \; \|f\|\)&lt;/p&gt;
+&lt;p&gt;다음과 같이 \(\tilde{f}_{out} = p(L)f_{in}\) 을 통해 \(f_{out}\) 을 근사할 수 있습니다.&lt;/p&gt;
 
 \[\begin{align}
 \vert f_{out}(i) - \tilde{f}_{out}(i) \vert 
-&amp;amp;\leq \left\vert \sum_{l} g(\theta\lambda_l)\hat{f}(\lambda_l)u_l(i) - \sum_{l} p(\lambda_l)\hat{f}(\lambda_l)u_l(i) \right\vert \\
-&amp;amp;\leq \sum_{l} \vert g(\theta\lambda_l) - p(\lambda_l) \vert \left\vert \hat{f}(\lambda_l)u_l(i) \right\vert \\
+&amp;amp;= \left\vert \sum_{l} g_{\theta}(\lambda_l)\hat{f}(\lambda_l)u_l(i) - \sum_{l} p(\lambda_l)\hat{f}(\lambda_l)u_l(i) \right\vert \\
+\\
+&amp;amp;\leq \sum_{l} \vert g_{\theta}(\lambda_l) - p(\lambda_l) \vert \left\vert \hat{f}(\lambda_l)u_l(i) \right\vert \\
 &amp;amp;\leq B \left( \sum_l \left\vert \hat{f}(\lambda_l) \right\vert^2\sum_l \vert u_l(i) \vert^2 \right)^{1/2} 
 = B\;\|f\| 
-\tag{$3$}
+\tag{$6$}
 \end{align}\]
 
-&lt;p&gt;Spectrum 의 upper bound \(\lambda_{max}\) 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 쉽게 구할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이 때 \(f_{out}\) 과 \(\tilde{f}_{out}\) 에 대한 오차 \((6)\) 을 줄이기 위해서는, \(g_{\theta}\) 와 \(p\) 에 대한 \(L_{\infty}\) error \((5)\) 를  최소화해야 합니다. 만약  \(p\) 가 order \(K\) polynomial 이라면, \((5)\) 는 \(p\) 가 minimax polynomial of order \(M\) 일 때 최소가 됩니다. 이 때 truncated Chebyshev expansion 을 통해 minimax polynomial 에 대한 근사가 가능합니다.&lt;/p&gt;
 
-&lt;p&gt;\(p(x)\) 가 \(M\) 차 다항식이라면,&lt;/p&gt;
+&lt;p&gt;저희가 찾고자 하는  \(p\) 로 \(g_{\theta}\) 의 truncated Chebyshev expansion 을 선택할 수 있습니다. 하지만 \(g_{\theta}\) 는 spectral domain 에서 정의된 함수이기 때문에, \((b)\) 를 적용하기 위해서는 domain 의 변환이 필요합니다. \(L\) 의 eigenvalue 들은 모두 \([0, \lambda_{max}]\) 구간에 속하기 때문에 \(h_{\theta}\) 를 다음과 같이 정의하면 \(g_{\theta}\) 를 \([-1,1]\) 에서 정의된 함수로 바꿀 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;\((3)\) 의 approximation error 는 \(p(x)\) 가 \(M\) 차 minimax polynomial 일 때 최소가 됩니다.&lt;/p&gt;
+\[h_{\theta}(x) = g_{\theta}\left( \frac{\lambda_{\max}}{2}(x+1) \right)\]
 
-&lt;h2 id=&quot;4-next&quot;&gt;4. Next&lt;/h2&gt;
+&lt;p&gt;\((b)\) 를 \(h_{\theta}\) 에 적용하고 order \(K\) 까지의 truncation 을 생각하면,&lt;/p&gt;
 
-&lt;p&gt;다음 포스트에서는 &lt;a href=&quot;https://arxiv.org/pdf/1609.02907.pdf&quot;&gt;Semi-Supervised Classification with Graph Convolutional Networks&lt;/a&gt; 의 paper review 를 하겠습니다.&lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Polynomial approximation" /><summary type="html">##0.</summary></entry><entry><title type="html">Graph Convoloution and Spectral Graph Wavelet Transform</title><link href="https://harryjo97.github.io/theory/Graph-Convoloution/" rel="alternate" type="text/html" title="Graph Convoloution and Spectral Graph Wavelet Transform" /><published>2020-12-30T15:00:00+09:00</published><updated>2020-12-30T15:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Convoloution</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Convoloution/">&lt;p&gt;based on the paper &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on Graphs via Spectral Graph Theory&lt;/a&gt;&lt;/p&gt;
+\[h_{\theta}(x) \approx \frac{1}{2}c_0 + \sum^{K}_{k=1} c_kT_k(x)\]
+
+&lt;p&gt;\(\tilde{L} = \frac{2}{\lambda_{max}}L - I\) 에 대해 \(p\) 를 다음과 같이 정의하면,&lt;/p&gt;
+
+\[p(\tilde{L}) = \frac{1}{2}c_0I + \sum^{\infty}_{k=1} c_kT_k(\tilde{L})
+\tag{7}\]
+
+&lt;p&gt;복잡한 eigenvector 의 계산 없이 spectral filtering 에 대한 근사가 가능합니다.&lt;/p&gt;
+
+\[\begin{align}
+Ug_{\theta}(\Lambda)U^T 
+&amp;amp;= Uh_{\theta}(\tilde{\Lambda})U^T  \\
+&amp;amp;\approx Up(\tilde{\Lambda})U^T = p(\tilde{L})
+\end{align}\]
+
+&lt;p&gt;정리하면, spectral filtering 의 결과 \(f_{out}\) 은 다음과 같이 근사할 수 있습니다.&lt;/p&gt;
+
+\[f_{out} = Ug_{\theta}(\Lambda)U^Tf_{in} \approx p(\tilde{L})f_{in}
+\tag{8}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;4-advantage-of-using-chebyshev-polynomial&quot;&gt;4. Advantage of using Chebyshev polynomial&lt;/h2&gt;
+
+&lt;p&gt;\((8)\) 과 같이 truncated Chebyshev expansion 을 통한 spectral filtering 의 근사는 다음과 같은 세 가지 이점이 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Fast filtering using recurrence relation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Chebyshev polynomial 의 중요한 특성은 \((a)\) 의 점화식을 통해 얻을 수 있다는 것입니다. Graph Laplacian \(L\) 에서부터 시작해 재귀적 연산으로 order \(K\) polynomial \(T_K\) 까지 구하는 computational cost 는 \(L\) 이 sparse matrix  &lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;일 때 \(O(K\vert E\vert)\) 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Localized in vertex domain&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2번째 파트에서 보았듯이 \(g_{\theta}\) 대신 polynomial approximant 를 사용한 filter 는 vertex domain 에서 localized 되어있습니다. 이를 통해 CNN 의 중요한 특성인 locality 가 그래프에서 일반화될 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Learnable filter&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\((7)\) 의 coefficient \(c_k\) 를 parameter 로 학습하는 neural network 를 만들 수 있습니다. &lt;a href=&quot;https://arxiv.org/pdf/1606.09375.pdf&quot;&gt;Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering&lt;/a&gt; 에 이 방법이 자세히 설명되어 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;5-lanczos-algorithm&quot;&gt;5. Lanczos Algorithm&lt;/h2&gt;
+
+&lt;p&gt;\((\ast)\) 의 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. &lt;a href=&quot;https://arxiv.org/pdf/1901.01484.pdf&quot;&gt;LanczosNet: Multi-Scale Deep Graph Convolutional Networks&lt;/a&gt; 의 paper review 포스트를 통해 더 자세히 설명하겠습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;6-next&quot;&gt;6. Next&lt;/h2&gt;
+
+&lt;p&gt;다음 포스트에서는 &lt;a href=&quot;https://arxiv.org/pdf/1609.02907.pdf&quot;&gt;Semi-Supervised Classification with Graph Convolutional Networks&lt;/a&gt; 의 paper review 를 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt; 
+ &lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;recurrence relation. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Hilbert space of square integrable functions &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Spectrum 의 upper bound \(\lambda_{max}\) 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 \(L\) 의 spectrum 전체를 찾는 것에 비해서 훨씬 쉽게 구할 수 있습니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;많은 경우 graph Laplacian 은 sparse matrix 로 표현 가능합니다. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="polynomial approximation" /><category term="spectral filtering" /><summary type="html">Truncated Chebyshev expansion 을 통한 spectral filtering 의 polynomial approximation.</summary></entry><entry><title type="html">Graph Convolution and Spectral Filtering</title><link href="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/" rel="alternate" type="text/html" title="Graph Convolution and Spectral Filtering" /><published>2021-01-03T17:00:00+09:00</published><updated>2021-01-03T17:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/">&lt;p&gt;Graph Signal Processing 의 관점에서 graph convolution 과 spectral filtering 의 이해.&lt;/p&gt;
 
 &lt;h2 id=&quot;0-graph-fourier-transform&quot;&gt;0. Graph Fourier Transform&lt;/h2&gt;
 
 &lt;p&gt;Graph Fourier transform 에 대해 자세히 설명한 &lt;a href=&quot;https://harryjo97.github.io/theory/Graph-Fourier-Transform/&quot;&gt;포스트&lt;/a&gt; 를 보고 오시면, graph convolution 을 이해하는데 큰 도움이 될 것입니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;1-classical-convolution&quot;&gt;1. Classical Convolution&lt;/h2&gt;
+&lt;h2 id=&quot;1-graph-convolution&quot;&gt;1. Graph Convolution&lt;/h2&gt;
 
-&lt;h2 id=&quot;2-graph-convolution&quot;&gt;2. Graph Convolution&lt;/h2&gt;
+&lt;p&gt;Vertex domain 에서 직접 convolution operator 를 정의할 수 없습니다. &lt;a href=&quot;https://harryjo97.github.io/theory/Graph-Fourier-Transform/&quot;&gt;포스트&lt;/a&gt; 의 Why Do We Need Fourier Transform? 에서 설명했듯이,  Fourier transform 을 이용하여 spectral domain 을 통해 vertex domain 의 함수에 대해 convolution operator 를 정의하겠습니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;3-spectral-graph-wavelet-transform&quot;&gt;3. Spectral Graph Wavelet Transform&lt;/h2&gt;
+&lt;p&gt;기존의 convolution 과 같이 graph convolution 또한 Fourier transform 에 대해 다음의 조건을 만족해야 합니다.&lt;/p&gt;
 
-&lt;p&gt;kernel function \(g:\mathbb{R}^+ \rightarrow \mathbb{R}^+\) bandpass filter&lt;/p&gt;
+\[\widehat{g\ast f}(\lambda_l) = \hat{g}(\lambda_l)\hat{f}(\lambda_l)
+\tag{1}\]
 
-&lt;p&gt;\(g(0) = 0\) and \(\lim_{x\rightarrow\infty}g(x) = 0\)&lt;/p&gt;
+&lt;p&gt;즉 vertex  domain 에서의 convolution 과 spectral domain 에서의 multiplication 이 일치하도록 만들고 싶습니다. \((1)\) 에 대해 inverse Fourier transform 을 적용하면, 다음의 결과를 얻게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;wavelet operator \(T_g = g(L)\) 를 다음과 같이 정의합니다.&lt;/p&gt;
+\[g\ast f = \sum^{N-1}_{l=0} \hat{g}(\lambda_l) \hat{f}(\lambda_l)u_l
+\tag{2}\]
 
-\[\widehat{T_gf}(\lambda_l) = g(\lambda_l)\hat{f}(\lambda_l)\]
+&lt;p&gt;따라서, vertex domain 에서 정의된 두 함수 \(f\) 와 \(g\) 에 대해 convolution operator \(\ast\) 는 \((2)\) 과 같이 정의합니다. 이는 기존의 convolution 에서 \(\left\{e^{2\pi i\xi t}\right\}_{\xi\in\mathbb{R}}\) 대신 graph Laplacian eigenvector \(\{u_l\}^{N-1}_{l=0}\)  을 사용했다고 이해할 수 있습니다. ( \(\left\{e^{2\pi i\xi t}\right\}_{\xi\in\mathbb{R}}\) 와 \(\{u_l\}^{N-1}_{l=0}\) 의 관계에 대해서는 &lt;a href=&quot;https://harryjo97.github.io/theory/Graph-Laplacian/&quot;&gt;포스트&lt;/a&gt; 를 참고해주세요 )&lt;/p&gt;
 
-&lt;h2 id=&quot;4-next&quot;&gt;4. Next&lt;/h2&gt;
+&lt;p&gt;\((2)\) 는 Hadamard product \(\odot\) 와  \(\{u_l\}^{N-1}_{l=0}\) 을 column vector 로 가지는 matrix \(U\) 를 사용해 다음과 같은 형태로도 표현할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;다음 포스트에서는&lt;/p&gt;
+\[g \ast f = U((U^Tg) \odot (U^Tf))\]
 
-&lt;p&gt;Polynomial approximation&lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph convolution" /><summary type="html">based on the paper Wavelets on Graphs via Spectral Graph Theory</summary></entry><entry><title type="html">Graph Fourier Transform</title><link href="https://harryjo97.github.io/theory/Graph-Fourier-Transform/" rel="alternate" type="text/html" title="Graph Fourier Transform" /><published>2020-12-28T22:00:00+09:00</published><updated>2020-12-28T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Fourier-Transform</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Fourier-Transform/">&lt;p&gt;Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.&lt;/p&gt;
+&lt;h2 id=&quot;2-spectral-filtering&quot;&gt;2. Spectral Filtering&lt;/h2&gt;
+
+&lt;p&gt;Spectral graph theory 와 같이 복잡한 이론을 통해 그래프에서 convolution 을 정의한 이유는, 바로 CNN 을 그래프에 적용하기 위해서입니다. CNN 은 large-scale high dimensional 데이터로 부터 local structure 를 학습하여 의미있는 패턴을 잘 찾아냅니다. Local feature 들은 convolutional filter 로 표현되며, filter 는 translation-invariant 이기 때문에 공간적인 위치나 데이터의 크기에 상관없이 같은 feature 를 뽑아낼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 그래프와 같이 irregular (non-Euclidean) domain 에서는 직접 translation 과 convolution 을 정의할 수 없기 때문에,  CNN 을 그래프에 바로 적용할 수 없습니다. 따라서, 그래프에 맞는 filtering 이 필요하며, 이를 spectral filtering 이라고 부릅니다.&lt;/p&gt;
+
+&lt;p&gt;다음과 같이 convolution 을 사용해 filter \(g\) 에 대한 spectral filtering 을 정의할 수 있습니다.&lt;/p&gt;
+
+\[f_{out} = g\ast f_{in}\]
+
+&lt;p&gt;\((1)\) 을 이용하면,&lt;/p&gt;
+
+\[\hat{f}_{out}(\lambda_l) = \hat{g}(\lambda_l)\hat{f}_{in}(\lambda_l)\]
+
+&lt;p&gt;Inverse Fourier transform 을 통해 \(f_{out}\) 을 복원하면,&lt;/p&gt;
+
+\[\begin{align}
+
+f_{out} 
+&amp;amp;= \sum^{N-1}_{l=0} \hat{f}_{out}(\lambda_l)u_l \\
+&amp;amp;= 
+\begin{bmatrix}
+\big| &amp;amp; \big| &amp;amp;  &amp;amp; \big| \\
+u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
+\big| &amp;amp; \big| &amp;amp;  &amp;amp; \big|
+\end{bmatrix}
+\begin{bmatrix}
+\hat{f}_{out}(\lambda_0) \\
+\vdots \\
+\hat{f}_{out}(\lambda_{N-1})
+\end{bmatrix} \\
+\\
+&amp;amp;= U
+\begin{bmatrix}
+\hat{g}(\lambda_0)\hat{f}_{in}(\lambda_0) \\
+\vdots \\
+\hat{g}(\lambda_{N-1})\hat{f}_{in}(\lambda_{N-1})
+\end{bmatrix} \\
+\\
+&amp;amp;= U
+\begin{bmatrix}
+\hat{g}(\lambda_0) &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 \\
+0 &amp;amp; \hat{g}(\lambda_1) &amp;amp; \cdots &amp;amp; 0 \\
+\vdots &amp;amp;  &amp;amp; \ddots &amp;amp; \\
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \hat{g}(\lambda_{N-1})
+\end{bmatrix}
+\begin{bmatrix}
+\hat{f}_{in}(\lambda_0) \\
+\vdots \\
+\hat{f}_{in}(\lambda_{N-1})
+\end{bmatrix} \\
+\\
+&amp;amp;= U\hat{g}(\Lambda)U^T\;f_{in} \tag{4}
+
+\end{align}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;\((4)\) 에서 \(\hat{g}(\Lambda)\) 는 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\hat{g}(\Lambda) =
+\begin{bmatrix}
+\hat{g}(\lambda_0) &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 \\
+0 &amp;amp; \hat{g}(\lambda_1) &amp;amp; \cdots &amp;amp; 0 \\
+\vdots &amp;amp;  &amp;amp; \ddots &amp;amp; \\
+0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \hat{g}(\lambda_{N-1})
+\end{bmatrix}\]
+
+&lt;p&gt;정리하자면, filter \(g\)  에 대한 spectral graph filtering 은 다음과 같습니다.&lt;/p&gt;
+
+\[f_{out} = U\hat{g}(\Lambda)U^T f_{in}\]
+
+&lt;h2 id=&quot;3-next&quot;&gt;3. Next&lt;/h2&gt;
+
+&lt;p&gt;다음 포스트에서는 Polynomial Approximation of Spectral Filtering 대해 설명하겠습니다.&lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="graph convolution" /><category term="spectral filtering" /><summary type="html">Graph Signal Processing 의 관점에서 graph convolution 과 spectral filtering 의 이해.</summary></entry><entry><title type="html">Graph Fourier Transform</title><link href="https://harryjo97.github.io/theory/Graph-Fourier-Transform/" rel="alternate" type="text/html" title="Graph Fourier Transform" /><published>2021-01-01T19:00:00+09:00</published><updated>2021-01-01T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Fourier-Transform</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Fourier-Transform/">&lt;p&gt;Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.&lt;/p&gt;
 
 &lt;h2 id=&quot;0-graph-laplacian&quot;&gt;0. Graph Laplacian&lt;/h2&gt;
 
@@ -121,41 +303,44 @@ polynomial approximant \(p\) 가 다음의 조건을 만족한다고 가정합�
 
 &lt;h2 id=&quot;1-classical-fourier-transform&quot;&gt;1. Classical Fourier Transform&lt;/h2&gt;
 
-&lt;p&gt;Fourier transform 은 주어진 신호 (함수) 를 서로 다른 frequency 를 가지는 정현파들로 분해하는 변환입니다.&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-    &lt;img src=&quot;/assets/post/Graph-Fourier-Transform/fourier.jpg&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
-&lt;/p&gt;
-&lt;p&gt;Graph Fourier transform 과 구분 짓기 위해 이를 “Classical” Fourier transform 이라고 부르겠습니다.&lt;/p&gt;
-
 &lt;blockquote&gt;
   &lt;p&gt;Fourier transform&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;임의의 실수 \(\xi\) 에 대한 integrable function \(f : \mathbb{R} \rightarrow \mathbb{C}\) 의 Fourier transform 은 다음과 같이 정의합니다.&lt;/p&gt;
+&lt;p&gt;Integrable function \(f : \mathbb{R} \rightarrow \mathbb{C}\) 의 Fourier transform 은 다음과 같이 정의합니다.&lt;/p&gt;
 
 \[\hat{f}(\xi) = \langle f, e^{2\pi i\xi t} \rangle = \int_{\mathbb{R}} f(t) e^{-2\pi i\xi t}dt \tag{$1$}\]
 
-&lt;p&gt;\((1)\) 의 정의를 살펴보면, Fourier transform 은 time domain \(t\in\mathbb{R}\) 에서 정의된 함수 \(f(t)\) 를 frequency domain \(\xi\in\mathbb{C}\) 에서 정의된 함수 \(\hat{f}(\xi)\) 로 변환시켜줍니다.&lt;/p&gt;
+&lt;p&gt;\((1)\) 을 살펴보면, Fourier transform 은 time domain \(t\in\mathbb{R}\) 에서 정의된 함수 \(f(t)\) 를 frequency domain \(\xi\in\mathbb{C}\) 에서 정의된 함수 \(\hat{f}(\xi)\) 로 변환시켜준다는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Fourier-Transform/fourier.jpg&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;위의 그림은 time domain 으로부터 frequency domain 으로의 Fourier transform 을 잘 나타내어 줍니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Inverse Fourier transform&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Fourier transform 의 역과정인 inverse Fourier transform 은 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;\((1)\) 에서 정의된 Fourier transform 의 역과정인 inverse Fourier transform 은 다음과 같습니다.&lt;/p&gt;
 
 \[f(x) = \int_{\mathbb{R}} \hat{f}(\xi)e^{2\pi i\xi t}d\xi \tag{$2$}\]
+
+&lt;p&gt;Invere Fourier transform 은 Fourier transform 과 반대로 frequency domain 에서 정의된 함수 \(\hat{f}\) 을 time domain 에서의 함수 \(f\) 로 변환시켜줍니다.&lt;/p&gt;
+
+&lt;p&gt;\((2)\) 는 주어진 \(\hat{f}\) 으로부터 원래의 함수 \(f\) 를 복원하는 과정입니다. Inverse Fourier transform 을 통해 각 성분별 amplitude \(\hat{f}(\xi)\) 가 주어졌을 때, 원래의 함수는 각 성분들의 합으로 표현할 수 있습니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Laplacian operator&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Fourier transform 에 등장하는 complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 는 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 입니다.&lt;/p&gt;
+&lt;p&gt;\((1)\) 과 \((2)\) 에서 등장하는 complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 는 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 입니다.&lt;/p&gt;
 
 \[\Delta(e^{2\pi i \xi t}) = \frac{\partial^2}{\partial t^2}e^{2\pi i \xi t} 
 = -(2\pi\xi)^2 e^{2\pi i \xi t}\]
 
-&lt;p&gt;그렇기 때문에 Classical Fourier transform 은 Laplacian operator \(\Delta\) 의 eigenfunction 들의 합으로 분해하는 것입니다.&lt;/p&gt;
+&lt;p&gt;즉 Fourier transform 은 Laplacian operator \(\Delta\) 의 eigenfunction 들의 합으로 분해하는 변환으로 생각 할 수 있습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;2-graph-fourier-transform&quot;&gt;2. Graph Fourier Transform&lt;/h2&gt;
 
@@ -163,22 +348,24 @@ polynomial approximant \(p\) 가 다음의 조건을 만족한다고 가정합�
   &lt;p&gt;Graph Fourier transform&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://harryjo97.github.io/gnn/Graph-Laplacian/&quot;&gt;포스트&lt;/a&gt; 의 4번째 파트에서 설명했듯이, Euclidean space 의 Laplacian operator \(\Delta\) 는 그래프에서의 graph Laplacian \(L\) 에 해당합니다. 즉 그래프에서도 graph Laplacian \(L\) 을 사용해 Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://harryjo97.github.io/gnn/Graph-Laplacian/&quot;&gt;포스트&lt;/a&gt; 의 4번째 파트에서 설명했듯이, Euclidean space 의 Laplacian operator \(\Delta\) 는 그래프에서의 graph Laplacian \(L\) 에 해당합니다. 그렇기 때문에, 그래프에서도 graph Laplacian \(L\) 을 사용해 Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;Complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 이 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 \(f \in\mathbb{R}^N\) 를 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) 들의 합으로 분해하는 변환입니다.&lt;/p&gt;
+&lt;p&gt;Complex exponentials \(\left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}}\) 은 1 차원 Laplacian operator \(\Delta\) 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 \(f \in\mathbb{R}^N\) 를 \(L\) 의 eigenvector \(\left\{ u_l \right\}^{N-1}_{l=0}\) 들의 합으로 분해하는 변환으로 이해할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;\(f\)에서 \(u_l\) 이 차지하는 부분은 두 vector 의 inner product 로 얻을 수 있습니다. 따라서, \((1)\) 과 같이 graph Fourier transform 을 정의할 수 있습니다.
-\(\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{\ast}_l(i) 
-\tag{$3$}\)&lt;/p&gt;
+&lt;p&gt;\(f\)에서 \(u_l\) 성분은 두 vector 의 inner product 로 계산할 수 있습니다. 따라서, \((1)\) 과 같이 graph Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;여기서 \(f\) 에 대한 Fourier transform 의 결과인 \(\hat{f}\) 는 \(L\) 의 spectrum 에서만 정의되는 함수입니다. \(\hat{f}\) 을 다음과 같이 \(\mathbb{R}^N\) 의 vector 로 보겠습니다.&lt;/p&gt;
+\[\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{T}_l(i) 
+\tag{$3$}\]
 
-\[\hat{f} 
+&lt;p&gt;여기서 \(f\) 에 대한 Fourier transform 의 결과인 \(\hat{f}\) 는 \(L\) 의 spectrum 에서만 정의되는 함수입니다. 그렇기 때문에 \(\hat{f}\) 가 정의된 domain 을 spectral domain&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; 이라고 부릅니다.&lt;/p&gt;
+
+&lt;p&gt;\(\hat{f}\) 을 다음과 같이 \(\mathbb{R}^N\) 의 vector 로 보겠습니다.
+\(\hat{f} 
 = \begin{bmatrix}
 \hat{f}(\lambda_0) \\
 \vdots \\
 \hat{f}(\lambda_{N-1})
-\end{bmatrix}\]
+\end{bmatrix}\)&lt;/p&gt;
 
 &lt;p&gt;\(L\) 의 eigenvector 들을 column 으로 가지는 행렬 \(U\) 에 대해&lt;/p&gt;
 
@@ -197,23 +384,25 @@ u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
 \hat{f}(\lambda_{N-1})
 \end{bmatrix}
 = \begin{bmatrix}
-- &amp;amp; u_0^{\ast} &amp;amp; - \\
+- &amp;amp; u_0^{T} &amp;amp; - \\
 
 &amp;amp; \vdots &amp;amp; \\
-- &amp;amp; u_{N-1}^{\ast} &amp;amp; -
+- &amp;amp; u_{N-1}^{T} &amp;amp; -
 \end{bmatrix}
 \begin{bmatrix}
 f(1) \\
 \vdots \\
 f(N)
 \end{bmatrix}
-= U^{\ast}f\]
+= U^{T}f\]
 
 &lt;blockquote&gt;
   &lt;p&gt;Inverse graph Fourier transform&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;\(\hat{f}(\lambda_l)\) 은 그래프에서의 함수 \(f\) 의 \(u_l\) 에 대한 성분으로 이해할 수 있습니다. \(\left\{ u_l \right\}^{N-1}_{l=0}\) 은 \(\mathbb{R}^N\) 의 orthonormal basis&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; 를 이루기 때문에, Fourier transform 의 결과인 \(\hat{f}\) 으로 부터 원래의 함수 \(f\) 를 얻어내려면 각 성분들을 모두 더해주면 됩니다. 따라서 \((2)\) 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;\(\hat{f}(\lambda_l)\) 은 그래프에서의 함수 \(f\) 의 \(u_l\) 에 대한 성분으로 볼 수 있습니다. 이 때 \(\left\{ u_l \right\}^{N-1}_{l=0}\) 은 \(\mathbb{R}^N\) 의 orthonormal basis&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; 를 이루기 때문에, Fourier transform 의 결과인 \(\hat{f}\) 으로 부터 원래의 함수 \(f\) 를 얻어내기 위해서는 각 성분들을 모두 더해주면 됩니다.&lt;/p&gt;
+
+&lt;p&gt;\((2)\) 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.&lt;/p&gt;
 
 \[f(i) = \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l(i) 
 \tag{$4$}\]
@@ -242,7 +431,7 @@ u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
   &lt;p&gt;Parseval relation&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Classical Fourier transform 에서와 마찬가지로 Parseval relation&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; 을 만족합니다.&lt;/p&gt;
+&lt;p&gt;Classical Fourier transform 에서와 마찬가지로, graph Fourier transform 은 Parseval relation&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; 을 만족합니다.&lt;/p&gt;
 
 \[\begin{align}
 	\langle f, h\rangle 
@@ -255,9 +444,28 @@ u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
 
 &lt;h2 id=&quot;3-why-do-we-need-fourier-transform&quot;&gt;3. Why Do We Need Fourier Transform?&lt;/h2&gt;
 
+&lt;p&gt;그래프의 vertex domain \(V\) 는 discrete 하기 때문에, 그래프의 함수 \(f:V\rightarrow \mathbb{R}^N\) 를 vertex domain 에서 다루기 까다롭습니다. 다음의 예시를 들어 생각해보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;\(\mathbb{R}\) 에서 정의된 함수 \(f\) 와 실수 \(s, t\) 에 대한 operation : translation  \(T_{t}\) 과 scaling  \(T^{s}\)  은 다음과 같이 정의됩니다.&lt;/p&gt;
+
+\[\begin{align}
+T_{t}f(x) = f(x+t)\;, \;\;T^{s}f(x) = f(sx)
+\tag{$5$}
+\end{align}\]
+
+&lt;p&gt;하지만 vertex domain 은 discrete 하기 때문에, vertex \(i\) 에 대해 \(i+t\) 와 \(si\) 의 의미를 알 수 없습니다. 그렇기에 그래프의 함수에 대해서는 \((5)\) 의 translation 과 scaling 을 적용할 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;이런 문제를 해결하기 위해서  discrete 한 vertex domain 대신 continuous 한 spectral domain 을 이용합니다. Fourier transform 을 통해 vertex domain 에서 정의된 함수 \(f\) 를 spectral domain 에서의 함수 \(\hat{f}\) 로 변환해 준 후, \(\hat{f}\) 에 대한 \((5)\) 의 translation 과 scaling 을 적용해주는 것입니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Fourier-Transform/transform-diagram.PNG&quot; style=&quot;max-width: 50%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Vertex domain 에서 정의하고 싶은 operation 은 위의 다이어그램과 같이 spectral domain 에서의 operation 을 통해 정의할 수 있습니다. 이 때, vertex domain 과 spectral domain 을 연결해주는 것이 바로 Fourier transform 입니다.&lt;/p&gt;
+
 &lt;h2 id=&quot;4-next&quot;&gt;4. Next&lt;/h2&gt;
 
-&lt;p&gt;다음 포스트에서는 graph Fourier transform 을 사용한 graph Convolution 과 polynomial approximation 에 대해 설명하겠습니다.&lt;/p&gt;
+&lt;p&gt;다음 포스트에서는 graph convolution 과 filtering 에 대해 설명하겠습니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
@@ -269,13 +477,16 @@ u_0 &amp;amp; u_1 &amp;amp; \cdots &amp;amp; u_{N-1} \\
       &lt;p&gt;\(L\) 의 eigenvalue \(\lambda_l\) 에 대한 eigenvector 를 \(u_l\) 이라 하겠습니다. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Eigenvector 들을 unit vector 로 설정하면 orthonormal 하게 됩니다. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Fourier domain, frequency domain 으로도 불립니다. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;\(\langle f, h \rangle = \langle \hat{f}, \hat{g} \rangle\) 의 identity 를 의미합니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Eigenvector 들을 unit vector 로 설정하면 orthonormal 하게 됩니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;\(\langle f, h \rangle = \langle \hat{f}, \hat{g} \rangle\) 의 identity 를 의미합니다. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph Fourier Transform" /><summary type="html">Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-27T22:00:00+09:00</published><updated>2020-12-27T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Spectral Graph Theory 이용한 Graph Laplacian 의 이해.&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="fourier transform" /><category term="graph fourier transform" /><summary type="html">Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-30T22:00:00+09:00</published><updated>2020-12-30T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Spectral Graph Theory 를 이용한 Graph Laplacian 의 이해.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-adjacency-matrix-degree-matrix&quot;&gt;1. Adjacency Matrix, Degree Matrix&lt;/h2&gt;
 
@@ -562,4 +773,4 @@ f(1) \\ \vdots \\ f(N)
       &lt;p&gt;“smooth” &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="Graph Laplacian" /><summary type="html">Spectral Graph Theory 이용한 Graph Laplacian 의 이해.</summary></entry></feed>
+&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="gnn" /><category term="graph laplacian" /><summary type="html">Spectral Graph Theory 를 이용한 Graph Laplacian 의 이해.</summary></entry></feed>
