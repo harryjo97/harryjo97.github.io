@@ -1,12 +1,11 @@
 ---
 title: Graph Fourier Transform
-description: with Graph Signal Processing
+description: based on Graph Signal Processing
 date: 2021-01-01 19:00:00 +0900
 category: 
 - theory
 tag:
 - gnn
-- fourier transform
 - graph fourier transform
 ---
 
@@ -42,8 +41,9 @@ $$
 $$(1)$$ 을 살펴보면, Fourier transform 은 time domain $$t\in\mathbb{R}$$ 에서 정의된 함수 $$f(t)$$ 를 frequency domain $$\xi\in\mathbb{C}$$ 에서 정의된 함수 $$\hat{f}(\xi)$$ 로 변환시켜준다는 것을 알 수 있습니다.
 
 <p align='center'>
-    <img src = '/assets/post/Graph-Fourier-Transform/fourier.jpg' style = 'max-width: 100%; height: auto'>
+    <img src = '/assets/post/Graph-Fourier-Transform/fourier.jpg' style = 'max-width: 80%; height: auto'>
 </p>
+
 
 위의 그림은 time domain 으로부터 frequency domain 으로의 Fourier transform 을 잘 나타내어 줍니다.
 
@@ -87,20 +87,21 @@ $$
 
 > Graph Fourier transform
 
-[포스트](https://harryjo97.github.io/gnn/Graph-Laplacian/) 의 4번째 파트에서 설명했듯이, Euclidean space 의 Laplacian operator $$\Delta$$ 는 그래프에서의 graph Laplacian $$L$$ 에 해당합니다. 그렇기 때문에, 그래프에서도 graph Laplacian $$L$$ 을 사용해 Fourier transform 을 정의할 수 있습니다. 
+[포스트](https://harryjo97.github.io/gnn/Graph-Laplacian/) 에서 설명했듯이, Euclidean space 의 Laplacian operator $$\Delta$$ 는 그래프에서의 graph Laplacian $$L$$ 에 해당합니다. 이 대응관계를 이용해 그래프에서도 graph Laplacian $$L$$ 을 사용해 Fourier transform 을 정의하려고 합니다. 
 
-Complex exponentials $$ \left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}} $$ 은 1 차원 Laplacian operator $$ \Delta $$ 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ [^1]입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 $$ f \in\mathbb{R}^N $$ 를 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 들의 합으로 분해하는 변환으로 이해할 수 있습니다.  
 
-$$f$$에서 $$u_l$$ 성분은 두 vector 의 inner product 로 계산할 수 있습니다. 따라서, $$(1)$$ 과 같이 graph Fourier transform 을 정의할 수 있습니다.
+
+Complex exponentials $$ \left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}} $$ 은 1 차원 Laplacian operator $$ \Delta $$ 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ [^1]입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 $$ f \in\mathbb{R}^N $$ 를 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 들의 합으로 분해하는 변환으로 이해할 수 있습니다.  이 때 $$f$$에서 $$u_l$$ 성분은 두 vector 의 inner product 로 계산할 수 있기 때문에, $$(1)$$ 과 같이 graph Fourier transform 을 정의할 수 있습니다.
 
 $$
 \hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{T}_l(i) 
 \tag{$3$}
 $$
 
-여기서 $$f$$ 에 대한 Fourier transform 의 결과인 $$\hat{f}$$ 는 $$L$$ 의 spectrum 에서만 정의되는 함수입니다. 그렇기 때문에 $$\hat{f}$$ 가 정의된 domain 을 spectral domain[^2] 이라고 부릅니다.
+여기서 $$f$$ 에 대한 Fourier transform 의 결과인 $$\hat{f}$$ 는 $$L$$ 의 spectrum 에서만 정의되는 함수이며,  $$\hat{f}$$ 이 정의된 domain 을 spectral domain[^2] 이라고 부릅니다.
 
 $$\hat{f}$$ 을 다음과 같이 $$\mathbb{R}^N$$ 의 vector 로 보겠습니다.
+
 $$
 \hat{f} 
 = \begin{bmatrix}
@@ -143,11 +144,12 @@ f(N)
 = U^{T}f
 $$
 
+
 > Inverse graph Fourier transform
 
 $$\hat{f}(\lambda_l)$$ 은 그래프에서의 함수 $$f$$ 의 $$u_l$$ 에 대한 성분으로 볼 수 있습니다. 이 때 $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 은 $$\mathbb{R}^N$$ 의 orthonormal basis[^3] 를 이루기 때문에, Fourier transform 의 결과인 $$\hat{f}$$ 으로 부터 원래의 함수 $$f$$ 를 얻어내기 위해서는 각 성분들을 모두 더해주면 됩니다. 
 
-$$(2)$$ 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.
+따라서, $$(2)$$ 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.
 
 $$
 f(i) = \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l(i) 
@@ -177,6 +179,8 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 $$
 
 
+
+
 > Parseval relation
 
 Classical Fourier transform 에서와 마찬가지로, graph Fourier transform 은 Parseval relation[^4] 을 만족합니다.
@@ -200,6 +204,8 @@ $$
 
 그래프의 vertex domain $$V$$ 는 discrete 하기 때문에, 그래프의 함수 $$f:V\rightarrow \mathbb{R}^N$$ 를 vertex domain 에서 다루기 까다롭습니다. 다음의 예시를 들어 생각해보겠습니다.
 
+
+
 $$\mathbb{R}$$ 에서 정의된 함수 $$f$$ 와 실수 $$s, t$$ 에 대한 operation : translation  $$ T_{t} $$ 과 scaling  $$T^{s}$$  은 다음과 같이 정의됩니다.
 
 $$
@@ -209,11 +215,11 @@ T_{t}f(x) = f(x+t)\;, \;\;T^{s}f(x) = f(sx)
 \end{align}
 $$
 
-
-
 하지만 vertex domain 은 discrete 하기 때문에, vertex $$i$$ 에 대해 $$i+t$$ 와 $$si$$ 의 의미를 알 수 없습니다. 그렇기에 그래프의 함수에 대해서는 $$(5)$$ 의 translation 과 scaling 을 적용할 수 없습니다. 
 
-이런 문제를 해결하기 위해서  discrete 한 vertex domain 대신 continuous 한 spectral domain 을 이용합니다. Fourier transform 을 통해 vertex domain 에서 정의된 함수 $$f$$ 를 spectral domain 에서의 함수 $$\hat{f}$$ 로 변환해 준 후, $$\hat{f}$$ 에 대한 $$(5)$$ 의 translation 과 scaling 을 적용해주는 것입니다.
+
+
+이런 문제를 해결하기 위해서  discrete 한 vertex domain 대신 continuous 한 spectral domain 을 이용합니다. 이 때, vertex domain 과 spectral domain 을 연결해주는 것이 바로 Fourier transform 입니다.  Fourier transform 을 통해 vertex domain 에서 정의된 함수 $$f$$ 를 spectral domain 에서의 함수 $$\hat{f}$$ 로 변환해 준 후, $$\hat{f}$$ 에 대한 $$(5)$$ 의 translation 과 scaling 을 적용해주는 것입니다.
 
 
 
@@ -222,9 +228,7 @@ $$
 </p>
 
 
-
-
-Vertex domain 에서 정의하고 싶은 operation 은 위의 다이어그램과 같이 spectral domain 에서의 operation 을 통해 정의할 수 있습니다. 이 때, vertex domain 과 spectral domain 을 연결해주는 것이 바로 Fourier transform 입니다.  
+Vertex domain 에서 정의하고 싶은 operation 은 위의 다이어그램과 같이 spectral domain 에서의 operation 을 통해 정의할 수 있습니다. 
 
 
 

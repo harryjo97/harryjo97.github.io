@@ -29,10 +29,11 @@ Graph Fourier transform 에 대해 자세히 설명한 [포스트](https://harry
 
 
 
-Vertex domain 에서 직접 convolution operator 를 정의할 수 없습니다. [포스트](https://harryjo97.github.io/theory/Graph-Fourier-Transform/) 의 Why Do We Need Fourier Transform? 에서 설명했듯이,  Fourier transform 을 이용하여 spectral domain 을 통해 vertex domain 의 함수에 대해 convolution operator 를 정의하겠습니다.
+Vertex domain 에서 직접 convolution operator 를 정의할 수 없기 때문에, Fourier transform 을 이용하여 spectral domain 을 통해 vertex domain 의 함수에 대해 convolution operator 를 정의하겠습니다.
+
+
 
 기존의 convolution 과 같이 graph convolution 또한 Fourier transform 에 대해 다음의 조건을 만족해야 합니다. 
-
 
 $$
 \widehat{g\ast f}(\lambda_l) = \hat{g}(\lambda_l)\hat{f}(\lambda_l)
@@ -51,7 +52,7 @@ $$
 
 
 
-$$(2)$$ 는 Hadamard product $$\odot$$ 와  $$\{u_l\}^{N-1}_{l=0}$$ 을 column vector 로 가지는 matrix $$U$$ 를 사용해 다음과 같은 형태로도 표현할 수 있습니다.
+또한 $$(2)$$ 는 Hadamard product $$\odot$$ 와  $$\{u_l\}^{N-1}_{l=0}$$ 을 column vector 로 가지는 matrix $$U$$ 를 사용해 다음과 같은 형태로도 표현할 수 있습니다.
 
 
 $$
@@ -75,7 +76,7 @@ Spectral graph theory 와 같이 복잡한 이론을 통해 그래프에서 conv
 
 
 
-다음과 같이 convolution 을 사용해 filter $$g$$ 에 대한 spectral filtering 을 정의할 수 있습니다. 
+다음과 같이 convolution 을 사용해 그래프의 함수 $$f_{in}$$ 의 filter $$g$$ 에 대한 spectral filtering 을 정의할 수 있습니다. 
 
 
 $$
@@ -87,6 +88,8 @@ $$(1)$$ 을 이용하면,
 $$
 \hat{f}_{out}(\lambda_l) = \hat{g}(\lambda_l)\hat{f}_{in}(\lambda_l)
 $$
+
+
 
 Inverse Fourier transform 을 통해 $$f_{out}$$ 을 복원하면,
 
@@ -152,15 +155,18 @@ $$
 
 $$
 f_{out} = U\hat{g}(\Lambda)U^T f_{in}
+\tag{5}
 $$
 
 
 
+$$(5)$$ 를 통해 graph convolutional network 의 convolutional layer 를 만들 수 있습니다.
 
+&nbsp;
 
 ## 3. Next
 
-다음 포스트에서는 Polynomial Approximation of Spectral Filtering 대해 설명하겠습니다.
+다음 포스트에서는 $$(5)$$ 를 효율적으로 계산할 수 있는 Polynomial Approximation of Spectral Filtering 대해 설명하겠습니다.
 
 
 

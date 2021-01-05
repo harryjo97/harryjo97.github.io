@@ -84,6 +84,8 @@ $$
 Undirected weighted graph $$G$$ 에 대해 $$W$$ 와 $$D$$ 는 real symmetric matrix 이므로, $$L=D-W$$ 또한 real symmetric matrix 입니다. 
 
 
+
+
 > Positive semi-definite
 
 임의의 $$x\in\mathbb{R}^N$$ 에 대해,
@@ -93,13 +95,13 @@ $$
 x^TLx 
 &= x^TDx - x^TWx = \sum_{i} D_{ii}x_i^2 - \sum_{i,j}x_iW_{ij}x_j \\
 &= \frac{1}{2} \left( 2\sum_{i} D_{ii}x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&\overset{\mathrm{(1)}}{=} \frac{1}{2}\left( 2\sum_{i}\left\{\sum_{j}W_{ij}\right\} x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&\overset{\mathrm{(2)}}{=} \frac{1}{2}\left( \sum_{i,j}W_{ij}x_i^2 + \sum_{i,j}W_{ij}x_j^2  - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&= \frac{1}{2}\sum_{i,j} W_{ij}(x_i-x_j)^2 \geq 0 \tag{$\dagger$}
+&\overset{\mathrm{(a)}}{=} \frac{1}{2}\left( 2\sum_{i}\left\{\sum_{j}W_{ij}\right\} x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
+&\overset{\mathrm{(b)}}{=} \frac{1}{2}\left( \sum_{i,j}W_{ij}x_i^2 + \sum_{i,j}W_{ij}x_j^2  - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
+&= \frac{1}{2}\sum_{i,j} W_{ij}(x_i-x_j)^2 \geq 0 \tag{1}
 \end{align}
 $$
 
-을 만족합니다. 유도 과정에서의 (1) 은 degree matrix 의 정의를 사용하였고, (2) 는 $$W$$ 가 symmetric 이기 때문에 성립합니다.
+유도 과정에서의 $$(a)$$ 는 degree matrix 의 정의를 사용하였고, $$(b)$$ 는 $$W$$ 가 symmetric 이기 때문에 성립합니다.
 
 따라서 $$L$$ 은 positive semi-definite matrix 입니다.
 
@@ -135,13 +137,13 @@ $$
 
 > Multiplicity of eigenvalue zero
 
-$$L$$ 이 positive semi-definite 임을 증명하는 과정에서 $$(\dagger)$$ 의 결과를 이용하면,
+$$L$$ 이 positive semi-definite 임을 증명하는 과정에서 $$(1)$$ 의 결과를 이용하면,
 
 $$
 0 = u^TLu = \sum_{i,j}W_{ij}(u(i) - u(j))^2
 $$
 
-$$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$를 만족합니다 (#) . 
+$$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$를 만족합니다. $$(\ast)$$ 
 
 따라서 $$k$$ 개의 connected components 를 가지는 그래프 $$G$$ 의 graph Laplacian $$L$$ 은 
 
@@ -156,9 +158,7 @@ $$
 
 sub-Laplacian $$L_i$$ 들로 이루어진 block matrix 로 볼 수 있습니다.
 
-각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 (#)으로 인해 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 1개의 0 eigenvalue 를 가집니다.  그렇기 때문에 $$L$$ 은 정확히 $$k$$ 개의 0 eigenvalue 들을 가집니다.
-
-정리하면, graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다.
+각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 $$(\ast)$$ 로 인해 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 1개의 0 eigenvalue 를 가집니다.  그렇기 때문에 $$L$$ 은 정확히 $$k$$ 개의 0 eigenvalue 들을 가집니다. 따라서 graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다.
 
 
 
@@ -168,7 +168,7 @@ $$
 0 = \lambda_0 < \lambda_1 \leq \cdots \leq \lambda_{N-1}
 $$
 
-으로 나타낼 수 있습니다. $$L$$ 의 spectrum[^4]을 연구하는 분야가 spectral graph theory  입니다. Spectral graph theory 에서 다루는 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트를 통해 자세히 설명하겠습니다.
+으로 나타낼 수 있습니다. 이런 $$L$$ 의 spectrum[^4]에 대해 연구하는 분야가 바로 spectral graph theory  입니다. Spectral graph theory 에서 다루는 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트를 통해 자세히 설명하겠습니다.
 
 
 
@@ -188,7 +188,9 @@ $$
 L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
 $$
 
-$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서 [Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. 그렇기 때문에, 다음의 포스트에서 설명할 graph Fourier transform 의 결과 또한 달라집니다.
+$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. 그렇기 때문에, 다음의 포스트에서 설명할 graph Fourier transform 의 결과 또한 달라집니다.
+
+
 
 Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 에 속한다는 것입니다. 특히, 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다.   
 
@@ -340,7 +342,7 @@ $$
 
 로 표현할 수 있습니다.
 
-[Unnormalized Graph Laplacian](#unnormalized-graph-laplacian) 파트의 $$(\dagger)$$ 를 다시 보면,
+$$(1)$$의 식을 다시 보면,
 
 $$
 f^TLf = \frac{1}{2} \sum_{i,j} W_{ij}(f(i)-f(j))^2
