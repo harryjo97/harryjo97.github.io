@@ -229,7 +229,7 @@ $$
 
 > Function for graph
 
-그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가진다고 자연스럽게 생각 할 수 있습니다. 이 때 feature space 를 $$N$$ 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 $$f : V \rightarrow \mathbb{R}^N$$ 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph Signal 이라고 합니다. 자세한 설명은 [The Emerging Field of Signal Processing on Graphs](https://arxiv.org/pdf/1211.0053.pdf) 을 참고하시면 큰 도움이 될 것 같습니다. 
+그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가진다고 자연스럽게 생각 할 수 있습니다. 이 때 feature space 를 $$F$$ 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 $$f : V \rightarrow \mathbb{R}^{F}$$ 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph Signal 이라고 합니다. 자세한 설명은 [The Emerging Field of Signal Processing on Graphs](https://arxiv.org/pdf/1211.0053.pdf) 을 참고하시면 도움이 될 것 같습니다. 
 
 
 
@@ -319,7 +319,7 @@ $$
 
 으로 정의할 수 있습니다.
 
-이를 weighted graph 에 적용하면, 임의의 $$f\in\mathbb{R}^N$$ 에 대해 weighted graph 의 graph Laplacian 은 
+이를 weighted graph 에 적용하면, 임의의 $$f\in\mathbb{R}^{N\times F}$$ 에 대해 weighted graph 의 graph Laplacian 은 
 
 $$
 (Lf)(i) 
@@ -338,7 +338,7 @@ $$
 마지막으로, graph Laplacian 의 의미에 대해서 얘기해보겠습니다. Laplacian operator 는 second-order differential operator 로 함수가 얼마나 "매끄러운지" [^5]를 알려줍니다. 이를 그래프 관점에서 보면, "매끄러운" 함수란 edge 로 연결된 점들에 대한 함숫값이 많이 변하지 않는다는 것입니다. edge 의 양 끝점의 함숫값의 차이가 작아야 한다는 것을 Mean Square Error 의 형태를 사용하면 
 
 $$
-\sum_{e=(i,j)\in E} W_{ij} (f(i)-f(j))^2
+\sum_{e=(i,j)\in E} W_{ij} \|f(i)-f(j)\|^2
 $$
 
 로 표현할 수 있습니다.
@@ -346,7 +346,7 @@ $$
 $$(1)$$의 식을 다시 보면,
 
 $$
-f^TLf = \frac{1}{2} \sum_{i,j} W_{ij}(f(i)-f(j))^2
+f^TLf = \frac{1}{2} \sum_{i,j} W_{ij}\|f(i)-f(j)\|^2
 $$
 
 edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문에 위의 두 식은 동일합니다. 
