@@ -45,7 +45,7 @@ $$
 
 
 
-그래프의 edge weight 가 주어지지 않은 경우에는 threshold Gaussian kernel weighting function을 사용해 아래와 같이 weighted adjacency matrix $$W$$ 를 정의할 수 있습니다. 그래프를 사용한 semi-supervised learning 에서는 $$dist(i,j)$$ 로 vertex $$i$$ 와 $$j$$ 의 feature vector 사이의 Euclidean distance 를 사용합니다.
+그래프의 edge weight 가 주어지지 않은 경우에는 threshold Gaussian kernel weighting function을 사용해 아래와 같이 weighted adjacency matrix $$W$$ 를 정의할 수 있습니다. 그래프에서의 semi-supervised learning 의 경우는 $$dist(i,j)$$ 로 vertex $$i$$ 와 $$j$$ 의 feature vector 사이의 Euclidean distance 를 사용합니다.
 
 $$
 W_{ij} = 
@@ -117,7 +117,7 @@ $$
 \lambda u^Tv = (\lambda u)^Tv = (Lu)^Tv = u^TLv = u^T(\mu v) = \mu u^Tv
 $$
 
-이기 때문에 $$u^Tv = 0$$ 이어야 하고, $$u$$ 와 $$v$$ 는 orthogonal 합니다.
+이므로 $$u^Tv = 0$$ 이어야 하고, $$u$$ 와 $$v$$ 는 orthogonal 합니다.
 
 따라서 $$L$$ 의 eigenvector 들은 서로 orthogonal 합니다.
 
@@ -125,25 +125,26 @@ $$
 
 > Zero as eigenvalue
 
-특히 $$u_0 = \frac{1}{\sqrt{N}}\begin{pmatrix} 1 & 1 & \cdots & 1 \end{pmatrix}^T$$ 에 대해 
+특히 $$u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 & 1 & \cdots & 1 \end{bmatrix}^T$$ 에 대해 
 
 $$
 Lu_0 = (D-W)u_0 = \mathbf{0}
 $$
 
-을 만족하기 때문에 $$L$$ 은 0 을 eigenvalue 로 가지며, 0 에 해당하는 eigenvector[^3] 는 $$u_0$$ 입니다. 여기서 기억해야 할 점은, 주어진 그래프와 상관 없이 $$L$$ 은 0 을 eigenvalue 로 가지고, eigenvector $$u_0 = \frac{1}{\sqrt{N}}\begin{pmatrix} 1 & 1 & \cdots & 1 \end{pmatrix}^T$$ 또한 변하지 않는다는 것입니다.
+을 만족하기 때문에 $$L$$ 은 0 을 eigenvalue 로 가지며, 0 에 해당하는 eigenvector[^3] 는 $$u_0$$ 입니다. 
+
+여기서 기억해야 할 점은, 주어진 그래프와 상관 없이 $$L$$ 은 0 을 eigenvalue 로 가지고, 0 의 eigenvector $$u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 & 1 & \cdots & 1 \end{bmatrix}^T$$ 또한 변하지 않는다는 것입니다. 
 
 
 
 > Multiplicity of eigenvalue zero
 
-$$L$$ 이 positive semi-definite 임을 증명하는 과정에서 $$(1)$$ 의 결과를 이용하면,
-
+0 의 eigenvector $$u$$ 에 대해 $$(1)$$ 의 결과를 이용하면, 다음과 같습니다.
 $$
 0 = u^TLu = \sum_{i,j}W_{ij}(u(i) - u(j))^2
 $$
 
-$$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$를 만족합니다. $$(\ast)$$ 
+$$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$ 를 만족합니다. $$(\ast)$$ 
 
 따라서 $$k$$ 개의 connected components 를 가지는 그래프 $$G$$ 의 graph Laplacian $$L$$ 은 
 
