@@ -1,6 +1,5 @@
 ---
 title: Graph Laplacian
-description : with Spectral Graph Theory
 date: 2020-12-30 22:00:00 +0900
 category: 
 - theory
@@ -24,12 +23,12 @@ $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edg
 
 
 
-Weighted adjacency matrix 의 한 예로 adjacency matrix 가 있습니다. Adjacency matrix 는 $$i$$ 와 $$j$$ 를 연결하는 edge 가 있다면 $$W_{ij} = 1$$, 없다면 $$W_{ij}=0$$ 으로 정의합니다. Fig1 은 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다. 
-
+Weighted adjacency matrix 의 한 예로 adjacency matrix 가 있습니다. Adjacency matrix 는 $$i$$ 와 $$j$$ 를 연결하는 edge 가 있다면 $$W_{ij} = 1$$, 없다면 $$W_{ij}=0$$ 으로 정의합니다. 다음의 그림은 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다. 
 
 <p align='center'>
-    <img src = '/assets/post/Graph-Laplacian/adjacency.gif' style = 'max-width: 100%; height: auto' alt = 'Fig1'>
+    <img src = '/assets/post/Graph-Laplacian/adjacency.gif' style = 'max-width: 100%; height: auto'>	
 </p>
+
 
 
 주어진 weighted adjacency matrix $$W$$ 에 대해 degree matrix  $$D$$ 는 다음을 만족하는 diagonal matrix 로 정의합니다.
@@ -56,13 +55,14 @@ $$
 
 여기서 $$D$$ 는 앞서 정의한 degree matrix 입니다. Unnormalized graph Laplacain 은 combinatorial Laplacian 이라고도 불립니다.
 
-Fig2 는 예시 그래프에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 를 보여줍니다.
+다음은 예시 그래프에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 를 보여줍니다.
 
 
 
 <p align='center'>
-    <img src = '/assets/post/Graph-Laplacian/graph-eg.jpg' style = 'max-width: 100%; height: auto', alt='Fig2'>
+    <img src = '/assets/post/Graph-Laplacian/graph-eg.jpg' style = 'max-width: 100%; height: auto'>
 </p>
+
 
 
 Unnormalized graph Laplacian 의 성질들을 설명
@@ -92,9 +92,7 @@ x^TLx
 \end{align}
 $$
 
-유도 과정에서의 $$(a)$$ 는 degree matrix 의 정의를 사용하였고, $$(b)$$ 는 $$W$$ 가 symmetric 이기 때문에 성립합니다.
-
-따라서 $$L$$ 은 positive semi-definite matrix 입니다.
+유도 과정에서 $$(a)$$ 는 degree matrix 의 정의를 사용하였고, $$(b)$$ 는 $$W$$ 가 symmetric 이기 때문에 성립합니다. 따라서 $$L$$ 은 positive semi-definite matrix 입니다.
 
 
 
@@ -109,9 +107,7 @@ $$
 \tag{3}
 $$
 
-$$(3)$$ 에서 $$\lambda\neq\mu$$ 이므로, $$u^Tv = 0$$ 이어야 합니다.
-
-따라서 서로 다른 eigenvalue 들에 대해 $$L$$ 의 eigenvector 들은 orthogonal 합니다.
+$$(3)$$ 에서 $$\lambda\neq\mu$$ 이므로, $$u^Tv = 0$$ 이어야 합니다. 따라서 서로 다른 eigenvalue 들에 대해 $$L$$ 의 eigenvector 들은 orthogonal 합니다.
 
 
 
@@ -195,7 +191,7 @@ $$
 
 
 
-## 4.  Reference
+## Reference
 
 1.  D. Shuman, S. Narang, P. Frossard, A. Ortega, and P. Vandergheynst. [The Emerging Field of Signal
    Processing on Graphs: Extending High-Dimensional Data Analysis to Networks and other Irregular Domains](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6494675). _IEEE Signal Processing Magazine_, 30(3):83–98, 2013.
