@@ -7,20 +7,16 @@ tag:
 - graph laplacian
 ---
 
-
-
 Graph Laplacian 의 이해.
 
 
+## Basic definition
 
-## Adjacency Matrix, Degree Matrix 
-
-
+### Weighted adjacency Matrix
 
 주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$\vert V\vert= N < \infty $$ 을 가정합니다. 
 
-$$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타내고,  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미합니다. 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 이며 부여된 weight 는 positive 입니다. 이 때 $$W$$ 는 모든 vertex pair 마다 정의되며 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ symmetric matrix 입니다.
-
+$$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타냅니다. 또한  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미하며 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 이고 edge 가 있는 경우 $$W_{ij}>0$$ 입니다. 이 때 $$W$$ 는 모든 vertex pair 마다 정의되고 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ real symmetric matrix 입니다. 
 
 
 Weighted adjacency matrix 의 한 예로 adjacency matrix 가 있습니다. Adjacency matrix 는 $$i$$ 와 $$j$$ 를 연결하는 edge 가 있다면 $$W_{ij} = 1$$, 없다면 $$W_{ij}=0$$ 으로 정의합니다. 다음의 그림은 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다. 
@@ -30,9 +26,9 @@ Weighted adjacency matrix 의 한 예로 adjacency matrix 가 있습니다. Adja
 </p>
 
 
+### Degree matrix
 
 주어진 weighted adjacency matrix $$W$$ 에 대해 degree matrix  $$D$$ 는 다음을 만족하는 diagonal matrix 로 정의합니다.
-
 $$
 D_{ii} = \sum^{N}_{j=1} W_{ij}
 \tag{1}
@@ -65,19 +61,17 @@ $$
 
 
 
-Unnormalized graph Laplacian 의 성질들을 설명
+Unnormalized graph Laplacian 은 다음과 같은 특징을 가집니다.
 
 
 
-
-> Real symmetric matrix
+### Real symmetric
 
 Undirected weighted graph $$G$$ 에 대해 $$W$$ 와 $$D$$ 는 $$N\times N$$ real symmetric matrix 이므로, $$L=D-W$$ 또한  $$N\times N$$ real symmetric matrix 입니다. 
 
 
 
-
-> Positive semi-definite
+### Positive semi-definite
 
 임의의 $$x\in\mathbb{R}^N$$ 에 대해,
 
@@ -96,22 +90,25 @@ $$
 
 
 
-> Eigenvalue and eigenvector
+### Non-negative eigenvalue
 
-$$L$$ 이 real symmetric, positive semi-definite matrix 이므로, $$L$$ 은 non-negative real eigenvalue 들을 가집니다. 
-
-서로 다른 eigenvalue $$\lambda$$, $$\mu$$ 와 이에 해당하는 eigenvector $$u$$, $$v$$ 에 대해,
-
-$$
-\lambda u^Tv = (\lambda u)^Tv = (Lu)^Tv = u^TLv = u^T(\mu v) = \mu u^Tv
-\tag{3}
-$$
-
-$$(3)$$ 에서 $$\lambda\neq\mu$$ 이므로, $$u^Tv = 0$$ 이어야 합니다. 따라서 서로 다른 eigenvalue 들에 대해 $$L$$ 의 eigenvector 들은 orthogonal 합니다.
+$$L$$ 이 positive semi-definite matrix 이므로, $$L$$ 은 non-negative real eigenvalue 들을 가집니다. 
 
 
 
-> Zero as eigenvalue
+### Orthonormal basis
+
+$$L$$ 은 real symmetric matrix 이기 때문에 다음의 lemma 를 이용하면, $$L$$ 의 eigenvector 들로 $$\mathbb{R}^N$$ 의 orthonormal basis 를 만들 수 있습니다.
+
+
+
+>  __Lemma : __ Real symmetric matrix 는 diagonalizable 합니다.
+
+증명은 포스트의 마지막 부분인 Appendix 를 참고하기 바랍니다.
+
+
+
+### Multiplicity of zero
 
 $$u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 & 1 & \cdots & 1 \end{bmatrix}^T$$ 에 대해 다음을 만족하기 때문에,
 
@@ -121,18 +118,14 @@ $$
 
 $$L$$ 은 0 을 eigenvalue 로 가지며 $$u_0$$ 는 $$L$$ 의 eigenvector 입니다. 이 때, 주어진 그래프와 상관 없이 $$L$$ 은 항상 0 을 eigenvalue 로 가지고 $$u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 & 1 & \cdots & 1 \end{bmatrix}^T$$ 또한 항상 eigenvector 가 됩니다. 
 
-
-
-> Multiplicity of zero
-
 0 의 eigenvector $$u$$ 에 대해 $$(2)$$ 의 결과를 이용하면, 다음과 같습니다.
 $$
-0 = u^TLu = \sum_{i,j}W_{ij}(u(i) - u(j))^2
+0 = u^TLu = \frac{1}{2}\sum_{i,j}W_{ij}(u(i) - u(j))^2
 $$
 
-$$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$ 를 만족합니다. $$(\ast)$$ 
+따라서 $$W_{ij}\neq 0$$ 인 모든 vertices $$i$$ 와 $$j$$ , 즉 edge로 연결된 $$i$$ 와 $$j$$ 에 대해 $$u(i) = u(j)$$ 를 만족합니다. $$(\ast)$$ 
 
-따라서 $$k$$ 개의 connected components 를 가지는 그래프 $$G$$ 의 graph Laplacian $$L$$ 은 
+$$k$$ 개의 connected components 를 가지는 그래프 $$G$$ 의 graph Laplacian $$L$$ 은 
 
 $$
 L = \begin{bmatrix}
@@ -145,9 +138,9 @@ $$
 
 sub-Laplacian $$L_i$$ 들로 이루어진 block matrix 로 볼 수 있습니다.
 
-각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 $$(\ast)$$ 로 인해 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 1개의 0 eigenvalue 를 가집니다.  그렇기 때문에 $$L$$ 은 정확히 $$k$$ 개의 0 eigenvalue 들을 가집니다. 따라서 graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다.
+각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 $$(\ast)$$ 로 인해 $$u_0$$ 로 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 한 개의 eigenvalue 0 을 가집니다.  $$k$$ 개의 connected components 를 가지는 그래프에 대해서 $$L$$ 은 정확히 $$k$$ 개의 eigenvalue 0 들을 가집니다. 따라서 graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다.
 
-
+&nbsp;
 
 주어진 그래프를 connected 라고 가정하면 $$L$$ 의 eigenvalue 들을 다음과 같이 나열할 수 있습니다.
 
@@ -165,7 +158,7 @@ $$L$$ 의 eigenvalue 들, 즉 spectrum 을 다루는 분야가 바로 spectral g
 
 
 
-> Normalized graph Laplacian
+### Normalized graph Laplacian
 
 Normalized graph Laplacian $$L^{norm}$$ 은 다음과 같이 정의합니다.
 
@@ -173,11 +166,11 @@ $$
 L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
 $$
 
-$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. 특히 $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 구간에 속한다는 것입니다. 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다.   
+$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. 특히 $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 구간에 속한다는 것입니다. 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다.   증명은 F. R. K. Chung. Spectral Graph Theory (pp. 6-7), volume 92. American Mathematical Society, 1997. 를 참고하기 바랍니다.
 
 
 
-> Random walk graph Laplacian
+### Random walk graph Laplacian
 
 Random walk graph Laplacian $$L^{rw}$$ 는 다음과 같이 정의합니다. 
 
@@ -195,6 +188,20 @@ $$
 
 1.  D. Shuman, S. Narang, P. Frossard, A. Ortega, and P. Vandergheynst. [The Emerging Field of Signal
    Processing on Graphs: Extending High-Dimensional Data Analysis to Networks and other Irregular Domains](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6494675). _IEEE Signal Processing Magazine_, 30(3):83–98, 2013.
+
+
+
+2. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
+
+
+
+## Appendix
+
+
+
+### Proof for the lemma
+
+ 
 
 
 

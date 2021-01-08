@@ -27,7 +27,7 @@ $$
 
 
 
-그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가진다고 자연스럽게 생각 할 수 있습니다. 이 때 feature space 를 $$F$$ 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 $$f : V \rightarrow \mathbb{R}^{F}$$ 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph Signal 이라고 합니다. 자세한 설명은 [The Emerging Field of Signal Processing on Graphs](https://arxiv.org/pdf/1211.0053.pdf) 을 참고하시면 도움이 될 것 같습니다. 
+그래프에서의 함수는 각각의 vertex 를 feature 에 매칭해주는 역할을 가집니다. 이 때 feature space 를 $$F$$ 차원의 vector 로 표현할 수 있으므로, 그래프 영역에서의 함수는 $$f : V \rightarrow \mathbb{R}^{F}$$ 으로 정의할 수 있습니다. 이와 같은 접근법을 Graph signal processing 이라고 하면, 자세한 설명은 Reference 의 [The Emerging Field of Signal Processing on Graphs](https://arxiv.org/pdf/1211.0053.pdf) 을 참고하기 바랍니다.
 
 
 
@@ -35,10 +35,21 @@ $$
 
 
 
-Euclidean space 에서의 gradient 는 함수의 방향에 따른 도함수를 의미합니다. 그래프와 같이 이산적인 경우에는 도함수를 함수값의 difference 로 해석할 수 있습니다. Euclidean space 에서의 방향의 개념을 그래프에서의 edge 로 생각한다면, edge $$e = (i,j)$$ 에 대한 함수 $$f$$ 의 gradient 를 $$f(i)-f(j)$$  로 정의할 수 있습니다.
+Euclidean space 에서의 gradient 는 함수의 방향에 따른 도함수를 의미합니다. 그래프와 같이 discrete 한 경우에는 도함수를 함수값의 difference 로 해석할 수 있습니다. Euclidean space 에서 방향의 개념을 그래프에서의 edge 로 생각한다면, edge $$e = (i,j)$$ 에 대한 함수 $$f$$ 의 gradient 를 $$f(i)-f(j)$$  로 정의할 수 있습니다.
 
-edge 의 시작점에 $$+1$$, 끝점에 $$-1$$ 을 부여하는 incidence matrix $$K$$ 를 통해 그래프의 모든 edge 에 대해 gradient 를 표현하면, 
+edge 의 시작점에 $$+1$$, 끝점에 $$-1$$ 을 부여하는 incidence matrix $$K$$ 를 통해 
 
+
+
+
+
+
+
+
+
+
+
+그래프의 모든 edge 에 대해 gradient 를 표현하면, 다음과 같습니다.
 $$
 \nabla f = K^T f
 $$
@@ -130,7 +141,7 @@ $$
 f(1) \\ \vdots \\ f(N) 
 \end{bmatrix} 
 \right)(i)
-= \sum_{i\sim j} W_{ij} (f(i)-f(j))
+= \sum^{N}_{j=1} W_{ij} (f(i)-f(j))
 $$
 
 를 만족하는 difference operator 입니다.
@@ -174,4 +185,7 @@ edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문
    connected networks on graphs](https://arxiv.org/pdf/1312.6203.pdf). In _International Conference on Learning Representations (ICLR)_,
    2014.
 
-   
+
+
+3. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
+
