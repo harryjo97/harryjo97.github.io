@@ -5,7 +5,6 @@ date: 2021-01-01 19:00:00 +0900
 category: 
 - theory
 tag:
-- gnn
 - graph fourier transform
 ---
 
@@ -15,20 +14,11 @@ Graph Signal Processing 의 관점에서 Graph Fourier Transform 의 이해.
 
 
 
-## 0. Graph Laplacian
+## Classical Fourier Transform
 
 
 
-Graph Laplacian 에 대해 자세히 설명한 [포스트](https://harryjo97.github.io/gnn/Graph-Laplacian/) 를 보고 오시면, graph Fourier Transform 을 이해하는데 큰 도움이 될 것입니다. 
-
-
-
-## 1. Classical Fourier Transform
-
-
-
-
-> Fourier transform
+### Fourier transform
 
 Integrable function $$ f : \mathbb{R} \rightarrow \mathbb{C} $$ 의 Fourier transform 은 다음과 같이 정의합니다.
 
@@ -38,19 +28,16 @@ $$
 
 
 
-$$(1)$$ 을 살펴보면, Fourier transform 은 time domain $$t\in\mathbb{R}$$ 에서 정의된 함수 $$f(t)$$ 를 frequency domain $$\xi\in\mathbb{C}$$ 에서 정의된 함수 $$\hat{f}(\xi)$$ 로 변환시켜준다는 것을 알 수 있습니다.
+즉 $$\hat{f}(\xi)$$ 은 $$f(t)$$ 의 $$e^{2\pi i \xi t}$$ 성분 (frequency) 의 크기 (amplitude) 를 의미합니다. $$(1)$$ 을 살펴보면, Fourier transform 은 time domain $$t\in\mathbb{R}$$ 에서 정의된 함수 $$f(t)$$ 를 frequency domain $$\xi\in\mathbb{C}$$ 에서 정의된 함수 $$\hat{f}(\xi)$$ 로 변환시켜준다는 것을 알 수 있습니다. 다음의 그림을 통해 time domain 으로부터 frequency domain 으로의 Fourier transform 을 이해할 수 있습니다.
 
 <p align='center'>
     <img src = '/assets/post/Graph-Fourier-Transform/fourier.jpg' style = 'max-width: 80%; height: auto'>
 </p>
 
 
-위의 그림은 time domain 으로부터 frequency domain 으로의 Fourier transform 을 잘 나타내어 줍니다.
 
 
-
-
-> Inverse Fourier transform
+### Inverse Fourier transform
 
 $$(1)$$ 에서 정의된 Fourier transform 의 역과정인 inverse Fourier transform 은 다음과 같습니다.
 
@@ -60,14 +47,11 @@ $$
 
 
 
-Invere Fourier transform 은 Fourier transform 과 반대로 frequency domain 에서 정의된 함수 $$\hat{f}$$ 을 time domain 에서의 함수 $$f$$ 로 변환시켜줍니다.
-
-$$(2)$$ 는 주어진 $$\hat{f}$$ 으로부터 원래의 함수 $$f$$ 를 복원하는 과정입니다. Inverse Fourier transform 을 통해 각 성분별 amplitude $$\hat{f}(\xi)$$ 가 주어졌을 때, 원래의 함수는 각 성분들의 합으로 표현할 수 있습니다.
+Invere Fourier transform 은 Fourier transform 과 반대로 frequency domain 에서 정의된 함수 $$\hat{f}$$ 을 time domain 에서의 함수 $$f$$ 로 변환시켜줍니다. $$(2)$$ 는 주어진 $$\hat{f}$$ 으로부터 원래의 함수 $$f$$ 를 복원하는 과정이며, 각 $$e^{2\pi i \xi t}$$ 성분의 amplitude $$\hat{f}(\xi)$$ 이 주어졌을 때 원래의 함수 $$f$$ 를 각 성분들의 합으로 표현하는 변환입니다.
 
 
 
-
-> Laplacian operator
+### Laplacian operator
 
 $$(1)$$ 과 $$(2)$$ 에서 등장하는 complex exponentials $$ \left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}} $$ 는 1 차원 Laplacian operator $$ \Delta $$ 의 eigenfunction 입니다.
 
@@ -76,42 +60,52 @@ $$
 = -(2\pi\xi)^2 e^{2\pi i \xi t}
 $$
 
-
 즉 Fourier transform 은 Laplacian operator $$\Delta$$ 의 eigenfunction 들의 합으로 분해하는 변환으로 생각 할 수 있습니다.
 
 
 
-## 2. Graph Fourier Transform
+### Discrete Fourier Transform
 
-
-
-> Graph Fourier transform
-
-[포스트](https://harryjo97.github.io/gnn/Graph-Laplacian/) 에서 설명했듯이, Euclidean space 의 Laplacian operator $$\Delta$$ 는 그래프에서의 graph Laplacian $$L$$ 에 해당합니다. 이 대응관계를 이용해 그래프에서도 graph Laplacian $$L$$ 을 사용해 Fourier transform 을 정의하려고 합니다. 
-
-
-
-Complex exponentials $$ \left\{ e^{2\pi i \xi t} \right\}_{\xi\in\mathbb{C}} $$ 은 1 차원 Laplacian operator $$ \Delta $$ 의 eigenfunction 이고, 그래프에서 이에 대응하는 것은 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ [^1]입니다. 즉 그래프에서의 Fourier transform 은 그래프에서의 함수 $$ f \in\mathbb{R}^N $$ 를 $$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 들의 합으로 분해하는 변환으로 이해할 수 있습니다.  이 때 $$f$$에서 $$u_l$$ 성분은 두 vector 의 inner product 로 계산할 수 있기 때문에, $$(1)$$ 과 같이 graph Fourier transform 을 정의할 수 있습니다.
 
 $$
-\hat{f}(\lambda_l) = \langle u_l, f\rangle =  \sum^N_{i=1} f(i)u^{T}_l(i) 
-\tag{$3$}
+\tag{3}
 $$
 
-여기서 $$f$$ 에 대한 Fourier transform 의 결과인 $$\hat{f}$$ 는 $$L$$ 의 spectrum 에서만 정의되는 함수이며,  $$\hat{f}$$ 이 정의된 domain 을 spectral domain[^2] 이라고 부릅니다.
 
-$$\hat{f}$$ 을 다음과 같이 $$\mathbb{R}^N$$ 의 vector 로 보겠습니다.
+
+
+## Graph Fourier Transform
+
+
+
+### Graph Fourier transform
+
+그래프에서의 graph Laplacian $$L$$ 은 Euclidean space 의 Laplacian operator $$\Delta$$ 과 같은 역할을 합니다. 기존의 Fourier transform 을 정의한 것 처럼, $$L$$ 을 사용해 graph Fourier transform 을 정의하겠습니다. 
+
+
+
+1 차원 Laplacian operator $$ \Delta $$ 에 대해 complex exponential 들은 eigenfunction 이며, 그래프에서는 $$L$$ 의 eigenvector 들이 그 역할을 대신합니다.  이 때 graph Laplacian 의 eigenvector 들로 $$\mathbb{R}^N$$ 의 orthonormal basis 를 만들 수 있기 때문에, orthonormal eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 로 graph Fourier transform 을 정의하겠습니다.
+
+
+
+그래프에서의 Fourier transform 은 graph signal $$ f \in\mathbb{R}^{N} $$ 를  $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 들의 합으로 분해하는 변환으로 이해할 수 있습니다.  
+$$
+\hat{f}(l) = \langle u_l, f\rangle =  \sum^N_{i=1} u^{T}_l(i)f(i) 
+\tag{4}
+$$
+
+$$\hat{f}$$ 을 다음과 같이 $$\mathbb{R}^N$$ 의 vector 로 생각하겠습니다.
 
 $$
 \hat{f} 
 = \begin{bmatrix}
-\hat{f}(\lambda_0) \\
+\hat{f}(0) \\
 \vdots \\
-\hat{f}(\lambda_{N-1})
+\hat{f}({N-1})
 \end{bmatrix}
 $$
 
-$$L$$ 의 eigenvector 들을 column 으로 가지는 행렬 $$U$$ 에 대해
+$$L$$ 의 eigenvector $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 를 column 으로 가지는 행렬 $$U$$ 에 대해
 
 $$
 U = \begin{bmatrix}
@@ -121,14 +115,14 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 \end{bmatrix}
 $$
 
-$$(3)$$ 을 다음과 같이 표현할 수 있습니다.
+$$(4)$$ 를 다음과 같이 표현할 수 있습니다.
 
 $$
 \hat{f} 
 = \begin{bmatrix}
-\hat{f}(\lambda_0) \\
+\hat{f}(0) \\
 \vdots \\
-\hat{f}(\lambda_{N-1})
+\hat{f}({N-1})
 \end{bmatrix}
 = \begin{bmatrix}
 - & u_0^{T} & - \\
@@ -145,18 +139,28 @@ f(N)
 $$
 
 
-> Inverse graph Fourier transform
 
-$$\hat{f}(\lambda_l)$$ 은 그래프에서의 함수 $$f$$ 의 $$u_l$$ 에 대한 성분으로 볼 수 있습니다. 이 때 $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 은 $$\mathbb{R}^N$$ 의 orthonormal basis[^3] 를 이루기 때문에, Fourier transform 의 결과인 $$\hat{f}$$ 으로 부터 원래의 함수 $$f$$ 를 얻어내기 위해서는 각 성분들을 모두 더해주면 됩니다. 
+정리하자면, graph signal $$f$$ 에 대한 graph Fourier transform 은 $$L$$ 의 orthonormal eigenvector matrix $$U$$ 를 통해 다음과 같이 쓸 수 있습니다.
+$$
+\hat{f} = U^T f
+\tag{5}
+$$
+
+
+### Inverse graph Fourier transform
+
+$$\hat{f}(l)$$ 은  $$f$$ 의 성분 $$u_l$$ 크기로 볼 수 있습니다. 
+
+이 때 $$ \left\{ u_l \right\}^{N-1}_{l=0} $$ 은 $$\mathbb{R}^N$$ 의 orthonormal basis 를 이루기 때문에, Fourier transform 의 결과인 $$\hat{f}$$ 으로 부터 원래의 $$f$$ 를 얻어내기 위해서는 각 성분들을 모두 더해주면 됩니다. 
 
 따라서, $$(2)$$ 와 같이 inverse graph Fourier transform 을 정의할 수 있습니다.
 
 $$
 f(i) = \sum^{N-1}_{l=0} \hat{f}(\lambda_l)u_l(i) 
-\tag{$4$}
+\tag{6}
 $$
 
-$$(4)$$ 를 $$\mathbb{R}^N$$ 의 vector 로 표현하면,
+$$(6)$$ 를 $$\mathbb{R}^N$$ 의 vector 로 표현하면,
 
 $$
 f 
@@ -178,19 +182,24 @@ u_0 & u_1 & \cdots & u_{N-1} \\
 = U\hat{f}
 $$
 
+따라서 inverse graph Fourier transform 은 다음과 같이 쓸 수 있습니다.
+$$
+f = U\hat{f}
+$$
 
 
 
-> Parseval relation
 
-Classical Fourier transform 에서와 마찬가지로, graph Fourier transform 은 Parseval relation[^4] 을 만족합니다.
+### Parseval relation
+
+Classical Fourier transform 에서와 마찬가지로, graph Fourier transform 은 Parseval relation 을 만족합니다.
 
 $$
 \begin{align}
-	\langle f, h\rangle 
-	&= \langle \sum^{N-1}_{l=0}\hat{f}(\lambda_l)u_l, \sum^{N-1}_{l'=0}\hat{g}(\lambda_{l'})u_{l'} \rangle \\
-	&= \sum_{l, l'} \hat{f}(\lambda_l)\hat{g}(\lambda_{l'})\langle u_l, u_{l'} \rangle \\
-	&= \sum_{l} \hat{f}(\lambda_l)\hat{g}(\lambda_l) = \langle \hat{f}, \hat{g} \rangle
+	\langle f, g\rangle 
+	&= \langle \sum^{N-1}_{l=0}\hat{f}(l)u_l, \sum^{N-1}_{l'=0}\hat{g}({l'})u_{l'} \rangle \\
+	&= \sum_{l, l'} \hat{f}(l)\hat{g}({l'})\langle u_l, u_{l'} \rangle \\
+	&= \sum_{l} \hat{f}(l)\hat{g}(l) = \langle \hat{f}, \hat{g} \rangle
 \end{align}
 $$
 
@@ -198,7 +207,7 @@ $$
 
 
 
-## 3. Why Do We Need Fourier Transform?
+## Why Do We Need Fourier Transform?
 
 
 
@@ -230,26 +239,15 @@ $$
 
 Vertex domain 에서 정의하고 싶은 operation 은 위의 다이어그램과 같이 spectral domain 에서의 operation 을 통해 정의할 수 있습니다. 
 
-
-
-
-
-
-## 4. Next
-
-
-
-다음 포스트에서는 graph convolution 과 filtering 에 대해 설명하겠습니다.
-
-
-
 &nbsp;
 
-&nbsp;
+## Reference
+
+1. David K. Hammond, Pierre Vandergheynst, and Remi Gribonval. [Wavelets on graphs via spectral
+   graph theory. Applied and Computational Harmonic Analysis](https://arxiv.org/pdf/0912.3848.pdf), 30(2):129–150, 2011.
 
 
 
-[^1]:$$L$$ 의 eigenvalue $$ \lambda_l $$ 에 대한 eigenvector 를 $$ u_l $$ 이라 하겠습니다.
-[^2]: Fourier domain, frequency domain 으로도 불립니다.
-[^3]: Eigenvector 들을 unit vector 로 설정하면 orthonormal 하게 됩니다.
-[^4]: $$ \langle f, h \rangle = \langle \hat{f}, \hat{g} \rangle$$ 의 identity 를 의미합니다.
+2. Michael Defferrard, Xavier Bresson, and Pierre Vandergheynst. [Convolutional neural networks on
+   graphs with fast localized spectral filtering](https://arxiv.org/pdf/1606.09375.pdf). In Advances in neural information processing systems
+   (NIPS), 2016.

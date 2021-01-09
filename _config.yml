@@ -1,4 +1,4 @@
-# Welcome to Jekyll!
+﻿# Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
 # which you are expected to set up once and rarely need to edit after that.
@@ -17,11 +17,11 @@ minimal_mistakes_skin    :  "default"
 
 # Site Settings
 locale                   : "en"
-title                    : "GNN review"
+title                    : "Graph ML review"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "harryjo97 blog"
-description              : "공부한 내용을 정리하는 블로그입니다."
+description              : "about Graph ML"
 url                      : "https://harryjo97.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "harryjo97/harryjo97.github.io"
