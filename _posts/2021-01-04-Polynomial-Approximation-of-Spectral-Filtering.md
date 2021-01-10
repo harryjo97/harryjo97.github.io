@@ -1,28 +1,18 @@
 ---
-title: Polynomial Approximation of Spectral Filtering
-description: based on "Wavelets on Graphs via Spectral Graph Theory"
-date: 2021-01-04 20:00:00 +0900
+title: Polynomial Approximation Using Chebyshev Expansion
+date: 2021-01-04 22:00:00 +0900
 category:
 - theory
 tag:
-- gnn
-- polynomial approximation
 - spectral filtering
+- polynomial filter
 ---
 
-
-
-Truncated Chebyshev expansion 을 통한 spectral filtering 의 polynomial approximation.
-
-
-
-## 0. Graph Convolution and Spectral Filtering
-
-Graph convolution 과 spectral filtering 에 대해 자세히 설명한 [포스트](https://harryjo97.github.io/theory/Graph-Convolution-and-Filtering/) 를 보고 오시면, 이번 포스트를 이해하는데 큰 도움이 될 것입니다. Graph signal processing 과 spectral graph wavelet transform 에 대해 더 공부하고 싶다면 [Wavelets on Graphs via Spectral Graph Theory](https://arxiv.org/pdf/0912.3848.pdf) 를 참고하기 바랍니다.
+Graph convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion
 
 
 
-## 1. Chebyshev Polynomial
+## Chebyshev Polynomial
 
 
 
@@ -52,95 +42,45 @@ $$
 
 &nbsp;
 
-## 2. Polynomial Approximation and Localization
+## Truncated Chebyshev Expansion
 
 
 
-입력 신호 $$f_{in}$$ 의 filter $$g$$ 에 대한 spectral filtering 의 결과 $$f_{out}$$ 은 다음과 같습니다.
+$$g_{\theta}$$ 에 대한 spectral filtering 의 결과 $$f_{out}$$ 은 다음과 같습니다.
 
 $$
 \begin{align}
 
 f_{out} 
-= U\hat{g}(\Lambda)U^T\;f_{in} \tag{$1$}
+= Ug_{\theta}(\Lambda)U^T\;f_{in} \tag{$1$}
 
 \end{align}
 $$
 
-이 포스트에서는 편의상 $$\hat{g}$$ 을 $$g_{\theta}$$ 로 대신 쓰겠습니다. 
+
+
+$$(1)$$ 을 계산하기 위해서는 Fourier basis $$U$$ 필요하기 때문에, graph Laplacian $$L$$ 의 eigenvector 를 모두 찾아야 합니다. $$N$$ 개의 node 를 가지는 그래프에 대해서, QR decomposition 과 같은 eigenvalue decomposition 의 computational complexity 의 $$O(N^3)$$ 입니다. 즉 node 가 수천개 혹은 수만개 이상인 그래프에 대해서는 직접 $$(1)$$ 을 계산하는 것은 굉장히 어렵습니다. 
 
 
 
-> Localization of graph Laplacian
+따라서, 그래프의 크기가 큰 경우에는 $$(1)$$ 을 근사할 수 있는 효율적인 방법이 필요합니다. 
 
-
-
-그래프 $$G$$ 의 vertex $$i$$ 와 $$j$$ 에 대해, $$d_G(i,j)$$ 를 $$i$$ 와 $$j$$ 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다. 
-
-이 때, 그래프 $$G$$ 의 vertex $$i, \;j$$ 와 $$d_G(i,j)$$  보다 작은 모든 $$s$$ 에 대해 다음이 성립합니다.
-
-$$
-\left(L^s\right)_{ij} = 0
-\tag{$2$}
-$$
-
-증명 과정에 대해 자세히 알고 싶다면,  [Wavelets on Graphs via Spectral Graph Theory](https://arxiv.org/pdf/0912.3848.pdf) 의 lemma 5.4 를 참고하기 바랍니다. 
-
-
-
-
-> Localized filter in vertex domain
-
-
-
-만약 $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면, $$g_{\theta}(x) = \sum^K_{k=0} a_k x^k$$ 를 $$(1)$$ 에 넣어 정리할 수 있습니다.
-
+만약 $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면, $$g_{\theta}(x) = \sum^K_{k=0} a_k x^k$$ 에 대해 $$(1)$$ 을 다음과 같이 쓸 수 있습니다.
 $$
 \begin{align}
 f_{out}
 &= U\left(\sum^{N-1}_{k=0} a_k\Lambda^k \right)U^T f_{in} \\
 &= \sum^{K}_{k=0} a_k\left( U\Lambda U^T \right)^k f_{in} 
 = g_{\theta}(L)f_{in}
-\tag{3}
+\tag{2}
 \end{align}
 $$
 
-$$(3)$$ 에서 볼 수 있듯이, graph Laplacian $$L$$ 의 eigenvector 를 계산하지 않고도 spectral filtering 의 결과를 구할 수 있습니다.
-
-특히 vertex $$i$$ 에 대한 spectral filtering 의 결과는 다음과 같습니다.
-
-$$
-f_{out}(i) 
-= (g_{\theta}(L) f_{in})(i) 
-= \sum^{K}_{k=0}\sum^{N}_{j=1} a_{k} \left(L^k\right)_{ij} f_{in}(j) 
-\tag{$4$}
-$$
-
-graph Laplacian 의 localization $$(2)$$ 를 사용하면, $$(4)$$ 를  vertex $$i$$ 의 $$K$$ - hop local neighborhood $$N(i,K)$$ 에 대해 표현할 수 있습니다. 
-
-$$
-\begin{align}
-f_{out}(i) 
-&= \sum^{N}_{j=1} \sum^{K}_{k=d_G(i,j)} a_k\left(L^k\right)_{ij} f_{in}(j) \\
-\\
-&= \sum_{j\in N(i,K)} b_{ij} f_{in}(j)
-\end{align}
-\tag{5}
-$$
-
-즉 $$f_{out}(i)$$ 는 $$i$$ 의 K - localized neighborhood 의 vertices $$j$$ 에 대해 $$f_{in}(j)$$ 들의 합으로 표현할 수 있습니다. 
+$$(2)$$ 에서 볼 수 있듯이, Fourier basis $$U$$  없이도 $$(1)$$ 의 결과를 계산할 수 있습니다.
 
 
 
-따라서, spectral filter $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면 filter 가 vertex domain 에서 $$K$$ - localized 된다는 것을 확인할 수 있습니다.
-
-&nbsp;
-
-## 3. Truncated Chebyshev Expansion
-
-
-
-$$(1)$$ 을 계산하기 위해서는  graph Laplacian $$L$$ 의 eigenvector 를 모두 찾아야 합니다. $$N$$ 개의 node 를 가지는 그래프에 대해서, QR decomposition 의 computational complexity 가 $$O(N^3)$$ 이기 때문에, node 가 수천개 혹은 수만개 이상인 그래프에 대해서는 직접 $$(1)$$ 을 계산하기는 힘듭니다. 따라서, 그래프의 크기가 큰 경우에는 $$(1)$$ 을 근사할 수 있는 효율적인 방법이 필요합니다. 저희의 목표는 $$(1)$$ 을 효율적으로 근사할 수 있는 $$g_{\theta}$$ 의 polynomial approximant $$p$$ 를 찾는 것입니다.
+$$(1)$$ 을 효율적으로 근사할 수 있는 $$g_{\theta}$$ 의 polynomial approximant $$p$$ 를 찾는 것입니다.
 
 
 
@@ -154,7 +94,7 @@ $$
 
 
 
-$$(3)$$ 을 참고하면, polynomial filter $$p(L)$$ 의 결과 $$\tilde{f}_{out} = p(L)f_{in}$$ 을 통해 다음과 같이 $$f_{out}$$ 을 근사할 수 있습니다. 
+polynomial filter $$p(L)$$ 의 결과 $$\tilde{f}_{out} = p(L)f_{in}$$ 을 통해 다음과 같이 $$f_{out}$$ 을 근사할 수 있습니다 [3].
 
 $$
 \begin{align}
@@ -167,6 +107,9 @@ $$
 \tag{7}
 \end{align}
 $$
+
+
+
 
 
 이 때 $$f_{out}$$ 과 $$\tilde{f}_{out}$$ 에 대한 오차 $$(7)$$ 을 줄이기 위해서는, $$g_{\theta}$$ 와 $$p$$ 에 대한 $$L_{\infty}$$ error $$(6)$$ 를  최소화해야 합니다. 만약  $$p$$ 가 order $$K$$ polynomial 이라면, $$(6)$$ 은 $$p$$ 가 minimax polynomial of order $$K$$ 일 때 최소가 됩니다. 이 때 truncated Chebyshev expansion 을 통해 minimax polynomial 에 대한 근사가 가능합니다. 
@@ -211,54 +154,52 @@ $$
 
 &nbsp;
 
-## 4. Advantage of using Chebyshev polynomial
+## Advantage of using Chebyshev expansion
 
 
 
-$$(9)$$ 과 같이 truncated Chebyshev expansion 을 통한 spectral filtering 의 근사는 다음과 같은 세 가지 이점이 있습니다.
+$$(9)$$ 와 같이 truncated Chebyshev expansion 을 통한 spectral filtering 의 근사는 다음과 같은 두 가지 이점이 있습니다.
 
 
 
+### Fast filtering using recurrence relation
 
-> Fast filtering using recurrence relation
-
-Chebyshev polynomial 의 중요한 특성은 $$(a)$$ 의 점화식을 통해 얻을 수 있다는 것입니다. Graph Laplacian $$L$$ 에서부터 시작해 재귀적 연산으로 order $$K$$ polynomial $$T_K$$ 까지 구하는 computational cost 는 $$L$$ 이 sparse matrix  [^4]일 때 $$O(K\vert E\vert)$$ 입니다. 
-
+Chebyshev polynomial 의 중요한 특성은 $$(a)$$ 의 점화식을 통해 얻을 수 있다는 것입니다. Graph Laplacian $$L$$ 에서부터 시작해 재귀적 연산으로 order $$K$$ polynomial $$T_K$$ 까지 구하는 computational cost 는 $$L$$ 이 sparse matrix 일 때 $$O(K\vert E\vert)$$ 입니다. 
 
 
 
-> Localized in vertex domain
+### Localized Filter
 
 $$(5)$$ 에서 보았듯이 $$g_{\theta}$$ 대신 polynomial approximant 를 사용한 filter 는 vertex domain 에서 localized 되어있습니다. 이를 통해 CNN 의 중요한 특성인 locality 가 그래프에서 일반화될 수 있습니다.
 
-
-
-
-> Learnable filter
-
-$$(8)$$ 의 coefficient $$c_k$$ 를 parameter 로 학습하는 neural network 를 만들 수 있습니다. [Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf) 에 이 방법이 자세히 설명되어 있습니다.
-
 &nbsp;
 
-## 5. Lanczos Algorithm 
+## Lanczos Algorithm 
 
 $$(1)$$ 을 효율적으로 계산하는 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. [LanczosNet: Multi-Scale Deep Graph Convolutional Networks](https://arxiv.org/pdf/1901.01484.pdf) 의 paper review 를 통해 더 자세히 설명하겠습니다.
 
 
 &nbsp;
 
-## 6. Next
+## Reference
 
-다음 포스트에서는 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) 의 paper review 를 하겠습니다.
-
-
-&nbsp;
-&nbsp;
+1. Michael Defferrard, Xavier Bresson, and Pierre Vandergheynst. [Convolutional neural networks on
+   graphs with fast localized spectral filtering](https://arxiv.org/pdf/1606.09375.pdf). In Advances in neural information processing systems
+   (NIPS), 2016.
 
 
-[^1]: recurrence relation.
-[^2]: Hilbert space of square integrable functions
+
+2. Thomas N. Kipf and Max Welling. [Semi-supervised classification with graph convolutional networks](https://arxiv.org/pdf/1609.02907.pdf).
+   In International Conference on Learning Representations (ICLR), 2017.
+
+
+
+3. David K Hammond, Pierre Vandergheynst, and Remi Gribonval. [Wavelets on graphs via spectral
+   graph theory](https://arxiv.org/pdf/0912.3848.pdf). Applied and Computational Harmonic Analysis, 30(2):129–150, 2011.
+
+
+
+
+
 [^3]: Spectrum 의 upper bound $$\lambda_{max}$$ 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 $$L$$ 의 spectrum 전체를 찾는 것에 비해서 훨씬 쉽게 구할 수 있습니다.
-
-[^4]: 많은 경우 graph Laplacian 은 sparse matrix 로 표현 가능합니다.
 

@@ -10,7 +10,7 @@ tag:
 
 
 
-Graph Laplacian 과 Laplacian opeartor 의 관계.
+Graph Laplacian 과 Laplacian opeartor 의 관계
 
 
 
@@ -187,5 +187,10 @@ edge 가 없는 두 vertex $$i$$ 와 $$j$$ 에 대해 $$W_{ij}=0$$ 이기 때문
 
 
 
-3. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
+3. Mikhail Belkin and Partha Niyogi. [Laplacian eigenmaps and spectral techniques for embedding
+   and clustering](https://papers.nips.cc/paper/2001/file/f106b7f99d2cb30c3db1c3cc0fde9ccb-Paper.pdf). In NIPS, volume 14, pages 585–591, 2001.
+
+
+
+4. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
 

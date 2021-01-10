@@ -7,14 +7,16 @@ tag:
 - graph laplacian
 ---
 
-Graph Laplacian 의 이해.
+Graph convolutional Network 이해하기 : (1) Graph Laplacian 
 
 
 ## Basic definition
 
+
+
 ### Weighted adjacency Matrix
 
-주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$\vert V\vert= N < \infty $$ 을 가정합니다. 
+주어진 undirected weighted graph $$G = (V,E,W)$$ 는 vertices 의 집합 $$V$$, edges 의 집합 $$E$$, 그리고 weighted adjacency matrix $$W$$ 로 이루어집니다. 이 포스트에서는 $$\vert V\vert= N < \infty $$ 을 가정합니다. 편의상 $$V = \{1,2,\cdots,N\}$$ 으로 나타내겠습니다. 여기서 vertices 의 ordering 은 임의로 주어진 것이며, 의미를 가지지 않습니다. 
 
 $$E$$ 의 원소 $$ e = (i,j) $$ 는 vertex $$i$$ 와 $$j$$ 를 연결하는 edge 를 나타냅니다. 또한  $$W_{ij}$$ 는 edge $$e = (i,j)$$ 의 weight 을 의미하며 만약 $$i$$ 와 $$j$$를 연결하는 edge 가 없다면 $$W_{ij}=0$$ 이고 edge 가 있는 경우 $$W_{ij}>0$$ 입니다. 이 때 $$W$$ 는 모든 vertex pair 마다 정의되고 그래프가 undirected 이므로, $$W$$ 는 $$N\times N$$ real symmetric matrix 입니다. 
 
@@ -191,7 +193,12 @@ $$
 
 
 
-2. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
+2. David K Hammond, Pierre Vandergheynst, and Remi Gribonval. [Wavelets on graphs via spectral
+   graph theory](https://arxiv.org/pdf/0912.3848.pdf). Applied and Computational Harmonic Analysis, 30(2):129–150, 2011.
+
+
+
+3. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
 
 
 
