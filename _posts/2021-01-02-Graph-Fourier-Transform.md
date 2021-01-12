@@ -1,6 +1,5 @@
 ---
 title: Graph Fourier Transform
-description: based on Graph Signal Processing
 date: 2021-01-01 19:00:00 +0900
 category: 
 - theory
@@ -8,7 +7,7 @@ tag:
 - graph fourier transform
 ---
 
-Graph convolutional Network 이해하기 : (2) Graph Fourier transform 
+Graph Convolutional Network 이해하기 : (2) Graph Fourier transform 
 
 ## Classical Fourier Transform
 

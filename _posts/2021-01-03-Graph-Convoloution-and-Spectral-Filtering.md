@@ -8,7 +8,7 @@ tag:
 - spectral filtering
 ---
 
-Graph convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering
+Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering
 
 &nbsp;
 

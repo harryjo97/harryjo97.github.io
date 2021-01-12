@@ -8,7 +8,7 @@ tag:
 - polynomial filter
 ---
 
-Graph convolutional Network 이해하기 : (4) Localized Polynomial Filter
+Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter
 
 
 

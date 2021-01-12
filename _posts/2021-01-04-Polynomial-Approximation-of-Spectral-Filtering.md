@@ -8,7 +8,7 @@ tag:
 - polynomial filter
 ---
 
-Graph convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion
+Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion
 
 
 

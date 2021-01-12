@@ -7,7 +7,7 @@ tag:
 - graph laplacian
 ---
 
-Graph convolutional Network 이해하기 : (1) Graph Laplacian 
+Graph Convolutional Network 이해하기 : (1) Graph Laplacian 
 
 
 ## Basic definition
