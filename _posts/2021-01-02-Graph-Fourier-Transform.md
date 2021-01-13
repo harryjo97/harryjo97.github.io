@@ -9,6 +9,7 @@ tag:
 
 Graph Convolutional Network 이해하기 : (2) Graph Fourier transform 
 
+
 ## Classical Fourier Transform
 
 
@@ -82,6 +83,7 @@ $$
 $$
 
 $$\hat{f}$$ 을 다음과 같이 $$\mathbb{R}^N$$ 의 vector 로 생각하겠습니다.
+
 $$
 \hat{f} 
 = \begin{bmatrix}
@@ -195,24 +197,6 @@ $$
 	&= \sum_{l} \hat{f}(l)\hat{g}(l) = \langle \hat{f}, \hat{g} \rangle
 \end{align}
 $$
-
-&nbsp;
-
-
-
-## Why Do We Need Fourier Transform?
-
-
-
-Graph Convolutional Network 는 CNN 을 
-
-
-
-CNN 은 large-scale high dimensional 데이터로 부터 local structure 를 학습하여 의미있는 패턴을 잘 찾아냅니다. Local feature 들은 convolutional filter 로 표현되며, filter 는 translation-invariant 이기 때문에 공간적인 위치나 데이터의 크기에 상관없이 같은 feature 를 뽑아낼 수 있습니다. 
-
-
-
-하지만, 그래프와 같이 irregular (non-Euclidean) domain 에서는 직접 convolution operator 를 정의할 수 없기 때문에,  
 
 &nbsp;
 

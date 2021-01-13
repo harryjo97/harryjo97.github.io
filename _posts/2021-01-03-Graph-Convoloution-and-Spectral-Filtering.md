@@ -10,7 +10,7 @@ tag:
 
 Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering
 
-&nbsp;
+
 
 
 ## Why do we need Graph Convolution?
@@ -144,6 +144,7 @@ $$
 
 
 따라서, $$g_{\theta}$$ 에 대한 filtering 의 결과는 다음과 같습니다.
+
 $$
 f_{out} = Ug_{\theta}(\Lambda)U^T f_{in}
 \tag{5}

@@ -1,19 +1,13 @@
 ---
 title: Semi-Supervised Classification with Graph Convolutional Networks
-date: 2021-01-13 23:00:00 +0900
+date: 2021-01-13 20:00:00 +0900
 category: 
 - paper review
-tag
+tag:
 - gcn
 ---
 
 Graph Convolutional Network 이해하기 : paper review
-
-
-
-## Preliminary
-
-
 
 
 
@@ -67,6 +61,7 @@ $$
 여기서 $$U$$  는 normalized graph Laplacian $$L = I - D^{-1/2}AD^{-1/2}$$ 의 eigenvector 로 이루어진 Fourier basis 이고, $$L=U\Lambda U^T$$ 로 표현할 수 있습니다. 
 
 Filter $$g_{\theta}$$ 는 다음과 같이 $$L$$ 의 eigenvalue 들의 함수로 생각할 수 있습니다 [3].
+
 $$
 g_{\theta}(\Lambda) =
 \begin{bmatrix}
@@ -236,19 +231,6 @@ GCN 의 정확도가 다른 baseline method 들에 비해 월등히 높은 것�
 $$(7)$$ 에서 사용한 renormalization trick 이 가장 높은 정확도를 보여줍니다.
 
 &nbsp;
-
-## Appendix
-
-
-### Weisfeiler-Lehman Algorithm
-
-<p align='center'>
-    <img src = '/assets/post/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/wl.PNG' style = 'max-width: 100%; height: auto'>	
-</p>
-
-
-
-### Model depth
 
 
 
