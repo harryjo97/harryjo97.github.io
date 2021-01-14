@@ -1,7 +1,7 @@
 ---
 title: Graph Laplacian as Operator
 description : with Spectral Graph Theory
-date: 2021-01-15 23:00:00 +0900
+date: 2021-01-20 23:00:00 +0900
 category: 
 - theory
 tag:

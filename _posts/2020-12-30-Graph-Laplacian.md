@@ -102,11 +102,7 @@ $$L$$ 이 positive semi-definite matrix 이므로, $$L$$ 은 non-negative real e
 
 $$L$$ 은 real symmetric matrix 이기 때문에 다음의 lemma 를 이용하면, $$L$$ 의 eigenvector 들로 $$\mathbb{R}^N$$ 의 orthonormal basis 를 만들 수 있습니다.
 
-
-
 >  __Lemma : __ Real symmetric matrix 는 diagonalizable 합니다.
-
-증명은 포스트의 마지막 부분인 Appendix 를 참고하기 바랍니다.
 
 
 
@@ -140,7 +136,7 @@ $$
 
 sub-Laplacian $$L_i$$ 들로 이루어진 block matrix 로 볼 수 있습니다.
 
-각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 $$(\ast)$$ 로 인해 $$u_0$$ 로 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 한 개의 eigenvalue 0 을 가집니다.  $$k$$ 개의 connected components 를 가지는 그래프에 대해서 $$L$$ 은 정확히 $$k$$ 개의 eigenvalue 0 들을 가집니다. 따라서 graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다.
+각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector $$u$$ 는 $$(\ast)$$ 로 인해 $$u_0$$ 로 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 한 개의 eigenvalue 0 을 가집니다.  $$k$$ 개의 connected components 를 가지는 그래프에 대해서 $$L$$ 은 정확히 $$k$$ 개의 eigenvalue 0 들을 가집니다. 따라서 graph Laplacian $$L$$ 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 $$G$$ 의 connected components 의 개수와 일치합니다 [3].
 
 &nbsp;
 
@@ -168,7 +164,7 @@ $$
 L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}
 $$
 
-$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. 특히 $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 구간에 속한다는 것입니다. 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다.   증명은 F. R. K. Chung. Spectral Graph Theory (pp. 6-7), volume 92. American Mathematical Society, 1997. 를 참고하기 바랍니다.
+$$L$$ 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 $$L$$ 과 $$L^{norm}$$ 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. 특히 $$L$$ 의 eigenvalue 0 에 대한 eigenvector $$u_0$$ 는 그래프에 상관 없이 일정하지만, $$L^{norm}$$ 의 경우 그래프에 따라 변합니다. Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 $$[0,2]$$ 구간에 속한다는 것입니다. 그래프 $$G$$ 가 bipartite graph 일 때만 $$L^{norm}$$ 의 가장 큰 eigenvalue 가 2가 됩니다 [3].   
 
 
 
@@ -184,8 +180,6 @@ $$
 
 &nbsp;
 
-
-
 ## Reference
 
 1.  D. Shuman, S. Narang, P. Frossard, A. Ortega, and P. Vandergheynst. [The Emerging Field of Signal
@@ -199,16 +193,6 @@ $$
 
 
 3. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
-
-
-
-## Appendix
-
-
-
-### Proof for the lemma
-
- 
 
 
 

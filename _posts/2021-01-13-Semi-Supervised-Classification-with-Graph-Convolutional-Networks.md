@@ -94,11 +94,11 @@ $$
 
 
 
-이 때, graph Laplacian $$L$$ 은 다음과 같이 localization 특성을 가집니다 [5].
+$$(4)$$ 의 결과가 특별한 이유는 각 node 에 대해 localized 되어 있기 때문입니다. 우선 graph Laplacian $$L$$ 은 다음과 같이 localization 특성을 가집니다 [5].
 
 >$$\left(L^s\right)_{ij}$$ 는 그래프의 두 node $$i$$ 와 $$j$$ 를 연결하는 path 들 중 길이가 $$s$$ 이하인 path 들의 개수와 일치한다.
 
-$$(4)$$ 에서 $$L$$ 의 $$K$$-th power 까지만 존재하기 때문에, $$y(i)$$ 는 $$i$$ 의 $$K$$-th order neighborhood signal 들의 합으로 표현할 수 있습니다. 따라서 $$(4)$$ 은 $$K$$-localized 됨을 확인할 수 있습니다.
+$$(4)$$ 에서 $$L$$ 의 $$K$$-th power 까지만 존재하기 때문에, $$y(i)$$ 는 $$i$$ 의 $$K$$-th order neighborhood signal 들의 합으로 표현할 수 있습니다. 따라서 $$(4)$$ 의 근사는 $$K$$-localized 됨을 확인할 수 있습니다.
 
 
 
@@ -111,9 +111,9 @@ $$(4)$$ 에서 $$K$$ 가 클수록 더 많은 종류의 convolutional filter 를
 
 
 이 논문에서는 극단적으로 $$K=1$$ 로 제한을 두었습니다. 또한 normalized graph Laplacian 의 eigenvalue 들은 $$[0,2]$$ 구간에 속하기 때문에 [6], $$\lambda_{max}\approx 2$$ 로 근사합니다.이 경우 $$(4)$$ 는 다음과 같이 두 개의 parameter $$\theta'_0$$ 와 $$\theta'_1$$ 을 통해 표현할 수 있습니다.
+
 $$
 g_{\theta'}\ast x \approx \theta'_0x + \theta'_1(L-I)x = \theta'_0x - \theta'_1D^{-1/2}AD^{-1/2}x
-\tag{5}
 $$
 
 
@@ -121,13 +121,16 @@ $$
 
 $$
 g_{\theta}\ast x \approx \theta(I + D^{-1/2}AD^{-1/2})x
+\tag{5}
 $$
 
 
 
-이 때 $$I + D^{-1/2}AD^{-1/2}$$ 의 eigenvalue 는 $$[0,2]$$ 에 속하기 때문에, 여러개의 layer 를 쌓아 deep model 을 만든다면 exploding / vanishing gradient problem 과 같이 불안정한 학습이 이루어질 수 있습니다. 
+$$M = I + D^{-1/2}AD^{-1/2}$$ 의 eigenvalue 는 $$[0,2]$$ 에 속합니다 [Appendix A]. 그렇기 때문에, $$(5)$$ 를 사용한 layer 를 여러개 쌓아 deep model 을 만든다면 exploding / vanishing gradient problem 과 같이 불안정한 학습이 이루어질 수 있습니다. 
 
-따라서, $$I + D^{-1/2}AD^{-1/2}$$ 대신 $$\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}$$ 를 사용하고, 이를 renormalization trick 이라 부릅니다.
+
+
+논문에서는 이를 해결하기 위해 renormalization trick 을 사용합니다. $$\tilde{A} = A + I$$ 와 $$\tilde{D}_{ii} = \sum_j \tilde{A}_{ij}$$  에 대해, $$(5)$$ 에서 $$I + D^{-1/2}AD^{-1/2}$$ 대신 $$\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}$$ 를 이용해 다음과 같이 convolutional filter 를 정의합니다 [Appendix B].
 
 $$
 g_{\theta}\ast x \approx \theta\, \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2} x
@@ -136,7 +139,8 @@ $$
 
 
 
-$$(6)$$ 의 결과를 $$C$$ 개의 input channel 을 가지는 signal $$X\in\mathbb{R}^{N\times C}$$ 와 $$F$$ 개의 feature map 에 대해서 일반화시키면, 다음과 같습니다.
+$$(6)$$ 의 결과는 각 node 가 1차원의 feature 를 가질 때로 한정되어 있습니다. 이제 각 node 마다 $$C$$ 차원의 feature vector 를 가지는 상황을 고려하겠습니다. 주어진 signal $$X\in\mathbb{R}^{N\times C}$$ 와 $$F$$ 개의 feature map 에 대해서 $$(6)$$ 을 다음과 같이 일반화할 수 있습니다 [Appendix C].
+
 $$
 Z = \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}X\Theta
 \tag{7}
@@ -144,9 +148,10 @@ $$
 
 여기서 $$\Theta\in\mathbb{R}^{C\times F}$$ 는 filter의 parameter matrix 이고 $$Z\in\mathbb{R}^{N\times F}$$ 가 filtering 의 결과입니다. 특히 $$\Theta$$ 는 그래프의 모든 node 들에 대해 동일하게 사용되기 때문에, CNN 의 filter 와 같이 weight-sharing 의 관점에서 큰 의미가 있습니다.
 
-
+&nbsp;
 
 $$(7)$$ 을 사용해 muli-layer GCN 의 layer-wise propagation rule 을 정의할 수 있습니다. $$l$$ 번째 layer 와 $$l+1$$ 번째 layer 의 activation 을 다음과 같이 쓰면,
+
 $$
 H^{(l)}\in\mathbb{R}^{N\times C_l}\, , \;\; H^{(l+1)}\in\mathbb{R}^{N\times C_{l+1}}
 $$
@@ -230,11 +235,125 @@ GCN 의 정확도가 다른 baseline method 들에 비해 월등히 높은 것�
 
 $$(7)$$ 에서 사용한 renormalization trick 이 가장 높은 정확도를 보여줍니다.
 
+
+
 &nbsp;
 
+## Appendix 
 
 
 
+### A.  Largesest Eigenvalue of $$M$$
+
+$$M = I + D^{-1/2}AD^{-1/2}$$ 가 real symmetric matrix 이기 때문에, Courant-Fischer 정리에 의해 $$M$$ 의 가장 큰 eigenvalue $$\mu$$ 는 다음을 만족합니다.
+
+$$
+\mu = \sup_{\|x\|=1} x^TMx
+$$
+
+$$L$$ 의 정의에 의해 $$M = 2I-L$$ 이며 $$L$$ 은 positive semi-definite matrix 이기 때문에, $$\|x\|=1$$ 를 만족하는 $$x\in\mathbb{R}^N$$ 에 대해 다음이 성립합니다.
+
+$$
+x^TMx 
+=x^T(2I-L)x
+= 2 - x^TLx \leq 2
+$$
+
+따라서, 
+
+$$
+\mu = \sup_{\|x\|=1} x^TMx \leq 2
+$$
+
+### B. About Renormalization Trick
+
+$$I + D^{-1/2}AD^{-1/2}$$ 와 $$\tilde{D}^{-1/2}\tilde{A}\,\tilde{D}^{-1/2}$$ 의 matrix 를 자세히 살펴보면 다음과 같습니다.
+
+$$
+I + D^{-1/2}AD^{-1/2} = \begin{cases}
+1 & i=j \\
+A_{ij}/\sqrt{D_{ii}D_{jj}} & i\neq j
+\end{cases}
+$$
+
+$$
+\tilde{D}^{-1/2}\tilde{A}\,\tilde{D}^{-1/2} = \begin{cases}
+1/(D_{ii}+1) & i=j \\
+A_{ij}/\sqrt{(D_{ii}+1)(D_{jj}+1)} & i\neq j
+\end{cases}
+$$
+
+
+### C. Generalization to high dimensional feature vectors
+
+먼저 filter 의 개수가 1개일 때를 생각하겠습니다. 각 node 가 $$C$$ 차원의 feature vector 를 가질 때, 이를 signal $$X\in\mathbb{R}^{N\times C}$$ 로 표현할 수 있습니다.
+
+$$
+X = \begin{bmatrix}
+\vert & & \vert \\
+x_1 & \cdots & x_C \\
+\vert & & \vert
+\end{bmatrix}
+$$
+
+$$X$$ 의 각 column 은 특정 feature 에 대한 signal $$x_{i}\in\mathbb{R}^N$$ 입니다. 각 feature 마다 convolutional filter $$(6)$$ 을 적용해 새로운 feature $$Z\in\mathbb{R}^N$$ 를 얻어내는 과정을 다음과 같이 표현할 수 있습니다.
+
+$$
+\begin{align}
+Z 
+&= \sum^{C}_{i=1} \hat{A}x_i\theta_i\\
+&= \begin{bmatrix}
+\vert & & \vert \\
+\hat{A}x_1 & \cdots & \hat{A}x_C \\
+\vert & & \vert
+\end{bmatrix}
+\begin{bmatrix}
+\theta_1 \\
+\vdots \\
+\theta_C
+\end{bmatrix} \\
+\\
+&= \hat{A}\;
+\begin{bmatrix}
+\vert & & \vert \\
+x_1 & \cdots &x_C \\
+\vert & & \vert
+\end{bmatrix}
+\begin{bmatrix}
+\theta_1 \\
+\vdots \\
+\theta_C
+\end{bmatrix}
+= \hat{A}X\Theta
+\end{align}
+$$
+
+이제 Filter 의 개수가 $$F$$ 개라면, $$i$$ 번째 filter 로 만들어진 새로운 feature $$Z_i = \hat{A}X\Theta_i$$ 들에 대해 다음과 같이 정리할 수 있습니다.
+
+$$
+\begin{align}
+Z 
+&= \begin{bmatrix}
+\vert & & \vert \\
+Z_1 & \cdots & Z_F \\
+\vert & & \vert
+\end{bmatrix} 
+= \begin{bmatrix}
+\vert & & \vert \\
+\hat{A}X\Theta_1 & \cdots & \hat{A}X\Theta_F \\
+\vert & & \vert
+\end{bmatrix} \\
+\\
+&= \hat{A}X\begin{bmatrix}
+\vert & & \vert \\
+\Theta_1 & \cdots &\Theta_F \\
+\vert & & \vert
+\end{bmatrix}
+= \hat{A}X\Theta
+\end{align}
+$$
+
+&nbsp;
 
 ## Reference
 
@@ -266,10 +385,4 @@ $$(7)$$ 에서 사용한 renormalization trick 이 가장 높은 정확도를 �
 
 
 6. F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.
-
-
-
-
-
-
 
