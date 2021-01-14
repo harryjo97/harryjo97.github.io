@@ -11,8 +11,6 @@ tag:
 Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering
 
 
-
-
 ## Why do we need Graph Convolution?
 
 
@@ -55,7 +53,6 @@ $$
 g \ast f = U((U^Tg) \odot (U^Tf))
 \tag{3}
 $$
-
 
 
 &nbsp;
@@ -131,6 +128,7 @@ Reference 의 [1, 2] 에서는 $$\text{diag}(\hat{g})$$ 를 함수가 아닌, fi
 
 
 따라서 GCN 에서의 spectral convolution 은 $$\hat{g}$$ 을 $$L$$ 의 eigenvalue 에 대한 함수 $$g_{\theta}$$ 로 생각하고, $$\text{diag}(\hat{g})$$ 대신 다음의 $$g_\theta(\Lambda)$$ 를 사용하여 $$(4)$$ 를 표현합니다.
+
 $$
 g_{\theta}(\Lambda) =
 \begin{bmatrix}
@@ -140,7 +138,6 @@ g_{\theta}(\lambda_0) & 0 & \cdots & 0 \\
 0 & 0 & 0 & g_{\theta}(\lambda_{N-1})
 \end{bmatrix}
 $$
-
 
 
 따라서, $$g_{\theta}$$ 에 대한 filtering 의 결과는 다음과 같습니다.

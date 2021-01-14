@@ -23,6 +23,7 @@ Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter
 > Lemma 1.
 >
 > 그래프 $$G$$ 의 adjacency matrix $$A$$ 에 대해 $$\tilde{A}$$ 를 다음과 같이 정의하겠습니다.
+> 
 > $$
 > \tilde{A} = \begin{cases}
 > A_{ij} &\mbox{ if } i\neq j \\
@@ -64,7 +65,6 @@ B_{ij} = \begin{cases}
 $$
 
 $$L$$ 의 정의에 의해 $$B$$ 는 그래프 $$G$$ 에 대한 adjacency matrix $$A$$ 를 변형한 $$\tilde{A}$$ 와 같습니다. 그러므로, Lemma 1 에 의해 $$\left( B^s \right)_{ij}=0$$ 입니다. Lemma 2 를 사용하면 $$\left( B^s \right)_{ij}=0$$ 이므로 $$\left( L^s \right)_{ij}=0$$ 임을 알 수 있습니다.  
-
 
 
 &nbsp;
