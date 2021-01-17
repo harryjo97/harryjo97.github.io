@@ -5,9 +5,10 @@ category:
 - theory
 tag:
 - WL algorithm
+- graph isomorphism
 ---
 
-Graph Convolution Network 이해하기 : (6) Weisfeiler-Lehman Algorithm
+Weisfeiler-Lehman Algorithm
 
 
 
