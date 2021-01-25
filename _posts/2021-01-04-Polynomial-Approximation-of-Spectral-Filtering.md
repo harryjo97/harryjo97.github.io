@@ -139,11 +139,13 @@ $$
 
 
 
+&nbsp;
+
 마지막으로, 두 가지 확인해야할 것이 있습니다. 첫번 째로, $$\tilde{L}$$ 을 계산하기 위해서 $$\lambda_{max}$$ 에 대한 정보가 필요합니다. Spectrum 의 upper bound $$\lambda_{max}$$ 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 $$L$$ 의 전체 spectrum 을 찾는 것에 비해서 훨씬 쉽게 구할 수 있습니다. 
 
 
 
-두번 째로, $$p(\tilde{L})$$ 을 계산하기 위해서는 Chebyshev coefficient $$c_k$$ 에 대해 알아야합니다. 이는 $(\ast)$ 를 통해 이론적으로 계산할 수 있지만, 현실적으로 도움이 되지 않습니다. 여기서, neural network 가 등장합니다. Universal approximation theorem 에 의해 $$(7)$$ 을 근사할 수 있는 neural network 가 존재합니다. 따라서, coefficient $$c_k$$ 를 parameter 로 학습하는 neural network 가 바로 ChebNet 입니다 [1].
+두번 째로, $$p(\tilde{L})$$ 을 계산하기 위해서는 Chebyshev coefficient $$c_k$$ 에 대해 알아야합니다. 이는 $$(\ast)$$ 를 통해 이론적으로 계산할 수 있지만, 현실적으로 도움이 되지 않습니다. 여기서, neural network 가 등장합니다. Universal approximation theorem 에 의해 $$(7)$$ 을 근사할 수 있는 neural network 가 존재합니다. 따라서, coefficient $$c_k$$ 를 parameter 로 학습하는 neural network 가 바로 ChebNet 입니다 [1].
 
 &nbsp;
 
