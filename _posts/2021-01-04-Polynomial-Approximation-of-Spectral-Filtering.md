@@ -46,7 +46,7 @@ $$
 
 
 
-$$g_{\theta}$$ 에 대한 spectral filtering 의 결과 $$f_{out}$$ 은 다음과 같습니다.
+Filter $$g_{\theta}$$ 에 대한 spectral convolution 의 결과 $$f_{out}$$ 은 다음과 같습니다.
 
 $$
 \begin{align}
@@ -59,13 +59,13 @@ $$
 
 
 
-$$(1)$$ 을 계산하기 위해서는 Fourier basis $$U$$ 필요하기 때문에, graph Laplacian $$L$$ 의 eigenvector 를 모두 찾아야 합니다. $$N$$ 개의 node 를 가지는 그래프에 대해서, QR decomposition 과 같은 eigenvalue decomposition 의 computational complexity 의 $$O(N^3)$$ 입니다. 즉 node 가 수천개 혹은 수만개 이상인 그래프에 대해서는 직접 $$(1)$$ 을 계산하는 것은 굉장히 어렵습니다. 
+$$(1)$$ 을 계산하기 위해서는 Fourier basis $$U$$ 가 필요하기 때문에, graph Laplacian $$L$$ 의 eigenvector 를 모두 찾아야 합니다. $$N$$ 개의 node 를 가지는 그래프에 대해서, QR decomposition 과 같은 eigenvalue decomposition 의 computational complexity 의 $$O(N^3)$$ 입니다. 즉 node 가 수천개 혹은 수만개 이상인 그래프에 대해서 직접 $$(1)$$ 을 계산하는 것은 현실적으로 불가능합니다.
 
 
 
 따라서, 그래프의 크기가 큰 경우에는 $$(1)$$ 을 근사할 수 있는 효율적인 방법이 필요합니다. 
 
-만약 $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면, $$g_{\theta}(x) = \sum^K_{k=0} a_k x^k$$ 에 대해 $$(1)$$ 을 다음과 같이 쓸 수 있습니다.
+만약 $$g_{\theta}$$ 가 order $$K$$ polynomial $$\sum^K_{k=0} a_k x^k$$ 이라면, $$(1)$$ 을 다음과 같이 쓸 수 있습니다.
 
 $$
 \begin{align}
@@ -77,7 +77,13 @@ f_{out}
 \end{align}
 $$
 
-$$(2)$$ 에서 볼 수 있듯이, Fourier basis $$U$$  없이도 $$(1)$$ 의 결과를 계산할 수 있습니다.
+$$(2)$$ 에서 볼 수 있듯이, Fourier basis $$U$$  없이도 $$(1)$$ 의 결과를 얻을 수 있습니다.
+
+
+
+
+
+
 
 
 

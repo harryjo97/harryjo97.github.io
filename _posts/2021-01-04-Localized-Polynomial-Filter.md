@@ -4,7 +4,6 @@ date: 2021-01-04 20:00:00 +0900
 category:
 - theory
 tag:
-- spectral filtering
 - polynomial filter
 ---
 
@@ -16,56 +15,35 @@ Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter
 
 
 
-그래프 $$G$$ 의 vertex $$i$$ 와 $$j$$ 에 대해, $$d_G(i,j)$$ 를 $$i$$ 와 $$j$$ 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다. 
+그래프 $$G$$ 의 vertex $$i$$ 와 $$j$$ 에 대해, 두 vertex 사이의 거리 $$d_G(i,j)$$ 를 $$i$$ 와 $$j$$ 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다. 
 
 
 
-> Lemma 1.
->
-> 그래프 $$G$$ 의 adjacency matrix $$A$$ 에 대해 $$\tilde{A}$$ 를 다음과 같이 정의하겠습니다.
-> 
-> $$
-> \tilde{A} = \begin{cases}
-> A_{ij} &\mbox{ if } i\neq j \\
-> 1 &\mbox{ if } i=j
-> \end{cases}
-> $$
-> 
-> 그러면 $$s>0$$ 에 대해, $$\left( \tilde{A}^s \right)_{ij}$$ 은 vertex $$i$$ 와 $$j$$ 를 연결하는 path 들 중 길이가  $$s$$ 이하인 path 들의 수와 같습니다.
-
-
-
-> Lemma 2. 
->
-> $$N\times N$$ matrix $$A$$ 와 $$B$$ 에 대해 $$B_{mn}=0$$ 이면 $$A_{mn}=0$$ 을 만족한다고 가정하겠습니다. 그러면 모든 $$s>0$$ 에 대해 $$\left( B^s \right)_{mn}=0$$ 이면  $$\left( A^s \right)_{mn}=0$$ 이 성립합니다.
-
-
-
-위의 두 lemma 를 사용하면, 다음의 $$L$$ 의 localization 을 보일 수 있습니다. 
-
-> 그래프 $$G$$ 의 vertex $$i, \;j$$ 와 $$d_G(i,j)$$  보다 작은 모든 $$s$$ 에 대해 다음이 성립합니다.
-> 
-> $$
-> \left(L^s\right)_{ij} = 0
-> \tag{1}
-> $$
-> 
-
-
-
-
-
-$$N\times N$$ matrix $$B$$ 를 다음과 같이 정의하겠습니다.
-
+**(Lemma 1)**  그래프 $$G$$ 의 adjacency matrix $$A$$ 에 대해 $$\tilde{A}$$ 를 다음과 같다면,
 $$
-B_{ij} = \begin{cases}
-1 &\mbox{ if } L_{ij}\neq 0 \\
-0 &\mbox{ if } L_{ij}= 0
+\tilde{A} = \begin{cases}
+A_{ij} &\mbox{ if } i\neq j \\
+1 &\mbox{ if } i=j
 \end{cases}
 $$
 
-$$L$$ 의 정의에 의해 $$B$$ 는 그래프 $$G$$ 에 대한 adjacency matrix $$A$$ 를 변형한 $$\tilde{A}$$ 와 같습니다. 그러므로, Lemma 1 에 의해 $$\left( B^s \right)_{ij}=0$$ 입니다. Lemma 2 를 사용하면 $$\left( B^s \right)_{ij}=0$$ 이므로 $$\left( L^s \right)_{ij}=0$$ 임을 알 수 있습니다.  
+임의의 양의 정수 $$s$$ 에 대해, $$\left( \tilde{A}^s \right)_{ij}$$ 은 vertex $$i$$ 와 $$j$$ 를 연결하는 path 들 중 길이가  $$s$$ 이하인 path 들의 수와 일치합니다.
 
+
+
+**(Lemma 2)**  $$N\times N$$ matrix $$A$$ , $$B$$ 와 모든 $$1\leq m,n\leq N$$ 에 대해, $$B_{mn}=0$$ 이면 $$A_{mn}=0$$ 을 만족한다면, 임의의 양의 정수 $$s$$ 에 대해서도 $$\left( B^s \right)_{mn}=0$$ 이면  $$\left( A^s \right)_{mn}=0$$ 이 성립합니다.
+
+
+
+위의 두 lemma 를 사용하면, graph Laplacian $$L$$ 의 localization 을 보일 수 있습니다. 
+
+
+
+**(Localization of graph Laplacian)**  그래프 $$G$$ 의 vertex $$i, \;j$$ 와 $$d_G(i,j)$$  보다 작은 모든 $$s$$ 에 대해 다음이 성립합니다.
+$$
+\left(L^s\right)_{ij} = 0
+\tag{1}
+$$
 
 &nbsp;
 
@@ -73,15 +51,16 @@ $$L$$ 의 정의에 의해 $$B$$ 는 그래프 $$G$$ 에 대한 adjacency matrix
 
 
 
-$$g_{\theta}$$ 에 대한 spectral filtering 의 결과 $$f_{out}$$ 은 다음과 같습니다.
+Filter $$g_{\theta}$$ 에 대한 spectral convolution 의 결과 $$f_{out}$$ 은 다음과 같습니다.
 
 $$
-f_{out} = Ug_{\theta}(\Lambda)U^T\;f_{in} \tag{2}
+f_{out} = Ug_{\theta}(\Lambda)U^T\;f_{in} 
+\tag{2}
 $$
 
 
 
-만약 $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면, $$g_{\theta}(x) = \sum^K_{k=0} a_k x^k$$ 를 $$(1)$$ 에 넣어 정리할 수 있습니다.
+만약 filter $$g_{\theta}$$ 가 order $$K$$ polynomial $$\sum^K_{k=0} a_k x^k$$ 이라면, $$(2)$$ 를 다음과 같이 정리할 수 있습니다.
 
 $$
 \begin{align}
@@ -93,34 +72,35 @@ f_{out}
 \end{align}
 $$
 
-$$(3)$$ 에서 볼 수 있듯이, graph Laplacian $$L$$ 의 eigenvector 를 계산하지 않고도 spectral filtering 의 결과를 구할 수 있습니다. 특히 vertex $$i$$ 에 대해서 보면,
+$$(3)$$ 에서 볼 수 있듯이, Fourier basis $$U$$ 를 직접 계산하지 않고도 $$(2)$$ 의 결과를 얻을 수 있습니다. 
 
+특히 vertex $$i$$ 에 대해서만 자세히 살펴보겠습니다.
 $$
 f_{out}(i) 
 = (g_{\theta}(L) f_{in})(i) 
 = \sum^{K}_{k=0}\sum^{N}_{j=1} a_{k} \left(L^k\right)_{ij} f_{in}(j) 
-\tag{$4$}
+\tag{4}
 $$
 
-graph Laplacian 의 localization $$(1)$$ 을 사용하면, $$(4)$$ 를  vertex $$i$$ 의 $$K$$ - hop local neighborhood $$N(i,K)$$ 에 대해 표현할 수 있습니다. 
 
+
+Vertex $$i$$ 로부터 거리가 $$K$$ 이하인 vertex 들의 집합을 $$N(i,K)$$ 라고 하고, 이를 $$i$$ 의 $$K$$- hop local neighborhood 라고 부르겠습니다. 만약 vertex $$j$$ 가 $$N(i,K)$$ 의 원소가 아니라면, $$(1)$$ 에 의해 $$(L^k)_{ij}=0$$ 입니다.
+
+따라서, $$(4)$$ 를 정리하면 다음과 같습니다.
 $$
 \begin{align}
 f_{out}(i) 
-&= \sum^{N}_{j=1} \sum^{K}_{k=d_G(i,j)} a_k\left(L^k\right)_{ij} f_{in}(j) \\
-\\
-&= \sum_{j\in N(i,K)} b_{ij} f_{in}(j)
-\end{align}
+&= \sum^N_{j=1}\sum^K_{k=0} a_k(L^k)_{ij}f_{in}(j) \\
+&= \sum_{j\in\N(i,K)}\left[\sum^K_{k=0} a_k(L^k)_{ij}\right]f_{in}(j) \\
+&= \sum_{j\in\N(i,K)} b_{ij}f_{in}(j)
 \tag{5}
+\end{align}
 $$
+ 
 
-즉 $$f_{out}(i)$$ 는 $$i$$ 의 K - localized neighborhood 의 vertices $$j$$ 에 대해 $$f_{in}(j)$$ 들의 합으로 표현할 수 있습니다. 
+결국 $$f_{out}(i)$$ 는 $$i$$ 의 $$K$$- hop local neighborhood 원소들만을 이용해서 표현할 수 있습니다. 즉 $$f_{out}(i)$$ 를 계산하기 위해 모든 vertex 들의 정보를 사용하지 않아도 된다는 뜻입니다. CNN 의 convolutional fiter 가 각 픽셀을 중심으로 주변의 픽셀 값만을 사용하는 것과 같은 맥락입니다.
 
-
-
-따라서, spectral filter $$g_{\theta}$$ 가 order $$K$$ polynomial 이라면 filter 가 vertex domain 에서 $$K$$ - localized 된다는 것을 확인할 수 있습니다.
-
-
+&nbsp;
 
 ## Reference
 

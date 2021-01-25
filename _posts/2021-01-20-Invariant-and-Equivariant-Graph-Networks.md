@@ -79,7 +79,7 @@ $$
 
 만약 hyper-edge 들이 $$a$$ 차원의 value 를 가진다면, $$X\in\mathbb{R}^{n^k\times a}$$  tensor 로 표현할 수 있습니다.
 
-
+&nbsp;
 
 ## Permutation Invariant / Equivariant
 
@@ -129,6 +129,7 @@ f(p\cdot A) = p\cdot f(A)
 \tag{4}
 $$
 
+&nbsp;
 
 ## Notation
 
@@ -208,6 +209,7 @@ P^{\otimes 2k}\text{vec}(\mathbf{L}) = \text{vec}(\mathbf{L})
 \tag{12}
 $$
 
+&nbsp;
 
 ## Solving the Fixed-Point Equations
 
