@@ -171,7 +171,7 @@ $$(8)$$ 의 결과 $$p(\tilde{L})f_{in}$$ 은 각 vertex $$i$$ 에 대해 $$i$$ 
 
 ## Lanczos Algorithm 
 
-$$(1)$$ 을 효율적으로 계산하는 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. [LanczosNet: Multi-Scale Deep Graph Convolutional Networks](https://arxiv.org/pdf/1901.01484.pdf) 의 paper review 를 통해 더 자세히 설명하겠습니다.
+$$(3)$$ 을 효율적으로 계산하는 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. [LanczosNet: Multi-Scale Deep Graph Convolutional Networks](https://arxiv.org/pdf/1901.01484.pdf) 의 paper review 를 통해 더 자세히 설명하겠습니다.
 
 
 &nbsp;

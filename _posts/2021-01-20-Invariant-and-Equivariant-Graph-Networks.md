@@ -81,7 +81,7 @@ $$
 
 &nbsp;
 
-## Permutation Invariant / Equivariant
+## Permutation Invariance & Equivariance
 
 
 이미지에서의 translation 은 symmetry 의 한 종류입니다. 그래프에 있어 symmetry 는 node 순서의 재배열 (re-ordering) 을 통해 해석할 수 있습니다.
@@ -137,14 +137,14 @@ $$
 
 논문에 나오는 notation 들을 정리하면 다음과 같습니다.
 
-| notation                    | explanation                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| $$[\,\cdot\,]$$             | $$[n]=\{1,\cdots,n\}$$                                       |
-| $$\text{vec}(\,\cdot\,)$$   | $$X$$ 의 column 들을 쌓아 만든 행렬; $$\mathbb{R}^{a\times b}$$ matrix $$X$$ 에 대해 $$\text{vec}(X)\in\mathbb{R}^{ab\times 1}$$ |
-| $$[\text{vec}(\,\cdot\,)]$$ | $$[\text{vec}(X)]=X$$                                        |
-| $$\otimes$$                 | Kronecker product                                            |
-| $$P^{\otimes k}$$           | $$\overbrace{P\otimes \cdots \otimes P}^{k}$$                |
-| $$b(l)$$                    | $$l$$ 번째 bell number                                       |
+| <center> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; notation &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <center> | <center> explanation <center>                                                  |
+| :------------------------------------------------------------: | ------------------------------------------------------------ |
+| $$[\,\cdot\,]$$                                              | $$[n]=\{1,\cdots,n\}$$                                       |
+| $$\text{vec}(\,\cdot\,)$$                                    | $$X$$ 의 column 들을 쌓아 만든 행렬; $$\mathbb{R}^{a\times b}$$ matrix $$X$$ 에 대해 $$\text{vec}(X)\in\mathbb{R}^{ab\times 1}$$ |
+| $$[\text{vec}(\,\cdot\,)]$$                                  | $$[\text{vec}(X)]=X$$                                        |
+| $$\otimes$$                                                  | Kronecker product                                            |
+| $$P^{\otimes k}$$                                            | $$\overbrace{P\otimes \cdots \otimes P}^{k}$$                |
+| $$b(l)$$                                                     | $$l$$ 번째 bell number                                       |
 
 &nbsp;
 
