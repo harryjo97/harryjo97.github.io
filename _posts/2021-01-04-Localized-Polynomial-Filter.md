@@ -4,7 +4,7 @@ date: 2021-01-04 20:00:00 +0900
 category:
 - theory
 tag:
-- polynomial filter
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter

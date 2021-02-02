@@ -4,8 +4,7 @@ date: 2021-01-03 17:00:00 +0900
 category:
 - theory
 tag:
-- graph convolution
-- spectral filtering
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering

@@ -4,7 +4,7 @@ date: 2021-01-13 20:00:00 +0900
 category: 
 - paper review
 tag:
-- gcn
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 : paper review

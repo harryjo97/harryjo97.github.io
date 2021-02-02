@@ -4,7 +4,7 @@ date: 2020-12-30 22:00:00 +0900
 category: 
 - theory
 tag:
-- graph laplacian
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 : (1) Graph Laplacian 

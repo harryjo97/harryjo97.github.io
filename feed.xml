@@ -1,4 +1,598 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-01-18T01:54:08+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Semi-Supervised Classification with Graph Convolutional Networks</title><link href="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/" rel="alternate" type="text/html" title="Semi-Supervised Classification with Graph Convolutional Networks" /><published>2021-01-13T20:00:00+09:00</published><updated>2021-01-13T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/">&lt;p&gt;Graph Convolutional Network 이해하기 : paper review&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-02-02T19:50:26+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">How Powerful are Graph Neural Networks?</title><link href="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/" rel="alternate" type="text/html" title="How Powerful are Graph Neural Networks?" /><published>2021-02-02T19:00:00+09:00</published><updated>2021-02-02T19:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/">&lt;p&gt;Graph Isomorpihsm Network 이해하기&lt;/p&gt;
+
+&lt;h2 id=&quot;related-study&quot;&gt;Related Study&lt;/h2&gt;
+
+&lt;p&gt;GNN 의 expressive power 에  대한 연구는 크게 두 가지 방향으로 이루어집니다. 첫 번째 방법은 이 논문과 같이, Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 GNN 의 expressive power 에 대한 limitation 을 연구합니다 (No. 1, 2, 5). 다른 방향으로는, permutation invariant function 들에 대한 universal approximation 을 통해 GNN 의 expressive power 를 다룹니다 (No. 3, 5). 최근에는 GNN 의 width, depth 와 expressive power 의 연관성에 대한 연구도 이루어졌습니다 (No. 6).&lt;/p&gt;
+
+&lt;p&gt;제가 공부하며 expressive power 와 관련된 논문을 아래의 리스트로 정리했습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;No.&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Paper&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1810.02244.pdf&quot;&gt;Weisfeiler and Leman Go Neural: Higher-order Graph Neural Networks&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Morris et al., 2018&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1905.11136.pdf&quot;&gt;Provably Powerful Graph Networks&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Maron et al., 2019&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1901.09342.pdf&quot;&gt;On the Universality of Invariant Networks&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Maron et al., 2019&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1905.04943.pdf&quot;&gt;Universal Invariant and Equivariant Graph Neural Networks&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Keriven et al., 2019&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/1905.12560.pdf&quot;&gt;On the equivalence between graph isomorphism testing and function approximation with GNNs&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Chen et al., 2019&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;6&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;a href=&quot;https://openreview.net/pdf?id=B1l2bp4YwS&quot;&gt;What graph neural networks cannot learn: depth vs width&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Loukas, 2020&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;잘 알려져 있는 Graph Convolutional Network, GraphSAGE, Graph Attention Network, Gated Graph Neural Netowork 등 대부분의 GNN 은 recursive neighborhood aggregation (message passing) scheme 을 사용합니다 [2]. 이런 network 들을 Message Passing Neural Network (MPNN) 이라 부릅니다. MPNN 은 각 node 마다 주변 neighborhood 의 feature vector (representation) 를 수집하여, 새로운 feature vector 를 만들어냅니다. \(k\) 번의 iteration 후, 각 node 들은 \(k\)-hop neighborhood 의 feature vector 들을 모을 수 있고, 이는 그래프의 구조에 대한 정보를 포함한다고 해석할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;특히 neighborhood aggregataion scheme 을 사용하는 GNN 은 node classification, link prediction, graph classification 등 다양한 task 에 대해 state-of-the-art 성능을 보여줍니다. 하지만, 모델을 설계하는 것은 주로 경험적인 직관 혹은 실험을 통한 시행 착오를 통해 이루어집니다. GNN 의 limitation 과 expressive power 등의 이론적인 연구가 바탕이 된다면, 더 효율적인 모델을 만들 수 있고 모델의 hyperparameter 의 선택에 큰 도움이 될 것입니다.&lt;/p&gt;
+
+&lt;p&gt;논문에서는 GNN 의 expressive power 를 Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 설명합니다. WL test 또한 MPNN 과 같이 매 iteratin 마다 주변 neighborhood 의 feature vector 를 수집해 각 node 의 feature vector 를 update 합니다. WL test 가 강력한 이유는 neighborhood aggregation 이후 node 의 feature vetor 를 update 하는 과정이 injective 하기 때문입니다. 그래프의 두 node 가 서로 다른 neighborhood 를 가지고 있다면, 서로 다른 feature vector 를 가지게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;Node 의 neighborhood 를 multiset ( multiset of representation ) 으로 본다면, GNN 의 neighborhood aggregation scheme 은 multiset 에 대한 함수로 생각할 수 있습니다. GNN 이 WL test 와 같이 그래프를 구분할 수 있는 능력 (discriminative power) 이 좋아지려면, multiset 에 대한 함수는 서로 다른 multiset 에 대해 서로다른 embedding 으로 보내주어야 합니다. 따라서, GNN 의 expressive power 를 multiset 에 대한 함수를 통해 분석할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;/h2&gt;
+
+&lt;p&gt;논문에서 다루는 GNN 들은 모두 MPNN 으로, 매 iteration 마다 각 node 의 neighborhood feature vector 를 수집해 새로운 feature vector 로 update 합니다. 이를 neighborhood aggregation scheme 이라 부르며, 크게 두 단계로 나눌 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;첫번 째 단계에서는, neighborhood 의 feature vector 들을 수집합니다. \(v\) 의 neighborhood \(N(v)\) 에 대해, \(u\in N(v)\) 의 feature vector 들을 모아줍니다. \(k\) 번째 iteration 에서 node \(v\) 의 feature vector 를 \(h_v^{(k)}\) 라고 하면, 다음과 같이 정리할 수 있습니다.&lt;/p&gt;
+
+\[a_v^{(k)} = \text{AGGREGATE}^{(k)}\left(\left\{\!\!\left\{h_u^{(k-1)}:u\in N(v)\right\}\!\!\right\}\right)\]
+
+&lt;p&gt;이 때 \(\text{AGGREGATE}\) 함수는 multiset 에 대해 정의된 함수이며, 주로 summation 을 사용합니다. GraphSAGE [4] 에서와 같이 max-pooling 또는 mean-pooling 등을 사용할 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;두번 째 단계에서는, 전 단계에서 수집한 정보 \(a_v^{(k)}\) 와 현재의 feature vector \(h_v^{(k-1)}\) 를 사용해 새로운 feature vector 를 update 합니다.&lt;/p&gt;
+
+\[h_v^{(k)} = \text{COMBINE}^{(k)}\left(h_v^{(k-1)},a_v^{(k)}\right)\]
+
+&lt;p&gt;GraphSAGE 는 vector concatenation \([\,\cdot\,]\) 이후 weight matrix \(W\) 를 이용한 linear mapping 을 통해, 다음과 같은 \(\text{COMBINE}\) 함수를 사용했습니다.&lt;/p&gt;
+
+\[\text{COMBINE}^{(k)}\left(h_v^{(k-1)},a_v^{(k)}\right)
+= W \cdot \left[ h_v^{(k-1)},a_v^{(k)} \right]\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;위의 과정을 합치면, MPNN 의 \(k\) 번째 iteration 은 다음과 같이 표현할 수 있습니다.&lt;/p&gt;
+
+\[\begin{align}
+h_v^{(k)} 
+&amp;amp;= \text{COMBINE}^{(k)}\left(h_v^{(k-1)},a_v^{(k)}\right) \\
+&amp;amp;= \text{COMBINE}^{(k)}\left(h_v^{(k-1)},\text{AGGREGATE}^{(k)}\left(\left\{\!\!\left\{h_u^{(k-1)}:u\in N(v)\right\}\!\!\right\}\right)\right) 
+\tag{1}
+\end{align}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Node classification 에서는 GNN 의 마지막 layer 에서 얻은 feature vector \(h_v^{(K)}\) 들로 prediction 을 수행합니다.  Graph classificaiton 의 경우 마지막 layer 에서 얻은 feature vector 들을 모아 \(\text{READOUT}\) 함수를 통해 graph representation \(h_G\) 를 표현하고, 이를 통해 prediction 을 수행합니다.&lt;/p&gt;
+
+\[h_G = \text{READOUT}\left( \left\{\!\!\left\{ h_v^{(K)}:v\in V \right\}\!\!\right\} \right)
+\tag{2}\]
+
+&lt;p&gt;Graph representation \(h_G\) 가 node 의 ordering 에 따라 달라지지 않아야하기 때문에, \(\text{READOUT}\)  함수로 permutation invariant function 을 사용합니다. 간단한 예로 feature 들을 모두 더하는 summation 이 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;building-powerful-graph-neural-networks&quot;&gt;Building Powerful Graph Neural Networks&lt;/h2&gt;
+
+&lt;p&gt;WL test 와 GNN 의 representational power 의 관계에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;weisfeiler-lehman-test&quot;&gt;Weisfeiler-Lehman Test&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Lemma 2.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Let \(G_1\) and \(G_2\) be any two non-isomorphic graphs. If a graph neural network \(\mathcal{A}:\mathcal{G}\rightarrow\mathbb{R}^d\) maps \(G_1\) and \(G_2\) to different embeddings, the Weisfeiler-Lehman graph isomorphism test also decides \(G_1\) and \(G_2\) are not isomorphic.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lemma 2 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 가 WL test 라는 것을 알 수 있습니다. 즉 WL test 로 구분하지 못하는 그래프들에 대해서는, 예를 들어 다음의 그림과 같이 circular skip link graph 들에 대해서는 GNN 또한 구분할 수 없습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/csl.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Lemma 2 에 대한 증명의 핵심은 WL test 또한 MPNN 과 같이 매 iteraion 마다 neighborhood aggregation 을 통해 label 을 update 하며, label 을 update 하는 과정이 multiset 에 대해 injective 하다는 것입니다. 즉 multiset 에 대한 injectivity 가 representation power 에 큰 영향을 끼칩니다. 그렇다면, 과연 GNN 의 neighborhood aggregation 이 injective 할 때 WL test 와 같은 power 를 가질 수 있을까요? 이에 대한 답은 다음의 Theorem 3 를 통해 얻을 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Theorem 3.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Let \(\mathcal{A}:\mathcal{G}\rightarrow\mathbb{R}^d\) be a GNN. With a sufficient number of GNN layers, \(\mathcal{A}\) maps any graphs \(G_1\) and \(G_2\) that the Weisfeiler-Lehman test of isomorphism decides as non-isomorphic, to different embeddings if the following conditions hold:&lt;/p&gt;
+
+  &lt;p&gt;a) \(\mathcal{A}\) aggregates and updates node features iteratively with&lt;/p&gt;
+
+\[h_v^{(k)} = \phi\left( h_v^{(k-1)},f\left(\left\{\!\!\left\{ h_u^{(k-1)}:u\in N(v) \right\}\!\!\right\}\right) \right)\]
+
+  &lt;p&gt;where the functions \(f\), which operates on multisets, and \(\phi\) are injective.&lt;/p&gt;
+
+  &lt;p&gt;b) \(\mathcal{A}\) ‘s graph-level readout, which operates on the multiset of node features \(\left\{\!\!\left\{  h_v^{(k)}\right\}\!\!\right\}\), is injective&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Theorem 3 에서 함수 \(f\) 와 \(\phi\) 는 각각 위에서 설명한 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수에 해당하며, graph-level readout 은 \(\text{READOUT}\) 을 의미합니다. 즉 \(\text{AGGREGATE}\), \(\text{COMBINE}\) 과 \(\text{READOUT}\) 이 모두 multiset 에 대해 injective 일때, GNN 은 WL test 와 같은 discriminative power 를 가질 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Lemma 2 와 Theorem 3 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 를 WL test 를 통해 나타낼 수 있습니다.&lt;/p&gt;
+
+\[\text{GNN} \leq \text{WL test}\]
+
+&lt;p&gt;그래프를 구분하는 능력에 있어 GNN 이 WL test 보다 성능이 떨어진다면,  GNN 을 쓰는 이유가 무엇인지에 대해 생각해보아야 합니다. GNN 의 가장 큰 장점은 바로 그래프 사이의 similarity 에 대해 학습할 수 있다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;graph-isomorphism-network&quot;&gt;Graph Isomorphism Network&lt;/h3&gt;
+
+&lt;p&gt;Theorem 3 에 의해, WL test 와 같은 discriminative power 를 가지는 GNN 을 만들기 위해서는 \((1)\) 의 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수가 mutiset 에 대해 injective 해야합니다. 그렇다면 먼저 multiset 에 대해 injective 한 함수가 존재하는지를 알아야합니다. 다음의 Lemma 5 와 Corollary 6 에서 답을 찾을 수 있습니다. 논문에서는 node 의 input feature space \(\chi\) 가 countable universe 라고 가정합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Lemma 5.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Assume \(\chi\) is countable. There exists a function \(f:\chi \rightarrow\mathbb{R}^n\) so that \(h(X)=\sum_{x\in X}f(x)\) is unique for each multiset \(X\subset\chi\) of bounded size. Moreover, any multiset function \(g\) can be decomposed as \(g(X)=\phi\left(\sum_{x\in X}f(x)\right)\) for some function \(\phi\).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Corollary 6.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Assume \(\chi\) is countable. There exists a function \(f:\chi \rightarrow\mathbb{R}^n\) so that for infinitely many choices of \(\epsilon\), including all irrational numbers, \(h(c,X)=(1+\epsilon)f(c) + \sum_{x\in X}f(x)\) is unique for each pair \((c,X)\) where \(c\in\chi\) and \(X\subset\chi\) is a multiset of bounded size. Moreover, any function \(g\) over such pairs can be decomposed as \(g(c,X)=\varphi\left( (1+\epsilon)f(c)+\sum_{x\in X}f(x) \right)\) for some function \(\varphi\).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lemma 5 와 Corollary 6 의 증명에서 핵심은, countable \(\chi\) 의 enumeration \(Z: \chi\rightarrow\mathbb{N}\) 와 bounded multiset \(X\) 에 대해 \(\vert X\vert&amp;lt;N\) 를 만족하는 \(N\) 을 사용해 \(f(x) = N^{-Z(x)}\) 를 정의하는 것입니다. 모든 bounded multiset \(X\) 에 대해 \(h(X)\) 가 injective 하게 만들기 위해, countable \(\chi\) 의 각 원소들을 나열하고 각 원소가 포함되었는지 아닌지를 \(N\) 진법으로 표현하는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;\((1)\) 에 Corollary 6 의 결과를 적용하면, 각 layer \(k=1,\cdots,K\) 에 대해 다음을 만족하는 함수 \(f^{(k)}\) 와 \(\varphi^{(k)}\) 가 존재합니다.&lt;/p&gt;
+
+\[h_v^{(k)} = \varphi^{(k-1)}\left( (1+\epsilon)\;f^{(k-1)}\left(h_v^{(k-1)}\right)+\sum_{u\in N(v)}f^{(k-1)}\left(h_u^{(k-1)}\right) \right)
+\tag{3}\]
+
+&lt;p&gt;\((3)\) 에서 양변에 \(f^{(k)}\) 를 취해주면 다음과 같습니다.&lt;/p&gt;
+
+\[f^{(k)}\left(h_v^{(k)}\right) = f^{(k)}\circ\varphi^{(k-1)}\left( (1+\epsilon)\;f^{(k-1)}\left(h_v^{(k-1)}\right)+\sum_{u\in N(v)}f^{(k-1)}\left(h_u^{(k-1)}\right) \right)
+\tag{4}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;\(k\) 번째 layer 에서 각 node 의 feature vector 를 \(f^{(k)}\left(h_v^{(k)}\right)\) 로 생각한다면, \((4)\) 를 다음과 같이 간단히 쓸 수 있습니다.&lt;/p&gt;
+
+\[h_v^{(k)} = f^{(k)}\circ\varphi^{(k-1)}\left( (1+\epsilon)\;h_v^{(k-1)}+\sum_{u\in N(v)}h_u^{(k-1)} \right)
+\tag{5}\]
+
+&lt;p&gt;Universal approximation theorem 덕분에 두 함수의 composition \(f^{(k)}\circ\varphi^{(k-1)}\) 을, multi-layer perceptrons (MLPs) 을 통해 근사할 수 있습니다. 또한 \((5)\) 의 \(\epsilon\) 을 학습 가능한 parameter \(\epsilon^{(k)}\) 으로 설정한다면, \((5)\) 를 다음과 같이 neural network 모델로 표현할 수 있습니다.&lt;/p&gt;
+
+\[h_v^{(k)} = \text{MLP}^{(k)}\left( \left(1+\epsilon^{(k)}\right)\;h_v^{(k-1)}+\sum_{u\in N(v)}h_u^{(k-1)}\right)
+\tag{6}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Graph Isomorphism Network (GIN) 은 \((6)\) 을 layer-wise propagation rule 로 사용합니다. Theorem 3 로 인해 GIN 은 WL test 와 같은 discriminative power 를 가지므로, maximally powerful GNN 이라는 것을 알 수 있습니다. 간단하면서도 powerful 하다는 것이 GIN 의 가장 큰 장점입니다.&lt;/p&gt;
+
+&lt;p&gt;Node classification 에는 \((6)\) 의 GIN 을  바로 사용하면 되지만, graph classification 에는 추가로 graph-level readout function 이 필요합니다. Readout function 은 node 의 feature vector 들입니다. 이 때 node 의 feature vector (representation) 은 layer 를 거칠수록 local 에서 global 하게 변합니다. Layer 의 수가 너무 많다면, global 한 특성만 남을 것이고, layer 의 수가 너무 적다면 local 한 특성만 가지게 됩니다. 따라서, 그래프를 구분하기 위해서는 적당한 수의 layer 를 거쳐야 합니다.&lt;/p&gt;
+
+&lt;p&gt;이런 특성을 반영하기 위해, GIN 은 각 layer 의 graph representation (\(\text{READOUT}(\,\cdot\,)\) 의 output) 을 concatenation 으로 모두 합쳐줍니다.  그렇다면 최종 결과는 각 layer 마다 나타나는 그래프의 구조적 정보를 모두 포함하게 됩니다.&lt;/p&gt;
+
+\[h_G = \text{CONCAT}\left( \text{READOUT} \left(\left\{\!\!\left\{h_v^{(k)} \right\}\!\!\right\}\right) \,:\, k=0,1,\cdots,K\right)
+\tag{7}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Theorem 3 를 다시 보면, \((7)\) 의 결과가 multiset 에 대해 injective 해야 maximally powerful GNN 을 만들 수 있습니다. Lemma 5 를 통해 bounded multiset 에 대해 unique 한 summation 이 존재하기 때문에, 다음과 같이 각 layer 의 graph representation 을 정의하면, \(h_G\) 는 multiset 에 대해 injective 하게 됩니다.&lt;/p&gt;
+
+\[\text{READOUT} \left(\left\{\!\!\left\{h_v^{(k)} \right\}\!\!\right\}\right) = \sum_{v\in V} f^{(k)}\left(h_v^{(k)}\right)\]
+
+&lt;p&gt;따라서, graph classification 에서도 GIN 이 maximally powerful 하다는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;논문에서는 node 의 input feature space \(\chi\) 가 countable 인 상황만 고려했지만, 실제로 그래프의 input data 가 countable space 라고 보장할 수 없습니다. \(\chi\) 가 \(\mathbb{R}^n\) 과 같이 continuous space 일 때에 대한 이론적인 연구가 필요해보입니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;less-powerful-but-still-interesting-gnns&quot;&gt;Less Powerful But Still Interesting GNNs&lt;/h2&gt;
+
+&lt;p&gt;논문에서는 \((6)\) 의 두 가지 특징, MLP 와 feature vector summation 에 대한 ablation study 를 보여줍니다.&lt;/p&gt;
+
+&lt;p&gt;다음의 두 가지 변화를 통해 GNN 의 성능이 떨어짐을 확인합니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;MLPs 대신 1-layer perceptrons&lt;/li&gt;
+  &lt;li&gt;Summation 대신 mean-pooling 또는 max-pooling&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;1-layer-perceptrons-instead-of-mlps&quot;&gt;1-Layer Perceptrons instead of MLPs&lt;/h3&gt;
+
+&lt;p&gt;GCN 의 layer-wise propagation rule 은 다음과 같습니다.&lt;/p&gt;
+
+\[h_v^{(k)} = \text{ReLU}\left( W\cdot\text{MEAN}\left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v)\cup\{v\}\right\}\!\!\right\}  \right)
+\tag{8}\]
+
+&lt;p&gt;\((6)\) 과 비교해보면, \(\text{MLP}\) 대신 1-layer perceptron \(\sigma\circ W\) 를 사용했음을 알 수 있습니다. Universal approximation theorem 은 MLP 에 대해 성립하지만, 일반적으로 1-layer perceptron 에 대해서는 성립하지 않습니다.  다음의 Lemma 7 은 1-layer perceptron 을 사용한 GNN 이 구분하지 못하는 non-isomorphic 그래프들이 존재함을 보여줍니다. 즉, 1-layer perceptron 으로는 충분하지 않다는 뜻입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Lemma 7.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;There exist finite multisets \(X_1\neq X_2\) so that for any linear mapping \(W\),&lt;/p&gt;
+
+\[\sum_{x\in X_1} \text{ReLU}(Wx) = \sum_{x\in X_2} \text{ReLU}(Wx)\]
+&lt;/blockquote&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;mean--max-pooling-instead-of-summation&quot;&gt;Mean / Max-Pooling instead of Summation&lt;/h3&gt;
+
+&lt;p&gt;Aggregator \(h\) 를 사용한 GraphSAGE 의 layer-wise propagation rule 은 다음과 같습니다 [4].&lt;/p&gt;
+
+\[h_v^{(k)} = \text{ReLU}\left( W\cdot \text{CONCAT}\left( h_v^{(k-1)}, h\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) \right) \right)\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Max-pooling 과 mean-pooling 의 경우 aggregator \(h\) 는 다음과 같습니다.&lt;/p&gt;
+
+\[\begin{align}
+&amp;amp; h_{max}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
+= \text{MAX}\left( \left\{\!\!\left\{ f\left(h_u^{(k-1)}\right) \,:\, u\in N(v) \right\}\!\!\right\}  \right) \\
+\\
+&amp;amp; h_{mean}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
+= \text{MEAN}\left( \left\{\!\!\left\{f\left(h_u^{(k-1)}\right) \,:\, u\in N(v) \right\}\!\!\right\}  \right)
+\tag{9}
+\end{align}\]
+
+&lt;p&gt;여기서 \(f(x) = \text{ReLU}\left(Wx\right)\), \(\text{MAX}\) 와 \(\text{MEAN}\) 은 element-wise max 와 mean operator 입니다.&lt;/p&gt;
+
+&lt;p&gt;\(h_{max}\) 와 \(h_{mean}\) 모두 multiset 에 대해 정의되며, permutation invariant 하기 때문에, aggregator 로써 역할을 잘 수행합니다. 하지만, 두 함수 모두 multiset 에 대해 injective 하지 않습니다. 다음의 예시를 통해 확인해보겠습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/eg.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Figure 3 에서 node 의 색은 feature vector 를 의미합니다. 즉 같은 색을 가지면, 같은 feature vector 를 가집니다. 위에서 정의된 \(f\) 에 대해, \(f(red) &amp;gt; f(blue)&amp;gt;f(green)\) 을 만족한다고 가정하겠습니다. Figure 3-(a) 를 보면 non-isomorphic 한 두 그래프 모두 \(h_{max}\) 와 \(h_{mean}\) 의 결과가 \(f(blue)\) 로 같습니다. Figure 3-(c) 도 마찬가지로 non-isomorphic 한 두 그래프 모두 \(h_{max}=f(red)\), \(h_{mean}=\frac{1}{2}(f(red)+f(green))\) 으로 결과가 같습니다. Figure 3-(b) 의 경우 \(h_{mean}\) 은 값이 다르지만, \(h_{max}\) 의 값은 같습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;\((6)\) 에서는 다음과 같이 aggregator \(h\) 를 summation 으로 정의합니다.&lt;/p&gt;
+
+\[h_{sum}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
+= \sum_{u\in N(v)}f\left(h_u^{(k-1)}\right)\]
+
+&lt;p&gt;\(h_{sum}\) 이 multiset 전체를 injective 하게 표현할 수 있고, \(h_{mean}\) 의 경우 multiset 의 distribution 을, \(h_{max}\) 의 경우 multiset 의 서로다른 원소들로 이루어진 set 을 표현할 수 있다고 설명합니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/rank.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;따라서, max-pooling 과 mean-pooling 을 사용한 GraphSAGE 같은 경우 GIN 보다 representation power 가 떨어진다고 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;experiment--result&quot;&gt;Experiment &amp;amp; Result&lt;/h2&gt;
+
+&lt;p&gt;논문에서는 GIN 과 다른 GNN 들의 graph classification 성능을 비교하기 위해, 4개의 bioinformatics datasets (MUTAG, PTC, NCI1, PROTEINS) 와 5개의 social network datasets (COLLAB, IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-MULTI5K) 에 대해 실험을 수행했습니다.&lt;/p&gt;
+
+&lt;p&gt;GIN 모델로 \((6)\) 에서 \(\epsilon\) 을 학습하는 GIN-\(\epsilon\) 와 \(\epsilon\) 을 0 으로 고정한 GIN-0 를 선택했습니다. GIN 과 비교하기 위해 \((6)\) 의 summation 을 \((9)\) 와 같이 mean-pooling 또는 max-pooling 으로 바꾸거나, MLP 를 1-layer perceptron 으로 바꾼 모델들 (Figure 4 의 Mean - 1-layer 과 같은 모델들을 의미합니다.) 을 실험 대상으로 선정했습니다.&lt;/p&gt;
+
+&lt;p&gt;Baseline 모델로는 graph classification 의 state-of-the-art 성능을 보여주는 WL subtree kernel, C-SVM, Diffusion-convolutional neural network (DCNN), PATCHY-SAN, Deep Graph CNN (DGCNN), 그리고 Anonymous Walk Embeddings (AWL) 을 사용했습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/train.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;먼저 representational power 를 확인하기 위해 GNN 들의 training accuracy 들을 비교합니다. 모델의 representational power 가 높다면, training set 에서의 accuracy 또한 높아져야합니다. Figure 4 를 보면 GIN-\(\epsilon\) 과 GIN-0 모두 training accuracy 가 거의 1 에 수렴하는 것을 볼 수 있습니다. GIN-\(\epsilon\) 의 경우 각 layer 의 parameter \(\epsilon^{(k)}\) 또한 학습하지만, GIN-0 와 큰 차이를 보이지는 않습니다. Figure 4 에서 1-layer perceptron 보다는 MLP 를 사용했을 때, mean / max-pooling 보다는 summation 을 사용했을 때 정확도가 대체로 더 높게 나타납니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 모든 GNN 모델들은 WL subtree kernel 의 정확도보다 낮은 것이 보입니다. Lemma 2 에서 설명했듯이, neighborhood aggregation scheme 을 사용하는 GNN 은 WL test 의 representational power 를 뛰어 넘을수 없다는 것을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/test.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Table 1 은 test set 에 대한 classification accuracy 를 보여줍니다. GIN 모델, 특히 GIN-0 모델의 성능이 가장 뛰어나다는 것을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Xu, K., Hu, W., Leskovec, J., and Jegelka, S. (2019). &lt;a href=&quot;https://arxiv.org/pdf/1810.00826.pdf&quot;&gt;How powerful are graph neural networks?&lt;/a&gt; In
+International Conference on Learning Representations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., and Dahl, G. E. (2017). &lt;a href=&quot;https://arxiv.org/pdf/1704.01212.pdf&quot;&gt;Neural
+message passing for quantum chemistry&lt;/a&gt;. In International Conference on Machine Learning, pages 1263–1272.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Zhengdao Chen, Soledad Villar, Lei Chen, and Joan Bruna. &lt;a href=&quot;https://arxiv.org/pdf/1905.12560.pdf&quot;&gt;On the equivalence between graph isomorphism testing and function approximation with GNNs&lt;/a&gt;. In Advances in Neural Information Processing Systems, pages 15868–15876, 2019.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;William L Hamilton, Rex Ying, and Jure Leskovec. &lt;a href=&quot;https://arxiv.org/pdf/1706.02216.pdf&quot;&gt;Inductive representation learning on large graphs&lt;/a&gt;.
+In Advances in Neural Information Processing Systems (NIPS), pp. 1025–1035, 2017a.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><category term="Weisfeiler-Lehman" /><summary type="html">Graph Isomorpihsm Network 이해하기</summary></entry><entry><title type="html">Invariant and Equivariant Graph Networks</title><link href="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/" rel="alternate" type="text/html" title="Invariant and Equivariant Graph Networks" /><published>2021-01-19T11:00:00+09:00</published><updated>2021-01-19T11:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/">&lt;p&gt;k-Invariant Graph Networks 이해하기 : (1) Permutation Invariant and Equivariant Graph Networks&lt;/p&gt;
+
+&lt;h2 id=&quot;motive&quot;&gt;Motive&lt;/h2&gt;
+
+&lt;h3 id=&quot;translation-invariance&quot;&gt;Translation Invariance&lt;/h3&gt;
+
+&lt;p&gt;CNN 의 translation invariant 한 특성은 이미지를 학습하는 데 큰 장점이 됩니다. 이와 같이 translation invariant 한 모델을 만드는 방법으로  Multi-layer perceptron (MLP) 이 있습니다. MLP 를 통해 임의의 연속 함수를 근사할 수 있기 때문에, translation invariant 한 함수 \(f\) 를 모델링하는 MLP 를 만들 수 있습니다. MLP 의 기본적인 형태는 non-linear function \(\sigma\) 와 linear function \(L(x) = Ax+b\) 로 구성된 layer 들로 이루어고, 각 layer 는 \(\mathcal{L}(x) = \sigma(L(x))\) 의 형태를 가집니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp.PNG&quot; style=&quot;max-width: 70%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;일반적인 MLP 의 경우 input size 가 커질수록, depth 가 깊어질수록 parameter 의 수가 감당할 수 없을 정도로 커집니다. Parameter 의 수를 줄이고 translation invariant 속성을 유지하기 위해서, \(L(x) = Ax+b\) 대신 transform invariant 한 linear operator 를 사용합니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-invariant.PNG&quot; style=&quot;max-width: 70%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;하지만 이미지의 한 픽셀은 다른 임의의 픽셀로 보내지는 translation 을 찾을 수 있기 때문에, transform invariant operator 는 각 픽셀들의 value 를 모두 더해주는 sum operator 와 일치합니다. 모든 픽셀 value 를 더해주는 것은 이미지의 세부 정보를 무시하기에, 의미 있는 operator 라 할 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;이 때 transform invariant operator 대신, CNN 의 convolution 과 같이 translation equivariant linear operator 를 사용할 수 있습니다. MLP \(m\), invariant linear layer \(h\), non-linear activation \(\sigma\) 와 equivariant linear layer \(L_i\) 들을 통해, 다음과 같이 invariant function \(f\) 를 만들 수 있습니다.&lt;/p&gt;
+
+\[f = m\circ h\circ L_k\circ\sigma\circ \cdots \circ\sigma\circ L_1 
+\tag{1}\]
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-equivariant.PNG&quot; style=&quot;max-width: 70%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;\((1)\) 에서 적절한 layer 들의 선택으로 다양한 invariant model 을 얻을 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;invariant-graph-networks&quot;&gt;Invariant Graph Networks&lt;/h3&gt;
+
+&lt;p&gt;이미지에서 translation invariant function 을 통해 feature 를 학습하는 것과 같이, 그래프에서는 permutation invariant function 을 통해 node representation 을 학습할 수 있습니다. 위와 같이 \((1)\) 을 통해 permutation invariant 한 function 을 만들어 낼 수 있고, 이 모델을 Invariant Graph Network (IGN) 라 부릅니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;graphs-as-tensors&quot;&gt;Graphs as Tensors&lt;/h2&gt;
+
+&lt;p&gt;\(n\) 개의 node 를 가진 그래프를 생각해봅시다. 각 node \(i\) 마다 value \(x_i\in\mathbb{R}\) 를 가지고 각 edge \((i,j)\) 마다 value \(x_{ij}\in\mathbb{R}\) 를 가진다면,  이는 \(X\in\mathbb{R}^{n\times n}\) tensor 를 통해 다음과 같이 표현할 수 있습니다.&lt;/p&gt;
+
+\[X_{ij} = \begin{cases}
+x_i &amp;amp;\mbox{ if }\; i=j \\
+x_{ij} &amp;amp; \mbox{ if }\; i\neq j
+\end{cases}\]
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/2-tensor.PNG&quot; style=&quot;max-width: 50%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;이 표현법을 hypergraph 에 대해서도 일반화할 수 있습니다. \(n\) 개의 node 를 가지는 hypergraph 에 대해, 각 hyper-edge 는  \((i_1,\cdots,i_k)\in [n]^k\)  의 형태로 나타낼 수 있습니다. 따라서 \((1)\) 과 마찬가지로, hypergraph 또한 \(X\in\mathbb{R}^{n^k}\) tensor 로 표현할 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/k-tensor.PNG&quot; style=&quot;max-width: 50%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;만약 hyper-edge 들이 \(a\) 차원의 value 를 가진다면, \(X\in\mathbb{R}^{n^k\times a}\)  tensor 로 표현할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;permutation-invariance--equivariance&quot;&gt;Permutation Invariance &amp;amp; Equivariance&lt;/h2&gt;
+
+&lt;p&gt;이미지에서의 translation 은 symmetry 의 한 종류입니다. 그래프에 있어 symmetry 는 node 순서의 재배열 (re-ordering) 을 통해 해석할 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/symmetry.PNG&quot; style=&quot;max-width: 50%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&quot;permutation-of-tensors&quot;&gt;Permutation of Tensors&lt;/h3&gt;
+
+&lt;p&gt;그래프 node 가 재배열되면, 그에 따라 그래프 tensor 또한 변하게 됩니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/permutation.PNG&quot; style=&quot;max-width: 70%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Permutation \(p\in S_n\) 와 \(k\)-tensor \(X\in\mathbb{R}^{n^k}\) 에 대해, \(X\) 에 대한 permutation \(p\) 는 각 hyper-edge \((i_1,\cdots,i_k)\in [n]^k\) 에 대해 다음과 같이 쓸수 있습니다.&lt;/p&gt;
+
+\[(p\cdot X)_{i_1,\cdots,i_k} = X_{p^{-1}(i_1),\cdots,p^{-1}(i_k)}
+\tag{2}\]
+
+&lt;h3 id=&quot;permutation-invariant&quot;&gt;Permutation Invariant&lt;/h3&gt;
+
+&lt;p&gt;함수 \(f\) 가 permutation invariant 하다는 것은, input element 들의 순서와 상관 없이 output 이 같다는 뜻입니다. \(f\) 의 input 이 tensor 일 경우, permutation invariant 는 다음과 같이 나타낼 수 있습니다.&lt;/p&gt;
+
+\[f(p\cdot A) = f(A)
+\tag{3}\]
+
+&lt;h3 id=&quot;permutation-equivariant&quot;&gt;Permutation Equivariant&lt;/h3&gt;
+
+&lt;p&gt;함수 \(f\) 가 permutation equivariant 하다는 것은, 임의의 permutation \(p\) 에 대해 \(p\) 와 \(f\)  가 commute 함을 의미합니다. \(f\) 의 input 이 tensor 일 경우, permutation equivariant 는 다음과 같이 나타낼 수 있습니다.&lt;/p&gt;
+
+\[f(p\cdot A) = p\cdot f(A)
+\tag{4}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;notation&quot;&gt;Notation&lt;/h2&gt;
+
+&lt;p&gt;논문에 나오는 notation 들을 정리하면 다음과 같습니다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;center&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; notation &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;center&gt;&lt;/center&gt;&lt;/center&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;center&gt; explanation &lt;center&gt;&lt;/center&gt;&lt;/center&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\([\,\cdot\,]\)&lt;/td&gt;
+      &lt;td&gt;\([n]=\{1,\cdots,n\}\)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\(\text{vec}(\,\cdot\,)\)&lt;/td&gt;
+      &lt;td&gt;\(X\) 의 column 들을 쌓아 만든 행렬; \(\mathbb{R}^{a\times b}\) matrix \(X\) 에 대해 \(\text{vec}(X)\in\mathbb{R}^{ab\times 1}\)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\([\text{vec}(\,\cdot\,)]\)&lt;/td&gt;
+      &lt;td&gt;\([\text{vec}(X)]=X\)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\(\otimes\)&lt;/td&gt;
+      &lt;td&gt;Kronecker product&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\(P^{\otimes k}\)&lt;/td&gt;
+      &lt;td&gt;\(\overbrace{P\otimes \cdots \otimes P}^{k}\)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;\(b(l)\)&lt;/td&gt;
+      &lt;td&gt;\(l\) 번째 bell number&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;fixed-point-equations&quot;&gt;Fixed-Point Equations&lt;/h2&gt;
+
+&lt;p&gt;먼저 permutation invariant linear operator 에 대해 알아보겠습니다. 일반적인 linear operator \(L:\mathbb{R}^{n^k}\rightarrow\mathbb{R}\) 을 \(\mathbb{R}^{1\times n^k}\) matrix \(\mathbf{L}\) 로 나타낼 때, \(L\) 이 permutation invaraint 하다면 임의의 permutation \(p\in S_n\) 에 대해 다음을 만족해야합니다.&lt;/p&gt;
+
+\[\mathbf{L}\text{vec}(p\cdot A) = \mathbf{L}\text{vec}(A)
+\tag{5}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Permutation \(p\in S_n\) 를 나타내는 matrix \(P\) 에 대해 \(\text{vec}(p\cdot A) = P^{T\otimes k}\text{vec}(A)\) 이기 때문에, \((5)\) 는 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
+
+\[P^{T\otimes k}\mathbf{L}\text{vec}(A) = \mathbf{L}\text{vec}(A)
+\tag{6}\]
+
+&lt;p&gt;\((6)\) 은 모든 \(A\in\mathbb{R}^{n^k}\) 에 대해 성립해야하기 때문에,&lt;/p&gt;
+
+\[P^{T\otimes k}\mathbf{L} = \mathbf{L}
+\tag{7}\]
+
+&lt;p&gt;\((7)\) 의 양변에 transpose 를 취하면, 다음의 fixed-point equation 을 얻을 수 있습니다.&lt;/p&gt;
+
+\[P^{\otimes k}\text{vec}(\mathbf{L}) = \text{vec}(\mathbf{L})
+\tag{8}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;이제 permutation equivariant linear operator 에 대해 알아보겠습니다. 일반적인 linear operator \(L:\mathbb{R}^{n^k}\rightarrow\mathbb{R}^{n^k}\) 을 \(\mathbb{R}^{n^k\times n^k}\) matrix \(\mathbf{L}\) 로 나타낼 때, \(L\) 이 permutaion equivariant 하다면 임의의 permutation \(p\in S_n\) 에 대해 다음을 만족해야합니다.&lt;/p&gt;
+
+\[[\mathbf{L}\text{vec}(p\cdot A)] = p\cdot[\mathbf{L}\text{vec}(A)]
+\tag{9}\]
+
+&lt;p&gt;양변에 \(\text{vec}(\cdot)\) 을 취하고 \(\text{vec}(p\cdot A) = P^{T\otimes k}\text{vec}(A)\) 을 이용하면, \((9)\) 를 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+\[\mathbf{L}P^{T\otimes k}\text{vec}(A) = P^{T\otimes k}\mathbf{L}\text{vec}(A)
+\tag{10}\]
+
+&lt;p&gt;\((10)\) 은 모든 \(A\in\mathbb{R}^{n^k}\) 에 대해 성립해야하기 하며 \(P^{T\otimes k}\) 의 역행렬이 \(P^{\otimes k}\) 이므로,&lt;/p&gt;
+
+\[P^{\otimes k}\mathbf{L}P^{T\otimes k} = \mathbf{L}
+\tag{11}\]
+
+&lt;p&gt;\((11)\) 의 양변에 \(\text{vec}(\cdot)\) 을 취하고 Kronecker product 의 성질인 \(\text{vec}(XAY) = Y^T\otimes X\text{vec}(A)\) 을 사용하면 다음의 fixed-point equation 을 얻을 수 있습니다.&lt;/p&gt;
+
+\[P^{\otimes 2k}\text{vec}(\mathbf{L}) = \text{vec}(\mathbf{L})
+\tag{12}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;solving-the-fixed-point-equations&quot;&gt;Solving the Fixed-Point Equations&lt;/h2&gt;
+
+&lt;p&gt;모든 permutation invaraint  / equivariant 한 linear operator 들을 찾아내는 것은, \((8)\) 과 \((12)\) 의 해를 구하는 것과 같습니다. 즉 다음과 같은 fixed-point equation 의 해 \(X\in\mathbb{R}^{n^l}\) 를 구해야합니다.&lt;/p&gt;
+
+\[P^{\otimes l}\text{vec}(X) = \text{vec}(X)
+\tag{13}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;이 때, \(P^{\otimes l}\text{vec}(X)=\text{vec}(p^{-1}\cdot X)\) 이므로, \((13)\) 은 다음과 같이 정리할 수 있습니다.&lt;/p&gt;
+
+\[q\cdot X = X \;\;\text{for all permutation} \;\; q\in S_{n}
+\tag{14}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;\((14)\) 에 대한 solution space 의 basis 를 특별한 equivalence relation 을 통해 표현하려고 합니다. \(a,\, b\in\mathbb{R}^l\) 에 대해  equivalence relation \(\sim\) 을 다음과 같이 정의하겠습니다.&lt;/p&gt;
+
+\[a\sim b \;\text{ iff }\; a_i=a_j \Leftrightarrow b_i=b_j \;\forall i,j\in [\,l\,]\]
+
+&lt;p&gt;\(a\in\mathbb{R}^l\) 에 대해 \(a_i\) 값이 같은 index \(i\) 들로 \([\,l\,]\) 을 분할한 집합을 \(S_a\) 라고 한다면, \(a\sim b\) 임은 \(S_a=S_b\) 와 동치입니다. 따라서, equivalence classes 들은 \([\,l\,]\) 의 분할과 일대일 대응됩니다. 예를 들어, \(l=2\) 라면 equivalence class 는 \(\{a\in\mathbb{R}^2: a_1=a_2\}\) 와 \(\{a\in\mathbb{R}^2: a_1\neq a_2\}\) 두 개 뿐입니다. 이 때 \(\{a\in\mathbb{R}^2: a_1=a_2\}\) 는 \(\{ \{1,2\} \}\) 와, \(\{a\in\mathbb{R}^2: a_1=a_2\}\) 는 \(\{\{1\},\{2\}\}\) 와 대응됩니다. 일대일 대응에 의해, equivalence class 는 총 \(b(l)\) 개 존재합니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;결론적으로, \(X\) 가 \((14)\) 의 해인 것과 \(X\) 가 각각의 equivalence class 내에서 상수라는 것이 동치입니다. 증명은 다음과 같습니다. 먼저 \(X\) 가 각 equivalence class 내에서 상수라고 가정하겠습니다. 임의의 permutation \(q\in S_n\) 와 \(a\mathbb{R}^l\) 에 대해, \(a_i=a_j \Leftrightarrow q(a_i)=q(a_j)\) 이므로 \(a\sim q(a)\) 이고, 가정에 의해 \(X_a=X_{q(a)}\) 를 만족합니다. \((14)\) 에서 양변의 \(a\in\mathbb{R}^l\) 성분을 비교하면 \(X_a=X_{q(a)}\) 이므로, \(X\) 는 \((14)\) 의 해입니다.&lt;/p&gt;
+
+&lt;p&gt;반대로, \(X\) 가 \((14)\) 의 해라고 가정하겠습니다. 만약, \(a\sim b\) 라면 permutation \(q\) 가 존재해 \(b=q(a)\) 를 만족합니다. 이 때 \(X_a\neq X_b\) 라면, \(X\) 가 \((14)\) 의 해라는 것에 모순이므로, \(X\) 가 각 equivalence class 내에서 상수여야 합니다.&lt;/p&gt;
+
+&lt;p&gt;이제 각 equivalence class \(\gamma\in [n]^l/\sim\) 에 대해 tensor \(B^{\gamma}\in\mathbb{R}^l\) 을 다음과 같이 정의하겠습니다.&lt;/p&gt;
+
+\[B^{\gamma}_a = \begin{cases}
+1 &amp;amp;\mbox{ if }\; a\in\gamma \\
+0 &amp;amp;\mbox{ otherwise}
+\end{cases}
+\tag{15}\]
+
+&lt;p&gt;\((14)\) 의 해 \(X\) 에 대해 \(X\) 가 각 equivalence class 내에서 상수여야 하므로, \(X\) 는 \(B^{\gamma}\) 들의 linear combination 으로  표현할 수 있습니다. 또한 \(B^{\gamma}\) 들의 support 는 disjoint 하므로, orthogonal 합니다. 따라서 \(B^{\gamma}\) 들은 \((14)\) 에 대한 solution space 의 orthogonal basis 를 이룹니다. 이 때, equivalence class 는 총 \(b(l)\) 개 존재하므로 solution space 는 \(b(l)\) 차원입니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;\(n=5\), \(k=2\) 일 때 permutation equivariant linear operator 공간의 orthogonal basis 는 다음과 같습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Invariant-and-Equivariant-Graph-Networks/basis.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;특히 \(b(2k)=b(4)=15\) 이므로 총 15개의 basis element 가 존재한다는 것을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Maron, H., Ben-Hamu, H., Shamir, N., and Lipman, Y. (2019). &lt;a href=&quot;https://arxiv.org/pdf/1812.09902.pdf&quot;&gt;Invariant and equivariant graph
+networks&lt;/a&gt;. In International Conference on Learning Representations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Zaheer, M., Kottur, S., Ravanbakhsh, S., Poczos, B., Salakhutdinov, R. R., and Smola, A. J. (2017).
+&lt;a href=&quot;https://arxiv.org/abs/1703.06114&quot;&gt;Deep sets&lt;/a&gt;. In Advances in Neural Information Processing Systems, pages 3391–3401.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;H. Maron, H. Ben-Hamu, H. Serviansky, and Y. Lipman. &lt;a href=&quot;https://arxiv.org/pdf/1905.11136.pdf&quot;&gt;Provably Powerful Graph Networks&lt;/a&gt;. In Neural
+Information Processing Systems (NeurIPS), pages 2153–2164, 2019.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Deep Learning of Irregular Data &lt;a href=&quot;http://irregulardeep.org/An-introduction-to-Invariant-Graph-Networks-(1-2)/&quot;&gt;An Introduction To Invariant Graph Networks (1:2)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><summary type="html">k-Invariant Graph Networks 이해하기 : (1) Permutation Invariant and Equivariant Graph Networks</summary></entry><entry><title type="html">Semi-Supervised Classification with Graph Convolutional Networks</title><link href="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/" rel="alternate" type="text/html" title="Semi-Supervised Classification with Graph Convolutional Networks" /><published>2021-01-13T20:00:00+09:00</published><updated>2021-01-13T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/">&lt;p&gt;Graph Convolutional Network 이해하기 : paper review&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -293,7 +887,7 @@ graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129�
   &lt;li&gt;
     &lt;p&gt;F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="gcn" /><summary type="html">Graph Convolutional Network 이해하기 : paper review</summary></entry><entry><title type="html">Weisfeiler-Lehman Algorithm</title><link href="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/" rel="alternate" type="text/html" title="Weisfeiler-Lehman Algorithm" /><published>2021-01-12T19:00:00+09:00</published><updated>2021-01-12T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm</id><content type="html" xml:base="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/">&lt;p&gt;Weisfeiler-Lehman Algorithm&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : paper review</summary></entry><entry><title type="html">Weisfeiler-Lehman Algorithm</title><link href="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/" rel="alternate" type="text/html" title="Weisfeiler-Lehman Algorithm" /><published>2021-01-12T19:00:00+09:00</published><updated>2021-01-12T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm</id><content type="html" xml:base="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/">&lt;p&gt;Weisfeiler-Lehman Algorithm&lt;/p&gt;
 
 &lt;h2 id=&quot;graph-isomorphism&quot;&gt;Graph Isomorphism&lt;/h2&gt;
 
@@ -385,63 +979,57 @@ arXiv:1101.5211, 2011.&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;J. Cai, M. Furer, and N. Immerman. An optimal lower bound on the number of variables for graph identification. Combinatorica, 12(4):389–410, 1992.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="WL algorithm" /><category term="graph isomorphism" /><summary type="html">Weisfeiler-Lehman Algorithm</summary></entry><entry><title type="html">Polynomial Approximation Using Chebyshev Expansion</title><link href="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/" rel="alternate" type="text/html" title="Polynomial Approximation Using Chebyshev Expansion" /><published>2021-01-04T22:00:00+09:00</published><updated>2021-01-04T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/">&lt;p&gt;Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="Weisfeiler-Lehman" /><summary type="html">Weisfeiler-Lehman Algorithm</summary></entry><entry><title type="html">Polynomial Approximation Using Chebyshev Expansion</title><link href="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/" rel="alternate" type="text/html" title="Polynomial Approximation Using Chebyshev Expansion" /><published>2021-01-04T22:00:00+09:00</published><updated>2021-01-04T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Polynomial-Approximation-of-Spectral-Filtering/">&lt;p&gt;Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion&lt;/p&gt;
 
 &lt;h2 id=&quot;chebyshev-polynomial&quot;&gt;Chebyshev Polynomial&lt;/h2&gt;
 
-&lt;p&gt;Chebyshev polynomial 은 다음과 같이 점화식[^1]으로 정의됩니다.&lt;/p&gt;
+&lt;p&gt;Chebyshev polynomial \(\{T_{k}(x)\}_{k\geq 0}\) 는 다음과 같이 점화식으로 정의됩니다.&lt;/p&gt;
 
 \[T_k(x) = 2xT_{k-1}(x) - T_{k-2}(x)
 \;\; \text{ with } \;\; T_0(x) = 1 ,\; T_1(x) = x
-\tag{a}\]
+\tag{1}\]
 
-&lt;p&gt;특히 Chebyshev polynomial 은 \(L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\)[^2] 의 orthogonal basis 를 이루기 때문에 \(h\in L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\) 에 대해 uniformly convergent 한 Chebyshev expansion 이 존재합니다.&lt;/p&gt;
+&lt;p&gt;특히 Chebyshev polynomial \(\{T_{k}(x)\}_{k\geq 0}\) 는 \(L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\) 의 orthogonal basis 를 이루기 때문에 \(h\in L^2\left( [-1,1],\, \frac{dx}{\sqrt{1-x^2}} \right)\) 에 대해, 다음과 같이 uniformly convergent 한 Chebyshev expansion 이 존재합니다.&lt;/p&gt;
 
 \[h(x) = \frac{1}{2}c_0 + \sum^{\infty}_{k=1} c_kT_k(x)
-\tag{b}\]
+\tag{2}\]
 
-&lt;p&gt;\((b)\) 에서 Chebyshev coefficeint \(c_k\) 는 다음과 같이 계산할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;\((2)\) 에서 Chebyshev coefficeint \(c_k\) 는 다음과 같이 계산할 수 있습니다.&lt;/p&gt;
 
-\[c_k = \frac{2}{\pi}\int^1_{-1} \frac{T_k(x)h(x)}{\sqrt{1-x^2}}dx\]
+\[c_k = \frac{2}{\pi}\int^1_{-1} \frac{T_k(x)h(x)}{\sqrt{1-x^2}}dx
+\tag{$\ast$}\]
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;truncated-chebyshev-expansion&quot;&gt;Truncated Chebyshev Expansion&lt;/h2&gt;
 
-&lt;p&gt;\(g_{\theta}\) 에 대한 spectral filtering 의 결과 \(f_{out}\) 은 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;Filter \(g_{\theta}\) 에 대한 spectral convolution 의 결과 \(f_{out}\) 은 다음과 같습니다.&lt;/p&gt;
 
-\[\begin{align}
+\[f_{out} 
+= Ug_{\theta}(\Lambda)U^T\;f_{in}
+\tag{3}\]
 
-f_{out} 
-= Ug_{\theta}(\Lambda)U^T\;f_{in} \tag{$1$}
+&lt;p&gt;\((3)\) 을 계산하기 위해서는 Fourier basis \(U\) 가 필요하기 때문에, graph Laplacian \(L\) 의 eigenvector 를 모두 찾아야 합니다. \(N\) 개의 node 를 가지는 그래프에 대해서, QR decomposition 과 같은 eigenvalue decomposition 의 computational complexity 의 \(O(N^3)\) 입니다. 즉 node 가 수천개 혹은 수만개 이상인 그래프에 대해서 직접 \((3)\) 을 계산하는 것은 현실적으로 불가능합니다.&lt;/p&gt;
 
-\end{align}\]
-
-&lt;p&gt;\((1)\) 을 계산하기 위해서는 Fourier basis \(U\) 필요하기 때문에, graph Laplacian \(L\) 의 eigenvector 를 모두 찾아야 합니다. \(N\) 개의 node 를 가지는 그래프에 대해서, QR decomposition 과 같은 eigenvalue decomposition 의 computational complexity 의 \(O(N^3)\) 입니다. 즉 node 가 수천개 혹은 수만개 이상인 그래프에 대해서는 직접 \((1)\) 을 계산하는 것은 굉장히 어렵습니다.&lt;/p&gt;
-
-&lt;p&gt;따라서, 그래프의 크기가 큰 경우에는 \((1)\) 을 근사할 수 있는 효율적인 방법이 필요합니다.&lt;/p&gt;
-
-&lt;p&gt;만약 \(g_{\theta}\) 가 order \(K\) polynomial 이라면, \(g_{\theta}(x) = \sum^K_{k=0} a_k x^k\) 에 대해 \((1)\) 을 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
+&lt;p&gt;따라서, 그래프의 크기가 큰 경우에는 \((3)\) 을 근사할 수 있는 효율적인 방법이 필요합니다. 만약 \(g_{\theta}\) 가 order \(K\) polynomial \(\sum^K_{k=0} a_k x^k\) 이라면, \((3)\) 을 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
 
 \[\begin{align}
 f_{out}
 &amp;amp;= U\left(\sum^{N-1}_{k=0} a_k\Lambda^k \right)U^T f_{in} \\
 &amp;amp;= \sum^{K}_{k=0} a_k\left( U\Lambda U^T \right)^k f_{in} 
 = g_{\theta}(L)f_{in}
-\tag{2}
+\tag{4}
 \end{align}\]
 
-&lt;p&gt;\((2)\) 에서 볼 수 있듯이, Fourier basis \(U\)  없이도 \((1)\) 의 결과를 계산할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;\((4)\) 에서 볼 수 있듯이, Fourier basis \(U\)  없이도 \((3)\) 의 결과를 얻을 수 있습니다. 만약 \(g_{\theta}\) 에 대한 polynomial approximant \(p\) 를 찾을 수 있다면, \(p\) 를 사용해 \((4)\) 와 같이 \((3)\) 을 효율적으로 근사할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;\((1)\) 을 효율적으로 근사할 수 있는 \(g_{\theta}\) 의 polynomial approximant \(p\) 를 찾는 것입니다.&lt;/p&gt;
-
-&lt;p&gt;만약 \(p\) 가 \(L\) 의 spectrum 에 대한 upper bound \(\lambda_{max}\)&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; 에 대해 다음의 조건을 만족한다면,&lt;/p&gt;
+&lt;p&gt;만약 \(p\) 가 \(L\) 의 spectrum 에 대한 upper bound \(\lambda_{max}\) 에 대해 다음의 조건을 만족한다면,&lt;/p&gt;
 
 \[\left\vert g_{\theta}(x) - p(x) \right\vert \leq B &amp;lt; \infty
 \;\;\text{ for all }\;\; x\in [0,\lambda_{max}]
-\tag{6}\]
+\tag{5}\]
 
-&lt;p&gt;polynomial filter \(p(L)\) 의 결과 \(\tilde{f}_{out} = p(L)f_{in}\) 을 통해 다음과 같이 \(f_{out}\) 을 근사할 수 있습니다 [3].&lt;/p&gt;
+&lt;p&gt;Polynomial \(p(L)\) 과의 spectral convolution \(\tilde{f}_{out} = p(L)f_{in}\) 을 통해, 다음과 같이 \((3)\) 을 근사할 수 있습니다 [3].&lt;/p&gt;
 
 \[\begin{align}
 \vert f_{out}(i) - \tilde{f}_{out}(i) \vert 
@@ -450,56 +1038,60 @@ f_{out}
 &amp;amp;\leq \sum_{l} \vert g_{\theta}(\lambda_l) - p(\lambda_l) \vert \left\vert \hat{f}(\lambda_l)u_l(i) \right\vert \\
 &amp;amp;\leq B \left( \sum_l \left\vert \hat{f}(\lambda_l) \right\vert^2\sum_l \vert u_l(i) \vert^2 \right)^{1/2} 
 = B\;\|f\| 
-\tag{7}
+\tag{6}
 \end{align}\]
 
-&lt;p&gt;이 때 \(f_{out}\) 과 \(\tilde{f}_{out}\) 에 대한 오차 \((7)\) 을 줄이기 위해서는, \(g_{\theta}\) 와 \(p\) 에 대한 \(L_{\infty}\) error \((6)\) 를  최소화해야 합니다. 만약  \(p\) 가 order \(K\) polynomial 이라면, \((6)\) 은 \(p\) 가 minimax polynomial of order \(K\) 일 때 최소가 됩니다. 이 때 truncated Chebyshev expansion 을 통해 minimax polynomial 에 대한 근사가 가능합니다.&lt;/p&gt;
+&lt;p&gt;이 때 \(f_{out}\) 과 \(\tilde{f}_{out}\) 에 대한 오차 \((6)\) 을 줄이기 위해서는, \(g_{\theta}\) 와 \(p\) 에 대한 \(L_{\infty}\) error \((5)\) 를  최소화해야 합니다. 만약  \(p\) 가 order \(K\) polynomial 이라면, \((5)\) 는 \(p\) 가 minimax polynomial of order \(K\) 일 때 최소가 됩니다. 더 나아가, minimax polynomial 은 truncated Chebyshev expansion 을 통해 충분히 근사할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;저희가 찾고자 하는  \(p\) 로 \(g_{\theta}\) 의 truncated Chebyshev expansion 을 선택할 수 있습니다. 하지만 \(g_{\theta}\) 는 spectral domain 에서 정의된 함수이기 때문에, \((b)\) 를 적용하기 위해서는 domain 의 변환이 필요합니다. \(L\) 의 eigenvalue 들은 모두 \([0, \lambda_{max}]\) 구간에 속하기 때문에 \(h_{\theta}\) 를 다음과 같이 정의하면 \(g_{\theta}\) 를 \([-1,1]\) 에서 정의된 함수로 바꿀 수 있습니다.&lt;/p&gt;
+&lt;p&gt;따라서, \((6)\) 의 오차를 줄이기 위해 \(p\) 로 \(g_{\theta}\) 의 truncated Chebyshev expansion 을 선택할 수 있습니다. 하지만  \(g_{\theta}\) 는 \(L\) 의 spectrum 을 포함하는 domain 에서 정의된 함수이기 때문에, \((2)\) 를 적용하기 위해서는 domain 의 변환이 필요합니다. \(L\) 의 eigenvalue 들은 모두 \([0, \lambda_{max}]\) 구간에 속하기 때문에 \(h_{\theta}\) 를 다음과 같이 정의하면 \(g_{\theta}\) 를 \([-1,1]\) 에서 정의된 함수로 바꿀 수 있습니다.&lt;/p&gt;
 
 \[h_{\theta}(x) = g_{\theta}\left( \frac{\lambda_{\max}}{2}(x+1) \right)\]
 
-&lt;p&gt;\((b)\) 를 \(h_{\theta}\) 에 적용하고 order \(K\) 까지의 truncation 을 생각하면,&lt;/p&gt;
+&lt;p&gt;\((2)\) 를 \(h_{\theta}\) 에 적용하고 order \(K\) 까지의 truncation 을 생각하면, 다음과 같이 \(h_{\theta}\) 를 근사할 수 있습니다.&lt;/p&gt;
 
 \[h_{\theta}(x) \approx \frac{1}{2}c_0 + \sum^{K}_{k=1} c_kT_k(x)\]
 
-&lt;p&gt;\(\tilde{L} = \frac{2}{\lambda_{max}}L - I\) 에 대해 \(p\) 를 다음과 같이 정의하면,&lt;/p&gt;
+&lt;p&gt;\(\tilde{L} = \frac{2}{\lambda_{max}}L - I\) 에 대해 \(g_{\theta}(L) = h_{\theta}(\tilde{L})\) 를 만족하기 때문에, \(p\) 를 다음과 같이 정의합니다.&lt;/p&gt;
 
-\[p(\tilde{L}) = \frac{1}{2}c_0I + \sum^{\infty}_{k=1} c_kT_k(\tilde{L})
-\tag{8}\]
+\[p(\tilde{L}) = h_{\theta}(\tilde{L}) =  \frac{1}{2}c_0I + \sum^{\infty}_{k=1} c_kT_k(\tilde{L})
+\tag{7}\]
 
-&lt;p&gt;복잡한 eigenvector 의 계산 없이 spectral filtering 에 대한 근사가 가능합니다.&lt;/p&gt;
+&lt;p&gt;\((7)\) 을 사용하면, Fourier basis \(U\) 를 이용하지 않고도 \((3)\) 에 대한 근사가 가능합니다.&lt;/p&gt;
 
 \[\begin{align}
-Ug_{\theta}(\Lambda)U^T 
-&amp;amp;= Uh_{\theta}(\tilde{\Lambda})U^T  \\
-&amp;amp;\approx Up(\tilde{\Lambda})U^T = p(\tilde{L})
+&amp;amp; Ug_{\theta}(\Lambda)U^T 
+= Uh_{\theta}(\tilde{\Lambda})U^T 
+\approx Up(\tilde{\Lambda})U^T = p(\tilde{L}) \\
+\\
+&amp;amp; f_{out} = Ug_{\theta}(\Lambda)U^Tf_{in} \approx p(\tilde{L})f_{in}
+\tag{8}
 \end{align}\]
-
-&lt;p&gt;정리하면, spectral filtering 의 결과 \(f_{out}\) 은 다음과 같이 근사할 수 있습니다.&lt;/p&gt;
-
-\[f_{out} = Ug_{\theta}(\Lambda)U^Tf_{in} \approx p(\tilde{L})f_{in}
-\tag{9}\]
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;h2 id=&quot;advantage-of-using-chebyshev-expansion&quot;&gt;Advantage of using Chebyshev expansion&lt;/h2&gt;
+&lt;p&gt;마지막으로, 두 가지 확인해야할 것이 있습니다. 첫번 째로, \(\tilde{L}\) 을 계산하기 위해서 \(\lambda_{max}\) 에 대한 정보가 필요합니다. Spectrum 의 upper bound \(\lambda_{max}\) 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 \(L\) 의 전체 spectrum 을 찾는 것에 비해서 훨씬 쉽게 구할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;\((9)\) 와 같이 truncated Chebyshev expansion 을 통한 spectral filtering 의 근사는 다음과 같은 두 가지 이점이 있습니다.&lt;/p&gt;
+&lt;p&gt;두번 째로, \(p(\tilde{L})\) 을 계산하기 위해서는 Chebyshev coefficient \(c_k\) 에 대해 알아야합니다. 이는 \((\ast)\) 를 통해 이론적으로 계산할 수 있지만, 현실적으로 도움이 되지 않습니다. 여기서, neural network 가 등장합니다. Universal approximation theorem 에 의해 \((7)\) 을 근사할 수 있는 neural network 가 존재합니다. 따라서, coefficient \(c_k\) 를 parameter 로 학습하는 neural network 가 바로 ChebNet 입니다 [1].&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;advantage-of-using-chebyshev-expansion&quot;&gt;Advantage of Using Chebyshev Expansion&lt;/h2&gt;
+
+&lt;p&gt;\((8)\) 과 같이 truncated Chebyshev expansion 을 통한 근사는 다음과 같은 두 가지 이점이 있습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;fast-filtering-using-recurrence-relation&quot;&gt;Fast filtering using recurrence relation&lt;/h3&gt;
 
-&lt;p&gt;Chebyshev polynomial 의 중요한 특성은 \((a)\) 의 점화식을 통해 얻을 수 있다는 것입니다. Graph Laplacian \(L\) 에서부터 시작해 재귀적 연산으로 order \(K\) polynomial \(T_K\) 까지 구하는 computational cost 는 \(L\) 이 sparse matrix 일 때 \(O(K\vert E\vert)\) 입니다.&lt;/p&gt;
+&lt;p&gt;Chebyshev polynomial 의 중요한 특성은 \((1)\) 의 점화식을 통해 재귀적으로 계사할 수 있다는 것입니다. Graph Laplacian \(L\) 에서부터 시작해 재귀적 연산으로 order \(K\) polynomial \(T_K\) 까지 구하는 computational cost 는 \(L\) 이 sparse matrix 일 때 \(O(K\vert E\vert)\) 입니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;localized-filter&quot;&gt;Localized Filter&lt;/h3&gt;
 
-&lt;p&gt;\((5)\) 에서 보았듯이 \(g_{\theta}\) 대신 polynomial approximant 를 사용한 filter 는 vertex domain 에서 localized 되어있습니다. 이를 통해 CNN 의 중요한 특성인 locality 가 그래프에서 일반화될 수 있습니다.&lt;/p&gt;
+&lt;p&gt;\((8)\) 의 결과 \(p(\tilde{L})f_{in}\) 은 각 vertex \(i\) 에 대해 \(i\) 의 \(K\)- hop local neighborhood 만을 이용해 표현할 수 있습니다. 이를 통해 CNN 의 중요한 특성인 locality 가 그래프에서 일반화될 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;lanczos-algorithm&quot;&gt;Lanczos Algorithm&lt;/h2&gt;
 
-&lt;p&gt;\((1)\) 을 효율적으로 계산하는 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. &lt;a href=&quot;https://arxiv.org/pdf/1901.01484.pdf&quot;&gt;LanczosNet: Multi-Scale Deep Graph Convolutional Networks&lt;/a&gt; 의 paper review 를 통해 더 자세히 설명하겠습니다.&lt;/p&gt;
+&lt;p&gt;\((3)\) 을 효율적으로 계산하는 다른 해결 방법으로는 Lanczos Algorithm 이 있습니다. &lt;a href=&quot;https://arxiv.org/pdf/1901.01484.pdf&quot;&gt;LanczosNet: Multi-Scale Deep Graph Convolutional Networks&lt;/a&gt; 의 paper review 를 통해 더 자세히 설명하겠습니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
@@ -519,67 +1111,40 @@ In International Conference on Learning Representations (ICLR), 2017.&lt;/p&gt;
     &lt;p&gt;David K Hammond, Pierre Vandergheynst, and Remi Gribonval. &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on graphs via spectral
 graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129–150, 2011.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Spectrum 의 upper bound \(\lambda_{max}\) 는 Arnoldi iteration 혹은 Jacobi-Davidson method 등을 사용하면 \(L\) 의 spectrum 전체를 찾는 것에 비해서 훨씬 쉽게 구할 수 있습니다. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="spectral filtering" /><category term="polynomial filter" /><summary type="html">Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion</summary></entry><entry><title type="html">Localized Polynomial Filter</title><link href="https://harryjo97.github.io/theory/Localized-Polynomial-Filter/" rel="alternate" type="text/html" title="Localized Polynomial Filter" /><published>2021-01-04T20:00:00+09:00</published><updated>2021-01-04T20:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Localized-Polynomial-Filter</id><content type="html" xml:base="https://harryjo97.github.io/theory/Localized-Polynomial-Filter/">&lt;p&gt;Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion</summary></entry><entry><title type="html">Localized Polynomial Filter</title><link href="https://harryjo97.github.io/theory/Localized-Polynomial-Filter/" rel="alternate" type="text/html" title="Localized Polynomial Filter" /><published>2021-01-04T20:00:00+09:00</published><updated>2021-01-04T20:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Localized-Polynomial-Filter</id><content type="html" xml:base="https://harryjo97.github.io/theory/Localized-Polynomial-Filter/">&lt;p&gt;Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter&lt;/p&gt;
 
 &lt;h2 id=&quot;localization-of-graph-laplacian&quot;&gt;Localization of Graph Laplacian&lt;/h2&gt;
 
-&lt;p&gt;그래프 \(G\) 의 vertex \(i\) 와 \(j\) 에 대해, \(d_G(i,j)\) 를 \(i\) 와 \(j\) 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다.&lt;/p&gt;
+&lt;p&gt;그래프 \(G\) 의 vertex \(i\) 와 \(j\) 에 대해, 두 vertex 사이의 거리 \(d_G(i,j)\) 를 \(i\) 와 \(j\) 를 연결하는 모든 path 들 중 edge 들의 수가 가장 적은 path 의 길이로 정의합니다.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Lemma 1.&lt;/p&gt;
-
-  &lt;p&gt;그래프 \(G\) 의 adjacency matrix \(A\) 에 대해 \(\tilde{A}\) 를 다음과 같이 정의하겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(Lemma 1)&lt;/strong&gt;  그래프 \(G\) 의 adjacency matrix \(A\) 에 대해 \(\tilde{A}\) 를 다음과 같다면,&lt;/p&gt;
 
 \[\tilde{A} = \begin{cases}
 A_{ij} &amp;amp;\mbox{ if } i\neq j \\
 1 &amp;amp;\mbox{ if } i=j
 \end{cases}\]
 
-  &lt;p&gt;그러면 \(s&amp;gt;0\) 에 대해, \(\left( \tilde{A}^s \right)_{ij}\) 은 vertex \(i\) 와 \(j\) 를 연결하는 path 들 중 길이가  \(s\) 이하인 path 들의 수와 같습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;임의의 양의 정수 \(s\) 에 대해, \(\left( \tilde{A}^s \right)_{ij}\) 은 vertex \(i\) 와 \(j\) 를 연결하는 path 들 중 길이가  \(s\) 이하인 path 들의 수와 일치합니다.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Lemma 2.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(Lemma 2)&lt;/strong&gt;  \(N\times N\) matrix \(A\) , \(B\) 와 모든 \(1\leq m,n\leq N\) 에 대해, \(B_{mn}=0\) 이면 \(A_{mn}=0\) 을 만족한다면, 임의의 양의 정수 \(s\) 에 대해서도 \(\left( B^s \right)_{mn}=0\) 이면  \(\left( A^s \right)_{mn}=0\) 이 성립합니다.&lt;/p&gt;
 
-  &lt;p&gt;\(N\times N\) matrix \(A\) 와 \(B\) 에 대해 \(B_{mn}=0\) 이면 \(A_{mn}=0\) 을 만족한다고 가정하겠습니다. 그러면 모든 \(s&amp;gt;0\) 에 대해 \(\left( B^s \right)_{mn}=0\) 이면  \(\left( A^s \right)_{mn}=0\) 이 성립합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;위의 두 lemma 를 사용하면, graph Laplacian \(L\) 의 localization 을 보일 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;위의 두 lemma 를 사용하면, 다음의 \(L\) 의 localization 을 보일 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;그래프 \(G\) 의 vertex \(i, \;j\) 와 \(d_G(i,j)\)  보다 작은 모든 \(s\) 에 대해 다음이 성립합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(Localization of graph Laplacian)&lt;/strong&gt;  그래프 \(G\) 의 vertex \(i, \;j\) 와 \(d_G(i,j)\)  보다 작은 모든 \(s\) 에 대해 다음이 성립합니다.&lt;/p&gt;
 
 \[\left(L^s\right)_{ij} = 0
 \tag{1}\]
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;\(N\times N\) matrix \(B\) 를 다음과 같이 정의하겠습니다.&lt;/p&gt;
-
-\[B_{ij} = \begin{cases}
-1 &amp;amp;\mbox{ if } L_{ij}\neq 0 \\
-0 &amp;amp;\mbox{ if } L_{ij}= 0
-\end{cases}\]
-
-&lt;p&gt;\(L\) 의 정의에 의해 \(B\) 는 그래프 \(G\) 에 대한 adjacency matrix \(A\) 를 변형한 \(\tilde{A}\) 와 같습니다. 그러므로, Lemma 1 에 의해 \(\left( B^s \right)_{ij}=0\) 입니다. Lemma 2 를 사용하면 \(\left( B^s \right)_{ij}=0\) 이므로 \(\left( L^s \right)_{ij}=0\) 임을 알 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;localized-polynomial-filter&quot;&gt;Localized Polynomial Filter&lt;/h2&gt;
 
-&lt;p&gt;\(g_{\theta}\) 에 대한 spectral filtering 의 결과 \(f_{out}\) 은 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;Filter \(g_{\theta}\) 에 대한 spectral convolution 의 결과 \(f_{out}\) 은 다음과 같습니다.&lt;/p&gt;
 
-\[f_{out} = Ug_{\theta}(\Lambda)U^T\;f_{in} \tag{2}\]
+\[f_{out} = Ug_{\theta}(\Lambda)U^T\;f_{in} 
+\tag{2}\]
 
-&lt;p&gt;만약 \(g_{\theta}\) 가 order \(K\) polynomial 이라면, \(g_{\theta}(x) = \sum^K_{k=0} a_k x^k\) 를 \((1)\) 에 넣어 정리할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;만약 filter \(g_{\theta}\) 가 order \(K\) polynomial \(\sum^K_{k=0} a_k x^k\) 이라면, \((2)\) 를 다음과 같이 정리할 수 있습니다.&lt;/p&gt;
 
 \[\begin{align}
 f_{out}
@@ -589,26 +1154,30 @@ f_{out}
 \tag{3}
 \end{align}\]
 
-&lt;p&gt;\((3)\) 에서 볼 수 있듯이, graph Laplacian \(L\) 의 eigenvector 를 계산하지 않고도 spectral filtering 의 결과를 구할 수 있습니다. 특히 vertex \(i\) 에 대해서 보면,&lt;/p&gt;
+&lt;p&gt;\((3)\) 에서 볼 수 있듯이, Fourier basis \(U\) 를 직접 계산하지 않고도 \((2)\) 의 결과를 얻을 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;특히 vertex \(i\) 에 대해서만 자세히 살펴보겠습니다.&lt;/p&gt;
 
 \[f_{out}(i) 
 = (g_{\theta}(L) f_{in})(i) 
 = \sum^{K}_{k=0}\sum^{N}_{j=1} a_{k} \left(L^k\right)_{ij} f_{in}(j) 
-\tag{$4$}\]
+\tag{4}\]
 
-&lt;p&gt;graph Laplacian 의 localization \((1)\) 을 사용하면, \((4)\) 를  vertex \(i\) 의 \(K\) - hop local neighborhood \(N(i,K)\) 에 대해 표현할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;Vertex \(i\) 로부터 거리가 \(K\) 이하인 vertex 들의 집합을 \(N(i,K)\) 라고 하고, 이를 \(i\) 의 \(K\)- hop local neighborhood 라고 부르겠습니다. 만약 vertex \(j\) 가 \(N(i,K)\) 의 원소가 아니라면, \((1)\) 에 의해 \((L^k)_{ij}=0\) 입니다.&lt;/p&gt;
+
+&lt;p&gt;따라서, \((4)\) 를 정리하면 다음과 같습니다.&lt;/p&gt;
 
 \[\begin{align}
 f_{out}(i) 
-&amp;amp;= \sum^{N}_{j=1} \sum^{K}_{k=d_G(i,j)} a_k\left(L^k\right)_{ij} f_{in}(j) \\
-\\
-&amp;amp;= \sum_{j\in N(i,K)} b_{ij} f_{in}(j)
-\end{align}
-\tag{5}\]
+&amp;amp;= \sum^N_{j=1}\sum^K_{k=0} a_k(L^k)_{ij}f_{in}(j) \\
+&amp;amp;= \sum_{j\in N(i,K)}\left[\sum^K_{k=0} a_k(L^k)_{ij}\right]f_{in}(j) \\
+&amp;amp;= \sum_{j\in N(i,K)} b_{ij}f_{in}(j)
+\tag{5}
+\end{align}\]
 
-&lt;p&gt;즉 \(f_{out}(i)\) 는 \(i\) 의 K - localized neighborhood 의 vertices \(j\) 에 대해 \(f_{in}(j)\) 들의 합으로 표현할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;결국 \(f_{out}(i)\) 는 \(i\) 의 \(K\)- hop local neighborhood 원소들만을 이용해서 표현할 수 있습니다. 즉 \(f_{out}(i)\) 를 계산하기 위해 모든 vertex 들의 정보를 사용하지 않아도 된다는 뜻입니다. CNN 의 convolutional fiter 가 각 픽셀을 중심으로 주변의 픽셀 값만을 사용하는 것과 같은 맥락입니다.&lt;/p&gt;
 
-&lt;p&gt;따라서, spectral filter \(g_{\theta}\) 가 order \(K\) polynomial 이라면 filter 가 vertex domain 에서 \(K\) - localized 된다는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 
@@ -621,7 +1190,7 @@ graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129�
     &lt;p&gt;D. Shuman, S. Narang, P. Frossard, A. Ortega, and P. Vandergheynst. &lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=6494675&quot;&gt;The Emerging Field of Signal
 Processing on Graphs: Extending High-Dimensional Data Analysis to Networks and other Irregular Domains&lt;/a&gt;. &lt;em&gt;IEEE Signal Processing Magazine&lt;/em&gt;, 30(3):83–98, 2013.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="spectral filtering" /><category term="polynomial filter" /><summary type="html">Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter</summary></entry><entry><title type="html">Graph Convolution and Spectral Filtering</title><link href="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/" rel="alternate" type="text/html" title="Graph Convolution and Spectral Filtering" /><published>2021-01-03T17:00:00+09:00</published><updated>2021-01-03T17:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/">&lt;p&gt;Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (4) Localized Polynomial Filter</summary></entry><entry><title type="html">Graph Convolution and Spectral Filtering</title><link href="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/" rel="alternate" type="text/html" title="Graph Convolution and Spectral Filtering" /><published>2021-01-03T17:00:00+09:00</published><updated>2021-01-03T17:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Convoloution-and-Spectral-Filtering/">&lt;p&gt;Graph Convolutional Network 이해하기 :  (3) Graph convolution 과 spectral filtering&lt;/p&gt;
 
 &lt;h2 id=&quot;why-do-we-need-graph-convolution&quot;&gt;Why do we need Graph Convolution?&lt;/h2&gt;
 
@@ -756,7 +1325,7 @@ In International Conference on Learning Representations (ICLR), 2017.&lt;/p&gt;
     &lt;p&gt;David K Hammond, Pierre Vandergheynst, and Remi Gribonval. &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on graphs via spectral
 graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129–150, 2011.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="graph convolution" /><category term="spectral filtering" /><summary type="html">Graph Convolutional Network 이해하기 : (3) Graph convolution 과 spectral filtering</summary></entry><entry><title type="html">Graph Fourier Transform</title><link href="https://harryjo97.github.io/theory/Graph-Fourier-Transform/" rel="alternate" type="text/html" title="Graph Fourier Transform" /><published>2021-01-01T19:00:00+09:00</published><updated>2021-01-01T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Fourier-Transform</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Fourier-Transform/">&lt;p&gt;Graph Convolutional Network 이해하기 : (2) Graph Fourier transform&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (3) Graph convolution 과 spectral filtering</summary></entry><entry><title type="html">Graph Fourier Transform</title><link href="https://harryjo97.github.io/theory/Graph-Fourier-Transform/" rel="alternate" type="text/html" title="Graph Fourier Transform" /><published>2021-01-01T19:00:00+09:00</published><updated>2021-01-01T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Fourier-Transform</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Fourier-Transform/">&lt;p&gt;Graph Convolutional Network 이해하기 : (2) Graph Fourier transform&lt;/p&gt;
 
 &lt;h2 id=&quot;classical-fourier-transform&quot;&gt;Classical Fourier Transform&lt;/h2&gt;
 
@@ -910,7 +1479,7 @@ graphs with fast localized spectral filtering&lt;/a&gt;. In Advances in neural i
   &lt;li&gt;
     &lt;p&gt;Terence Tao, &lt;a href=&quot;https://www.math.ucla.edu/~tao/preprints/fourier.pdf&quot;&gt;Fourier Trasnform&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="graph fourier transform" /><summary type="html">Graph Convolutional Network 이해하기 : (2) Graph Fourier transform</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-30T22:00:00+09:00</published><updated>2020-12-30T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Graph Convolutional Network 이해하기 : (1) Graph Laplacian&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (2) Graph Fourier transform</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-30T22:00:00+09:00</published><updated>2020-12-30T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Graph Convolutional Network 이해하기 : (1) Graph Laplacian&lt;/p&gt;
 
 &lt;h2 id=&quot;basic-definition&quot;&gt;Basic definition&lt;/h2&gt;
 
@@ -1055,4 +1624,4 @@ graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129�
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt; &lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="graph laplacian" /><summary type="html">Graph Convolutional Network 이해하기 : (1) Graph Laplacian</summary></entry></feed>
+&lt;p&gt; &lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (1) Graph Laplacian</summary></entry></feed>

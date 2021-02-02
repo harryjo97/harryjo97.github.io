@@ -4,7 +4,7 @@ date: 2021-01-01 19:00:00 +0900
 category: 
 - theory
 tag:
-- graph fourier transform
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 : (2) Graph Fourier transform 

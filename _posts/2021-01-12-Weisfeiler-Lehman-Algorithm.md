@@ -4,8 +4,7 @@ date: 2021-01-12 19:00:00 +0900
 category:
 - theory
 tag:
-- WL algorithm
-- graph isomorphism
+- Weisfeiler-Lehman
 ---
 
 Weisfeiler-Lehman Algorithm

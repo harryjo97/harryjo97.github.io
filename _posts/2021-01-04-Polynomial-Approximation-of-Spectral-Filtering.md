@@ -4,8 +4,7 @@ date: 2021-01-04 22:00:00 +0900
 category:
 - theory
 tag:
-- spectral filtering
-- polynomial filter
+- GCN
 ---
 
 Graph Convolutional Network 이해하기 : (5) Polynomial approximation using Chebyshev expansion
