@@ -8,13 +8,13 @@ tag:
 - Weisfeiler-Lehman
 ---
 
-Graph Isomorpihsm Network 이해하기
+[Paper review] Graph Isomorphism Network 이해하기
 
 
 
 ## Related Study
 
-
+&nbsp;
 
 GNN 의 expressive power 에  대한 연구는 크게 두 가지 방향으로 이루어집니다. 첫 번째 방법은 이 논문과 같이, Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 GNN 의 expressive power 에 대한 limitation 을 연구합니다 (No. 1, 2, 5). 다른 방향으로는, permutation invariant function 들에 대한 universal approximation 을 통해 GNN 의 expressive power 를 다룹니다 (No. 3, 5). 최근에는 GNN 의 width, depth 와 expressive power 의 연관성에 대한 연구도 이루어졌습니다 (No. 6). 
 
@@ -36,27 +36,27 @@ GNN 의 expressive power 에  대한 연구는 크게 두 가지 방향으로 �
 
 ## Introduction
 
+&nbsp;
 
-
-잘 알려져 있는 Graph Convolutional Network, GraphSAGE, Graph Attention Network, Gated Graph Neural Netowork 등 대부분의 GNN 은 recursive neighborhood aggregation (message passing) scheme 을 사용합니다 [2]. 이런 network 들을 Message Passing Neural Network (MPNN) 이라 부릅니다. MPNN 은 각 node 마다 주변 neighborhood 의 feature vector (representation) 를 수집하여, 새로운 feature vector 를 만들어냅니다. $$k$$ 번의 iteration 후, 각 node 들은 $$k$$-hop neighborhood 의 feature vector 들을 모을 수 있고, 이는 그래프의 구조에 대한 정보를 포함한다고 해석할 수 있습니다.
-
-
-
-특히 neighborhood aggregataion scheme 을 사용하는 GNN 은 node classification, link prediction, graph classification 등 다양한 task 에 대해 state-of-the-art 성능을 보여줍니다. 하지만, 모델을 설계하는 것은 주로 경험적인 직관 혹은 실험을 통한 시행 착오를 통해 이루어집니다. GNN 의 limitation 과 expressive power 등의 이론적인 연구가 바탕이 된다면, 더 효율적인 모델을 만들 수 있고 모델의 hyperparameter 의 선택에 큰 도움이 될 것입니다. 
+잘 알려져 있는 Graph Convolutional Network, GraphSAGE, Graph Attention Network, Gated Graph Neural Netowork 등 대부분의 GNN 은 recursive neighborhood aggregation (message passing) scheme 을 사용합니다 [2]. 이런 network 들을 Message Passing Neural Network (MPNN) 이라 부릅니다. MPNN 은 매 iteration 마다 node 주변 neighborhood 의 feature vector (representation) 를 수집하여, node 의 새로운 feature vector 를 update 합니다. $$k$$ 번의 iteration 후, 각 node 들은 $$k$$-hop neighborhood 의 feature vector 들로 update 된 새로운 feature vector 를 가지게 됩니다. 충분한 수의 iteration 후에는, 각 node 의 feature vector 가 그래프 전체의 구조에 대한 정보를 포함한다고 해석할 수 있습니다.
 
 
 
-논문에서는 GNN 의 expressive power 를 Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 설명합니다. WL test 또한 MPNN 과 같이 매 iteratin 마다 주변 neighborhood 의 feature vector 를 수집해 각 node 의 feature vector 를 update 합니다. WL test 가 강력한 이유는 neighborhood aggregation 이후 node 의 feature vetor 를 update 하는 과정이 injective 하기 때문입니다. 그래프의 두 node 가 서로 다른 neighborhood 를 가지고 있다면, 서로 다른 feature vector 를 가지게 됩니다.
+Neighborhood aggregataion scheme 을 사용하는 GNN 은 node classification, link prediction, graph classification 등 다양한 task 에 대해 state-of-the-art 성능을 보여줍니다. 하지만, 모델의 설계는 주로 경험적인 직관 혹은 실험을 통한 시행 착오를 통해 이루어집니다. GNN 의 limitation 과 expressive power 등의 이론적인 연구가 바탕이 된다면 더 효율적인 모델을 만들 수 있고, 또한 모델의 hyperparameter tuning 에 큰 도움이 될 것입니다. 
 
 
 
-Node 의 neighborhood 를 multiset ( multiset of representation ) 으로 본다면, GNN 의 neighborhood aggregation scheme 은 multiset 에 대한 함수로 생각할 수 있습니다. GNN 이 WL test 와 같이 그래프를 구분할 수 있는 능력 (discriminative power) 이 좋아지려면, multiset 에 대한 함수는 서로 다른 multiset 에 대해 서로다른 embedding 으로 보내주어야 합니다. 따라서, GNN 의 expressive power 를 multiset 에 대한 함수를 통해 분석할 수 있습니다.
+논문에서는 GNN 의 expressive power 를 Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 설명합니다. WL test 또한 MPNN 과 같이 매 iteratin 마다 주변 neighborhood 의 feature vector 를 수집해 각 node 의 feature vector 를 update 합니다. WL test 는 regular graph 와 같이 특수한 그래프를 제외하고는, 대부분의 그래프를 구분해낼 수 있습니다 (up to isomorphism). 그 이유는, 바로 알고리즘에서 neighborhood aggregation 이후 node 의 feature vetor 를 update 하는 과정이 injective 하기 때문입니다. WL test 의 알고리즘에서는 그래프의 두 node 가 서로 다른 neighborhood 를 가지고 있다면, 서로 다른 label 을 가지게 됩니다.
+
+
+
+Node 의 neighborhood 를 feature vector 들의 multiset 으로 표현하면, GNN 의 neighborhood aggregation scheme 은 multiset 에 대한 함수로 볼 수 있습니다. GNN 이 WL test 와 같이 그래프를 구분할 수 있는 능력 (discriminative power) 이 높지려면, neighborhood aggregation scheme 이 서로 다른 multiset 에 대해 서로다른 embedding 으로 보내주어야 합니다. 따라서, GNN 의 expressive power 를 multiset 에 대한 함수를 통해 분석할 수 있습니다.
 
 &nbsp;
 
 ## Preliminaries
 
-
+&nbsp;
 
 논문에서 다루는 GNN 들은 모두 MPNN 으로, 매 iteration 마다 각 node 의 neighborhood feature vector 를 수집해 새로운 feature vector 로 update 합니다. 이를 neighborhood aggregation scheme 이라 부르며, 크게 두 단계로 나눌 수 있습니다.
 
@@ -74,7 +74,7 @@ $$
 
 
 
-두번 째 단계에서는, 전 단계에서 수집한 정보 $$a_v^{(k)}$$ 와 현재의 feature vector $$h_v^{(k-1)}$$ 를 사용해 새로운 feature vector 를 update 합니다.
+두번 째 단계에서는 전 단계에서 수집한 정보 $$a_v^{(k)}$$ 와 현재의 feature vector $$h_v^{(k-1)}$$ 를 사용해, node 의 새로운 feature vector 를 update 합니다.
 
 $$
 h_v^{(k)} = \text{COMBINE}^{(k)}\left(h_v^{(k-1)},a_v^{(k)}\right)
@@ -115,7 +115,7 @@ Graph representation $$h_G$$ 가 node 의 ordering 에 따라 달라지지 않�
 
 ## Building Powerful Graph Neural Networks
 
-
+&nbsp;
 
 WL test 와 GNN 의 representational power 의 관계에 대해 알아보겠습니다.
 
@@ -131,14 +131,14 @@ WL test 와 GNN 의 representational power 의 관계에 대해 알아보겠습�
 
 
 
-Lemma 2 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 가 WL test 라는 것을 알 수 있습니다. 즉 WL test 로 구분하지 못하는 그래프들에 대해서는, 예를 들어 다음의 그림과 같이 circular skip link graph 들에 대해서는 GNN 또한 구분할 수 없습니다.
+Lemma 2 에 의해, GNN 의 discriminative power 가 WL test 보다 좋을 수 없다는 것을 알 수 있습니다. 즉 WL test 로 구분하지 못하는 그래프들에 대해서는, 예를 들어 다음의 그림과 같이 circular skip link graph 들에 대해서는 GNN 또한 구분할 수 없습니다.
 
 <p align='center'>
     <img src = '/assets/post/How-Powerful-are-Graph-Neural-Networks/csl.PNG' style = 'max-width: 100%; height: auto'>
 </p>
 
 
-Lemma 2 에 대한 증명의 핵심은 WL test 또한 MPNN 과 같이 매 iteraion 마다 neighborhood aggregation 을 통해 label 을 update 하며, label 을 update 하는 과정이 multiset 에 대해 injective 하다는 것입니다. 즉 multiset 에 대한 injectivity 가 representation power 에 큰 영향을 끼칩니다. 그렇다면, 과연 GNN 의 neighborhood aggregation 이 injective 할 때 WL test 와 같은 power 를 가질 수 있을까요? 이에 대한 답은 다음의 Theorem 3 를 통해 얻을 수 있습니다.
+Lemma 2 에 대한 증명의 핵심은 WL test 에서 feature vector 를 update 하는 과정이 injectivite 하다는 것입니다. 그렇다면, 과연 GNN 의 neighborhood aggregation 이 injective 할 때 WL test 와 같은 power 를 가질 수 있을까요? 이에 대한 답은 다음의 Theorem 3 를 통해 얻을 수 있습니다.
 
 
 
@@ -158,26 +158,25 @@ Lemma 2 에 대한 증명의 핵심은 WL test 또한 MPNN 과 같이 매 iterai
 
 
 
-Theorem 3 에서 함수 $$f$$ 와 $$\phi$$ 는 각각 위에서 설명한 $$\text{AGGREGATE}$$ 와 $$\text{COMBINE}$$ 함수에 해당하며, graph-level readout 은 $$\text{READOUT}$$ 을 의미합니다. 즉 $$\text{AGGREGATE}$$, $$\text{COMBINE}$$ 과 $$\text{READOUT}$$ 이 모두 multiset 에 대해 injective 일때, GNN 은 WL test 와 같은 discriminative power 를 가질 수 있습니다.
+Theorem 3 에서 함수 $$f$$ 와 $$\phi$$ 는 각각 위에서 설명한 $$\text{AGGREGATE}$$ 와 $$\text{COMBINE}$$ 함수에 해당하며, graph-level readout 은 $$\text{READOUT}$$ 함수를 의미합니다. 즉 $$\text{AGGREGATE}$$, $$\text{COMBINE}$$ 과 $$\text{READOUT}$$ 이 모두 multiset 에 대해 injective 일때, GNN 은 WL test 와 같은 discriminative power 를 가질 수 있다는 것이 Theorem 3 의 결론입니다.
 
 
 
 Lemma 2 와 Theorem 3 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 를 WL test 를 통해 나타낼 수 있습니다. 
 
-$$
-\text{GNN} \leq \text{WL test}
-$$
+> GNN is at most as powerful as WL test in distinguishing different graphs.
 
 
-그래프를 구분하는 능력에 있어 GNN 이 WL test 보다 성능이 떨어진다면,  GNN 을 쓰는 이유가 무엇인지에 대해 생각해보아야 합니다. GNN 의 가장 큰 장점은 바로 그래프 사이의 similarity 에 대해 학습할 수 있다는 것입니다. 
+
+그래프를 구분하는 능력에 있어 GNN 이 WL test 보다 성능이 떨어진다면,  GNN 을 쓰는 이유가 무엇인지에 대해 생각해보아야 합니다. GNN 의 가장 큰 장점은 바로 그래프 사이의 similarity 에 대해 학습할 수 있다는 것입니다. WL test 에서의 feature vector 는 label 로 one-hot encoding 에 불과합니다. 두 그래프가 다르다는 것은 확실히 알 수 있어도, 얼마나 다른지에 대해서는 알 수 없습니다. 하지만 GNN 의 feature vector 를 통해 그래프를 구분하는 것 뿐만 아니라, 비슷한 그래프를 비슷한 embedding 으로 보내주도록 학습할 수 있습니다. 즉 두 그래프가 얼마나 다른지에 대해서도 알 수 있습니다. 이런 특성 덕분에, 다양한 분야에서 GNN 이 훌륭한 성과를 보여준다고 생각합니다.
 
 &nbsp;
 
 ### Graph Isomorphism Network
 
+&nbsp;
 
-
-Theorem 3 에 의해, WL test 와 같은 discriminative power 를 가지는 GNN 을 만들기 위해서는 $$(1)$$ 의 $$\text{AGGREGATE}$$ 와 $$\text{COMBINE}$$ 함수가 mutiset 에 대해 injective 해야합니다. 그렇다면 먼저 multiset 에 대해 injective 한 함수가 존재하는지를 알아야합니다. 다음의 Lemma 5 와 Corollary 6 에서 답을 찾을 수 있습니다. 논문에서는 node 의 input feature space $$\chi$$ 가 countable universe 라고 가정합니다. 
+WL test 와 같은 discriminative power 를 가지는 GNN 을 만들기 위해서는, Theorem 3 에 의해 $$(1)$$ 의 $$\text{AGGREGATE}$$ 와 $$\text{COMBINE}$$ 함수가 mutiset 에 대해 injective 해야합니다. 그렇다면, 먼저 multiset 에 대해 injective 한 함수가 존재하는지를 알아야합니다. 다음의 Lemma 5 와 Corollary 6 에서 답을 찾을 수 있습니다. 논문에서는 node 의 input feature space $$\chi$$ 가 countable universe 라고 가정합니다. 
 
 
 
@@ -193,7 +192,7 @@ Theorem 3 에 의해, WL test 와 같은 discriminative power 를 가지는 GNN 
 
 
 
-Lemma 5 와 Corollary 6 의 증명에서 핵심은, countable $$\chi$$ 의 enumeration $$Z: \chi\rightarrow\mathbb{N}$$ 와 bounded multiset $$X$$ 에 대해 $$\vert X\vert<N$$ 를 만족하는 $$N$$ 을 사용해 $$f(x) = N^{-Z(x)}$$ 를 정의하는 것입니다. 모든 bounded multiset $$X$$ 에 대해 $$h(X)$$ 가 injective 하게 만들기 위해, countable $$\chi$$ 의 각 원소들을 나열하고 각 원소가 포함되었는지 아닌지를 $$N$$ 진법으로 표현하는 것입니다.
+Lemma 5 와 Corollary 6 의 증명에서 핵심은, countable $$\chi$$ 의 enumeration $$Z: \chi\rightarrow\mathbb{N}$$ 와 bounded multiset $$X$$ 에 대해 $$\vert X\vert<N$$ 를 만족하는 $$N$$ 을 사용해 $$f(x) = N^{-Z(x)}$$ 를 정의하는 것입니다. 쉽게 말해, $$\chi$$ 의 각 원소들을 나열하고 각 원소가 포함되었는지 아닌지를 $$N$$ 진법으로 표현하는 것입니다.
 
 
 
@@ -231,11 +230,11 @@ $$
 
 &nbsp;
 
-Graph Isomorphism Network (GIN) 은 $$(6)$$ 을 layer-wise propagation rule 로 사용합니다. Theorem 3 로 인해 GIN 은 WL test 와 같은 discriminative power 를 가지므로, maximally powerful GNN 이라는 것을 알 수 있습니다. 간단하면서도 powerful 하다는 것이 GIN 의 가장 큰 장점입니다.
+Graph Isomorphism Network (GIN) 은 $$(6)$$ 을 layer-wise propagation rule 로 사용합니다. Theorem 3 로 인해 GIN 은 WL test 와 같은 discriminative power 를 가지므로, maximally powerful GNN 이라는 것을 알 수 있습니다. WL test 와 같은 discriminative power 를 가지는 모델로 GIN 이 유일하지 않을 수 있습니다. GIN 의 가장 큰 장점은 구조가 간단하면서도 powerful 하다는 것입니다.
 
 
 
-Node classification 에는 $$(6)$$ 의 GIN 을  바로 사용하면 되지만, graph classification 에는 추가로 graph-level readout function 이 필요합니다. Readout function 은 node 의 feature vector 들입니다. 이 때 node 의 feature vector (representation) 은 layer 를 거칠수록 local 에서 global 하게 변합니다. Layer 의 수가 너무 많다면, global 한 특성만 남을 것이고, layer 의 수가 너무 적다면 local 한 특성만 가지게 됩니다. 따라서, 그래프를 구분하기 위해서는 적당한 수의 layer 를 거쳐야 합니다. 
+Node classification 에는 $$(6)$$ 의 GIN 을  바로 사용하면 되지만, graph classification 에는 추가로 graph-level readout function 이 필요합니다. Readout function 은 node 의 feature vector 들에 대한 함수입니다. 이 때 node 의 feature vector (representation) 은 layer 를 거칠수록 local 에서 global 하게 변합니다. Layer 의 수가 너무 많다면, global 한 특성만 남을 것이고, layer 의 수가 너무 적다면 local 한 특성만 가지게 됩니다. 따라서, readout function 을 통해 그래프를 구분하기 위해서는, 적당한 수의 layer 를 거쳐야 합니다. 
 
 
 
@@ -248,7 +247,7 @@ $$
 
 &nbsp;
 
-Theorem 3 를 다시 보면, $$(7)$$ 의 결과가 multiset 에 대해 injective 해야 maximally powerful GNN 을 만들 수 있습니다. Lemma 5 를 통해 bounded multiset 에 대해 unique 한 summation 이 존재하기 때문에, 다음과 같이 각 layer 의 graph representation 을 정의하면, $$h_G$$ 는 multiset 에 대해 injective 하게 됩니다.
+Theorem 3 를 다시 보면, $$(7)$$ 의 결과가 multiset 에 대해 injective 해야 maximally powerful GNN 을 만들 수 있습니다. Lemma 5 를 통해 multiset 에 대해 unique 한 summation 이 존재하기 때문에, 다음과 같이 각 layer 의 graph representation 을 정의하면, $$h_G$$ 는 multiset 에 대해 injective 하게 됩니다.
 
 $$
 \text{READOUT} \left(\left\{\!\!\left\{h_v^{(k)} \right\}\!\!\right\}\right) = \sum_{v\in V} f^{(k)}\left(h_v^{(k)}\right)
@@ -264,12 +263,13 @@ $$
 
 ## Less Powerful But Still Interesting GNNs
 
+&nbsp;
 
 논문에서는 $$(6)$$ 의 두 가지 특징, MLP 와 feature vector summation 에 대한 ablation study 를 보여줍니다.
 
-다음의 두 가지 변화를 통해 GNN 의 성능이 떨어짐을 확인합니다.
+다음의 두 가지 변화를 주면, 모델의 성능이 떨어짐을 확인합니다.
 
-1. MLPs 대신 1-layer perceptrons
+1. MLP 대신 1-layer perceptron
 2. Summation 대신 mean-pooling 또는 max-pooling
 
 
@@ -307,10 +307,9 @@ $$
 h_v^{(k)} = \text{ReLU}\left( W\cdot \text{CONCAT}\left( h_v^{(k-1)}, h\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) \right) \right)
 $$
 
-&nbsp;
-
 Max-pooling 과 mean-pooling 의 경우 aggregator $$h$$ 는 다음과 같습니다.
 
+&nbsp;
 $$
 \begin{align}
 & h_{max}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
@@ -360,13 +359,13 @@ $$h_{sum}$$ 이 multiset 전체를 injective 하게 표현할 수 있고, $$h_{m
 
 ## Experiment & Result
 
-
+&nbsp;
 
 논문에서는 GIN 과 다른 GNN 들의 graph classification 성능을 비교하기 위해, 4개의 bioinformatics datasets (MUTAG, PTC, NCI1, PROTEINS) 와 5개의 social network datasets (COLLAB, IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-MULTI5K) 에 대해 실험을 수행했습니다.
 
 
 
-GIN 모델로 $$(6)$$ 에서 $$\epsilon$$ 을 학습하는 GIN-$$\epsilon$$ 와 $$\epsilon$$ 을 0 으로 고정한 GIN-0 를 선택했습니다. GIN 과 비교하기 위해 $$(6)$$ 의 summation 을 $$(9)$$ 와 같이 mean-pooling 또는 max-pooling 으로 바꾸거나, MLP 를 1-layer perceptron 으로 바꾼 모델들 (Figure 4 의 Mean - 1-layer 과 같은 모델들을 의미합니다.) 을 실험 대상으로 선정했습니다. 
+GIN 모델로 $$(6)$$ 에서 $$\epsilon$$ 을 학습하는 GIN-$$\epsilon$$ 과, $$\epsilon$$ 을 0 으로 고정한 GIN-0 를 선택했습니다. GIN 과 비교하기 위해 $$(6)$$ 의 summation 을 $$(9)$$ 와 같이 mean-pooling 또는 max-pooling 으로 바꾸거나, MLP 를 1-layer perceptron 으로 바꾼 모델들 (Figure 4 의 Mean - 1-layer 와 같은 variant 들을 의미합니다.) 을 실험 대상으로 선정했습니다. 
 
 
 
