@@ -5,6 +5,7 @@ category:
 - paper review
 tag:
 - GAT
+published: false
 ---
 
 [paper review] : Graph Attention Networks 이해하기
@@ -141,7 +142,7 @@ $$
 h^{(L)} = \sigma\left( \frac{1}{K}\sum^K_{k=1}\sum_{j\in N_i}\alpha^{k}_{ij}W^kh^{(L-1)}_j \right)
 \tag{7}
 $$
- 
+
 
 highly efficient : self-attentional layer 모든 edge 들에 대해 parallelized , 
 
