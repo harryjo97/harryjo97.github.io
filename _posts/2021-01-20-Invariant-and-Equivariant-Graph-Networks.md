@@ -7,7 +7,7 @@ tag:
 - Analysis
 ---
 
-k-Invariant Graph Networks 이해하기 : (1) Permutation Invariant and Equivariant Graph Networks
+[paper review] : Invariant and Equivariant Graph Networks
 
 
 

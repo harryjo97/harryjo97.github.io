@@ -7,7 +7,7 @@ tag:
 - GCN
 ---
 
-Graph Convolutional Network 이해하기 : paper review
+[paper review] : Graph Convolutional Network 이해하기
 
 
 
