@@ -16,25 +16,39 @@ published: false
 
 
 
-CNN 은 image classification, semantic segmentation, machine translation 등 다양한 분야에 적용되어 좋은 성능을 보여주었습니다. 
+CNN 은 image classification, semantic segmentation, machine translation 등 다양한 분야에 적용되어 좋은 성능을 보여주었습니다. CNN 의 핵심인 convolution 은 주어진 data 의 구조가 grid-like (Euclidean domain) 특성을 가질 때 정의됩니다. 3D mesh, social network, biological network 등과 같이 data 의 구조가 irregular 한 경우, 
 
-local filter 의 weight sharing 덕분에 효율적이며 computationally efficient 합니다.
+ data 는 그래프의 형태로 잘 표현 됩니다. 
 
-
-
-CNN 의 핵심인 convolution 은 주어진 data 의 구조가 grid-like (Euclidean domain) 특성을 가지는 상황에서 정의되고, 이를 irregular data 에 일반화
+그렇기 때문에, 그래프 data 에 대해 convolution operator 를 일반화시키기 위한 다양한 연구가 이루어지고 있습니다.
 
 
 
-3D mesh, social network, biological network 등과 같이 data 의 구조가 irregular 한 경우, data 는 그래프의 형태로 잘 표현 됩니다. 그렇기 때문에, 그래프 data 에 대해 CNN 을 적용하기 위한 다양한 연구가 이루어지고 있으며, 크게 두 가지로 나눌 수 있습니다.
+Graph domain 에서 convolution 을 일반화시키는 연구는 크게 두 가지로 나눌 수 있습니다.
 
 
 
-첫번째 방법은, Fourier domain 에서 정의된 convolution 을 이용한 spectral approach 입니다. ChebNet 과 GCN 과 같이 
+첫번째 방법은, Fourier domain 에서 정의된 convolution 을 이용한 spectral approach 입니다. Spectral approach 는 graph Laplacian 의 eigendecomposition 을 통해 convolution 을 정의합니다. 이 때 복잡한 행렬 연산과 non-spatially localized filter 의 문제를 해결하기 위해, ChebNet 은 graph Laplacian 의 Chebyshev expansion 을 적용했습니다. 더 나아가 [2] 에서는 Chebyshev approximation 을 각 node 의 1-step neighborhood 에 한정시켜 
 
 
 
-두번째 방법은, 공간적으로 가까운 neighbor 를 통해 그래프에서 직접 정의된 convolution 을 사용하는 non-spectral approach 입니다. 
+하지만 spectral approach 의 가장 큰 문제점은 바로 그래프의 전체 구조에 의존한다는 것입니다. Input graph 에 따라 graph Laplacian 이 변하기 때문에, inductive learning 에 직접 적용될 수 없습니다.
+
+
+
+두번째 방법은, non-spectral approach 입니다. 
+
+공간적으로 가까운 neighbor 를 통해 그래프에서 직접 convolution 을 정의합니다. Grid-like structured data 와 다르게, 그래프에서는 
+
+
+
+크기가 다른 neighborhood 에 대해서도 적용되며, CNN 의 weight-sharing 특성을 유지하는 convolution 을 정의하기 
+
+대표적인 예로 MoNet 과 GraphSAGE [3] 가 있습니다. Spectral approach 와 같이 그래프 전체의 구조에 의존하지 않기 때문에, inductive learning 이 가능합니다.
+
+
+
+논문은 [4] 의 attencion mechanism 
 
 
 
@@ -118,8 +132,6 @@ $$
 
 Self-attention 의 학습 과정을 안정화시키기 위해, multi-head attention 을 적용했습니다.
 
-
-
 <p align='center'>
     <img src = '../assets/post/Graph-Attention-Networks/multihead.PNG' style = 'max-width: 100%; height: auto'>
 </p>
@@ -192,10 +204,30 @@ sample fixed-size neighborhood due to computational footprint consistency
 
 
 
-
+&nbsp;
 
 ## Evaluation
 
+&nbsp;
+
+### Datasets
+
+GAT 모델을 다른 baseline 모델들과 비교하기 위해, 잘 알려진 4 가지 dataset 에서 실험을 진행했습니다. Transductive learning 의 performance 측정을 위해 Cora, Citeseer, Pubmed 세 가지의 citation network dataset 을 사용했습니다. 또한 inductive learing 의 performance 측정을 위해 protein-protein interaction (PPI) dataset 에서도 실험을 수행했습니다.
+
+각 dataset 의 특징은 아래의 table 1 에 정리되어 있습니다. 
+
+<p align='center'>
+<img src='../assets/post/Graph-Attention-Networks/dataset.PNG' style='max-width: 100%; height: auto'
+</p>
+
+
+### Transductive Learning
+
+Transductive learning task 의 baseline 들로는 [2] 의 실험에서 사용된 baseline 들과 GCN 을 사용했습니다.
+
+
+
+GAT 와 baseline 모델들의 성능은 mean classification error 로 측정되었으며, 아래의 표에 정리되어 있습니다.
 
 
 <p align='center'>
@@ -203,22 +235,86 @@ sample fixed-size neighborhood due to computational footprint consistency
 </p>
 
 
+GCN 의 performance 와 비교를 통해, 같은 neighborhood 내의 node 들에 대해 다른 weight 를 부여하는 것이 효과적임을 알 수 있습니다.
+
+
+
+### Inductive Learning
+
+Transductive learning 의 baseline 들로 활용된 모델들은 inductive learning 에 직접적으로 적용되기 힘들기 때문에, inductive learning baseline 에서 제외했습니다. Inductive learning task 의 baseline 들로는 GraphSAGE 의 variant 들을 선택했습니다. 특히 GraphSAGE 모델 중 성능이 좋다고 알려진 두 모델 : pool aggregator 를 사용하는 GraphSAGE-pool 과 LSTM aggregator 를 사용하는 GraphSAGE-LSTM 과 더불어 aggregator 로 GCN 또는 mean 을 사용한 GraphSAGE-GCN, GraphSAGE-mean 총 네 개의 모델을 골랐습니다. 
+
+
+
+또한, GAT 모델이 그래프 구조에 대한 정보를 이용하는지 확인하기 위해, 그래프의 구조를 전혀 이용하지 않는 multilayer perceptron (MLP) classifier 와 비교했습니다.
+
+
+
+특히, GAT 모델의 특징 중 한 가지가 바로 같은 neighborhood 내의 node 들에 대해서 다른 weight 를 부여할 수 있다는 것인데, 이를 확인하기 위해 constant attention mechanism 을 사용한 Const-GAT 모델을 GAT 모델과 함께 비교했습니다.
+
+
+
+
+
+GAT 와 baseline 모델들의 성능은 micro-averaged $$F_1$$ score 로 측정되었으며, 아래의 표에 정리되어 있습니다.
+
 
 <p align='center'>
     <img src = '../assets/post/Graph-Attention-Networks/inductive.PNG' style = 'max-width: 100%; height: auto'>
 </p>
+GraphSAGE 의 performance 와 비교를 통해, neighborhood 의 일부만 sampling 하는 것보다 전체 neighborhood 를 이용하는 것이 효과적임을 확인할 수 있습니다. 또한 Const-GAT 모델과의 비교를 통해 다시 한번 같은 neighborhood 내의 node 들에 대해서 다른 weight 를 부여하는 것이 중요하다는 것을 알 수 있습니다.
 
+
+
+
+
+논문에선는 GAT 모델을 통해 학습한 feature representation 을 눈으로 확인하기 위해, data visualization 을 위해 많이 사용되는 t-SNE (stochastic neighbor embedding) 를 아래의 그림과 같이  시각화 했습니다.
 
 
 <p align='center'>
     <img src = '../assets/post/Graph-Attention-Networks/t-sne.PNG' style = 'max-width: 100%; height: auto'>
 </p>
+Node 의 색은 각각의 7개의 class 에 해당하며, 눈으로 확연히 구분될 정도로 clustering 이 된 것을 볼 수 있습니다.
 
-
-
+&nbsp;
 
 
 ## Conclusion
+
+&nbsp;
+
+GAT 는 graph-structured data 에 적용될 수 있는 convolutin-style 의 neural network 로 다음과 같은 특징을 가지고 있습니다.
+
+
+
+> Computationally Efficient
+
+parallelizable across all nodes without intensive matrix operation
+
+
+
+> Different Importance
+
+같은 neighborhood 내의 node 들에 대해 다른 weight 을 부여해줄 수 있습니다.
+
+
+
+> Inductive Learning
+
+기존의 모델들과 다르게
+
+서로 다른 degree 를 가지는 경우에도 적용할 수 있으며, 
+
+spectral approach 와 다르게 그래프의 전체 구조에 의존하지 않기 때문에, inductive learning 또한 가능합니다.
+
+
+
+GAT 는 
+
+특히 attention mechanism 을 사용했기 때문에, 모델의 interpretability
+
+graph classification
+
+edge feature 
 
 
 
