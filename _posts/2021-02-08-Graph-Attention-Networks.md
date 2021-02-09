@@ -19,11 +19,7 @@ CNN 은 image classification, semantic segmentation, machine translation 등 다
 
 
 
-Graph domain 에서 convolution 을 일반화시키는 연구는 크게 두 가지로 나눌 수 있습니다. 첫번째 방법은 spectral approach 로, graph Laplacian 을 통해 Fourier domain 에서 convolution 을 정의합니다. 이 때 eigendecomposition 과 같은 복잡한 행렬 연산과 non-spatially localized filter 의 문제를 해결하기 위해, ChebNet 은 Chebyshev expansion 을 사용했습니다. 더 나아가 [2] 에서는 Chebyshev expansion 을 각 node 의 1-step neighborhood 에 한정시킨 GCN 을 
-
-
-
-GCN 은 node classification, link prediction, graph classification 등 다양한 분야에서 좋은 성능을 보여줍니다. 하지만 spectral approach 의 가장 큰 문제점은 바로 그래프의 전체 구조에 의존한다는 것입니다. Input graph 에 따라 graph Laplacian 이 변하기 때문에, inductive learning 에 직접 적용될 수 없습니다.
+Graph domain 에서 convolution 을 일반화시키는 연구는 크게 두 가지로 나눌 수 있습니다. 첫번째 방법은 spectral approach 로, graph Laplacian 을 통해 Fourier domain 에서 convolution 을 정의합니다. 이 때 eigendecomposition 과 같은 복잡한 행렬 연산과 non-spatially localized filter 의 문제를 해결하기 위해, ChebNet 은 Chebyshev expansion 을 사용했고, 더 나아가 [2] 에서는 Chebyshev expansion 을 각 node 의 1-step neighborhood 에 한정시켜 node classification, link prediction, graph classification 등 다양한 분야에서 좋은 성능을 보여주는 GCN 을 제시했습니다. 하지만 spectral approach 의 가장 큰 문제점은 바로 그래프의 전체 구조에 의존한다는 것입니다. Input graph 에 따라 graph Laplacian 이 변하기 때문에, inductive learning 에 직접 적용될 수 없습니다.
 
 
 
@@ -31,7 +27,7 @@ GCN 은 node classification, link prediction, graph classification 등 다양한
 
 
 
-논문은 [4] 의 attencion mechanism 을 통해 non-spectral appoach 의 문제점을 해결합니다. Attention mechanism 의 장점은, 고정되지 않은 input size 에 적용될 수 있다는 점입니다. 즉 그래프에서 크기가 다른 neighborhood 들에 대해 공통적으로 사용될 수 있기 때문에, weight-sharing 의 특성을 기대할 수 있습니다.
+논문은 [4] 에서 제시된 attention mechanism 을 통해 non-spectral appoach 의 문제점을 해결합니다. Attention mechanism 의 장점은, 고정되지 않은 input size 에 적용될 수 있다는 점입니다. 그래프에서 크기가 다른 neighborhood 들에 대해서도 공통적으로 적용될 수 있기 때문에, attention mechansim 을 통한 non-spectral approach 는 weight-sharing 특성을 가질 수 있습니다.
 
 &nbsp;
 
@@ -39,19 +35,18 @@ GCN 은 node classification, link prediction, graph classification 등 다양한
 
 ### Graph Attentional Layer
 
-들어가기 앞서, $$N$$ 개의 node 를 가지는 그래프에 대해 node $$i$$ 의 feature 를 vector $$h_i\in\mathbb{R}^{F}$$ 로 나타내겠습니다. 여기서 $$F$$ 는 node 의 feature dimension 이며, $$F'$$ 을 output 의 feature dimension 이라고 하겠습니다. 또한, node 의 ordering 에는 의미가 없으며 단순히 node 를 구분하기 위한 notation 입니다. 
+들어가기 앞서, $$N$$ 개의 node 를 가지는 그래프에 대해 node $$i$$ 의 feature 를 vector $$h_i\in\mathbb{R}^{F}$$ 로 나타내겠습니다. 여기서 $$F$$ 는 node 의 input feature dimension 이며, $$F'$$ 을 output 의 feature dimension 이라고 하겠습니다. 또한, node 의 ordering 에는 의미가 없으며 단순히 node 를 구분하기 위한 notation 입니다. 
 
 
 
-GAT 를 이루는 graph attentional layer 는, 모든 node 들에 대해 공통된 weight matrix $$W\in\mathbb{R}^{F'\times F}$$ 와 self-attention $$\mathcal{A}:\mathbb{R}^{F'}\times\mathbb{R}^{F'}\rightarrow\mathbb{R}$$ 으로 이루어집니다. 먼저 node $$i$$ 에 대한 node $$j$$ 의 중요도 (importance) 를 의미하는 attention coefficient $$e_{ij}$$ 는 다음과 같이 계산합니다.
+GAT 를 이루는 graph attentional layer 는, 모든 node 들에 대해 공통된 weight matrix $$W\in\mathbb{R}^{F'\times F}$$ 와 self-attention $$\mathcal{A}:\mathbb{R}^{F'}\times\mathbb{R}^{F'}\rightarrow\mathbb{R}$$ 로 이루어집니다. 먼저  self-attention 을 통해 attention coefficient $$e_{ij}$$ 를 다음과 같이 계산합니다.
 
 $$
 e_{ij} = \mathcal{A}\left( Wh_i, Wh_j \right)
 \tag{1}
 $$
 
-
-만약 모든 node 들의 쌍에 대해 attention coefficient 를 사용한다면, 그래프의 구조적인 특성을 무시하게 됩니다. GAT 의 핵심은, 바로 node $$i$$ 의 neighborhood $$N_i$$ 에 속하는 node $$j$$ 들에 대해서만 coefficient $$e_{ij}$$ 를 사용하는 것입니다. Masked attention 을 통해 그래프의 구조에 대한 정보를 살릴 수 있습니다.
+$$(1)$$ 의 attention coefficient $$e_{ij}$$ 는 node $$i$$ 에 대한 node $$j$$ 의 중요도 (importance) 로 해석할 수 있습니다. 만약 모든 node 들의 쌍에 대해 attention coefficient 를 사용한다면, 그래프의 구조적인 특성을 무시하게 됩니다. GAT 의 핵심은, 바로 node $$i$$ 의 neighborhood $$N_i$$ 에 속하는 node $$j$$ 들에 대해서만 coefficient $$e_{ij}$$ 를 사용하는 것입니다. Masked attention 을 통해 그래프의 구조에 대한 정보를 살릴 수 있습니다.
 
 &nbsp;
 
@@ -72,9 +67,12 @@ $$
 \tag{3}
 $$
 
+아래의 그림은 $$(3)$$ 의 과정을 나타냅니다.
+
 <p align='center'>
     <img src = '/assets/post/Graph-Attention-Networks/attention.PNG' style = 'max-width: 100%; height: auto'>
 </p>
+
 
 
 $$(3)$$ 을 적용해 $$(2)$$ 를 다시 표현하면 다음과 같이 쓸 수 있습니다. 
@@ -95,7 +93,7 @@ $$
 
 &nbsp;
 
-또한 논문에서는 self-attention 의 학습 과정을 안정화시키기 위해, transformer 에 대한 논문 "Attention is all you need" 와 같이 multi-head attention 을 사용했습니다. $$K$$ 개의 independent 한 attention mechanism $$(5)$$ 들의 concatenation 을 통해 다음과 같이 새로운 layer-wise propagation rule 을 정의합니다.
+또한 논문에서는 self-attention 의 학습 과정을 안정화시키기 위해, transformer 에 대한 논문 "Attention is all you need" 의 방법과 같이 multi-head attention 을 사용했습니다. $$K$$ 개의 independent 한 attention mechanism $$(5)$$ 들의 concatenation 을 통해 다음과 같이 새로운 layer-wise propagation rule 을 정의합니다.
 
 $$
 h_i \leftarrow \Big\Vert^{K}_{k=1} \sigma\left( \sum_{j\in N_i}\alpha^{k}_{ij}W^kh_j \right)
@@ -132,7 +130,7 @@ h_i \leftarrow \sigma\left( \sum_{j\in N_i}\frac{1}{c_{ij}}Wh_j \right)
 \tag{8}
 $$
 
-$$(5)$$ 와 비교해보면, $$c_{ij}$$ 는 값이 고정되어 있지만 $$\alpha_{ij}$$ 는 weight vector $$a\in\mathbb{R}^{2F'}$$ 에 따라 변할 수 있습니다. Weight 가 고정되어 있지 않기 때문에, GCN 보다 더 expressive 할 것입니다.
+$$(5)$$ 와 비교해보면, $$c_{ij}$$ 는 값이 고정되어 있지만 $$\alpha_{ij}$$ 는 weight vector $$a\in\mathbb{R}^{2F'}$$ 에 따라 변할 수 있습니다. Weight 가 고정되어 있지 않기 때문에 GCN 보다 더 expressive 하고다는 것을 알 수 있습니다.
 
 
 
@@ -142,7 +140,7 @@ $$(5)$$ 와 비교해보면, $$c_{ij}$$ 는 값이 고정되어 있지만 $$\alp
 
 ### GAT vs GraphSAGE
 
-GraphSAGE 는 대표적인 non-spectral approach 로, GAT 와 비슷한 propagation rule 을 따릅니다. GAT 와의 차이점은 바로 neighborhood 중 일부만을 sample 해 사용한다는 것입니다. 계산량을 한정시키기 위해 선택한 방법으로, 이는 추론 시에 neighborhood 중 일부의 정보만을 이용합니다. 또한 LSTM 을 aggregator 로 사용한 GraphSAGE 와 다르게, GAT 는 node 의 ordering 과 무관합니다. 
+GraphSAGE 는 대표적인 non-spectral approach 로, GAT 와 비슷한 propagation rule 을 따릅니다. 하지만 GraphSAGE 는 GAT 와의 달리 neighborhood 중 일부만을 sample 해 사용합니다. 이는 계산량을 한정시키기 위해 선택한 방법으로, 추론 과정에서 neighborhood 중 일부의 정보만을 이용하게 됩니다. 또한 LSTM 을 aggregator 로 사용한 GraphSAGE 와 다르게, GAT 는 node 의 ordering 과 무관합니다. 
 
 &nbsp;
 
@@ -162,7 +160,7 @@ GAT 모델을 다른 baseline 모델들과 비교하기 위해, 잘 알려진 4 
 
 ### Transductive Learning
 
-Transductive learning task 의 baseline 들로는 [2] 의 실험에서 사용된 baseline 들과 GCN 을 사용했습니다. GAT 와 baseline 모델들의 성능은 mean classification error 로 측정되었고, 결과는 아래의 표에 정리되어 있습니다.
+Transductive learning task 의 baseline 들로는 [2] 의 실험에서 사용된 baseline 들과 함께 GCN 을 사용했습니다. GAT 와 baseline 모델들의 성능은 mean classification error 로 측정되었고, 결과는 아래의 표에 정리되어 있습니다.
 
 <p align='center'>
     <img src = '/assets/post/Graph-Attention-Networks/transductive.PNG' style = 'max-width: 100%; height: auto'>
@@ -170,13 +168,13 @@ Transductive learning task 의 baseline 들로는 [2] 의 실험에서 사용된
 
 
 
-GCN 과의 비교를 통해, 같은 neighborhood 내의 node 들에 대해 다른 weight 를 부여하는 것이 효과적임을 알 수 있습니다.
+GCN 과의 비교를 통해, 같은 neighborhood 내의 node 들에 대해 다른 weight 를 부여하는 방법이 효과적임을 알 수 있습니다.
 
 &nbsp;
 
 ### Inductive Learning
 
-Transductive learning task 의 baseline 들로 활용된 모델들은 inductive learning 에 직접적으로 적용되기 힘들기 때문에, inductive learning task baseline 에서 제외했습니다. Inductive learning task 의 baseline 들로는 GraphSAGE 의 variant 들을 선택했습니다. 특히 GraphSAGE 모델 중 성능이 좋다고 알려진 두 모델 : pool aggregator 를 사용하는 GraphSAGE-pool 과 LSTM aggregator 를 사용하는 GraphSAGE-LSTM 과 더불어 aggregator 로 GCN 또는 mean 을 사용한 GraphSAGE-GCN, GraphSAGE-mean 총 네 개의 모델을 골랐습니다. 
+Transductive learning task 의 baseline 들로 활용된 모델들은 inductive learning 에 직접적으로 적용되기 힘들기 때문에, inductive learning task 의 baseline 에서 제외했습니다. Inductive learning task 의 baseline 들로는 GraphSAGE 의 variant 들을 선택했습니다. 특히 GraphSAGE 모델 중 성능이 좋다고 알려진 두 모델 : pool aggregator 를 사용하는 GraphSAGE-pool 과 LSTM aggregator 를 사용하는 GraphSAGE-LSTM 과 더불어 aggregator 로 GCN 또는 mean 을 사용한 GraphSAGE-GCN, GraphSAGE-mean 총 네 개의 모델을 골랐습니다. 
 
 
 
@@ -231,7 +229,7 @@ Node 들이 서로 다른 degree 를 가지는 그래프에도 적용할 수 있
 
 
 
-GAT 는 attention mechanism 을 사용하기 때문에, 학습된 attentional weight 를 통해 모델의 해석에 도움을 줄 수 있습니다. Attentional weight 을 이용한 model interpretability 에 관한 연구가 기대됩니다.
+GAT 는 attention mechanism 을 사용하기 때문에, 학습된 attentional weight 를 통해 모델의 해석에 도움을 줄 수 있습니다. Attentional weight 을 이용한 model interpretability 관련 연구가 기대됩니다.
 
 &nbsp;
 

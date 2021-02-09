@@ -1,6 +1,203 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-02-02T19:50:26+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">How Powerful are Graph Neural Networks?</title><link href="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/" rel="alternate" type="text/html" title="How Powerful are Graph Neural Networks?" /><published>2021-02-02T19:00:00+09:00</published><updated>2021-02-02T19:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/">&lt;p&gt;Graph Isomorpihsm Network 이해하기&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-02-09T18:17:52+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Graph Attention Networks</title><link href="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/" rel="alternate" type="text/html" title="Graph Attention Networks" /><published>2021-02-08T20:00:00+09:00</published><updated>2021-02-08T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Graph-Attention-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/">&lt;p&gt;[paper review] : Graph Attention Networks 이해하기&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;CNN 은 image classification, semantic segmentation, machine translation 등 다양한 분야에 적용되어 좋은 성능을 보여주었습니다. CNN 의 핵심인 convolution 은 주어진 data 의 구조가 grid-like (Euclidean domain) 특성을 가질 때 정의됩니다. 3D mesh, social network, biological network 등과 같이 irregular 한 그래프 data 에 대해 convolution operator 를 일반화시키기 위한 다양한 연구가 이루어지고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Graph domain 에서 convolution 을 일반화시키는 연구는 크게 두 가지로 나눌 수 있습니다. 첫번째 방법은 spectral approach 로, graph Laplacian 을 통해 Fourier domain 에서 convolution 을 정의합니다. 이 때 eigendecomposition 과 같은 복잡한 행렬 연산과 non-spatially localized filter 의 문제를 해결하기 위해, ChebNet 은 Chebyshev expansion 을 사용했고, 더 나아가 [2] 에서는 Chebyshev expansion 을 각 node 의 1-step neighborhood 에 한정시켜 node classification, link prediction, graph classification 등 다양한 분야에서 좋은 성능을 보여주는 GCN 을 제시했습니다. 하지만 spectral approach 의 가장 큰 문제점은 바로 그래프의 전체 구조에 의존한다는 것입니다. Input graph 에 따라 graph Laplacian 이 변하기 때문에, inductive learning 에 직접 적용될 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;두번째 방법은, non-spectral approach 입니다. 공간적으로 가까운 neighbor 를 통해 그래프에서 직접 convolution 을 정의합니다. Graph Laplacian 을 사용하지 않기 때문에 spectral approach 의 문제점을 피해가지만, 크기가 다른 neighborhood 들에 대해서 적용되며  CNN 의 weight-sharing 특성을 유지하는 convolution operator 를 정의하는 것은 굉장히 어렵습니다. 대표적인 모델로 MoNet 과 GraphSAGE [3] 가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;논문은 [4] 에서 제시된 attention mechanism 을 통해 non-spectral appoach 의 문제점을 해결합니다. Attention mechanism 의 장점은, 고정되지 않은 input size 에 적용될 수 있다는 점입니다. 그래프에서 크기가 다른 neighborhood 들에 대해서도 공통적으로 적용될 수 있기 때문에, attention mechansim 을 통한 non-spectral approach 는 weight-sharing 특성을 가질 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;gat-architecture&quot;&gt;GAT Architecture&lt;/h2&gt;
+
+&lt;h3 id=&quot;graph-attentional-layer&quot;&gt;Graph Attentional Layer&lt;/h3&gt;
+
+&lt;p&gt;들어가기 앞서, \(N\) 개의 node 를 가지는 그래프에 대해 node \(i\) 의 feature 를 vector \(h_i\in\mathbb{R}^{F}\) 로 나타내겠습니다. 여기서 \(F\) 는 node 의 input feature dimension 이며, \(F'\) 을 output 의 feature dimension 이라고 하겠습니다. 또한, node 의 ordering 에는 의미가 없으며 단순히 node 를 구분하기 위한 notation 입니다.&lt;/p&gt;
+
+&lt;p&gt;GAT 를 이루는 graph attentional layer 는, 모든 node 들에 대해 공통된 weight matrix \(W\in\mathbb{R}^{F'\times F}\) 와 self-attention \(\mathcal{A}:\mathbb{R}^{F'}\times\mathbb{R}^{F'}\rightarrow\mathbb{R}\) 로 이루어집니다. 먼저  self-attention 을 통해 attention coefficient \(e_{ij}\) 를 다음과 같이 계산합니다.&lt;/p&gt;
+
+\[e_{ij} = \mathcal{A}\left( Wh_i, Wh_j \right)
+\tag{1}\]
+
+&lt;p&gt;\((1)\) 의 attention coefficient \(e_{ij}\) 는 node \(i\) 에 대한 node \(j\) 의 중요도 (importance) 로 해석할 수 있습니다. 만약 모든 node 들의 쌍에 대해 attention coefficient 를 사용한다면, 그래프의 구조적인 특성을 무시하게 됩니다. GAT 의 핵심은, 바로 node \(i\) 의 neighborhood \(N_i\) 에 속하는 node \(j\) 들에 대해서만 coefficient \(e_{ij}\) 를 사용하는 것입니다. Masked attention 을 통해 그래프의 구조에 대한 정보를 살릴 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;각 node 들에 대해 \((1)\) 의 coefficient 들을 비교할 수 있도록, [4] 에서와 같이 softmax 함수를 통해 정규화를 해줍니다.&lt;/p&gt;
+
+\[\alpha_{ij} = \text{softmax}_j(e_{ij}) = \frac{\exp(e_{ij})}{\sum_{k\in N_i}\exp(e_{ik})}
+\tag{2}\]
+
+&lt;p&gt;논문에서는 \(\mathcal{A}\) 를 weight vector \(a\in\mathbb{R}^{2F'}\) 와 LeakyReLU 를 사용해 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\mathcal{A}\left( Wh_i, Wh_j \right)
+= \text{LeakyReLU}\left( a^T\left[ Wh_i\vert\vert Wh_j \right] \right)
+\tag{3}\]
+
+&lt;p&gt;아래의 그림은 \((3)\) 의 과정을 나타냅니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Attention-Networks/attention.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;\((3)\) 을 적용해 \((2)\) 를 다시 표현하면 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
+
+\[\alpha_{ij} = \frac{\exp\left( \text{LeakyReLU}\left( a^T\left[ Wh_i\,\Vert\, Wh_j \right] \right) \right)}{\sum_{k\in N_i}\exp\left(\text{LeakyReLU}\left( a^T\left[ Wh_i\,\Vert\, Wh_k \right] \right)\right)}
+\tag{4}\]
+
+&lt;p&gt;\((4)\) 의 정규화된 attention coefficient 를 통해 다음과 같이 node \(i\) 의 feature vector 를 update 해줍니다.&lt;/p&gt;
+
+\[h_i \leftarrow \sigma\left( \sum_{j\in N_i}\alpha_{ij}Wh_j \right)
+\tag{5}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;또한 논문에서는 self-attention 의 학습 과정을 안정화시키기 위해, transformer 에 대한 논문 “Attention is all you need” 의 방법과 같이 multi-head attention 을 사용했습니다. \(K\) 개의 independent 한 attention mechanism \((5)\) 들의 concatenation 을 통해 다음과 같이 새로운 layer-wise propagation rule 을 정의합니다.&lt;/p&gt;
+
+\[h_i \leftarrow \Big\Vert^{K}_{k=1} \sigma\left( \sum_{j\in N_i}\alpha^{k}_{ij}W^kh_j \right)
+\tag{6}\]
+
+&lt;p&gt;\(K=3\) 일 때 independent 한 attention mechanism 들을 서로 다른 색의 화살표로 표현한다면, \((6)\) 의 식을 아래의 그림과 같이 이해할 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Attention-Networks/multihead.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;마지막 layer 에서는 concatenation 대신 feature 들의 averaging 을 통해 final output 을 만들어줍니다.&lt;/p&gt;
+
+\[h_i \leftarrow \sigma\left( \frac{1}{K}\sum^K_{k=1}\sum_{j\in N_i}\alpha^{k}_{ij}W^kh_j \right)
+\tag{7}\]
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;GAT 의 가장 큰 장점은 계산이 효율적으로 이루어질 수 있다는 것입니다. Self-attentional layer 는 모든 edge 들에 대해 병렬화가 가능하고, node 의 output feature 는 각 node 마다 병렬적으로 계산이 가능합니다. 특히 spectral approach 에서와 같은 eigendecomposition 혹은 복잡한 행렬 연산이 필요하지 않습니다. 1개의 head 에 대한 \((6)\) 의 계산 복잡도는 \(O\left(\vert V\vert FF' + \vert E\vert F'\right)\) 이며, 이는 GCN 의 복잡도와 비슷합니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;gat-vs-gcn&quot;&gt;GAT vs GCN&lt;/h3&gt;
+
+&lt;p&gt;GCN 과의 가장 큰 차이는 동일한 neighborhood 내의 node 들에 대해 다른 importance 를 부여할 수 있다는 점입니다. GCN 의 layer-wise propagation rule 은 normalization constant \(c_{ij}=\sqrt{\vert N_i\vert\vert N_j\vert}\) 를 통해 다음과 같이 나타낼 수 있습니다.&lt;/p&gt;
+
+\[h_i \leftarrow \sigma\left( \sum_{j\in N_i}\frac{1}{c_{ij}}Wh_j \right)
+\tag{8}\]
+
+&lt;p&gt;\((5)\) 와 비교해보면, \(c_{ij}\) 는 값이 고정되어 있지만 \(\alpha_{ij}\) 는 weight vector \(a\in\mathbb{R}^{2F'}\) 에 따라 변할 수 있습니다. Weight 가 고정되어 있지 않기 때문에 GCN 보다 더 expressive 하고다는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;또한 \((8)\) 에서 볼 수 있듯이 GCN 은 학습 전에 그래프의 전체 구조에 대한 정보 (graph Laplacian) 를 알고 있어야합니다. GAT 의 경우 전체 구조에 대한 정보가 필요 없기 때문에 GCN 과 다르게 inductive learning 에 직접 이용될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;gat-vs-graphsage&quot;&gt;GAT vs GraphSAGE&lt;/h3&gt;
+
+&lt;p&gt;GraphSAGE 는 대표적인 non-spectral approach 로, GAT 와 비슷한 propagation rule 을 따릅니다. 하지만 GraphSAGE 는 GAT 와의 달리 neighborhood 중 일부만을 sample 해 사용합니다. 이는 계산량을 한정시키기 위해 선택한 방법으로, 추론 과정에서 neighborhood 중 일부의 정보만을 이용하게 됩니다. 또한 LSTM 을 aggregator 로 사용한 GraphSAGE 와 다르게, GAT 는 node 의 ordering 과 무관합니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;evaluation&quot;&gt;Evaluation&lt;/h2&gt;
+
+&lt;h3 id=&quot;datasets&quot;&gt;Datasets&lt;/h3&gt;
+
+&lt;p&gt;GAT 모델을 다른 baseline 모델들과 비교하기 위해, 잘 알려진 4 가지 dataset 에서 실험을 진행했습니다. Transductive learning 의 performance 측정을 위해 Cora, Citeseer, Pubmed 세 가지의 citation network dataset 을 사용했습니다. 또한 inductive learing 의 performance 측정을 위해 protein-protein interaction (PPI) dataset 에서도 실험을 수행했습니다. 각 dataset 의 특징은 아래의 table 1 에 정리되어 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+&lt;img src=&quot;/assets/post/Graph-Attention-Networks/dataset.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;transductive-learning&quot;&gt;Transductive Learning&lt;/h3&gt;
+
+&lt;p&gt;Transductive learning task 의 baseline 들로는 [2] 의 실험에서 사용된 baseline 들과 함께 GCN 을 사용했습니다. GAT 와 baseline 모델들의 성능은 mean classification error 로 측정되었고, 결과는 아래의 표에 정리되어 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Attention-Networks/transductive.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;GCN 과의 비교를 통해, 같은 neighborhood 내의 node 들에 대해 다른 weight 를 부여하는 방법이 효과적임을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;inductive-learning&quot;&gt;Inductive Learning&lt;/h3&gt;
+
+&lt;p&gt;Transductive learning task 의 baseline 들로 활용된 모델들은 inductive learning 에 직접적으로 적용되기 힘들기 때문에, inductive learning task 의 baseline 에서 제외했습니다. Inductive learning task 의 baseline 들로는 GraphSAGE 의 variant 들을 선택했습니다. 특히 GraphSAGE 모델 중 성능이 좋다고 알려진 두 모델 : pool aggregator 를 사용하는 GraphSAGE-pool 과 LSTM aggregator 를 사용하는 GraphSAGE-LSTM 과 더불어 aggregator 로 GCN 또는 mean 을 사용한 GraphSAGE-GCN, GraphSAGE-mean 총 네 개의 모델을 골랐습니다.&lt;/p&gt;
+
+&lt;p&gt;GAT 모델이 그래프 구조에 대한 정보를 이용하는지 확인하기 위해, 그래프의 구조를 전혀 이용하지 않는 multilayer perceptron (MLP) classifier 를 실험에 포함시켰습니다. 또한 GAT 모델의 특징 중 한 가지가 바로 같은 neighborhood 내의 node 들에 대해서 다른 weight 를 부여할 수 있다는 것인데, 이를 확인하기 위해 constant attention mechanism 을 사용한 Const-GAT 모델을 GAT 모델과 함께 비교했습니다.&lt;/p&gt;
+
+&lt;p&gt;GAT 와 baseline 모델들의 성능은 micro-averaged \(F_1\) score 로 측정되었으며, 결과는 아래의 표에 정리되어 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Attention-Networks/inductive.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;GraphSAGE 의 performance 와 비교를 통해, neighborhood 의 일부만 sampling 하는 것보다 전체 neighborhood 를 이용하는 것이 효과적임을 확인할 수 있습니다. 또한 Const-GAT 모델과의 비교를 통해 다시 한번 같은 neighborhood 내의 node 들에 대해서 다른 weight 를 부여하는 것이 중요하다는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;논문에서는 GAT 모델을 통해 학습한 feature representation 을 눈으로 확인하기 위해, data visualization 을 위해 많이 사용되는 t-SNE (stochastic neighbor embedding) 를 아래의 그림과 같이  시각화 했습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Graph-Attention-Networks/t-sne.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Node 의 색은 7개의 class 에 해당하며, 각각의 class 끼리 clustering 된 것을 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;GAT 는 graph-structured data 에 적용될 수 있는 convolutin-style 의 neural network 로 다음과 같은 특징을 가지고 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Computationally Efficient&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;앞서 설명했듯이, 계산이 효율적으로 이루어질 수 있습니다. Self-attentional layer 는 모든 edge 들에 대해 병렬화가 가능하고, node 의 output feature 는 각 node 마다 병렬적으로 계산이 가능합니다. 특히 복잡한 행렬 연산을 사용하지 않습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Different Importance&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;같은 neighborhood 내의 node 들에 대해 다른 weight 을 부여해줄 수 있습니다. 이웃한 node 들에 대해 weight 이 고정되어 있지 않기 때문에, GCN 보다 expressive 한 특성을 가집니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Inductive Learning&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Node 들이 서로 다른 degree 를 가지는 그래프에도 적용할 수 있으며, 그래프의 전체 구조에 의존하지 않기 때문에 inductive learning 이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;GAT 는 attention mechanism 을 사용하기 때문에, 학습된 attentional weight 를 통해 모델의 해석에 도움을 줄 수 있습니다. Attentional weight 을 이용한 model interpretability 관련 연구가 기대됩니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Petar Veliˇckovi´c, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Lio, and Yoshua
+Bengio. &lt;a href=&quot;https://arxiv.org/pdf/1710.10903.pdf&quot;&gt;Graph attention networks&lt;/a&gt;. arXiv preprint arXiv:1710.10903, 2017.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Thomas N Kipf and Max Welling. &lt;a href=&quot;&quot;&gt;Semi-supervised classification with graph convolutional networks&lt;/a&gt;. arXiv preprint arXiv:1609.02907, 2016.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Will Hamilton, Zhitao Ying, and Jure Leskovec. &lt;a href=&quot;https://arxiv.org/pdf/1706.02216.pdf&quot;&gt;Inductive representation learning on large graphs&lt;/a&gt;. In Advances in Neural Information Processing Systems, pages 1024–1034, 2017.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. &lt;a href=&quot;https://arxiv.org/pdf/1409.0473.pdf&quot;&gt;Neural machine translation by jointly
+learning to align and translate&lt;/a&gt;. International Conference on Learning Representations (ICLR),
+2015.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="GAT" /><summary type="html">[paper review] : Graph Attention Networks 이해하기</summary></entry><entry><title type="html">How Powerful are Graph Neural Networks?</title><link href="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/" rel="alternate" type="text/html" title="How Powerful are Graph Neural Networks?" /><published>2021-02-02T19:00:00+09:00</published><updated>2021-02-02T19:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/How-Powerful-are-Graph-Neural-Networks/">&lt;p&gt;[Paper review] Graph Isomorphism Network 이해하기&lt;/p&gt;
 
 &lt;h2 id=&quot;related-study&quot;&gt;Related Study&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;GNN 의 expressive power 에  대한 연구는 크게 두 가지 방향으로 이루어집니다. 첫 번째 방법은 이 논문과 같이, Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 GNN 의 expressive power 에 대한 limitation 을 연구합니다 (No. 1, 2, 5). 다른 방향으로는, permutation invariant function 들에 대한 universal approximation 을 통해 GNN 의 expressive power 를 다룹니다 (No. 3, 5). 최근에는 GNN 의 width, depth 와 expressive power 의 연관성에 대한 연구도 이루어졌습니다 (No. 6).&lt;/p&gt;
 
@@ -54,17 +251,21 @@
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;잘 알려져 있는 Graph Convolutional Network, GraphSAGE, Graph Attention Network, Gated Graph Neural Netowork 등 대부분의 GNN 은 recursive neighborhood aggregation (message passing) scheme 을 사용합니다 [2]. 이런 network 들을 Message Passing Neural Network (MPNN) 이라 부릅니다. MPNN 은 각 node 마다 주변 neighborhood 의 feature vector (representation) 를 수집하여, 새로운 feature vector 를 만들어냅니다. \(k\) 번의 iteration 후, 각 node 들은 \(k\)-hop neighborhood 의 feature vector 들을 모을 수 있고, 이는 그래프의 구조에 대한 정보를 포함한다고 해석할 수 있습니다.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;특히 neighborhood aggregataion scheme 을 사용하는 GNN 은 node classification, link prediction, graph classification 등 다양한 task 에 대해 state-of-the-art 성능을 보여줍니다. 하지만, 모델을 설계하는 것은 주로 경험적인 직관 혹은 실험을 통한 시행 착오를 통해 이루어집니다. GNN 의 limitation 과 expressive power 등의 이론적인 연구가 바탕이 된다면, 더 효율적인 모델을 만들 수 있고 모델의 hyperparameter 의 선택에 큰 도움이 될 것입니다.&lt;/p&gt;
+&lt;p&gt;잘 알려져 있는 Graph Convolutional Network, GraphSAGE, Graph Attention Network, Gated Graph Neural Netowork 등 대부분의 GNN 은 recursive neighborhood aggregation (message passing) scheme 을 사용합니다 [2]. 이런 network 들을 Message Passing Neural Network (MPNN) 이라 부릅니다. MPNN 은 매 iteration 마다 node 주변 neighborhood 의 feature vector (representation) 를 수집하여, node 의 새로운 feature vector 를 update 합니다. \(k\) 번의 iteration 후, 각 node 들은 \(k\)-hop neighborhood 의 feature vector 들로 update 된 새로운 feature vector 를 가지게 됩니다. 충분한 수의 iteration 후에는, 각 node 의 feature vector 가 그래프 전체의 구조에 대한 정보를 포함한다고 해석할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;논문에서는 GNN 의 expressive power 를 Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 설명합니다. WL test 또한 MPNN 과 같이 매 iteratin 마다 주변 neighborhood 의 feature vector 를 수집해 각 node 의 feature vector 를 update 합니다. WL test 가 강력한 이유는 neighborhood aggregation 이후 node 의 feature vetor 를 update 하는 과정이 injective 하기 때문입니다. 그래프의 두 node 가 서로 다른 neighborhood 를 가지고 있다면, 서로 다른 feature vector 를 가지게 됩니다.&lt;/p&gt;
+&lt;p&gt;Neighborhood aggregataion scheme 을 사용하는 GNN 은 node classification, link prediction, graph classification 등 다양한 task 에 대해 state-of-the-art 성능을 보여줍니다. 하지만, 모델의 설계는 주로 경험적인 직관 혹은 실험을 통한 시행 착오를 통해 이루어집니다. GNN 의 limitation 과 expressive power 등의 이론적인 연구가 바탕이 된다면 더 효율적인 모델을 만들 수 있고, 또한 모델의 hyperparameter tuning 에 큰 도움이 될 것입니다.&lt;/p&gt;
 
-&lt;p&gt;Node 의 neighborhood 를 multiset ( multiset of representation ) 으로 본다면, GNN 의 neighborhood aggregation scheme 은 multiset 에 대한 함수로 생각할 수 있습니다. GNN 이 WL test 와 같이 그래프를 구분할 수 있는 능력 (discriminative power) 이 좋아지려면, multiset 에 대한 함수는 서로 다른 multiset 에 대해 서로다른 embedding 으로 보내주어야 합니다. 따라서, GNN 의 expressive power 를 multiset 에 대한 함수를 통해 분석할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;논문에서는 GNN 의 expressive power 를 Weisfeiler-Lehman (WL) graph isomorphism test 를 통해 설명합니다. WL test 또한 MPNN 과 같이 매 iteratin 마다 주변 neighborhood 의 feature vector 를 수집해 각 node 의 feature vector 를 update 합니다. WL test 는 regular graph 와 같이 특수한 그래프를 제외하고는, 대부분의 그래프를 구분해낼 수 있습니다 (up to isomorphism). 그 이유는, 바로 알고리즘에서 neighborhood aggregation 이후 node 의 feature vetor 를 update 하는 과정이 injective 하기 때문입니다. WL test 의 알고리즘에서는 그래프의 두 node 가 서로 다른 neighborhood 를 가지고 있다면, 서로 다른 label 을 가지게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;Node 의 neighborhood 를 feature vector 들의 multiset 으로 표현하면, GNN 의 neighborhood aggregation scheme 은 multiset 에 대한 함수로 볼 수 있습니다. GNN 이 WL test 와 같이 그래프를 구분할 수 있는 능력 (discriminative power) 이 높지려면, neighborhood aggregation scheme 이 서로 다른 multiset 에 대해 서로다른 embedding 으로 보내주어야 합니다. 따라서, GNN 의 expressive power 를 multiset 에 대한 함수를 통해 분석할 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;논문에서 다루는 GNN 들은 모두 MPNN 으로, 매 iteration 마다 각 node 의 neighborhood feature vector 를 수집해 새로운 feature vector 로 update 합니다. 이를 neighborhood aggregation scheme 이라 부르며, 크게 두 단계로 나눌 수 있습니다.&lt;/p&gt;
 
@@ -74,7 +275,7 @@
 
 &lt;p&gt;이 때 \(\text{AGGREGATE}\) 함수는 multiset 에 대해 정의된 함수이며, 주로 summation 을 사용합니다. GraphSAGE [4] 에서와 같이 max-pooling 또는 mean-pooling 등을 사용할 수도 있습니다.&lt;/p&gt;
 
-&lt;p&gt;두번 째 단계에서는, 전 단계에서 수집한 정보 \(a_v^{(k)}\) 와 현재의 feature vector \(h_v^{(k-1)}\) 를 사용해 새로운 feature vector 를 update 합니다.&lt;/p&gt;
+&lt;p&gt;두번 째 단계에서는 전 단계에서 수집한 정보 \(a_v^{(k)}\) 와 현재의 feature vector \(h_v^{(k-1)}\) 를 사용해, node 의 새로운 feature vector 를 update 합니다.&lt;/p&gt;
 
 \[h_v^{(k)} = \text{COMBINE}^{(k)}\left(h_v^{(k-1)},a_v^{(k)}\right)\]
 
@@ -107,6 +308,8 @@ h_v^{(k)}
 
 &lt;h2 id=&quot;building-powerful-graph-neural-networks&quot;&gt;Building Powerful Graph Neural Networks&lt;/h2&gt;
 
+&lt;p&gt; &lt;/p&gt;
+
 &lt;p&gt;WL test 와 GNN 의 representational power 의 관계에 대해 알아보겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;weisfeiler-lehman-test&quot;&gt;Weisfeiler-Lehman Test&lt;/h3&gt;
@@ -117,13 +320,13 @@ h_v^{(k)}
   &lt;p&gt;Let \(G_1\) and \(G_2\) be any two non-isomorphic graphs. If a graph neural network \(\mathcal{A}:\mathcal{G}\rightarrow\mathbb{R}^d\) maps \(G_1\) and \(G_2\) to different embeddings, the Weisfeiler-Lehman graph isomorphism test also decides \(G_1\) and \(G_2\) are not isomorphic.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Lemma 2 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 가 WL test 라는 것을 알 수 있습니다. 즉 WL test 로 구분하지 못하는 그래프들에 대해서는, 예를 들어 다음의 그림과 같이 circular skip link graph 들에 대해서는 GNN 또한 구분할 수 없습니다.&lt;/p&gt;
+&lt;p&gt;Lemma 2 에 의해, GNN 의 discriminative power 가 WL test 보다 좋을 수 없다는 것을 알 수 있습니다. 즉 WL test 로 구분하지 못하는 그래프들에 대해서는, 예를 들어 다음의 그림과 같이 circular skip link graph 들에 대해서는 GNN 또한 구분할 수 없습니다.&lt;/p&gt;
 
 &lt;p align=&quot;center&quot;&gt;
     &lt;img src=&quot;/assets/post/How-Powerful-are-Graph-Neural-Networks/csl.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
 &lt;/p&gt;
 
-&lt;p&gt;Lemma 2 에 대한 증명의 핵심은 WL test 또한 MPNN 과 같이 매 iteraion 마다 neighborhood aggregation 을 통해 label 을 update 하며, label 을 update 하는 과정이 multiset 에 대해 injective 하다는 것입니다. 즉 multiset 에 대한 injectivity 가 representation power 에 큰 영향을 끼칩니다. 그렇다면, 과연 GNN 의 neighborhood aggregation 이 injective 할 때 WL test 와 같은 power 를 가질 수 있을까요? 이에 대한 답은 다음의 Theorem 3 를 통해 얻을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;Lemma 2 에 대한 증명의 핵심은 WL test 에서 feature vector 를 update 하는 과정이 injectivite 하다는 것입니다. 그렇다면, 과연 GNN 의 neighborhood aggregation 이 injective 할 때 WL test 와 같은 power 를 가질 수 있을까요? 이에 대한 답은 다음의 Theorem 3 를 통해 얻을 수 있습니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Theorem 3.&lt;/strong&gt;&lt;/p&gt;
@@ -139,19 +342,23 @@ h_v^{(k)}
   &lt;p&gt;b) \(\mathcal{A}\) ‘s graph-level readout, which operates on the multiset of node features \(\left\{\!\!\left\{  h_v^{(k)}\right\}\!\!\right\}\), is injective&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Theorem 3 에서 함수 \(f\) 와 \(\phi\) 는 각각 위에서 설명한 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수에 해당하며, graph-level readout 은 \(\text{READOUT}\) 을 의미합니다. 즉 \(\text{AGGREGATE}\), \(\text{COMBINE}\) 과 \(\text{READOUT}\) 이 모두 multiset 에 대해 injective 일때, GNN 은 WL test 와 같은 discriminative power 를 가질 수 있습니다.&lt;/p&gt;
+&lt;p&gt;Theorem 3 에서 함수 \(f\) 와 \(\phi\) 는 각각 위에서 설명한 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수에 해당하며, graph-level readout 은 \(\text{READOUT}\) 함수를 의미합니다. 즉 \(\text{AGGREGATE}\), \(\text{COMBINE}\) 과 \(\text{READOUT}\) 이 모두 multiset 에 대해 injective 일때, GNN 은 WL test 와 같은 discriminative power 를 가질 수 있다는 것이 Theorem 3 의 결론입니다.&lt;/p&gt;
 
 &lt;p&gt;Lemma 2 와 Theorem 3 에 의해, neighborhood aggregation scheme 을 사용하는 GNN 의 discriminative power 에 대한 upper bound 를 WL test 를 통해 나타낼 수 있습니다.&lt;/p&gt;
 
-\[\text{GNN} \leq \text{WL test}\]
+&lt;blockquote&gt;
+  &lt;p&gt;GNN is at most as powerful as WL test in distinguishing different graphs.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;그래프를 구분하는 능력에 있어 GNN 이 WL test 보다 성능이 떨어진다면,  GNN 을 쓰는 이유가 무엇인지에 대해 생각해보아야 합니다. GNN 의 가장 큰 장점은 바로 그래프 사이의 similarity 에 대해 학습할 수 있다는 것입니다.&lt;/p&gt;
+&lt;p&gt;그래프를 구분하는 능력에 있어 GNN 이 WL test 보다 성능이 떨어진다면,  GNN 을 쓰는 이유가 무엇인지에 대해 생각해보아야 합니다. GNN 의 가장 큰 장점은 바로 그래프 사이의 similarity 에 대해 학습할 수 있다는 것입니다. WL test 에서의 feature vector 는 label 로 one-hot encoding 에 불과합니다. 두 그래프가 다르다는 것은 확실히 알 수 있어도, 얼마나 다른지에 대해서는 알 수 없습니다. 하지만 GNN 의 feature vector 를 통해 그래프를 구분하는 것 뿐만 아니라, 비슷한 그래프를 비슷한 embedding 으로 보내주도록 학습할 수 있습니다. 즉 두 그래프가 얼마나 다른지에 대해서도 알 수 있습니다. 이런 특성 덕분에, 다양한 분야에서 GNN 이 훌륭한 성과를 보여준다고 생각합니다.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h3 id=&quot;graph-isomorphism-network&quot;&gt;Graph Isomorphism Network&lt;/h3&gt;
 
-&lt;p&gt;Theorem 3 에 의해, WL test 와 같은 discriminative power 를 가지는 GNN 을 만들기 위해서는 \((1)\) 의 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수가 mutiset 에 대해 injective 해야합니다. 그렇다면 먼저 multiset 에 대해 injective 한 함수가 존재하는지를 알아야합니다. 다음의 Lemma 5 와 Corollary 6 에서 답을 찾을 수 있습니다. 논문에서는 node 의 input feature space \(\chi\) 가 countable universe 라고 가정합니다.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;WL test 와 같은 discriminative power 를 가지는 GNN 을 만들기 위해서는, Theorem 3 에 의해 \((1)\) 의 \(\text{AGGREGATE}\) 와 \(\text{COMBINE}\) 함수가 mutiset 에 대해 injective 해야합니다. 그렇다면, 먼저 multiset 에 대해 injective 한 함수가 존재하는지를 알아야합니다. 다음의 Lemma 5 와 Corollary 6 에서 답을 찾을 수 있습니다. 논문에서는 node 의 input feature space \(\chi\) 가 countable universe 라고 가정합니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Lemma 5.&lt;/strong&gt;&lt;/p&gt;
@@ -165,7 +372,7 @@ h_v^{(k)}
   &lt;p&gt;Assume \(\chi\) is countable. There exists a function \(f:\chi \rightarrow\mathbb{R}^n\) so that for infinitely many choices of \(\epsilon\), including all irrational numbers, \(h(c,X)=(1+\epsilon)f(c) + \sum_{x\in X}f(x)\) is unique for each pair \((c,X)\) where \(c\in\chi\) and \(X\subset\chi\) is a multiset of bounded size. Moreover, any function \(g\) over such pairs can be decomposed as \(g(c,X)=\varphi\left( (1+\epsilon)f(c)+\sum_{x\in X}f(x) \right)\) for some function \(\varphi\).&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Lemma 5 와 Corollary 6 의 증명에서 핵심은, countable \(\chi\) 의 enumeration \(Z: \chi\rightarrow\mathbb{N}\) 와 bounded multiset \(X\) 에 대해 \(\vert X\vert&amp;lt;N\) 를 만족하는 \(N\) 을 사용해 \(f(x) = N^{-Z(x)}\) 를 정의하는 것입니다. 모든 bounded multiset \(X\) 에 대해 \(h(X)\) 가 injective 하게 만들기 위해, countable \(\chi\) 의 각 원소들을 나열하고 각 원소가 포함되었는지 아닌지를 \(N\) 진법으로 표현하는 것입니다.&lt;/p&gt;
+&lt;p&gt;Lemma 5 와 Corollary 6 의 증명에서 핵심은, countable \(\chi\) 의 enumeration \(Z: \chi\rightarrow\mathbb{N}\) 와 bounded multiset \(X\) 에 대해 \(\vert X\vert&amp;lt;N\) 를 만족하는 \(N\) 을 사용해 \(f(x) = N^{-Z(x)}\) 를 정의하는 것입니다. 쉽게 말해, \(\chi\) 의 각 원소들을 나열하고 각 원소가 포함되었는지 아닌지를 \(N\) 진법으로 표현하는 것입니다.&lt;/p&gt;
 
 &lt;p&gt;\((1)\) 에 Corollary 6 의 결과를 적용하면, 각 layer \(k=1,\cdots,K\) 에 대해 다음을 만족하는 함수 \(f^{(k)}\) 와 \(\varphi^{(k)}\) 가 존재합니다.&lt;/p&gt;
 
@@ -191,9 +398,9 @@ h_v^{(k)}
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Graph Isomorphism Network (GIN) 은 \((6)\) 을 layer-wise propagation rule 로 사용합니다. Theorem 3 로 인해 GIN 은 WL test 와 같은 discriminative power 를 가지므로, maximally powerful GNN 이라는 것을 알 수 있습니다. 간단하면서도 powerful 하다는 것이 GIN 의 가장 큰 장점입니다.&lt;/p&gt;
+&lt;p&gt;Graph Isomorphism Network (GIN) 은 \((6)\) 을 layer-wise propagation rule 로 사용합니다. Theorem 3 로 인해 GIN 은 WL test 와 같은 discriminative power 를 가지므로, maximally powerful GNN 이라는 것을 알 수 있습니다. WL test 와 같은 discriminative power 를 가지는 모델로 GIN 이 유일하지 않을 수 있습니다. GIN 의 가장 큰 장점은 구조가 간단하면서도 powerful 하다는 것입니다.&lt;/p&gt;
 
-&lt;p&gt;Node classification 에는 \((6)\) 의 GIN 을  바로 사용하면 되지만, graph classification 에는 추가로 graph-level readout function 이 필요합니다. Readout function 은 node 의 feature vector 들입니다. 이 때 node 의 feature vector (representation) 은 layer 를 거칠수록 local 에서 global 하게 변합니다. Layer 의 수가 너무 많다면, global 한 특성만 남을 것이고, layer 의 수가 너무 적다면 local 한 특성만 가지게 됩니다. 따라서, 그래프를 구분하기 위해서는 적당한 수의 layer 를 거쳐야 합니다.&lt;/p&gt;
+&lt;p&gt;Node classification 에는 \((6)\) 의 GIN 을  바로 사용하면 되지만, graph classification 에는 추가로 graph-level readout function 이 필요합니다. Readout function 은 node 의 feature vector 들에 대한 함수입니다. 이 때 node 의 feature vector (representation) 은 layer 를 거칠수록 local 에서 global 하게 변합니다. Layer 의 수가 너무 많다면, global 한 특성만 남을 것이고, layer 의 수가 너무 적다면 local 한 특성만 가지게 됩니다. 따라서, readout function 을 통해 그래프를 구분하기 위해서는, 적당한 수의 layer 를 거쳐야 합니다.&lt;/p&gt;
 
 &lt;p&gt;이런 특성을 반영하기 위해, GIN 은 각 layer 의 graph representation (\(\text{READOUT}(\,\cdot\,)\) 의 output) 을 concatenation 으로 모두 합쳐줍니다.  그렇다면 최종 결과는 각 layer 마다 나타나는 그래프의 구조적 정보를 모두 포함하게 됩니다.&lt;/p&gt;
 
@@ -202,7 +409,7 @@ h_v^{(k)}
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Theorem 3 를 다시 보면, \((7)\) 의 결과가 multiset 에 대해 injective 해야 maximally powerful GNN 을 만들 수 있습니다. Lemma 5 를 통해 bounded multiset 에 대해 unique 한 summation 이 존재하기 때문에, 다음과 같이 각 layer 의 graph representation 을 정의하면, \(h_G\) 는 multiset 에 대해 injective 하게 됩니다.&lt;/p&gt;
+&lt;p&gt;Theorem 3 를 다시 보면, \((7)\) 의 결과가 multiset 에 대해 injective 해야 maximally powerful GNN 을 만들 수 있습니다. Lemma 5 를 통해 multiset 에 대해 unique 한 summation 이 존재하기 때문에, 다음과 같이 각 layer 의 graph representation 을 정의하면, \(h_G\) 는 multiset 에 대해 injective 하게 됩니다.&lt;/p&gt;
 
 \[\text{READOUT} \left(\left\{\!\!\left\{h_v^{(k)} \right\}\!\!\right\}\right) = \sum_{v\in V} f^{(k)}\left(h_v^{(k)}\right)\]
 
@@ -216,12 +423,14 @@ h_v^{(k)}
 
 &lt;h2 id=&quot;less-powerful-but-still-interesting-gnns&quot;&gt;Less Powerful But Still Interesting GNNs&lt;/h2&gt;
 
+&lt;p&gt; &lt;/p&gt;
+
 &lt;p&gt;논문에서는 \((6)\) 의 두 가지 특징, MLP 와 feature vector summation 에 대한 ablation study 를 보여줍니다.&lt;/p&gt;
 
-&lt;p&gt;다음의 두 가지 변화를 통해 GNN 의 성능이 떨어짐을 확인합니다.&lt;/p&gt;
+&lt;p&gt;다음의 두 가지 변화를 주면, 모델의 성능이 떨어짐을 확인합니다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;MLPs 대신 1-layer perceptrons&lt;/li&gt;
+  &lt;li&gt;MLP 대신 1-layer perceptron&lt;/li&gt;
   &lt;li&gt;Summation 대신 mean-pooling 또는 max-pooling&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -250,18 +459,17 @@ h_v^{(k)}
 
 \[h_v^{(k)} = \text{ReLU}\left( W\cdot \text{CONCAT}\left( h_v^{(k-1)}, h\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) \right) \right)\]
 
-&lt;p&gt; &lt;/p&gt;
-
 &lt;p&gt;Max-pooling 과 mean-pooling 의 경우 aggregator \(h\) 는 다음과 같습니다.&lt;/p&gt;
 
-\[\begin{align}
+&lt;p&gt; 
+\(\begin{align}
 &amp;amp; h_{max}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
 = \text{MAX}\left( \left\{\!\!\left\{ f\left(h_u^{(k-1)}\right) \,:\, u\in N(v) \right\}\!\!\right\}  \right) \\
 \\
 &amp;amp; h_{mean}\left( \left\{\!\!\left\{ h_u^{(k-1)} \,:\, u\in N(v) \right\}\!\!\right\} \right) 
 = \text{MEAN}\left( \left\{\!\!\left\{f\left(h_u^{(k-1)}\right) \,:\, u\in N(v) \right\}\!\!\right\}  \right)
 \tag{9}
-\end{align}\]
+\end{align}\)&lt;/p&gt;
 
 &lt;p&gt;여기서 \(f(x) = \text{ReLU}\left(Wx\right)\), \(\text{MAX}\) 와 \(\text{MEAN}\) 은 element-wise max 와 mean operator 입니다.&lt;/p&gt;
 
@@ -294,9 +502,11 @@ h_v^{(k)}
 
 &lt;h2 id=&quot;experiment--result&quot;&gt;Experiment &amp;amp; Result&lt;/h2&gt;
 
+&lt;p&gt; &lt;/p&gt;
+
 &lt;p&gt;논문에서는 GIN 과 다른 GNN 들의 graph classification 성능을 비교하기 위해, 4개의 bioinformatics datasets (MUTAG, PTC, NCI1, PROTEINS) 와 5개의 social network datasets (COLLAB, IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-MULTI5K) 에 대해 실험을 수행했습니다.&lt;/p&gt;
 
-&lt;p&gt;GIN 모델로 \((6)\) 에서 \(\epsilon\) 을 학습하는 GIN-\(\epsilon\) 와 \(\epsilon\) 을 0 으로 고정한 GIN-0 를 선택했습니다. GIN 과 비교하기 위해 \((6)\) 의 summation 을 \((9)\) 와 같이 mean-pooling 또는 max-pooling 으로 바꾸거나, MLP 를 1-layer perceptron 으로 바꾼 모델들 (Figure 4 의 Mean - 1-layer 과 같은 모델들을 의미합니다.) 을 실험 대상으로 선정했습니다.&lt;/p&gt;
+&lt;p&gt;GIN 모델로 \((6)\) 에서 \(\epsilon\) 을 학습하는 GIN-\(\epsilon\) 과, \(\epsilon\) 을 0 으로 고정한 GIN-0 를 선택했습니다. GIN 과 비교하기 위해 \((6)\) 의 summation 을 \((9)\) 와 같이 mean-pooling 또는 max-pooling 으로 바꾸거나, MLP 를 1-layer perceptron 으로 바꾼 모델들 (Figure 4 의 Mean - 1-layer 와 같은 variant 들을 의미합니다.) 을 실험 대상으로 선정했습니다.&lt;/p&gt;
 
 &lt;p&gt;Baseline 모델로는 graph classification 의 state-of-the-art 성능을 보여주는 WL subtree kernel, C-SVM, Diffusion-convolutional neural network (DCNN), PATCHY-SAN, Deep Graph CNN (DGCNN), 그리고 Anonymous Walk Embeddings (AWL) 을 사용했습니다.&lt;/p&gt;
 
@@ -336,7 +546,7 @@ message passing for quantum chemistry&lt;/a&gt;. In International Conference on 
     &lt;p&gt;William L Hamilton, Rex Ying, and Jure Leskovec. &lt;a href=&quot;https://arxiv.org/pdf/1706.02216.pdf&quot;&gt;Inductive representation learning on large graphs&lt;/a&gt;.
 In Advances in Neural Information Processing Systems (NIPS), pp. 1025–1035, 2017a.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><category term="Weisfeiler-Lehman" /><summary type="html">Graph Isomorpihsm Network 이해하기</summary></entry><entry><title type="html">Invariant and Equivariant Graph Networks</title><link href="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/" rel="alternate" type="text/html" title="Invariant and Equivariant Graph Networks" /><published>2021-01-19T11:00:00+09:00</published><updated>2021-01-19T11:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/">&lt;p&gt;k-Invariant Graph Networks 이해하기 : (1) Permutation Invariant and Equivariant Graph Networks&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><category term="Weisfeiler-Lehman" /><summary type="html">[Paper review] Graph Isomorphism Network 이해하기</summary></entry><entry><title type="html">Invariant and Equivariant Graph Networks</title><link href="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/" rel="alternate" type="text/html" title="Invariant and Equivariant Graph Networks" /><published>2021-01-19T11:00:00+09:00</published><updated>2021-01-19T11:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Invariant-and-Equivariant-Graph-Networks/">&lt;p&gt;[paper review] : Invariant and Equivariant Graph Networks&lt;/p&gt;
 
 &lt;h2 id=&quot;motive&quot;&gt;Motive&lt;/h2&gt;
 
@@ -592,7 +802,7 @@ Information Processing Systems (NeurIPS), pages 2153–2164, 2019.&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;Deep Learning of Irregular Data &lt;a href=&quot;http://irregulardeep.org/An-introduction-to-Invariant-Graph-Networks-(1-2)/&quot;&gt;An Introduction To Invariant Graph Networks (1:2)&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><summary type="html">k-Invariant Graph Networks 이해하기 : (1) Permutation Invariant and Equivariant Graph Networks</summary></entry><entry><title type="html">Semi-Supervised Classification with Graph Convolutional Networks</title><link href="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/" rel="alternate" type="text/html" title="Semi-Supervised Classification with Graph Convolutional Networks" /><published>2021-01-13T20:00:00+09:00</published><updated>2021-01-13T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/">&lt;p&gt;Graph Convolutional Network 이해하기 : paper review&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="Analysis" /><summary type="html">[paper review] : Invariant and Equivariant Graph Networks</summary></entry><entry><title type="html">Semi-Supervised Classification with Graph Convolutional Networks</title><link href="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/" rel="alternate" type="text/html" title="Semi-Supervised Classification with Graph Convolutional Networks" /><published>2021-01-13T20:00:00+09:00</published><updated>2021-01-13T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Semi-Supervised-Classification-with-Graph-Convolutional-Networks/">&lt;p&gt;[paper review] : Graph Convolutional Network 이해하기&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -887,7 +1097,7 @@ graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129�
   &lt;li&gt;
     &lt;p&gt;F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : paper review</summary></entry><entry><title type="html">Weisfeiler-Lehman Algorithm</title><link href="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/" rel="alternate" type="text/html" title="Weisfeiler-Lehman Algorithm" /><published>2021-01-12T19:00:00+09:00</published><updated>2021-01-12T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm</id><content type="html" xml:base="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/">&lt;p&gt;Weisfeiler-Lehman Algorithm&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="GCN" /><summary type="html">[paper review] : Graph Convolutional Network 이해하기</summary></entry><entry><title type="html">Weisfeiler-Lehman Algorithm</title><link href="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/" rel="alternate" type="text/html" title="Weisfeiler-Lehman Algorithm" /><published>2021-01-12T19:00:00+09:00</published><updated>2021-01-12T19:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm</id><content type="html" xml:base="https://harryjo97.github.io/theory/Weisfeiler-Lehman-Algorithm/">&lt;p&gt;Weisfeiler-Lehman Algorithm&lt;/p&gt;
 
 &lt;h2 id=&quot;graph-isomorphism&quot;&gt;Graph Isomorphism&lt;/h2&gt;
 
