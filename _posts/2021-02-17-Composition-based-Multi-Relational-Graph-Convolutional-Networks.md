@@ -30,7 +30,7 @@ Knowledge graph 는 multi-relational graph 의 한 종류로 Freebase, WordNet �
 
 
 
-Knowledge graph 는 수많은 triplet 들로 이루어져 있고, 많은 수의 edge 들이 incomplete 합니다. 완성되지 않은 edge 들을 채우기 위해서는 link prediction 이 필요합니다. Link prediction 은 각 entity 와 relation 들에 대한 low-dimensional representation 을 찾고, 올바른 triplet 에 더 높은 score 를 부여하는 score function 을 통해 이루어집니다. 대표적인 모델로 TransE, DistMult, RotatE 등이 있습니다. 
+Knowledge graph 는 수많은 triplet 들로 이루어져 있고, 많은 수의 triplet 들이 incomplete 합니다. 완성되지 않은 edge 들을 채우기 위해서는 link prediction 이 필요합니다. Link prediction 은 각 entity 와 relation 들에 대한 low-dimensional representation 을 찾고, 올바른 triplet 에 더 높은 score 를 부여하는 score function 을 통해 이루어집니다. 대표적인 모델로 TransE, DistMult, RotatE 등이 있습니다. 
 
 
 
@@ -83,38 +83,41 @@ CompGCN 은 각 node $$u\in\mathcal{V}$$ 에 대한 node embedding $$h_u\in\math
 
 > Composition Operation
 
-GCN 에 relation embedding 을 적용하기 위해, entity-relation composition operation $$\phi:\mathbb{R}^d\times \mathbb{R}^d\rightarrow\mathbb{R}^d$$ 을 사용합니다. Composition operation $$\phi$$ 를 통해 각 entity 와 relation 들의 embedding 을 다음과 같이 표현할 수 있습니다.
-
-$$
-h_v = \phi(h_u,h_r)
-\tag{3}
-$$
-
-
-
-고정된 tail entity $$v$$ 에 대해, 
+GCN 에 relation embedding 을 적용하기 위해, entity-relation composition operation $$\phi:\mathbb{R}^d\times \mathbb{R}^d\rightarrow\mathbb{R}^d$$ 을 사용합니다. 이는 entity 의 embedding $$h_v$$ 와 relation 의 embedding $$h_r$$ 을 통해 새로운 embedding $$\phi(h_v,h_r)$$ 을 만들어주는 operation 입니다.
 
 
 
 논문에서는 composition operation $$\phi$$ 를 다음의 세 가지 non-parametrized operation 에 한정시킵니다. 
 
-- subtraction : $$\phi(h_u,h_r) = h_u - h_r$$
-- multiplication : $$\phi(h_u,h_r) = h_u\ast h_v$$
-- circular-correlation : $$\phi(h_u,h_r) = h_u\star h_v$$
+- subtraction : $$\phi(h_v,h_r) = h_v - h_r$$
+- multiplication : $$\phi(h_v,h_r) = h_v\ast h_r$$
+- circular-correlation : $$\phi(h_v,h_r) = h_v\star h_r$$
+
+각각의 operation 들은 TransE, DistMult, HolE 모델에서 영감을 받았다고 설명하지만, 실험 결과를 보면 operation 들에 특별한 의미가 있는 것 같지는 않습니다. 
 
 
 
 > Node Embedding Update
 
-$$(2)$$ 를 사용하여 node embedding 을 update 해주는 과정은 다음과 같이 정리할 수 있습니다.
+$$(2)$$ 를 통한 node embedding 의 update 는 다음과 같이 정리할 수 있습니다.
 
 $$
 h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W_rh_v \right)
+\tag{3}
+$$
+
+
+
+$$(3)$$ 은 $$u$$ 를 head entity 로 가지는 모든 edge $$(u,r,v)$$ 들에 대해, relation $$r$$ 과 tail entity $$v$$ 의 정보를 통해 $$u$$ 의 새로운 embedding 을 update 하는 과정으로 이해할 수 있습니다. 이 때 relation specific weight $$W_r$$ 을 사용하지 않기 위해, composition operation $$\phi(h_v,h_r)$$ 을 통해 relation 에 대한 정보를 담아냅니다. Composition operation 을 사용한다면, 모든 node 들에 대해 공통적인 weight $$W$$ 를 사용해 $$(3)$$ 을 다음과 같이 바꿀 수 있습니다.
+
+$$
+h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W\phi(h_v,h_r) \right)
 \tag{4}
 $$
 
 
-$$h_v$$ 대신 $$(3)$$ 을 사용하면 relation 에 대한 정보를 포함하기 때문에 relation specific weight $$W_r$$ 을 필요로 하지 않습니다. $$\mathcal{E}'$$ 에서 기존의 edge 와 inverse edge, self edge 를 구분하기 위해, relation specific weight $$W_r$$ 대신 direction specific weight $$W_{\text{dir}(r)}$$ [5] 를 사용하여 새로운 update rule 을 정의해줍니다. 
+
+더 나아가 $$\mathcal{E}'$$ 에서 기존의 edge 와 새로 추가된 inverse edge, self edge 들을 구분하기 위해, $$(4)$$ 의 $$W$$ 대신 direction specific weight $$W_{\text{dir}(r)}$$ [5] 를 사용하여 새로운 update rule 을 정의해줍니다. 
 
 $$
 h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W_{\text{dir}(r)}\,\phi(h_v,h_r) \right)
@@ -164,9 +167,27 @@ $$
 
 
 
-CompGCN 의 경우 사용하는 layer 의 수가 적기 때문에 (논문에서는 1~3 개의 layer 를 사용), relation 의 initial representation 이 큰 영향력을 가지게 됩니다. 따라서, basis formulation 을 통해 각 relation 에 대해 독립적으로 initial representation 을 주는 것이 학습에 큰 도움이 될 것입니다.
+CompGCN 의 경우 사용하는 layer 의 수가 적기 때문에 (논문에서는 1~3 개의 layer 를 사용), relation 의 initial representation 이 큰 영향력을 가지게 됩니다. 
 
 
+
+
+
+
+
+
+
+따라서, basis formulation 을 통해 각 relation 에 대해 독립적으로 initial representation 을 학습하는 것이 랜덤한 initial representation 보다 .
+
+
+
+
+
+
+
+
+
+> Comparison With Other Models
 
 $$(5)$$ 의 update rule 은 GCN, Relational-GCN [4], Directed-GCN [5], Weighted-GCN 모델들을 모두 일반화한 것입니다. 각각의 모델들은 다음의 표와 같이 $$(5)$$ 의 direction specific weight $$W_{\text{dir}(r)}$$ 와 composition operation 을 특정해주어 나타낼 수 있습니다.
 
@@ -177,9 +198,9 @@ $$(5)$$ 의 update rule 은 GCN, Relational-GCN [4], Directed-GCN [5], Weighted-
 다음의 표는 각 모델들이 반영한 특징을 잘 정리해 놓았습니다.
 
 
- <p align='center'>
+<p align='center'>
      <img src='/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/other.PNG' style='max-width: 100%; height: auto'>
- </p>
+</p>
 
 &nbsp;
 
@@ -276,7 +297,7 @@ Relational-GCN 과 비교했을 때, $$\mathcal{B}=5$$ 로 제한된 조건에�
 
 
 
-- CompGCN 에 대한 이론적인 연구가 필요합니다. 실험적으로 relation embedding 을 통해 multi-relational graph 의 representation 을 학습하는데 효과적이라는 것은 입증했지만, 어떤 이유로 효과적인에 대해 설명이 부족합니다. 특히 score function 과 composition operation 이 performance 에 미치는 영향력에 대해 연구한다면, CompGCN 을 더 효과적으로 사용할 수 있을 것입니다.
+- CompGCN 에 대한 이론적인 연구가 필요합니다. 실험적으로 relation embedding 을 통해 multi-relational graph 의 representation 을 학습하는데 효과적이라는 것은 입증했지만, 어떤 이유로 효과적인에 대해 설명이 부족합니다. 특히 score function 과 composition operation 이 performance 에 미치는 영향에 대해 연구한다면, CompGCN 을 더 효과적으로 사용할 수 있을 것입니다.
 
 &nbsp;
 
