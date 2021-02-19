@@ -7,7 +7,7 @@ tag:
 - Analysis
 ---
 
-[Paper review] Graph Isomorphism Network 이해하기
+[paper review] Graph Isomorphism Network 이해하기
 
 
 

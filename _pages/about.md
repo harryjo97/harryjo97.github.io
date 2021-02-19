@@ -5,17 +5,15 @@ layout: single
 author_profile: true
 ---
 
+&nbsp;
 
-
-
-
-# Research Interest
+## Research Interest
 
 &nbsp;
 
-### Expressive Power of GNN
+### > Expressive Power of GNN
 
-### Knowledge Graph Embedding
+### > Knowledge Graph
 
 
 
