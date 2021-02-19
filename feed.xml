@@ -1,4 +1,258 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-02-09T18:17:52+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Graph Attention Networks</title><link href="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/" rel="alternate" type="text/html" title="Graph Attention Networks" /><published>2021-02-08T20:00:00+09:00</published><updated>2021-02-08T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Graph-Attention-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/">&lt;p&gt;[paper review] : Graph Attention Networks 이해하기&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://harryjo97.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://harryjo97.github.io/" rel="alternate" type="text/html" /><updated>2021-02-19T15:02:39+09:00</updated><id>https://harryjo97.github.io/feed.xml</id><title type="html">Graph ML review</title><subtitle>about Graph ML</subtitle><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><entry><title type="html">Composition-based Multi-Relational Graph Convolutional Networks</title><link href="https://harryjo97.github.io/paper%20review/Composition-based-Multi-Relational-Graph-Convolutional-Networks/" rel="alternate" type="text/html" title="Composition-based Multi-Relational Graph Convolutional Networks" /><published>2021-02-17T12:00:00+09:00</published><updated>2021-02-17T12:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Composition-based-Multi-Relational-Graph-Convolutional-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Composition-based-Multi-Relational-Graph-Convolutional-Networks/">&lt;p&gt;[paper review] CompGCN 이해하기&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;대부분의 Graph Convolutional Networks (GCNs) 는 simple, undirectred graph 에 대해서 연구가 이루어졌습니다. 더 일반적인 형태의 그래프는 edge 에 feature 와 direction 이 존재하는 multi-relational graph 이며, 예로 knowledge graph 가 있습니다. GCN 을 통해 multi-relational graph 를 분석하는 기존의 방법은 node representation 만을 학습할 수 있고, over-parametrization 의 문제가 있습니다. 특히 node 뿐만 아니라 node 사이 relation 에 대한 학습이 필요한 link prediction 의 경우 GCN 을 직접 사용하는데 어려움이 있습니다. 논문에서는 이런 문제점을 해결하기 위해 GCN 을 통해 node 의 representation 뿐만 아니라, relation 의 representation 을 같이 학습하는 CompGCN 모델을 제시합니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;knowledge-graph&quot;&gt;Knowledge Graph&lt;/h3&gt;
+
+&lt;p&gt;Knowledge graph 는 multi-relational graph 의 한 종류로 Freebase, WordNet 과 같은 knowledge base 를 그래프로 나타낸 것입니다. Entity 들을 node 로, entity 들 사이의 relation 을 edge 로 표현합니다. Node 들의 집합 \(\mathcal{V}\) 와 relation 들의 집합 \(\mathcal{R}\) 에 대해, edge 는 node \(u,v\in\mathcal{V}\)사이의 relation \(r\in\mathcal{R}\) 로 이루어진 triplet \((u,r,v)\) 로 정의됩니다. 이러한 edge 들의 집합으로 knowledge graph \(\mathcal{G} = \{(u,r,v)\} \subset \mathcal{V}\times\mathcal{R}\times\mathcal{V}\) 를 정의합니다.&lt;/p&gt;
+
+&lt;p&gt;Knowledge graph 는 수많은 triplet 들로 이루어져 있고, 많은 수의 triplet 들이 incomplete 합니다. 이를테면, 주어진 두 entity \(u\) 와 \(v\) 사이의 relation 이 알려지지 않은 triplet \((u,?,v)\), 혹은 node \(u\) 와 연결된 relation \(r\) 이 주어졌지만 tail entity 를 모르는 triplet \((u,r,?)\) 과 같은 케이스가 있습니다. 이런 imcomplete 한 triplet 을 완성하기 위해서는 link prediction 이 필요합니다. Link prediction 은 각 entity 와 relation 들에 대한 low-dimensional representation 을 찾고, 올바른 triplet 에 더 높은 score 를 부여하는 score function 을 통해 이루어집니다. 대표적인 모델로 TransE, DistMult, RotatE 등이 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;gcn-on-multi-relational-graphs&quot;&gt;GCN on Multi-Relational Graphs&lt;/h3&gt;
+
+&lt;p&gt;Simple undirected graph 에 대한 GCN 의 layer-wise propagation rule 은 다음과 같이 표현할 수 있습니다 [3].&lt;/p&gt;
+
+\[H^{(k+1)} = f\left( \hat{A}H^{(k)}W^{(k)} \right)
+\tag{1}\]
+
+&lt;p&gt;하지만 multi-relational graph 에도 \((1)\) 을 적용한다면, relation 에 대한 정보를 사용하지 않기 때문에 제대로된 representation 을 찾을 수 없습니다. 따라서 \((1)\) 의 \(W^{(k)}\) 대신 relation specific weight \(W^{(k)}_r\) 를 사용하여, 다음과 같이 새로운 propagation rule 을 정의할 수 있습니다.&lt;/p&gt;
+
+\[H^{(k+1)} = f\left( \hat{A}H^{(k)}W^{(k)}_r \right)
+\tag{2}\]
+
+&lt;p&gt;\((2)\) 를 사용할 경우 relation 의 수가 많아질수록 over-parametrization 이 쉽게 일어날 수 있다는 단점이 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;compgcn-details&quot;&gt;CompGCN Details&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Directed-GCN [5] 과 같이 relation 이 단방향이 아닌 양방향으로 정의될 수 있도록, edge 와 relation 들의 집합 \(\mathcal{E}\) 과 \(\mathcal{R}\) 을 확장합니다. 기존의 edge \((u,r,v)\in\mathcal{E}\) 에 대해, relation \(r\) 의 방향을 뒤집은 inverse \(r^{-1}\) 를 이용한 inverse edge \((v,r^{-1},u)\) 와 self-loop \(\top\) 을 이용한 self edge \((u,\top,u)\) 을 추가해 새로운 edge 들의 집합 \(\mathcal{E}'\) 을 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\mathcal{E}' = \mathcal{E}\,\cup\{(v,r^{-1},u):(u,r,v)\in\mathcal{E}\,\}\,\cup\{(u,\top,u):u\in V\}\]
+
+&lt;p&gt;또한 기존의 relation \(r\in\mathcal{R}\) 에 대해 inverse relation \(r^{-1}\) 과 self-loop \(\top\) 을 추가한 새로운 relation 들의 집합 \(\mathcal{R}'\) 을 다음과 같이 정의합니다.&lt;/p&gt;
+
+\[\mathcal{R}' = \mathcal{R}\,\cup\{r^{-1}:r\in\mathcal{R}\}\,\cup\{\top\}\]
+
+&lt;p&gt;Self-loop \(\top\) 을 추가해주는 이유는 GCN [3] 에서와 같이 embedding 을 update 해줄 때 주변 node 들의 embedding 뿐만 아니라, 자가 자신의 embedding 에 대한 정보를 사용해주기 위해서입니다 [4, 5].&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;CompGCN 은 각 node \(u\in\mathcal{V}\) 에 대한 node embedding \(h_u\in\mathbb{R}^d\) 와 각 relation \(r\in\mathcal{R}'\) 에 대한 relation embedding \(h_r\in\mathbb{R}^d\) 을 학습합니다. 이 때 node embedding 과 relation embedding 의 차원이 같도록 설정해줍니다. 다음의 그림은 추가된 inverse relation 들과 node embedding, relation embedding 을 보여줍니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+     &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/graph.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Composition Operation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;GCN 에 relation embedding 을 적용하기 위해, entity-relation composition operation \(\phi:\mathbb{R}^d\times \mathbb{R}^d\rightarrow\mathbb{R}^d\) 을 사용합니다. 이는 entity 의 embedding \(h_v\) 와 relation 의 embedding \(h_r\) 을 통해 새로운 embedding \(\phi(h_v,h_r)\) 을 만들어주는 operation 입니다.&lt;/p&gt;
+
+&lt;p&gt;논문에서는 composition operation \(\phi\) 를 다음의 세 가지 non-parametrized operation 에 한정시킵니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;subtraction : \(\phi(h_v,h_r) = h_v - h_r\)&lt;/li&gt;
+  &lt;li&gt;multiplication : \(\phi(h_v,h_r) = h_v\ast h_r\)&lt;/li&gt;
+  &lt;li&gt;circular-correlation : \(\phi(h_v,h_r) = h_v\star h_r\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;각각의 operation 들은 TransE, DistMult, HolE 모델에서 영감을 받았다고 설명하지만, 실험 결과를 보면 operation 들에 특별한 의미가 있는 것 같지는 않습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Node Embedding Update&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\((2)\) 를 통한 node embedding 의 update 는 다음과 같이 정리할 수 있습니다.&lt;/p&gt;
+
+\[h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W_rh_v \right)
+\tag{3}\]
+
+&lt;p&gt;\((3)\) 은 \(u\) 를 head entity 로 가지는 모든 edge \((u,r,v)\) 들에 대해, relation \(r\) 과 tail entity \(v\) 의 정보를 통해 \(u\) 의 새로운 embedding 을 update 하는 과정으로 이해할 수 있습니다. 이 때 over-parametrization 의 문제점을 가지는 relation specific weight \(W_r\) 을 사용하지 않기 위해, composition operation \(\phi(h_v,h_r)\) 을 통해 relation 에 대한 정보를 담아냅니다.&lt;/p&gt;
+
+&lt;p&gt;Composition operation 을 사용한다면, 모든 node 들에 대해 공통적인 weight \(W\) 를 사용해 \((3)\) 을 다음과 같이 바꿀 수 있습니다.
+\(h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W\phi(h_v,h_r) \right)
+\tag{4}\)&lt;/p&gt;
+
+&lt;p&gt;더 나아가 \(\mathcal{E}'\) 에서 기존의 edge 와 새로 추가된 inverse edge, self edge 들을 구분하기 위해, \((4)\) 의 \(W\) 대신 direction specific weight \(W_{\text{dir}(r)}\) [5] 를 사용하여 새로운 update rule 을 정의해줍니다.&lt;/p&gt;
+
+\[h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W_{\text{dir}(r)}\,\phi(h_v,h_r) \right)
+\tag{5}\]
+
+&lt;p&gt;이 때 direction specific weight \(W_{\text{dir}(r)}\) 는 다음과 같이 구분할 수 있습니다.&lt;/p&gt;
+
+\[W_{\text{dir}(r)} = 
+\begin{cases}
+W_O, &amp;amp; r\in\mathcal{R} \\
+W_I, &amp;amp; r\in\mathcal{R}_{inv} \\
+W_S, &amp;amp; r=\top
+\end{cases}\]
+
+&lt;p&gt;\((5)\) 의 과정은 다음의 그림을 통해 이해할 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+     &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/update.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Relation Embedding Update&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\((5)\) 를 통해 node embedding 을 update 한 후, 학습 가능한 행렬 \(W_{\text{rel}}\) 을 통해 다음과 같이 relation embedding 을 update 해줍니다.&lt;/p&gt;
+
+\[h_r \leftarrow W_{\text{rel}}h_r
+\tag{6}\]
+
+&lt;blockquote&gt;
+  &lt;p&gt;Basis Formulation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;또한 relation 의 수가 증가함에 따라 CompGCN 모델이 필요 이상으로 복잡해지는 것을 막기 위해, [4] 의 basis formulation 을 응용합니다. 각 relation 들의 initial representation 을 다음과 같이 학습 가능한 basis vector \(\{v_1,\cdots,v_{\mathcal{B}}\}\) 들의 linear combination 으로 표현합니다.&lt;/p&gt;
+
+\[h_r^{(0)} = \sum^{\mathcal{B}}_{b=1} \alpha_{br}v_b 
+\tag{7}\]
+
+&lt;p&gt;여기서 \(\alpha_{br}\in\mathbb{R}\) 은 relation 과 basis vector 에 의존하는, 학습 가능한 scalar 입니다.&lt;/p&gt;
+
+&lt;p&gt;\((7)\) 을 통해 서로 다른 relation 들의 embedding 을 공통의 basis vector 들로 표현할 수 있습니다. 이를 weight sharing 관점에서 볼 때 수가 적은 (rare) relation 들과 수가 많은 (frequent) relation 들이 wegiht 을 공유하기 때문에, rare relation 들에 대해 overfitting 이 일어나는 것을 방지할 수 있습니다 [4]. CompGCN 은 Relational-GCN [4] 과 다르게, initial representation 만을 basis vector 로 표현하며 이후의 layer 에서는 basis 를 사용하지 않습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Comparison With Other Models&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\((5)\) 의 update rule 은 GCN [3], Relational-GCN [4], Directed-GCN [5], Weighted-GCN 모델들을 모두 일반화한 것입니다. 각각의 모델들은 다음의 표와 같이 \((5)\) 의 direction specific weight \(W_{\text{dir}(r)}\) 와 composition operation 을 특정해주어 나타낼 수 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+     &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/general.PNG&quot; style=&quot;max-width: 90%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;다음의 표는 각 모델들이 반영한 특징을 잘 정리해 놓았습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+     &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/other.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;experiment--results&quot;&gt;Experiment &amp;amp; Results&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;논문에서는 CompGCN 모델을 link prediction, node classification, graph classification 세 가지 task 들에 대해 performance 를 측정합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;link-prediction&quot;&gt;Link Prediction&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Performance comparison&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;먼저 link prediction task 에 대해 5 가지 metric 으로 평가하여 모델들의 performance 를 비교합니다. FB15k-237 과 WN18RR 데이터셋에 대한 CompGCN 과 baseline 모델들의 성능을 측정한 결과는 다음의 표에 정리되어있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/link.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;대부분의 metric 에서 CompGCN 의 성능이 가장 뛰어남을 확인할 수 있습니다. 2 가지 metric 에서 CompGCN 보다 뛰어난 성능을 보이는 RotatE [2] 모델은 entity 와 relation 을 복소수 영역에서 다루며, relation 을 rotation operation 으로 해석합니다. CompGCN 또한 complex domain 에서의 rotation operation 을 적용한다면, 더 우수한 성능을 낼 수 있지 않을까 기대해봅니다.&lt;/p&gt;
+
+&lt;p&gt;Relational-GCN 과 같은 기존의 모델 대신 CompGCN 을 사용하는 것이 얼마나 효과적인지에 대한 분석이 필요합니다. Score function \(X\) 와 entity embedding 을 위한 모델 \(M\) 그리고 CompGCN 의 경우 composition operator \(Y\) 의 다양한 조합 \(X+M(Y)\) 에 대해, FB15k-237 데이터셋에서 성능을 평가했습니다. 결과는 다음의 표에 정리되어 있습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/encoder.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;다양한 조합들 중, 모델 \(M\) 으로 CompGCN 을 사용했을 때 성능이 가장 좋음을 볼 수 있습니다. 대부분의 모델들은 TransE 의 score function 을 적용했을 때 성능이 눈에 띄게 떨어지지만, CompGCN 은 성능에 큰 차이가 나지 않습니다. CompGCN 의 performance 가 다른 모델들에 비해 뛰어난 이유는, node embedding 뿐만 아니라 relation embedding 을 같이 학습하기 때문이라고 추측할 수 있습니다. 다음의 그림에서 볼 수 있듯이 Relational-GCN 과 Weighted-GCN 은 entity embedding 만을 학습하지만, CompGCN 은 relation embedding 을 같이 학습하기 때문에 entity 와 relation 을 모두 고려해야하는 link prediciton task 에서 효과적입니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/embedding.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;CompGCN 의 성능을 composition operation 에 따라 비교해보면, 사용한 score function 에 따라 달라지지만 대체적으로 circular-correlation 과 같이 복잡한 operation 을 사용한 경우 더 나은 performance 를 보입니다. 특히, 다양한 조합들 중 ConvE 의 score function, circular-correlation (Corr) 과 함께 CompGCN 을 사용했을 때의 성능이 가장 뛰어남을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Scalability&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;CompGCN 의 scalability 를 분석하기 위해, relation 의 수와 basis vector 의 수에 따른 CompGCN 의 performance 를 비교했습니다.  FB15k-237 데이터셋에서 ConvE + CompGCN (Corr) 모델을 사용해 basis vector 의 수 \(\mathcal{B}\) 에 따른 성능을 측정하였고, 결과는 다음의 그래프와 같습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/basis.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;\(\mathcal{B}\) 가 커질수록 CompGCN 의 performance 가 좋아지며, \(\mathcal{B}=5\) 일 때에도 충분히 뛰어난 성능을 보입니다. \(\mathcal{B}\) 가 작을수록 parameter 의 수가 줄어들기 때문에, CompGCN 은 적은 parameter 로도 충분히 multi-relational graph 의 representatin 을 학습한다는 것을 알 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Relational-GCN 과 자세히 비교하기 위해, \(\mathcal{B}=5\) 로 제한된 CompGCN 과 relation 의 수에 따른 성능을 측정하였습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/rgcn.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Relational-GCN 과 비교했을 때, \(\mathcal{B}=5\) 로 제한된 조건에서도 relation 의 수와 상관 없이 CompGCN 이 R-GCN 보다 더 좋은 성능을 보여줍니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;node-classification-graph-classification&quot;&gt;Node Classification, Graph Classification&lt;/h3&gt;
+
+&lt;p&gt;마지막으로 node classification 과 graph classification task 에서의 성능을 baseline 과 비교했습니다. Node classification 에 대해서는 MUTAG 과 AM 데이터셋에서의 정확도를, graph classification 에 대해서는 MUTAG 과 PTC 데이터셋에서의 정확도를 측정했습니다.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/post/Composition-based-Multi-Relational-Graph-Convolutional-Networks/classification.PNG&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;두 task 모두에서 baseline 모델들보다 월등히 뛰어난 정확도를 보여줍니다. 이를 통해 CompGCN 이 node embedding 만을 학습하는 기존의 GCN 보다 효과적으로 multi-relational graph 의 representation 을 학습함을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;future-study&quot;&gt;Future Study&lt;/h2&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;여러가지 방면에서 CompGCN 에 대한 추가적인 연구가 이루어질 수 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Composition operation \(\phi\) 를 non-parametrized operation 이 아닌, Neural Tensor Networks (NTN) 와ConvE 같은 parametrized operation 을 사용했을 때 CompGCN 의 성능이 개선될 것이라고 생각합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RotatE 모델과 같이 relation 의 다양한 패턴들, symmetry / antisymmetry / inversion / composition, 을 반영할 수 있도록 score function 및 composition operation 에 대해 연구가 진행 될 수 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CompGCN 에 대한 이론적인 연구가 필요합니다. 실험적으로 relation embedding 을 통해 multi-relational graph 의 representation 을 학습하는데 효과적이라는 것은 입증했지만, 어떤 이유로 효과적인에 대해 설명이 부족합니다. 특히 score function 과 composition operation 이 performance 에 미치는 영향에 대해 연구한다면, CompGCN 을 더 효과적으로 사용할 수 있을 것입니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Shikhar Vashishth, Soumya Sanyal, Vikram Nitin, and Partha P. Talukdar. &lt;a href=&quot;https://arxiv.org/pdf/1911.03082.pdf&quot;&gt;Composition-based multi-relational graph convolutional networks&lt;/a&gt;. In ICLR, 2020.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, and Jian Tang. &lt;a href=&quot;https://arxiv.org/pdf/1902.10197.pdf&quot;&gt;Rotate: Knowledge graph embedding by relational rotation in complex space&lt;/a&gt;. arXiv preprint arXiv:1902.10197, 2019.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Thomas N Kipf and Max Welling. &lt;a href=&quot;&quot;&gt;Semi-supervised classification with graph convolutional networks&lt;/a&gt;. arXiv preprint arXiv:1609.02907, 2016.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Michael Schlichtkrull, Thomas N Kipf, Peter Bloem, Rianne van den Berg, Ivan Titov, and Max Welling. &lt;a href=&quot;https://arxiv.org/pdf/1703.06103.pdf&quot;&gt;Modeling relational data with graph convolutional networks&lt;/a&gt;. arXiv preprint arXiv:1703.06103, 2017.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Diego Marcheggiani and Ivan Titov. &lt;a href=&quot;https://arxiv.org/pdf/1703.04826.pdf&quot;&gt;Encoding sentences with graph convolutional networks for
+semantic role labeling&lt;/a&gt;. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing, pp. 1506–1515. Association for Computational Linguistics, 2017&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;paper review&quot;]" /><category term="knowledge graph embedding" /><summary type="html">[paper review] CompGCN 이해하기</summary></entry><entry><title type="html">Graph Attention Networks</title><link href="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/" rel="alternate" type="text/html" title="Graph Attention Networks" /><published>2021-02-08T20:00:00+09:00</published><updated>2021-02-08T20:00:00+09:00</updated><id>https://harryjo97.github.io/paper%20review/Graph-Attention-Networks</id><content type="html" xml:base="https://harryjo97.github.io/paper%20review/Graph-Attention-Networks/">&lt;p&gt;[paper review] : Graph Attention Networks 이해하기&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -1689,149 +1943,4 @@ graphs with fast localized spectral filtering&lt;/a&gt;. In Advances in neural i
   &lt;li&gt;
     &lt;p&gt;Terence Tao, &lt;a href=&quot;https://www.math.ucla.edu/~tao/preprints/fourier.pdf&quot;&gt;Fourier Trasnform&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (2) Graph Fourier transform</summary></entry><entry><title type="html">Graph Laplacian</title><link href="https://harryjo97.github.io/theory/Graph-Laplacian/" rel="alternate" type="text/html" title="Graph Laplacian" /><published>2020-12-30T22:00:00+09:00</published><updated>2020-12-30T22:00:00+09:00</updated><id>https://harryjo97.github.io/theory/Graph-Laplacian</id><content type="html" xml:base="https://harryjo97.github.io/theory/Graph-Laplacian/">&lt;p&gt;Graph Convolutional Network 이해하기 : (1) Graph Laplacian&lt;/p&gt;
-
-&lt;h2 id=&quot;basic-definition&quot;&gt;Basic definition&lt;/h2&gt;
-
-&lt;h3 id=&quot;weighted-adjacency-matrix&quot;&gt;Weighted adjacency Matrix&lt;/h3&gt;
-
-&lt;p&gt;주어진 undirected weighted graph \(G = (V,E,W)\) 는 vertices 의 집합 \(V\), edges 의 집합 \(E\), 그리고 weighted adjacency matrix \(W\) 로 이루어집니다. 이 포스트에서는 \(\vert V\vert= N &amp;lt; \infty\) 을 가정합니다. 편의상 \(V = \{1,2,\cdots,N\}\) 으로 나타내겠습니다. 여기서 vertices 의 ordering 은 임의로 주어진 것이며, 의미를 가지지 않습니다.&lt;/p&gt;
-
-&lt;p&gt;\(E\) 의 원소 \(e = (i,j)\) 는 vertex \(i\) 와 \(j\) 를 연결하는 edge 를 나타냅니다. 또한  \(W_{ij}\) 는 edge \(e = (i,j)\) 의 weight 을 의미하며 만약 \(i\) 와 \(j\)를 연결하는 edge 가 없다면 \(W_{ij}=0\) 이고 edge 가 있는 경우 \(W_{ij}&amp;gt;0\) 입니다. 이 때 \(W\) 는 모든 vertex pair 마다 정의되고 그래프가 undirected 이므로, \(W\) 는 \(N\times N\) real symmetric matrix 입니다.&lt;/p&gt;
-
-&lt;p&gt;Weighted adjacency matrix 의 한 예로 adjacency matrix 가 있습니다. Adjacency matrix 는 \(i\) 와 \(j\) 를 연결하는 edge 가 있다면 \(W_{ij} = 1\), 없다면 \(W_{ij}=0\) 으로 정의합니다. 다음의 그림은 그래프 (labeled) 에 대한 adjacency matrix 의 예시입니다.&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-    &lt;img src=&quot;/assets/post/Graph-Laplacian/adjacency.gif&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;	
-&lt;/p&gt;
-
-&lt;h3 id=&quot;degree-matrix&quot;&gt;Degree matrix&lt;/h3&gt;
-
-&lt;p&gt;주어진 weighted adjacency matrix \(W\) 에 대해 degree matrix  \(D\) 는 다음을 만족하는 diagonal matrix 로 정의합니다.
-\(D_{ii} = \sum^{N}_{j=1} W_{ij}
-\tag{1}\)&lt;/p&gt;
-
-&lt;p&gt;쉽게 말해, \(D_{ii}\) 는 vertex \(i\) 를 끝점으로 가지는 edge 들의 weight 를 모두 더한 값과 같습니다. 특히 adjacency matrix 에 대해서는 \((1)\) 의 합이 각 vertex 의 degree 를 의미하기 때문에 degree matrix 라는 명칭이 붙었습니다.&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h2 id=&quot;unnormalized-graph-laplacian&quot;&gt;Unnormalized Graph Laplacian&lt;/h2&gt;
-
-&lt;p&gt;주어진 undirected weighted graph \(G = (V,E,W)\) 에 대해  unnormalized graph Laplacian 은 다음과 같이 정의됩니다.&lt;/p&gt;
-
-\[L = D-W\]
-
-&lt;p&gt;여기서 \(D\) 는 앞서 정의한 degree matrix 입니다. Unnormalized graph Laplacain 은 combinatorial Laplacian 이라고도 불립니다.&lt;/p&gt;
-
-&lt;p&gt;다음은 예시 그래프에 대한 adjacency matrix, degree matrix, 그리고 graph Laplacian matrix 를 보여줍니다.&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-    &lt;img src=&quot;/assets/post/Graph-Laplacian/graph-eg.jpg&quot; style=&quot;max-width: 100%; height: auto&quot; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Unnormalized graph Laplacian 은 다음과 같은 특징을 가집니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;real-symmetric&quot;&gt;Real symmetric&lt;/h3&gt;
-
-&lt;p&gt;Undirected weighted graph \(G\) 에 대해 \(W\) 와 \(D\) 는 \(N\times N\) real symmetric matrix 이므로, \(L=D-W\) 또한  \(N\times N\) real symmetric matrix 입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;positive-semi-definite&quot;&gt;Positive semi-definite&lt;/h3&gt;
-
-&lt;p&gt;임의의 \(x\in\mathbb{R}^N\) 에 대해,&lt;/p&gt;
-
-\[\begin{align}
-x^TLx 
-&amp;amp;= x^TDx - x^TWx = \sum_{i} D_{ii}x_i^2 - \sum_{i,j}x_iW_{ij}x_j \\
-&amp;amp;= \frac{1}{2} \left( 2\sum_{i} D_{ii}x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&amp;amp;\overset{\mathrm{(a)}}{=} \frac{1}{2}\left( 2\sum_{i}\left\{\sum_{j}W_{ij}\right\} x_i^2 - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&amp;amp;\overset{\mathrm{(b)}}{=} \frac{1}{2}\left( \sum_{i,j}W_{ij}x_i^2 + \sum_{i,j}W_{ij}x_j^2  - 2\sum_{i,j} W_{ij}x_ix_j \right) \\
-&amp;amp;= \frac{1}{2}\sum_{i,j} W_{ij}(x_i-x_j)^2 \geq 0 \tag{2}
-\end{align}\]
-
-&lt;p&gt;유도 과정에서 \((a)\) 는 degree matrix 의 정의를 사용하였고, \((b)\) 는 \(W\) 가 symmetric 이기 때문에 성립합니다. 따라서 \(L\) 은 positive semi-definite matrix 입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;non-negative-eigenvalue&quot;&gt;Non-negative eigenvalue&lt;/h3&gt;
-
-&lt;p&gt;\(L\) 이 positive semi-definite matrix 이므로, \(L\) 은 non-negative real eigenvalue 들을 가집니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;orthonormal-basis&quot;&gt;Orthonormal basis&lt;/h3&gt;
-
-&lt;p&gt;\(L\) 은 real symmetric matrix 이기 때문에 다음의 lemma 를 이용하면, \(L\) 의 eigenvector 들로 \(\mathbb{R}^N\) 의 orthonormal basis 를 만들 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;__Lemma : __ Real symmetric matrix 는 diagonalizable 합니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;multiplicity-of-zero&quot;&gt;Multiplicity of zero&lt;/h3&gt;
-
-&lt;p&gt;\(u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 &amp;amp; 1 &amp;amp; \cdots &amp;amp; 1 \end{bmatrix}^T\) 에 대해 다음을 만족하기 때문에,&lt;/p&gt;
-
-\[Lu_0 = (D-W)u_0 = \mathbf{0}\]
-
-&lt;p&gt;\(L\) 은 0 을 eigenvalue 로 가지며 \(u_0\) 는 \(L\) 의 eigenvector 입니다. 이 때, 주어진 그래프와 상관 없이 \(L\) 은 항상 0 을 eigenvalue 로 가지고 \(u_0 = \frac{1}{\sqrt{N}}\begin{bmatrix} 1 &amp;amp; 1 &amp;amp; \cdots &amp;amp; 1 \end{bmatrix}^T\) 또한 항상 eigenvector 가 됩니다.&lt;/p&gt;
-
-&lt;p&gt;0 의 eigenvector \(u\) 에 대해 \((2)\) 의 결과를 이용하면, 다음과 같습니다.
-\(0 = u^TLu = \frac{1}{2}\sum_{i,j}W_{ij}(u(i) - u(j))^2\)&lt;/p&gt;
-
-&lt;p&gt;따라서 \(W_{ij}\neq 0\) 인 모든 vertices \(i\) 와 \(j\) , 즉 edge로 연결된 \(i\) 와 \(j\) 에 대해 \(u(i) = u(j)\) 를 만족합니다. \((\ast)\)&lt;/p&gt;
-
-&lt;p&gt;\(k\) 개의 connected components 를 가지는 그래프 \(G\) 의 graph Laplacian \(L\) 은&lt;/p&gt;
-
-\[L = \begin{bmatrix}
-L_1 &amp;amp; &amp;amp; &amp;amp; \\
- &amp;amp; L_2 &amp;amp; &amp;amp; \\
- &amp;amp; &amp;amp; \ddots &amp;amp; \\
- &amp;amp; &amp;amp; &amp;amp; L_k
-\end{bmatrix}\]
-
-&lt;p&gt;sub-Laplacian \(L_i\) 들로 이루어진 block matrix 로 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;각각의 sub-Laplacian 들은 모두 0 을 eigenvalue 로 가지고, eigenvector \(u\) 는 \((\ast)\) 로 인해 \(u_0\) 로 유일하게 결정되기 때문에 각각의 sub-Laplacian 들은 정확히 한 개의 eigenvalue 0 을 가집니다.  \(k\) 개의 connected components 를 가지는 그래프에 대해서 \(L\) 은 정확히 \(k\) 개의 eigenvalue 0 들을 가집니다. 따라서 graph Laplacian \(L\) 의 eigenvalue 0 의 multiplicity 는 주어진 그래프 \(G\) 의 connected components 의 개수와 일치합니다 [3].&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;주어진 그래프를 connected 라고 가정하면 \(L\) 의 eigenvalue 들을 다음과 같이 나열할 수 있습니다.&lt;/p&gt;
-
-\[0 = \lambda_0 &amp;lt; \lambda_1 \leq \cdots \leq \lambda_{N-1}\]
-
-&lt;p&gt;\(L\) 의 eigenvalue 들, 즉 spectrum 을 다루는 분야가 바로 spectral graph theory 입니다. Spectral graph theory 에 포함된 Fideler vector, Cheegar Constant, Laplacian embedding, NCut 등에 대해서는, 기회가 생기면 다른 포스트를 통해 자세히 설명하겠습니다.&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h2 id=&quot;other-graph-laplacians&quot;&gt;Other Graph Laplacians&lt;/h2&gt;
-
-&lt;h3 id=&quot;normalized-graph-laplacian&quot;&gt;Normalized graph Laplacian&lt;/h3&gt;
-
-&lt;p&gt;Normalized graph Laplacian \(L^{norm}\) 은 다음과 같이 정의합니다.&lt;/p&gt;
-
-\[L^{norm} = D^{-1/2}\;L\;D^{-1/2} = I -  D^{-1/2}\;W\;D^{-1/2}\]
-
-&lt;p&gt;\(L\) 과 같이 symmetric positive semi-definite matrix 입니다. 따라서  위에서 설명한 eigenvalue 에 대한 성질이 동일하게 적용됩니다.  하지만 \(L\) 과 \(L^{norm}\) 은 similar matrices 가 아니기 때문에 다른 eigenvector 를 가집니다. 특히 \(L\) 의 eigenvalue 0 에 대한 eigenvector \(u_0\) 는 그래프에 상관 없이 일정하지만, \(L^{norm}\) 의 경우 그래프에 따라 변합니다. Normalized graph Laplacian 의 특징으로는, eigenvalue 들이 \([0,2]\) 구간에 속한다는 것입니다. 그래프 \(G\) 가 bipartite graph 일 때만 \(L^{norm}\) 의 가장 큰 eigenvalue 가 2가 됩니다 [3].&lt;/p&gt;
-
-&lt;h3 id=&quot;random-walk-graph-laplacian&quot;&gt;Random walk graph Laplacian&lt;/h3&gt;
-
-&lt;p&gt;Random walk graph Laplacian \(L^{rw}\) 는 다음과 같이 정의합니다.&lt;/p&gt;
-
-\[L^{rw} = D^{-1}L = I - D^{-1}W\]
-
-&lt;p&gt;여기서 \(D^{-1}W\) 는 random walk matrix 로 그래프 \(G\) 에서의 Markov random walk 를 나타내어 줍니다. \(L^{rw}\) 는 symmetric 이 보장되지 않습니다.&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;D. Shuman, S. Narang, P. Frossard, A. Ortega, and P. Vandergheynst. &lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=6494675&quot;&gt;The Emerging Field of Signal
-   Processing on Graphs: Extending High-Dimensional Data Analysis to Networks and other Irregular Domains&lt;/a&gt;. &lt;em&gt;IEEE Signal Processing Magazine&lt;/em&gt;, 30(3):83–98, 2013.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;David K Hammond, Pierre Vandergheynst, and Remi Gribonval. &lt;a href=&quot;https://arxiv.org/pdf/0912.3848.pdf&quot;&gt;Wavelets on graphs via spectral
-graph theory&lt;/a&gt;. Applied and Computational Harmonic Analysis, 30(2):129–150, 2011.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;F. R. K. Chung. Spectral Graph Theory, volume 92. American Mathematical Society, 1997.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt; &lt;/p&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (1) Graph Laplacian</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Jaehyeong Jo</name><email>harryjo97@kaist.ac.kr</email></author><category term="[&quot;theory&quot;]" /><category term="GCN" /><summary type="html">Graph Convolutional Network 이해하기 : (2) Graph Fourier transform</summary></entry></feed>
