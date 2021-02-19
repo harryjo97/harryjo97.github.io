@@ -116,6 +116,7 @@ $$(3)$$ 은 $$u$$ 를 head entity 로 가지는 모든 edge $$(u,r,v)$$ 들에 �
 
 
 Composition operation 을 사용한다면, 모든 node 들에 대해 공통적인 weight $$W$$ 를 사용해 $$(3)$$ 을 다음과 같이 바꿀 수 있습니다.
+
 $$
 h_u \leftarrow f\left( \sum_{(u,r,v)\in\mathcal{E}'}W\phi(h_v,h_r) \right)
 \tag{4}
