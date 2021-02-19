@@ -5,7 +5,6 @@ category:
 - paper review
 tag:
 - Analysis
-- Weisfeiler-Lehman
 ---
 
 [Paper review] Graph Isomorphism Network 이해하기

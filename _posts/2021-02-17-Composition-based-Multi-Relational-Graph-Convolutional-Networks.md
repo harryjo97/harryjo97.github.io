@@ -4,7 +4,7 @@ date: 2021-02-17 12:00:00 +0900
 category:
 - paper review
 tag:
-- knowledge graph embedding
+- Knowledge Graph
 ---
 
 [paper review] CompGCN 이해하기

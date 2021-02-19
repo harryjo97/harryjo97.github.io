@@ -4,7 +4,7 @@ date: 2021-02-08 20:00:00 +0900
 category:
 - paper review
 tag:
-- GAT
+- Attention
 ---
 
 [paper review] : Graph Attention Networks 이해하기

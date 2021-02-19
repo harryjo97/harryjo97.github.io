@@ -4,7 +4,7 @@ date: 2021-01-12 19:00:00 +0900
 category:
 - theory
 tag:
-- Weisfeiler-Lehman
+- Analysis
 ---
 
 Weisfeiler-Lehman Algorithm
