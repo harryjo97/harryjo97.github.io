@@ -436,9 +436,7 @@ CGNN variant 들을 비교해보면, CGNN discrete 보다 CGNN (CGNN with weight
 
 > Performance with respect to time steps
 
-CGNN 이 이점 중 하나는 바로 over-smoothing 
-
-이를 확인하기 위해 GCN 과 GAT 에서는 layer 의 수에 따른 정확도를, CGNN 에서는 종료 시간 $$t_1$$ 에 따른 정확도를 비교했습니다. 결과는 다음의 그래프에 나타나 있습니다.
+CGNN 의 이점 중 하나는 바로 over-smoothing 이 일어나지 않는다는 것입니다. 이를 확인하기 위해 GCN 과 GAT 에서는 layer 의 수에 따른 정확도를, CGNN 에서는 종료 시간 $$t_1$$ 에 따른 정확도를 비교했습니다. 결과는 다음의 그래프에 나타나 있습니다.
 
 
 
