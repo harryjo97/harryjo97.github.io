@@ -163,6 +163,7 @@ $$
 &nbsp;
 
 $$(7)$$ 과 $$(10)$$ 으로부터 $$(9)$$ 의 적분상수 $$const$$ 를 계산할 수 있습니다.
+
 $$
 \begin{align}
 AE = \left.\frac{dH(t)}{dt}\right|_{t=0} 
@@ -188,7 +189,7 @@ $$
 > 
 > with the initial value $$H(0)=\left(\ln A\right)^{-1}\left( A-I\right)E$$
 
- 
+&nbsp;
 
 $$(11)$$ 의 $$\ln A$$ 는 직접 계산할 수 없으므로, 1차 항까지의 Taylor expansion 을 통해  $$\ln A\approx A-I$$ 로 근사해줍니다. 
 
@@ -458,10 +459,10 @@ GCN 과 GAT 와 같은 모델은 layer 의 수가 2 혹은 3일 때 가장 높�
 
 마지막으로 CGNN 모델의 종료 시간 $$t_1$$ 에 따른 memory 사용량을 확인했습니다. 
 
-
 <p align='center'>
     <img src='/assets/post/Continuous-Graph-Neural-Networks/memory.PNG' style='max-width: 100%; height: auto'>
 </p>
+
 
 node representation 의 변화를 discrete 하게 표현하는 모델들 :  GCN, GAT, CGNN discrete 은 layer 의 수에 따라 memory 사용량이 linear 하게 증가했습니다. 그에 비해 adjoint sensitivity method [2] 를 사용하는 CGNN 은 memory 사용량이 일정하게 적은 것을 볼 수 있습니다. 따라서 CNN 은 memory efficient 하기 때문에, large graph 에 대해서도 적용할 수 있습니다. 
 
