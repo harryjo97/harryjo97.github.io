@@ -1,6 +1,6 @@
 ---
 title: Continuous Graph Neural Networks
-date: 2021-02-24 22:00:00 +0900
+date: 2021-02-25 20:00:00 +0900
 category:
 - paper review
 tag:
@@ -81,8 +81,9 @@ CGNN 은 크게 encoder, ODE solver, decoder 세 가지 스텝으로 이루어�
 &nbsp;
 
 <p align='center'>
-    <img src='/assets/post/Continuous-Graph-Neural-Networks/architecture.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/architecture.PNG' style='max-width: 100%; height: auto'>
 </p>
+
 &nbsp;
 
 CGNN 에서 가장 중요한 것은 바로 node 들의 관계를 모델링해주는 ODE 입니다. ODE 는 node representation 의 연속적인 변화를 정의하며, node 들의 long-term dependency 를 표현할 수 있어야 합니다. 논문에서는 다음의 두 가지 ODE 를 제시합니다.
@@ -152,8 +153,6 @@ $$
 \tag{9}
 $$
 
-&nbsp;
-
 $$(6)$$ 으로부터 $$t=0$$ 일 때, $$H(0)$$ 의 값을 구할 수 있습니다.
 
 $$
@@ -161,9 +160,9 @@ $$
 \tag{10}
 $$
 
+&nbsp;
 
 $$(7)$$ 과 $$(10)$$ 으로부터 $$(9)$$ 의 적분상수 $$const$$ 를 계산할 수 있습니다.
-
 $$
 \begin{align}
 AE = \left.\frac{dH(t)}{dt}\right|_{t=0} 
@@ -442,10 +441,10 @@ CGNN 이 이점 중 하나는 바로 over-smoothing
 
 
 
-
 <p align='center'>
-    <img src='/assets/post/Continuous-Graph-Neural-Networks/layer.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/layer.PNG' style='max-width: 100%; height: auto'>
 </p>
+
 
 GCN 과 GAT 와 같은 모델은 layer 의 수가 2 혹은 3일 때 가장 높은 정확도를 보이며, layer 의 수가 많아질수록 정확도가 감소하는 것을 볼 수 있습니다. 그에 비해 CGNN 은 종료 시간이 증가함에 따라 정확도도 올라가며, 결국 수렴하는 경향을 관찰할 수 있습니다. 즉 CGNN 은 over-smoothing 이 일어나지 않고, node 들의 long-term dependency 를 학습할 수 있다는 것을 실험적으로 확인했습니다.
 
@@ -461,7 +460,7 @@ GCN 과 GAT 와 같은 모델은 layer 의 수가 2 혹은 3일 때 가장 높�
 
 
 <p align='center'>
-    <img src='/assets/post/Continuous-Graph-Neural-Networks/memory.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/memory.PNG' style='max-width: 100%; height: auto'>
 </p>
 
 node representation 의 변화를 discrete 하게 표현하는 모델들 :  GCN, GAT, CGNN discrete 은 layer 의 수에 따라 memory 사용량이 linear 하게 증가했습니다. 그에 비해 adjoint sensitivity method [2] 를 사용하는 CGNN 은 memory 사용량이 일정하게 적은 것을 볼 수 있습니다. 따라서 CNN 은 memory efficient 하기 때문에, large graph 에 대해서도 적용할 수 있습니다. 
