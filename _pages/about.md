@@ -5,13 +5,14 @@ layout: single
 author_profile: true
 ---
 
-&nbsp;
 
 ## Research Interest
 
 &nbsp;
 
 ### > Expressive Power of GNN
+
+### > Continuous-Depth Model
 
 ### > Knowledge Graph
 

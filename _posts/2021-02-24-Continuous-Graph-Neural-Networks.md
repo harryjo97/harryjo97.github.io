@@ -4,8 +4,7 @@ date: 2021-02-24 22:00:00 +0900
 category:
 - paper review
 tag:
-- neural ode
-published: false
+- continuous-depth model
 ---
 
 [paper review] CGNN 이해하기
@@ -20,7 +19,7 @@ GCN 의 propagation rule 은 neighbor node representation 들을 통해 각 node
 
 
 
-논문에서는 node representation 의 시간에 따른 연속적인 변화를 표현할 수 있는 CGNN 모델을 제시합니다. CGNN 은 node representation 의 변화를 ODE 를 통해 표현하여 기존의 discrete GNN 을 연속적인 모델로 일반화시킵니다. ODE 에 restart distribution 을 추가하여 over-smoothing 문제를 해결하여 node 들의 long-range dependency 를 학습할 수 있습니다. 특히 node classification 에 있어 기존의 GNN 모델들보다 성능이 뛰어나며,  memory efficient 한 모델입니다.
+논문에서는 node representation 의 시간에 따른 연속적인 변화를 표현할 수 있는 CGNN 모델을 제시합니다. CGNN 은 node representation 의 변화를 ODE 를 통해 표현하여 기존의 discrete GNN 을 연속적인 모델로 일반화시킵니다. ODE 에 restart distribution 을 추가하여 over-smoothing 문제를 해결하고, 그로 인해 node 들의 long-range dependency 를 학습할 수 있습니다. 특히 node classification 에 있어 기존의 GNN 모델들보다 성능이 뛰어나며, memory efficient 한 모델입니다.
 
 &nbsp;
 
@@ -30,7 +29,7 @@ GCN 의 propagation rule 은 neighbor node representation 들을 통해 각 node
 
 Simple undirected graph $$G=(V,E)$$ 의 adjacent matrix 를 $$Adj$$ , degree matrix 를 $$D$$ 라고 하겠습니다. 이 때 node 들의 degree 가 서로 다를 수 있기 때문에, normalized adjacent matrix $$D^{-1/2}Adj\,D^{-1/2}$$ 를 주로 사용합니다. 하지만  normalized adjacent matrix 의 eigenvalue 는 $$[-1,1]$$ 구간에 존재하기 때문에,  normalized adjacent matrix 로 정의된 convolution 을 사용할 경우 exploding / vanishing gradient 와 같은 instability 가 발생할 수 있습니다 [3]. 
 
-
+&nbsp;
 
 따라서 [3] 에서는 renormalization trick 을 통해 normalized adjacent matrix 대신 $$\hat{A} = \tilde{D}^{-1/2}\tilde{A}\,\tilde{D}^{-1/2}$$ 을 사용합니다. GCN 의 $$n$$ 번째 layer 의 node representation $$H_n$$ 과 weight matrix $$W$$ 를 통해,  propagation rule 을 다음과 같이 쓸 수 있습니다.
 
@@ -38,7 +37,7 @@ $$
 H_{n+1} = \hat{A}\,H_nW
 $$
 
-
+&nbsp;
 
 논문에서는 normalized adjacent matrix 의 eigenvalue 의 크기를 조절하기 위해, renormalization trick 대신 parameter $$\alpha\in (0,1)$$ 을 사용여 다음과 같은 regularized adjacency matrix $$A$$ 를 사용합니다.
 
@@ -49,9 +48,10 @@ $$
 
 이 때 정의에 의해 $$A$$ 는 diagonalizable 하므로 $$A=U\Lambda U^T$$ 로 표현한다면, $$A-I = U(\Lambda-I)U^T$$ 입니다. 이 때 $$A$$ 의 eigenvalue 는 $$[0,\alpha]$$ 구간에 존재하므로, $$\Lambda-I$$ 의 diagonal element 들은 모두 0 보다 작기 때문에 $$A-I$$ 는 invertible 합니다.
 
+&nbsp;
 
 
-더 나아가 node 마다 regularization parameter $$\alpha$$ 를 다르게 설정하기 위해, parmeter vector $$\tilde{\alpha}\in (0,1)^{|V|}$$ 를 사용하여 새로운 regularized adjacency matrix $$\tilde{A}$$ 를 정의할 수 있습니다.
+더 나아가 node 마다 regularization parameter $$\alpha$$ 를 다르게 설정하기 위해, parmeter vector $$ \tilde{\alpha}\in (0,1)^{\vert V\vert} $$ 를 사용하여 새로운 regularized adjacency matrix $$\tilde{A}$$ 를 정의할 수 있습니다.
 
 $$
 \tilde{A} 
@@ -61,35 +61,10 @@ $$
 
 $$A$$ 와 마찬가지로 $$\tilde{A}$$  의 eigenvalue 는 $$[0,1)$$ 구간에 존재하며, $$\tilde{A}-I$$ 또한 invertible 합니다.
 
-
+&nbsp;
 
 논문에서는 $$(1)$$ 의 regularized adjacency matrix 를 사용한다고 했지만, 실제 implementation 에서는 $$(2)$$ 의 regularized adjacency matrix 를 사용했습니다 [6].
 
-
-&nbsp;
-
-## Related Works
-
-&nbsp;
-
-### Neural ODE
-
-[2] 에서는 ODE 를 통해 정의된 hidden representation 의 연속적인 변화를 모델링할 수 있는 새로운 방법을 제시합니다. 이 때 hidden representation 을 정의하는 ODE 를 풀어주기 위해 직접 gradient 를 계산하는 것은 굉장히 어렵습니다. 이런 문제점을 해결하기 위해 adjoint sensitivity method 를 활용합니다.  
-
-
-
-Adjoint sensitivity method 를 통해 gradient 를 계산하면 다음과 같은 장점이 있습니다.
-
-- Memory efficiency
-- Adaptive computation
-- Scalable and invertible normalizing flows
-- Continuous time-series models
-
-
-
-<p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/neural-ode.PNG' style='max-width: 100%; height: auto'>
-</p>
 
 &nbsp;
 
@@ -97,22 +72,22 @@ Adjoint sensitivity method 를 통해 gradient 를 계산하면 다음과 같은
 
 &nbsp;
 
-CGNN 은 크게 encoder, ODE solver, decoder 세 가지 스텝으로 이루어져 있습니다. 먼저 encoder (fully connected layer) $$\mathcal{E}$$ 는 각 node feature 를 latent space 로 보내주는 역할로, node feature matrix $$X\in\mathbb{R}^{|V|\times|F|}$$ 를 $$E = \mathcal{E}(X)$$ 로 변환해줍니다. 미리 준비된 ODE 와 initial value $$H(0):=E$$  에 대한 initial value problem 을 풀어주는 ODE solver 를 거쳐, 종료 시간 $$t_1$$ 에 대한 node representation $$H(t_1)$$ 을 만들어줍니다. 마지막으로 $$H(t_1)$$ 은 decoder (fully connected layer) $$\mathcal{D}$$ 를 거쳐 node-label matrix 로 변환됩니다. 
+CGNN 은 크게 encoder, ODE solver, decoder 세 가지 스텝으로 이루어져 있습니다. 먼저 encoder (fully connected layer) $$\mathcal{E}$$ 는 각 node feature 를 latent space 로 보내주는 역할로, node feature matrix $$X\in\mathbb{R}^{\vert V\vert\times\vert F\vert}$$ 를 $$E = \mathcal{E}(X)$$ 로 변환해줍니다. 미리 준비된 ODE 와 initial value $$H(0):=E$$  에 대한 initial value problem 을 풀어주는 ODE solver 를 거쳐, 종료 시간 $$t_1$$ 에 대한 node representation $$H(t_1)$$ 을 만들어줍니다. 마지막으로 $$H(t_1)$$ 은 decoder (fully connected layer) $$\mathcal{D}$$ 를 거쳐 node-label matrix 로 변환됩니다. ODE solver 로는 최근 각광받는 Neural ODE [2] 를 사용합니다. 
 
+&nbsp;
 
+주어진 그래프에 대해 CGNN 의 architecture 는 그래프의 (normalized) adjacency matrix 와 종료 시간 $$t_1$$, 그리고 node representation 의 변화를 표현하는 ODE 로 결정됩니다. CGNN 모델의 input 은 node feature matrix 이고 이로부터 output 은 node-label matrix 가 됩니다. 다음의 그림을 통해 CGNN 의 구조를 이해할 수 있습니다. 그림에서 빨간색 화살표는 정보의 이동을 나타냅니다.
 
-정리하면, CGNN 의 input 은 그래프의 (normalized) adjacency matrix 와 종료시간 $$t_1$$ 이며, output 은 node-label matrix 입니다. 다음의 그림을 통해 CGNN 의 구조를 이해할 수 있습니다. 그림에서 빨간색 화살표는 message passing 을 나타냅니다.
-
-
+&nbsp;
 
 <p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/architecture.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/architecture.PNG' style='max-width: 80%; height: auto'>
 </p>
-
+&nbsp;
 
 CGNN 에서 가장 중요한 것은 바로 node 들의 관계를 모델링해주는 ODE 입니다. ODE 는 node representation 의 연속적인 변화를 정의하며, node 들의 long-term dependency 를 표현할 수 있어야 합니다. 논문에서는 다음의 두 가지 ODE 를 제시합니다.
 
-
+&nbsp;
 
 ### Case 1 : Independent Feature Channels
 
@@ -123,6 +98,7 @@ H_{n+1} = AH_n + H_0
 \tag{3}
 $$
 
+&nbsp;
 
 $$(3)$$ 의 node representation update 는 자신의 처음 feature $$H_0$$ 를 기억하며, 주변 node feature 들의 정보를 모으는 과정으로 이해할 수 있습니다. 즉 원래의 node feature 를 잊어버리지 않으며 그래프의 구조를 학습할 수 있습니다. $$(3)$$ 를 통해 다음과 같이 $$H_n$$ 을 직접 표현할 수 있습니다.
 
@@ -133,7 +109,7 @@ $$
 
 $$(4)$$ 를 통해 representation $$H_n$$ 은 $$n$$ 번째 layer 까지 propagated 된 정보 $$\left\{A^iH_0\right\}^{n}_{i=0}$$ 를 모두 포함한다는 것을 알 수 있습니다. 
 
-
+&nbsp;
 
 이를 continuous 한 과정으로 일반화 시키기 위해, $$(4)$$ 를 Riemann sum 으로 바라봅니다. $$E=H_0$$ 라 하고 partition $$\{ 0, 1, \cdots, n \}$$ 과 $$\Delta t=1$$ 에 대해, $$(4)$$ 를 Riemann sum 으로 표현하면 다음과 같습니다.
 
@@ -142,6 +118,7 @@ $$
 \tag{5}
 $$
 
+&nbsp;
 
 $$(5)$$ 에서 $$ n\rightarrow\infty$$ 이면, Riemann sum 으로부터 다음의 적분을 얻을 수 있습니다. 
 
@@ -157,6 +134,7 @@ $$
 \tag{7}
 $$
 
+&nbsp;
 
 이 때 $$t$$ 가 정수가 아닌 경우 $$A^{t+1}$$ 을 직접 계산할 수 없기 때문에, 한 번 더 미분을 취해줍니다.
 
@@ -165,6 +143,7 @@ $$
 \tag{8}
 $$
 
+&nbsp;
 
 이후 $$(8)$$ 의 양변을 다시 적분해줌으로써 다음의 ODE 를 얻습니다.
 
@@ -173,6 +152,7 @@ $$
 \tag{9}
 $$
 
+&nbsp;
 
 $$(6)$$ 으로부터 $$t=0$$ 일 때, $$H(0)$$ 의 값을 구할 수 있습니다.
 
@@ -192,7 +172,7 @@ AE = \left.\frac{dH(t)}{dt}\right|_{t=0}
 \end{align}
 $$
 
-
+&nbsp;
 
 따라서 다음의 Proposition 1 을 얻을 수 있습니다.
 
@@ -206,6 +186,7 @@ $$
 > \frac{dH(t)}{dt} = \ln A\,H(t)+E
 > \tag{11}
 > $$
+> 
 > with the initial value $$H(0)=\left(\ln A\right)^{-1}\left( A-I\right)E$$
 
  
@@ -217,7 +198,7 @@ $$
 \tag{12}
 $$
 
-
+&nbsp;
 
 $$(12)$$ 의 ODE 는 epidemic model 의 관점에서 이해할 수 있습니다. 또한 $$(12)$$ 의 양변에 integrating factor $$e^{-(A-I)t}$$ 를 곱해주면, 다음의 ODE 로부터 Proposition 2 를 보일 수 있습니다.
 
@@ -235,9 +216,7 @@ $$
 > \tag{13}
 > $$
 
-
-
-
+&nbsp;
 
 Preliminaries 에서 설명했듯이 $$A-I$$ 의 eigenvalue 는 $$[-1,\alpha-1]\subset [-1,0)$$ 구간에 존재합니다. 즉 $$t\rightarrow\infty$$ 이라면, $$(13)$$ 의 matrix exponential $$e^{(A-I)t}$$ 는 0 으로 수렴합니다. 따라서, 충분히 큰 $$t$$ 에 대해 $$H(t)$$ 를 다음과 같이 근사할 수 있습니다.
 
@@ -246,18 +225,17 @@ H(t)\approx (I-A)^{-1}E = \left( \sum^{\infty}_{i=0}A^i \right)E
 \tag{14}
 $$
 
+&nbsp;
 
-$$(3)$$ 과 형태를 비교하면 $$(14)$$ 의 $$H(t)$$ 는 모든 layer 에서 전파된 정보  $$\left\{A^iE\right\}^{\infty}_{i=0}$$  들을 포함한다는 것을 볼 수 있습니다. 즉 discrete 한 layer 의 representation 정보를 모두 반영하기 때문에, node 들의 long-term dependency 를 잘 표현할 수 있습니다.
+$$(3)$$ 과 형태를 비교하면, $$(14)$$ 의 $$H(t)$$ 는 모든 layer 에서 전파된 정보  $$\left\{A^iE\right\}^{\infty}_{i=0}$$  들을 포함한다는 것을 볼 수 있습니다. 즉 discrete 한 layer 의 representation 정보를 모두 반영하기 때문에, node 들의 long-term dependency 를 잘 표현할 수 있습니다.
 
+&nbsp;
 
+$$(1)$$ 의 정의에 의해, $$\alpha$$ 가 $$A$$ 의 eigenvalue 의 크기를 정해줍니다.  $$\alpha$$ 가 작아질수록 $$A^i$$ 이 $$\mathbf{0}$$ 으로 더 빠르게 수렴하기 때문에, $$\alpha$$ 를 통해 $$(14)$$ 의 representation $$H(t)$$ 가 반영하는 neighborhood 의 크기를 조절할 수 있습니다. 이런 특성을 활용하기 위해 CGNN 은 모델의 학습 과정에서 parameter $$\alpha$$ 를 같이 학습합니다.
 
-$$(1)$$ 의 정의에 의해, $$\alpha$$ 가 $$A$$ 의 eigenvalue 의 크기를 정해줍니다.  $$\alpha$$ 가 작아질수록 $$A^i$$ 이 $$\bold{0}$$ 으로 더 빠르게 수렴하기 때문에, $$\alpha$$ 를 통해 $$(14)$$ 의 representation $$H(t)$$ 가 반영하는 neighborhood 의 크기를 조절할 수 있습니다. 이런 특성을 활용하기 위해 CGNN 은 모델의 학습 과정에서 parameter $$\alpha$$ 를 같이 학습합니다.
-
-
+&nbsp;
 
 더 나아가 각 node 마다 $$\alpha$$ 를 다르게 설정하기 위해, $$(1)$$ 에서 정의된 $$A$$ 대신 $$(2)$$ 에서 정의한 $$\tilde{A}$$ 를 사용합니다. $$\tilde{A}$$ 를 사용해도 $$(12)$$ 와 $$(14)$$ 의 결과가 동일하게 성립하기 때문에, 실제 implementation 에서는 $$(2)$$ 를 사용하여 parameter vector $$\tilde{\alpha}$$ 를 학습합니다.
-
-
 
 &nbsp;
 
@@ -270,7 +248,7 @@ H_{n+1} = AH_nW + H_0
 \tag{15}
 $$
 
-
+&nbsp;
 
 Case 1 과 동일하게 $$(15)$$ 를 Riemann sum 으로 바라보아, Proposition 3 를 얻을 수 있습니다.
 
@@ -294,7 +272,7 @@ Case 1 과 동일하게 $$(15)$$ 를 Riemann sum 으로 바라보아, Propositio
 > 
 > where $$\tilde{E} = P^{-1}EQ$$.
 
-
+&nbsp;
 
 마찬가지로 $$\ln A$$ 와 $$\ln W$$ 를 직접 계산할 수 없기 때문에, $$(16)$$ 에서 $$\ln A\approx A-I$$ 와 $$\ln W\approx W-I$$ 로 근사하여, 다음의 ODE 를 얻을 수 있습니다. 이 때 초기값은 $$H_0$$ 로 동일합니다.
 
@@ -317,7 +295,7 @@ $$(18)$$ 의 ODE 는 Sylvester differential equation 으로 알려져있으며, 
 >\tag{19}
 >$$
 >
->where $$F(t)\in\mathbb{R}^{|V|\times d}$$ with each element defined as follows :
+>where $$F(t)\in\mathbb{R}^{\vert V\vert\times d}$$ with each element defined as follows :
 >
 >$$
 >F_{ij}(t) = \frac{\tilde{E}_{ij}}{\Lambda'_{ii}+\Phi'_{jj}}e^{(\Lambda'_{ii}+\Phi'_{jj})t} - \frac{\tilde{E}_{ij}}{\Lambda'_{ii}+\Phi'_{jj}}
@@ -325,15 +303,16 @@ $$(18)$$ 의 ODE 는 Sylvester differential equation 으로 알려져있으며, 
 >
 >where $$\tilde{E}=P^{-1}EQ$$.
 
+&nbsp;
 
-
-만약 Proposition 4 에서 $$W$$ 의 eigenvalue 가 1 이하라고 가정한다면,  $$A-I$$ 의 eigenvalue 는 $$(-1,0)$$ 에 존재하며 $$W-I$$ 의 eigenvalue 는 $$(-1,0]$$ 에 존재하기 때문에, 다음과 같이 matrix exponential 들이 $$\bold{0}$$ 으로 수렴합니다.
+만약 Proposition 4 에서 $$W$$ 의 eigenvalue 가 1 이하라고 가정한다면,  $$A-I$$ 의 eigenvalue 는 $$(-1,0)$$ 에 존재하며 $$W-I$$ 의 eigenvalue 는 $$(-1,0]$$ 에 존재하기 때문에, 다음과 같이 matrix exponential 들이 $$\mathbf{0}$$ 으로 수렴합니다.
 
 $$
 \lim_{t\rightarrow\infty} e^{(A-I)t}\rightarrow 0 \;,\;\;\;
 \lim_{t\rightarrow\infty} e^{(\Lambda'_{ii}+\Phi'_{jj})t}\rightarrow 0
 $$
 
+&nbsp;
 
 따라서, 충분히 큰 $$\;t$$ 에 대해 $$H(t)$$ 를 다음과 같이 근사할 수 있습니다.
 
@@ -343,9 +322,9 @@ $$
 $$
 
 
-$$(20)$$ 에서 $$W=I$$ 이면, $$(14)$$ 의 결과와 같다는 것을 확인할 수 있습니다. 즉 $$(11)$$ 의 ODE 는 $$(16)$$ 의 ODE 의 특수한 케이스입니다.
+$$(20)$$ 에서 $$W=I$$ 를 대입하면, $$(14)$$ 의 결과와 같다는 것을 확인할 수 있습니다. 즉 $$(11)$$ 의 ODE 는 $$(16)$$ 의 ODE 의 특수한 케이스입니다.
 
-
+&nbsp;
 
 실제 implementation 에서는 $$W$$ 가 diagonalizable 하도록 학습 가능한 orthogonal matrix $$U$$ 와 학습 가능한 vector $$M$$ 을 사용해 $$W$$ 를 다음과 같이 표현합니다.
 
@@ -360,7 +339,9 @@ $$
 U \leftarrow (1+\beta)U-\beta(UU^T)U
 $$
 
-논문에서는 $$\beta=0.5$$ 로 고정합니다. 또한 Case 1 과 마찬가지로 $$A$$ 대신 $$\tilde{A}$$ 를 사용하며, parameter vector $$\tilde{\alpha}$$ 를 학습합니다. 마지막으로 학습의 안정화를 위해 $$H(t)$$ 에 auxiliary dimension 을 추가하는 방법을 활용하지만, performance 에는 큰 차이가 없습니다.
+
+
+논문에서는 $$\beta=0.5$$ 로 고정합니다. 또한 Case 1 과 마찬가지로 $$A$$ 대신 $$\tilde{A}$$ 를 사용하여 parameter vector $$\tilde{\alpha}$$ 를 학습합니다. 마지막으로 학습의 안정화를 위해 $$H(t)$$ 에 auxiliary dimension 을 추가하는 방법을 활용하지만, performance 에는 큰 차이가 없습니다.
 
 &nbsp;
 
@@ -398,14 +379,15 @@ Case 2 의 $$(18)$$ ODE 를 사용하면 서로 다른 feature channel 들의 �
 
 ### Insight into the role of the restart distribution 
 
-$$(12)$$ 와 $$(18)$$ 의 ODE 에서는 추가적으로 $$E$$ 항을 더해줍니다. 만약 $$(12)$$ 의 ODE 에서 $$E$$ 가 더해지지 않은 다음의 ODE 를 사용한다면,
+$$(12)$$ 와 $$(18)$$ 의 ODE 에서 node representation $$H(t)$$ 의 시간에 따른 미분값은 restart distribuion $$H(0)=E$$ 에 의존합니다. $$(12)$$ 의 ODE 에서 $$E$$ 가 더해지지 않은 다음의 ODE 를 보겠습니다. 
 
 $$
 \frac{dH(t)}{dt} = (A-I)H(t)
 \tag{21}
 $$
 
-실험을 통해, 시간 $$t_1$$ 에 따라 representation $$H(t)=e^{(A-I)t}\,H(0)\approx A^tH(0)$$ 가 민감하게 변화하는 것을 확인할 수 있습니다.   
+
+$$(21)$$ 의 analytical solution 은 $$H(t)=e^{(A-I)t}\,H(0)\approx A^tH(0)$$ 입니다.  $$t\rightarrow\infty$$ 에 따라 최종 representation 이  으로 $$\mathbf{0}$$ 수렴하기 때문에 학습하고자 하는 representation 과 부합합니다. 또한 실험을 통해 $$(21)$$ 의 ODE 를 사용한 CGNN (CGNN discrete) 은 종료 시간 $$t_1$$ 이 증가함에 따라 성능이 감소하는 것을 확인할 수 있습니다.
 
 &nbsp;
 
@@ -413,29 +395,76 @@ $$
 
 &nbsp;
 
-
+semi-supervised node classification task 에 대한 CGNN 모델의 performance 를 측정하기 위해, [3] 에서 사용한 dataset 을 그대로 사용했습니다. Dataset 은 네 가지의 citation network Cora, Citeseer, Pubmed, NELL 이며, 실험 방법 또한 [3] 의 방법을 따랐습니다.
 
 <p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/classification.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/dataset.PNG' style='max-width: 70%; height: auto'>
 </p>
 
 
 
+실험의 baseline 모델로는 discrete 한 GNN 모델인 GCN, GAT 와 continuous 한 GNN 모델 GODE 를 선택했습니다. GODE 는 node representation 의 연속적인 변화를 GNN 으로 매개화한 ODE 를 통해 표현하며, ODE 를 매개화하는 GNN 으로 GCN (GCN-GODE) 과 GAT (GAT-GODE) 를 골랐습니다. CGNN 의 variant 들로는 Case 1 의 CGNN, Case 2 의 weight matrix 를 사용한 CGNN with weight, 그리고 $$(3)$$ 의 discrete propagation rule 을 사용한 CGNN discrete 모델을 선택했습니다.
+
+&nbsp;
+
+> Performance comparison
+
+
+
+각 dataset 에 대해, basline 모델들과 CGNN 모델들의 정확도는 다음의 표에 정리되어있습니다.
+
 <p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/classification-random.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/classification.PNG' style='max-width: 80%; height: auto'>
 </p>
 
 
-
-<p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/layer.PNG' style='max-width: 80%; height: auto'>
-</p>
-
+또한 각 dataset 들에서 15 개의 random split 에 대한 모델들의 정확도는 다음의 표를 통해 확인할 수 있습니다. 
 
 
 <p align='center'>
-    <img src='../assets/post/Continuous-Graph-Neural-Networks/memory.PNG' style='max-width: 80%; height: auto'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/classification-random.PNG' style='max-width: 80%; height: auto'>
 </p>
+
+
+GCN 과 GAT 와 비교해 CGNN (CGNN with weight) 의 정확도가 훨씬 놓은 것을 볼 수 있습니다. 이는 CGNN 이 node 들의 long-term dependency 를 학습할 수 있기 때문입니다. 또한 GODE 와 비교했을 때 Cora 와 Pubmed 에서 훨씬 높은 성능을 보입니다. CGNN 은 그래프에서 node 들의 long-term dependency 를 반영할 수 있도록 잘 설계된 ODE 를 사용하는 반면, GODE 는 기존의 GCN 혹은 GAT 와 같은 GNN 으로 매개화된 ODE 를 사용하기 때문에 node representation 의 변화에 대한 학습의 차이가 생깁니다.
+
+
+
+CGNN variant 들을 비교해보면, CGNN discrete 보다 CGNN (CGNN with weight) 의 성능이 더 뛰어납니다. 즉 node representation 의 변화를 continuous 하게 모델링하는 것이 효과적임을 알 수 있습니다. CGNN 과 CGNN with weight 의 성능 차이는 미미한데, 아마도 사용한 dataset 이 복잡하지 않기 때문이라고 생각됩니다. 더 복잡한 knowledge graph 혹은 protein-protein interactions network 와 같은 dataset 에서는 performance 의 차이가 뚜렷하게 나타날 것이라고 봅니다.
+
+&nbsp;
+
+> Performance with respect to time steps
+
+CGNN 이 이점 중 하나는 바로 over-smoothing 
+
+이를 확인하기 위해 GCN 과 GAT 에서는 layer 의 수에 따른 정확도를, CGNN 에서는 종료 시간 $$t_1$$ 에 따른 정확도를 비교했습니다. 결과는 다음의 그래프에 나타나 있습니다.
+
+
+
+
+<p align='center'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/layer.PNG' style='max-width: 80%; height: auto'>
+</p>
+
+GCN 과 GAT 와 같은 모델은 layer 의 수가 2 혹은 3일 때 가장 높은 정확도를 보이며, layer 의 수가 많아질수록 정확도가 감소하는 것을 볼 수 있습니다. 그에 비해 CGNN 은 종료 시간이 증가함에 따라 정확도도 올라가며, 결국 수렴하는 경향을 관찰할 수 있습니다. 즉 CGNN 은 over-smoothing 이 일어나지 않고, node 들의 long-term dependency 를 학습할 수 있다는 것을 실험적으로 확인했습니다.
+
+
+
+또한 restart distribution $$H(0)=E$$ 를 사용하지 않은 모델 CGNN w/o H(0) 는 GCN, GAT 와 같이 layer 의 수가 커질수록 정확도가 떨어지는 것을 볼 수 있습니다. 이를 통해 restart distribution 이 over-smoothing 을 해결하는 중요한 역할을 한다는 것을 알 수 있습니다.
+
+&nbsp;
+
+> Memory Efficiency
+
+마지막으로 CGNN 모델의 종료 시간 $$t_1$$ 에 따른 memory 사용량을 확인했습니다. 
+
+
+<p align='center'>
+    <img src='/assets/post/Continuous-Graph-Neural-Networks/memory.PNG' style='max-width: 80%; height: auto'>
+</p>
+
+node representation 의 변화를 discrete 하게 표현하는 모델들 :  GCN, GAT, CGNN discrete 은 layer 의 수에 따라 memory 사용량이 linear 하게 증가했습니다. 그에 비해 adjoint sensitivity method [2] 를 사용하는 CGNN 은 memory 사용량이 일정하게 적은 것을 볼 수 있습니다. 따라서 CNN 은 memory efficient 하기 때문에, large graph 에 대해서도 적용할 수 있습니다. 
 
 &nbsp;
 
@@ -443,7 +472,7 @@ $$
 
 &nbsp;
 
-CGNN 은 homophily, 즉 node 가 주변의 이웃한 node 들과 비슷한 feature 를 가진다고 가정합니다. 이를 확장해,homophily 뿐만 아니라 structural equivalence 를 반영할 수 있도록 ODE 를 정의한다면, 분자 구조, 단백질의 결합, knowledge graph 과 같이 node 들 사이의 더 복잡한 관계를 가지는 영역에서도 좋은 성능을 보여줄 수 있다고 생각합니다.
+CGNN 은 homophily, 즉 node 가 주변의 이웃한 node 들과 비슷한 feature 를 가진다고 가정합니다. 이를 확장해, homophily 뿐만 아니라 structural equivalence 를 반영할 수 있도록 $$(3)$$ 과 $$(15)$$ 의 discrete propagation rule 을 정의하는 방향으로의 연구가 기대됩니다. 특히, diffusion-based 에서 더 나아가 domain-specific ODE 를 사용한다면 분자 구조, 단백질의 결합, knowledge graph 과 같이 node 들 사이의 더 복잡한 관계를 가지는 상황에서도 우수한 성능을 보여줄 수 있다고 생각합니다.
 
 &nbsp;
 
