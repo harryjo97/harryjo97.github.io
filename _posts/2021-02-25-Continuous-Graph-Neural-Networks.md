@@ -15,11 +15,11 @@ tag:
 
 &nbsp;
 
-GCN 의 propagation rule 은 neighbor node representation 들을 통해 각 node representation 을 update 합니다 [3]. 이 때 update 과정에서 각 node 와 주변의 node 들의 representation 이 점점 비슷해집니다. GCN layer 를 많이 쌓을수록 node 들의 representation 이 같은 값으로 수렴하는 over-smoothing 이 발생하기 쉽고, 이는 GCN 의 performance 를 저해하게 됩니다 [4]. 깊은 모델은 node feature 들의 복잡한 상호작용을 표현할 수 있기 때문에, over-smoothing 을 해결하는 것이 GNN 의 성능 향상에 있어 중요한 과제입니다. 
+GCN 의 propagation rule 은 neighbor node representation 들을 모아 각 node representation 을 update 합니다 [3]. 이 때 update 과정에서 각 node 와 주변의 node 들의 representation 이 점점 비슷해집니다. GCN layer 를 많이 쌓을수록 node 들의 representation 이 같은 값으로 수렴하는 over-smoothing 이 발생하기 쉽고, 이는 GCN 의 performance 를 저해하게 됩니다 [4]. 깊은 모델은 node feature 들의 복잡한 상호작용을 표현할 수 있기 때문에, over-smoothing 을 해결하는 것이 GNN 의 성능 향상에 있어 중요한 과제입니다. 
 
 
 
-논문에서는 node representation 의 시간에 따른 연속적인 변화를 표현할 수 있는 CGNN 모델을 제시합니다. CGNN 은 node representation 의 변화를 ODE 를 통해 표현하여 기존의 discrete GNN 을 연속적인 모델로 일반화시킵니다. ODE 에 restart distribution 을 추가하여 over-smoothing 문제를 해결하고, 그로 인해 node 들의 long-range dependency 를 학습할 수 있습니다. 특히 node classification 에 있어 기존의 GNN 모델들보다 성능이 뛰어나며, memory efficient 한 모델입니다.
+논문에서는 node representation 의 시간에 따른 연속적인 변화를 표현할 수 있는 CGNN 모델을 제시합니다. CGNN 은 node representation 의 변화를 ODE 를 통해 표현하여 기존의 discrete GNN 을 연속적인 모델로 일반화시킵니다. ODE 에 restart distribution 을 추가하여 over-smoothing 문제를 해결하고, 그로 인해 node 들의 long-range dependency 를 학습할 수 있습니다. 특히 node classification 에 있어 기존의 GNN 모델들보다 성능이 뛰어나며, memory efficient 한 continuous-depth 모델입니다.
 
 &nbsp;
 
@@ -29,7 +29,7 @@ GCN 의 propagation rule 은 neighbor node representation 들을 통해 각 node
 
 Simple undirected graph $$G=(V,E)$$ 의 adjacent matrix 를 $$Adj$$ , degree matrix 를 $$D$$ 라고 하겠습니다. 이 때 node 들의 degree 가 서로 다를 수 있기 때문에, normalized adjacent matrix $$D^{-1/2}Adj\,D^{-1/2}$$ 를 주로 사용합니다. 하지만  normalized adjacent matrix 의 eigenvalue 는 $$[-1,1]$$ 구간에 존재하기 때문에,  normalized adjacent matrix 로 정의된 convolution 을 사용할 경우 exploding / vanishing gradient 와 같은 instability 가 발생할 수 있습니다 [3]. 
 
-&nbsp;
+
 
 따라서 [3] 에서는 renormalization trick 을 통해 normalized adjacent matrix 대신 $$\hat{A} = \tilde{D}^{-1/2}\tilde{A}\,\tilde{D}^{-1/2}$$ 을 사용합니다. GCN 의 $$n$$ 번째 layer 의 node representation $$H_n$$ 과 weight matrix $$W$$ 를 통해,  propagation rule 을 다음과 같이 쓸 수 있습니다.
 
@@ -46,7 +46,7 @@ A = \frac{\alpha}{2}\left(I + D^{-1/2}Adj\,D^{-1/2} \right)
 \tag{1}
 $$
 
-이 때 정의에 의해 $$A$$ 는 diagonalizable 하므로 $$A=U\Lambda U^T$$ 로 표현한다면, $$A-I = U(\Lambda-I)U^T$$ 입니다. 이 때 $$A$$ 의 eigenvalue 는 $$[0,\alpha]$$ 구간에 존재하므로, $$\Lambda-I$$ 의 diagonal element 들은 모두 0 보다 작기 때문에 $$A-I$$ 는 invertible 합니다.
+이 때 정의에 의해 $$A$$ 는 diagonalizable 하므로 $$A=U\Lambda U^T$$ 로 표현한다면, $$A-I = U(\Lambda-I)U^T$$ 입니다. 이 때 $$A$$ 의 eigenvalue 는 $$[0,\alpha]$$ 구간에 존재하므로 $$\Lambda-I$$ 의 diagonal element 들은 모두 0 보다 작고, $$A-I$$ 는 invertible 합니다.
 
 &nbsp;
 
@@ -59,11 +59,7 @@ $$
 \tag{2}
 $$
 
-$$A$$ 와 마찬가지로 $$\tilde{A}$$  의 eigenvalue 는 $$[0,1)$$ 구간에 존재하며, $$\tilde{A}-I$$ 또한 invertible 합니다.
-
-&nbsp;
-
-논문에서는 $$(1)$$ 의 regularized adjacency matrix 를 사용한다고 했지만, 실제 implementation 에서는 $$(2)$$ 의 regularized adjacency matrix 를 사용했습니다 [6].
+$$A$$ 와 마찬가지로 $$\tilde{A}$$  의 eigenvalue 는 $$[0,1)$$ 구간에 존재하며, $$\tilde{A}-I$$ 또한 invertible 합니다. 논문의 실제 implementation 에서는 $$(2)$$ 의 regularized adjacency matrix 를 사용했습니다 [6].
 
 
 &nbsp;
@@ -72,11 +68,11 @@ $$A$$ 와 마찬가지로 $$\tilde{A}$$  의 eigenvalue 는 $$[0,1)$$ 구간에 
 
 &nbsp;
 
-CGNN 은 크게 encoder, ODE solver, decoder 세 가지 스텝으로 이루어져 있습니다. 먼저 encoder (fully connected layer) $$\mathcal{E}$$ 는 각 node feature 를 latent space 로 보내주는 역할로, node feature matrix $$X\in\mathbb{R}^{\vert V\vert\times\vert F\vert}$$ 를 $$E = \mathcal{E}(X)$$ 로 변환해줍니다. 미리 준비된 ODE 와 initial value $$H(0):=E$$  에 대한 initial value problem 을 풀어주는 ODE solver 를 거쳐, 종료 시간 $$t_1$$ 에 대한 node representation $$H(t_1)$$ 을 만들어줍니다. 마지막으로 $$H(t_1)$$ 은 decoder (fully connected layer) $$\mathcal{D}$$ 를 거쳐 node-label matrix 로 변환됩니다. ODE solver 로는 최근 각광받는 Neural ODE [2] 를 사용합니다. 
+CGNN 은 크게 encoder, ODE solver, decoder 세 가지 부분으로 이루어져 있습니다. 먼저 encoder (fully connected layer) $$\mathcal{E}$$ 는 각 node feature 를 latent space 로 보내주는 역할로, node feature matrix $$X\in\mathbb{R}^{\vert V\vert\times\vert F\vert}$$ 를 $$E = \mathcal{E}(X)$$ 로 변환해줍니다. 그 후 미리 준비된 ODE 와 initial value $$H(0):=E$$  에 대한 initial value problem 을 풀어주는 ODE solver 를 거쳐, 종료 시간 $$t_1$$ 에 대한 node representation $$H(t_1)$$ 을 만들어줍니다. 마지막으로 $$H(t_1)$$ 은 decoder (fully connected layer) $$\mathcal{D}$$ 를 거쳐 node-label matrix 로 변환됩니다. ODE solver 로는 최근 각광받는 Neural ODE [2] 를 사용합니다. 
 
 &nbsp;
 
-주어진 그래프에 대해 CGNN 의 architecture 는 그래프의 (normalized) adjacency matrix 와 종료 시간 $$t_1$$, 그리고 node representation 의 변화를 표현하는 ODE 로 결정됩니다. CGNN 모델의 input 은 node feature matrix 이고 이로부터 output 은 node-label matrix 가 됩니다. 다음의 그림을 통해 CGNN 의 구조를 이해할 수 있습니다. 그림에서 빨간색 화살표는 정보의 이동을 나타냅니다.
+주어진 그래프에 대해 CGNN 의 architecture 는 그래프의 (normalized) adjacency matrix 와 종료 시간 $$t_1$$, 그리고 node representation 의 변화를 표현하는 ODE 로 결정됩니다. CGNN 모델의 input 은 node feature matrix 이고, 이로부터 output 은 node-label matrix 가 됩니다. 다음의 그림을 통해 CGNN 의 구조를 이해할 수 있습니다. 그림에서 빨간색 화살표는 정보의 이동을 나타냅니다.
 
 &nbsp;
 
@@ -92,7 +88,7 @@ CGNN 에서 가장 중요한 것은 바로 node 들의 관계를 모델링해주
 
 ### Case 1 : Independent Feature Channels
 
-올바른 node representation 을 찾기 위해서는 node 들의 연결성을 반영해야 합니다. 따라서 ODE 는 그래프의 구조를 고려해야합니다. 논문에서는 PageRank 와 같은 diffusion-based method 로부터 영감을 받아, 다음의 propogation rule 을 정의합니다. 여기서 $$A$$ 는 $$(1)$$ 의 정의를 따릅니다.
+올바른 node representation 을 찾기 위해서는 node 들의 연결성을 반영해야 하기 때문에, ODE 는 그래프의 구조를 고려해야합니다. 논문에서는 PageRank 와 같은 diffusion-based method 로부터 영감을 받아, 다음의 propogation rule 을 정의합니다. 여기서 $$A$$ 는 $$(1)$$ 의 정의를 따릅니다.
 
 $$
 H_{n+1} = AH_n + H_0
@@ -101,7 +97,7 @@ $$
 
 &nbsp;
 
-$$(3)$$ 의 node representation update 는 자신의 처음 feature $$H_0$$ 를 기억하며, 주변 node feature 들의 정보를 모으는 과정으로 이해할 수 있습니다. 즉 원래의 node feature 를 잊어버리지 않으며 그래프의 구조를 학습할 수 있습니다. $$(3)$$ 를 통해 다음과 같이 $$H_n$$ 을 직접 표현할 수 있습니다.
+$$(3)$$ 의 node representation update 는 자신의 처음 representation $$H_0$$ 를 기억하며, 주변 node representation 들의 정보를 모으는 과정으로 이해할 수 있습니다. 즉 원래의 node feature 를 잊어버리지 않으며 그래프의 구조를 학습할 수 있습니다. $$(3)$$ 를 통해 다음과 같이 $$H_n$$ 을 직접 표현할 수 있습니다.
 
 $$
 H_n = \left(\sum^n_{i=0} A^i\right)H_0
@@ -326,7 +322,7 @@ $$(20)$$ 에서 $$W=I$$ 를 대입하면, $$(14)$$ 의 결과와 같다는 것�
 
 &nbsp;
 
-실제 implementation 에서는 $$W$$ 가 diagonalizable 하도록 학습 가능한 orthogonal matrix $$U$$ 와 학습 가능한 vector $$M$$ 을 사용해 $$W$$ 를 다음과 같이 표현합니다.
+실제 implementation 에서는 $$W$$ 가 diagonalizable 하도록, 학습 가능한 orthogonal matrix $$U$$ 와 학습 가능한 vector $$M$$ 을 사용해 $$W$$ 를 다음과 같이 표현합니다.
 
 $$
 W=U\,\text{diag}(M)U^T
@@ -361,7 +357,7 @@ $$
 
 ### Global dependencies
 
-GCN layer 의 수가 적다면 node representation 에 가까운 주변 node 들의 정보만을 반영할 수 있습니다. 즉 expressive 한 모델을 만들기 위해서는, 더 깊은 모델을 통해 멀리 떨어진 node 들의 정보들을 반영할 수 있어야합니다. $$(14)$$ 에서 볼 수 있듯이 시간 $$t$$ 가 충분히 크다면 representation $$H(t)$$ 가 $$\left\{A^i\right\}^{\infty}_{i=0}$$ 들의 합으로 표현되기 때문에, CGNN 은 node 들의 long-term dependency 를 학습할 수 있습니다. 
+GCN layer 의 수가 적다면 node representation 에 가까운 주변 node 들의 정보만을 반영할 수 있습니다. 즉 expressive 한 모델을 만들기 위해서는, 더 깊은 모델을 통해 멀리 떨어진 node 들의 정보들을 반영할 수 있어야합니다. $$(14)$$ 에서 볼 수 있듯이 시간 $$t$$ 가 충분히 크다면 representation $$H(t)$$ 가 $$\left\{A^i E\right\}^{\infty}_{i=0}$$ 들의 합으로 표현되기 때문에, CGNN 은 node 들의 long-term dependency 를 학습할 수 있습니다. 
 
 
 
@@ -395,7 +391,7 @@ $$(21)$$ 의 analytical solution 은 $$H(t)=e^{(A-I)t}\,H(0)\approx A^tH(0)$$ �
 
 &nbsp;
 
-semi-supervised node classification task 에 대한 CGNN 모델의 performance 를 측정하기 위해, [3] 에서 사용한 dataset 을 그대로 사용했습니다. Dataset 은 네 가지의 citation network Cora, Citeseer, Pubmed, NELL 이며, 실험 방법 또한 [3] 의 방법을 따랐습니다.
+Semi-supervised node classification task 에 대한 CGNN 모델의 performance 를 측정하기 위해, [3] 에서 사용한 dataset 을 그대로 사용했습니다. Dataset 은 네 가지의 citation network Cora, Citeseer, Pubmed, NELL 이며, 실험 방법 또한 [3] 의 방법을 따랐습니다.
 
 <p align='center'>
     <img src='/assets/post/Continuous-Graph-Neural-Networks/dataset.PNG' style='max-width: 70%; height: auto'>
