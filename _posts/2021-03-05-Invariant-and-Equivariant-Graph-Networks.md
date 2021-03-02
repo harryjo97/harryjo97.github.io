@@ -1,10 +1,11 @@
 ---
 title: Invariant and Equivariant Graph Networks
-date: 2021-01-19 11:00:00 +0900
+date: 2021-03-05 11:00:00 +0900
 category:
 - paper review
 tag:
 - Analysis
+published: false
 ---
 
 [paper review] : Invariant and Equivariant Graph Networks
@@ -17,19 +18,35 @@ tag:
 
 ### Translation Invariance 
 
+
+
+translation invariant
+
+
+
 CNN 의 translation invariant 한 특성은 이미지를 학습하는 데 큰 장점이 됩니다. 이와 같이 translation invariant 한 모델을 만드는 방법으로  Multi-layer perceptron (MLP) 이 있습니다. MLP 를 통해 임의의 연속 함수를 근사할 수 있기 때문에, translation invariant 한 함수 $$f$$ 를 모델링하는 MLP 를 만들 수 있습니다. MLP 의 기본적인 형태는 non-linear function $$\sigma$$ 와 linear function $$L(x) = Ax+b$$ 로 구성된 layer 들로 이루어고, 각 layer 는 $$\mathcal{L}(x) = \sigma(L(x))$$ 의 형태를 가집니다.
 
+&nbsp;
+
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
+&nbsp;
 
 일반적인 MLP 의 경우 input size 가 커질수록, depth 가 깊어질수록 parameter 의 수가 감당할 수 없을 정도로 커집니다. Parameter 의 수를 줄이고 translation invariant 속성을 유지하기 위해서, $$L(x) = Ax+b$$ 대신 transform invariant 한 linear operator 를 사용합니다. 
 
+&nbsp;
+
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-invariant.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-invariant.PNG' style = 'max-width: 70%; height: auto'>
 </p>
 
+&nbsp;
+
 하지만 이미지의 한 픽셀은 다른 임의의 픽셀로 보내지는 translation 을 찾을 수 있기 때문에, transform invariant operator 는 각 픽셀들의 value 를 모두 더해주는 sum operator 와 일치합니다. 모든 픽셀 value 를 더해주는 것은 이미지의 세부 정보를 무시하기에, 의미 있는 operator 라 할 수 없습니다.
+
+
 
 
 이 때 transform invariant operator 대신, CNN 의 convolution 과 같이 translation equivariant linear operator 를 사용할 수 있습니다. MLP $$m$$, invariant linear layer $$h$$, non-linear activation $$\sigma$$ 와 equivariant linear layer $$L_i$$ 들을 통해, 다음과 같이 invariant function $$f$$ 를 만들 수 있습니다.
@@ -39,12 +56,16 @@ f = m\circ h\circ L_k\circ\sigma\circ \cdots \circ\sigma\circ L_1
 \tag{1}
 $$
 
+&nbsp;
 
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-equivariant.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-equivariant.PNG' style = 'max-width: 100%; height: auto'>
 </p>
 
+
 $$(1)$$ 에서 적절한 layer 들의 선택으로 다양한 invariant model 을 얻을 수 있습니다. 
+
+
 
 
 ### Invariant Graph Networks 
@@ -87,9 +108,8 @@ $$
 이미지에서의 translation 은 symmetry 의 한 종류입니다. 그래프에 있어 symmetry 는 node 순서의 재배열 (re-ordering) 을 통해 해석할 수 있습니다.
 
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/symmetry.PNG' style = 'max-width: 50%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/symmetry.PNG' style = 'max-width: 70%; height: auto'>
 </p>
-
 
 
 ### Permutation of Tensors
@@ -97,8 +117,9 @@ $$
 그래프 node 가 재배열되면, 그에 따라 그래프 tensor 또한 변하게 됩니다. 
 
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/permutation.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/permutation.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
 
 Permutation $$p\in S_n$$ 와 $$k$$-tensor $$X\in\mathbb{R}^{n^k}$$ 에 대해, $$X$$ 에 대한 permutation $$p$$ 는 각 hyper-edge $$(i_1,\cdots,i_k)\in [n]^k$$ 에 대해 다음과 같이 쓸수 있습니다. 
 
@@ -108,7 +129,8 @@ $$
 $$
 
 
-### Permutation Invariant
+
+### Permutation Invariance
 
 함수 $$f$$ 가 permutation invariant 하다는 것은, input element 들의 순서와 상관 없이 output 이 같다는 뜻입니다. $$f$$ 의 input 이 tensor 일 경우, permutation invariant 는 다음과 같이 나타낼 수 있습니다.
 
@@ -118,9 +140,8 @@ f(p\cdot A) = f(A)
 $$
 
 
-### Permutation Equivariant
 
-
+### Permutation Equivariance
 
 함수 $$f$$ 가 permutation equivariant 하다는 것은, 임의의 permutation $$p$$ 에 대해 $$p$$ 와 $$f$$  가 commute 함을 의미합니다. $$f$$ 의 input 이 tensor 일 경우, permutation equivariant 는 다음과 같이 나타낼 수 있습니다.
 
@@ -132,8 +153,6 @@ $$
 &nbsp;
 
 ## Notation
-
-
 
 논문에 나오는 notation 들을 정리하면 다음과 같습니다.
 
@@ -150,10 +169,9 @@ $$
 
 ## Fixed-Point Equations
 
-
+&nbsp;
 
 먼저 permutation invariant linear operator 에 대해 알아보겠습니다. 일반적인 linear operator $$L:\mathbb{R}^{n^k}\rightarrow\mathbb{R}$$ 을 $$\mathbb{R}^{1\times n^k}$$ matrix $$\mathbf{L}$$ 로 나타낼 때, $$L$$ 이 permutation invaraint 하다면 임의의 permutation $$p\in S_n$$ 에 대해 다음을 만족해야합니다.  
-
 $$
 \mathbf{L}\text{vec}(p\cdot A) = \mathbf{L}\text{vec}(A)
 \tag{5}
@@ -218,7 +236,7 @@ $$
 
 ## Solving the Fixed-Point Equations
 
-
+&nbsp;
 
 모든 permutation invaraint  / equivariant 한 linear operator 들을 찾아내는 것은, $$(8)$$ 과 $$(12)$$ 의 해를 구하는 것과 같습니다. 즉 다음과 같은 fixed-point equation 의 해 $$X\in\mathbb{R}^{n^l}$$ 를 구해야합니다.
 
@@ -270,8 +288,9 @@ $$(14)$$ 의 해 $$X$$ 에 대해 $$X$$ 가 각 equivalence class 내에서 상�
 $$n=5$$, $$k=2$$ 일 때 permutation equivariant linear operator 공간의 orthogonal basis 는 다음과 같습니다.
 
 <p align='center'>
-    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/basis.PNG' style = 'max-width: 100%; height: auto'>
+    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/basis.PNG' style = 'max-width: 100%; height: auto'>
 </p>
+
 
 특히 $$b(2k)=b(4)=15$$ 이므로 총 15개의 basis element 가 존재한다는 것을 확인할 수 있습니다.
 
