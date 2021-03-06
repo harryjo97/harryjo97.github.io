@@ -215,6 +215,9 @@ $$
 $$
 
 
+
+
+
 barycentric projection 을 통해 $$(0)$$ 의 Monge map 을 근사하면,
 $$
 F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
@@ -300,15 +303,29 @@ x^{(l)}_v = \sum_{u\in N(v)\cup\{v\}}\left( \sum^F_{f=1}\frac{w_{uv,f}}{\sqrt{\t
 $$
 
 
-
-
 $$()$$ 의 diffusion layer 는 학습 가능한 parameter 가 없기 때문에 간단하며 
 
 
 
-### Linear Wasserstein Embedding
+마지막으로 diffusion layer 들을 거친 node feature $$\left\{x^{(l)}_v\right\}^{L}_{l=0}$$ 들에 대한 local pooling $$g$$ 의 결과
+$$
+z_v = g\left( \left\{x^{(l)}_v\right\}^{L}_{l=0} \right) \in\mathbb{R}^d
+$$
+node embedding 
 
 
+
+local pooling $$g$$ 로 concatenation 또는 averaging 을 사용합니다.
+
+
+$$
+h\left(G_i\right) = Z_i = \begin{bmatrix}
+z_1,\;\cdots\;,\;z_{\vert \mathcal{V}_i\vert}
+\end{bmatrix}^T \in \mathbb{R}^{\vert\mathcal{V}_i\vert\times d}
+$$
+
+
+$$\left\{G_i=(\mathcal{V}_i,\mathcal{E}_i)\right\}^M_{i=1}$$ 들의 node embedding $$\left\{Z_i\right\}^M_{i=1}$$ 
 
 
 
@@ -318,9 +335,45 @@ $$()$$ 의 diffusion layer 는 학습 가능한 parameter 가 없기 때문에 �
 
 
 
+논문에서는 그래프들의 node embeddings $$\cup^M_{i=1} Z_i$$ 에 대해 $$N=\left\lfloor\frac{1}{M}\sum^M_{i=1}N_i \right\rfloor$$ 개의 centroid 들을 가지도록 $$k$$-means clustering 을 통해 reference node embedding $$Z_0$$ 을 계산합니다.
+
+
+
+다른 방법으로는 node embedding 들에 대한 Wasserstein barycenter 혹은 normal distribution 으로부터 뽑은 $$N$$ 개의 sample 들로 reference node embedding 을 구성할 수 있습니다. 
+
+
+
+linear Wasserstein embedding 의 결과는 reference 에 따라 달라지지만, 실험적으로 WEGL 의 성능은 reference 에 따라 큰 차이를 보이지 않습니다.
+
+
+
+### Linear Wasserstein Embedding
+
+
+
+$$()$$ 를 통해 reference embedding $$Z_0$$ 에 대한 linear Wasserstein embedding $$\phi(Z_i)\in\mathbb{R}^{N\times d}$$ 를 계산합니다.
+
+
+
+그래프들의 최종적인 embedding 들은 차원이 모두 동일합니다.
+
+
+
+
+
 ### Classifier
 
 
+
+linear Wasserstein embedding 을 통해 얻은 graph embedding $$\{\phi(Z_i)\}^{M}_{i=1}$$ 
+
+
+
+WEGL 의 장점 중 하나는 task 에 맞는 classifier 를 선택할 수 있다는 점입니다.
+
+
+
+논문에서는 classifier 로 AuotML, random forest, RBF kernel 을 이용한 SVM 을 사용했습니다.
 
 
 
@@ -475,6 +528,10 @@ existence of Monge map?
 
 
 5. G. Bécigneul, O.-E. Ganea, B. Chen, R. Barzilay, and T. Jaakkola. [Optimal Transport Graph Neural Networks](https://arxiv.org/pdf/2006.04804.pdf). arXiv preprint arXiv:2006.04804
+
+
+
+6. WEGL Github code :  [https://github.com/navid-naderi/WEGL](https://github.com/navid-naderi/WEGL)
 
 
 
