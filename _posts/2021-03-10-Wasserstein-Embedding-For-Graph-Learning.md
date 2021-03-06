@@ -254,6 +254,16 @@ linear Wasserstein embedding $$\{\phi(Z_i)\}^{M}_{i=1}$$
 
 이후 개별적인 classifier 를 통해 graph classification 
 
+
+
+end-to-end 학습이 불가능
+
+
+
+WEGL 모델의 input 은 그래프 dataset, diffusion layer 의 수, final node embedding 의 local pooling 그리고 classifier 의 종류입니다.
+
+그로부터 output 은 graph classification 의 결과
+
  
 
 <p align='center'>
@@ -264,7 +274,35 @@ linear Wasserstein embedding $$\{\phi(Z_i)\}^{M}_{i=1}$$
 
 ### Node embedding
 
+node embedding 에는 다양한 방법인 존재합니다.
 
+
+
+만약 parametric encoder 를 사용한다면 학습 과정에서 node embedding 이 달라질 때마다 새로 linear Wasserstein embedding 을 계산해주어야하기 때문에, 
+
+
+
+WEGL 에서는 복잡한 계산을 줄이기 위해 non-parametric diffusion layer 를 사용합니다.
+
+주어진 그래프 $$G=(\mathcal{V},\mathcal{E})$$ 의 node feature $$\{x_v\}_{v\in\mathcal{V}}$$ 들과 scalar edge feature $$\{w_{uv}\}_{(u,v)\in\mathcal{E}}$$ 에 대해 다음과 같이 layer-wise propagation rule 을 정의합니다.
+$$
+x^{(l)}_v = \sum_{u\in N(v)\cup\{v\}}\frac{w_{uv}}{\sqrt{\text{deg}(u)\text{deg}(v)}}\,x^{(l-1)}_u
+\tag{}
+$$
+만약 self-loop $$(v,v)$$ 를 포함해 scalar edge feature 가 주어지지 않은 edge $$(u,v)$$ 들에 대해서는 1 로 설정해줍니다. $$(0)$$ 에서 $$\sqrt{\text{deg}(u)\text{deg}(v)}$$ 를 통해 noramlize 해주는 방법은  GCN 의 propagation rule 에서도 볼 수 있습니다.
+
+만약 edge feaure 가 scalar 가 아닌 multiple features $$w_{uv}\in\mathbb{R}^{F}$$ 로 주어진다면, 
+
+$$\text{deg}_f(u) = \sum_{v\in\mathcal{V}}w_{uv,f}$$ 
+$$
+x^{(l)}_v = \sum_{u\in N(v)\cup\{v\}}\left( \sum^F_{f=1}\frac{w_{uv,f}}{\sqrt{\text{deg}_f(u)\text{deg}_f(v)}}\right)\,x^{(l-1)}_u
+\tag{}
+$$
+
+
+
+
+$$()$$ 의 diffusion layer 는 학습 가능한 parameter 가 없기 때문에 간단하며 
 
 
 
