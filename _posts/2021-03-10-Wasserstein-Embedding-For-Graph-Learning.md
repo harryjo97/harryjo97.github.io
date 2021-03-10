@@ -1,6 +1,6 @@
 ---
 title: Wasserstein Embedding For Graph Learning
-date: 2021-03-10
+date: 2021-03-10 15:00:00 +0900
 category:
 - paper review
 tag:
