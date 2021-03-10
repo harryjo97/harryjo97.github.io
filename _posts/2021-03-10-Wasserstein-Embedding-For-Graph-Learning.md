@@ -7,7 +7,7 @@ tag:
 - Optimal Transportation
 ---
 
-[paper review] : WEGL 이해하기
+[paper review] : WEGL, ICLR 2021
 
 
 
@@ -49,8 +49,6 @@ tag:
 
 ## Background
 
-&nbsp;
-
 
 
 ### Wasserstein Distances
@@ -73,17 +71,15 @@ $$
 \tag{2}
 $$
 
-여기서 $$MP(\mu,\nu)=\left\{ f:\mathbb{R}^d\rightarrow\mathbb{R}^d \mid \nu(B)=\mu(f^{-1}(B)) \;\; \text{for any Borel set B} \right\}$$ 으로 정의하며, $$f\in MP(\mu,\nu)$$ 를 transport map 이라고 부릅니다. 특히 Brenier theorem [7, 3] 에 의해 optimal transport plan $$\pi^{\ast}$$ 는 유일하게 존재하며, $$(2)$$ 를 만족하는 optimal transport map $$f^{\ast}$$ 또한 유일하게 존재합니다. 이를 만족하는 optimal transport map $$f^{\ast}$$ 를  Monge map 이라고 부르며, $$T^{\nu}_{\mu}$$ 라고 쓰겠습니다.
+여기서 $$MP(\mu,\nu)=\left\{ f:\mathbb{R}^d\rightarrow\mathbb{R}^d \mid \nu(B)=\mu(f^{-1}(B)) \;\; \text{for any Borel set B} \right\}$$ 로 정의하며, $$f\in MP(\mu,\nu)$$ 를 transport map 이라고 부릅니다. 특히 Brenier theorem [7, 3] 에 의해 optimal transport plan $$\pi^{\ast}$$ 는 유일하게 존재하며, $$(2)$$ 를 만족하는 optimal transport map $$f^{\ast}$$ 또한 유일하게 존재합니다. 이를 만족하는 optimal transport map $$f^{\ast}$$ 를  Monge map 이라고 부르며, $$T^{\nu}_{\mu}$$ 라고 쓰겠습니다.
 
-
-
-
+&nbsp;
 
 ### LOT Framework
 
 Linear Optimal Transportation (LOT) framework [2] 는 기존의 optimal transport metric 을 더 빠르게 계산하기 위해 제시된 방법입니다. 기존의 방법은 $$M$$ 개의 그래프들에 대해 그래프의 각 쌍마다 2-Wasserstein distance 를 구하려면 총 $$M(M-1)/2$$ 번의 거리 계산이 필요하기 때문에, large-scale dataset 에 적용하기 힘듭니다. 이를 해결하기 위해 LOT 는 non-linear 한 distribution space 를 linear 한 function space 로 embedding 시켜, distribution 사이의 복잡한 거리 계산 대신 embedding 사이의 weighted $$L^2$$-norm 을 계산합니다. 
 
-
+&nbsp;
 
 이를 구체적으로 설명하면 다음과 같습니다. $$\mathbb{R}^n$$ 에서 정의되며 bounded second momoent 를 가진  probability measure 들의 집합을 $$\mathcal{P}_2(\mathbb{R}^n)$$ 이라고 하겠습니다. 또한 $$\sigma\in\mathcal{P}_2(\mathbb{R}^n)$$ 에 대해 다음의 norm 으로 정의된 function space  $$L^2(\mathbb{R}^n,\sigma)$$ 를 생각하겠습니다.
 
@@ -99,17 +95,21 @@ F_{\sigma}(\nu) = T^{\nu}_{\sigma}
 \tag{3}
 $$
 
-
+&nbsp;
 
 Monge map 의 정의에 의해, LOT embedding $$F_{\sigma}$$ 는 reference measure $$\sigma$$ 로부터의 거리를 보존합니다.
 
 $$
-\Vert F_{\sigma}(\sigma) - F_{\sigma}(\nu)\Vert_{\sigma} = \Vert Id-T^{\nu}_{\sigma}\Vert_{\sigma} = \int \Vert z - T^{\nu}_{\sigma}(z)\Vert^2_2\,d\sigma(z) 
-= \mathcal{W}_2(\sigma,\nu)
+\begin{align}
+\Vert F_{\sigma}(\sigma) - F_{\sigma}(\nu)\Vert_{\sigma} 
+&= \Vert Id-T^{\nu}_{\sigma}\Vert_{\sigma} \\
+&= \int \Vert z - T^{\nu}_{\sigma}(z)\Vert^2_2\,d\sigma(z) \\
+&= \mathcal{W}_2(\sigma,\nu)
 \tag{4}
+\end{align}
 $$
 
-
+&nbsp;
 
 특히 measure 들 사이의 2-Wasserstein distance 는 LOT embedding 사이의 거리로 근사할 수 있습니다 [7].
 
@@ -118,7 +118,7 @@ $$
 \tag{5}
 $$
 
-
+&nbsp;
 
 LOT 는 크게 두 가지 장점이 있습니다. 먼저 measure 들의 거리 계산이 쉬워진다는 것입니다. 두 probability measure 의 2-Wasserstein distance 를 LOT embedding 들의 weighted $$L^2$$-norm $$(5)$$ 로 근사할 수 있기 때문에, 기존의 방법으로는 $$M$$ 개의 그래프에 대해 $$M(M-1)/2$$ 개의 LP 를 풀어야했지만, LOT 를 통해 $$M$$ 개의 LP 만을 풀면 충분합니다. 또한 LOT embedding 은 linear 하기 때문에, Euclidean structure (e.g. image) 에 적용할 수 있는 PCA 혹은 LDA 와 같은 방법을 사용할 수 있습니다. 
 
@@ -147,11 +147,15 @@ $$
 $$
 
 $$
-\text{for }\;\;\;
-\Pi_i = \left\{ \pi\in\mathbb{R}^{N\times N_i} \mid N_i\sum^N_{j=1}\pi_{jk} = N\sum^{N_i}_{k=1}\pi_{jk}=1,\;\forall k\in\{1,\cdots,N_i\},\;\forall j\in\{1,\cdots,N\} \right\}
+\begin{align}
+\Pi_i 
+= \{ \pi\in\mathbb{R}^{N\times N_i} \;\mid\; 
+&N_i\sum^N_{j=1}\pi_{jk} = N\sum^{N_i}_{k=1}\pi_{jk}=1, \\
+&\forall k\in\{1,\cdots,N_i\},\;\forall j\in\{1,\cdots,N\} \}
+\end{align}
 $$
 
-
+&nbsp;
 
 LOT embedding $$(3)$$ 을 계산하기 위해서는 $$\mu_0$$ 로부터 $$\mu_i$$ 로의 Monge map 을 찾아야합니다. 다음과 같이 barycentric projection [2, 7] 을 사용해,
 
@@ -167,7 +171,7 @@ F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
 \tag{9}
 $$
 
-
+&nbsp;
 
 $$(3)$$ 과 $$(9)$$ 로부터 $$Z_i$$ 의 LOT embedding $$F_{\mu_o}(Z_i)$$ 를 다음과 같이 계산할 수 있습니다.
 
@@ -176,9 +180,7 @@ F_{\mu_o}(Z_i) = F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
 $$
 
 
-이 때 $$\mu_0$$ 와 $$\mu_0$$ 사이의 optimal transport plan 은 $$\frac{1}{N}I_{N\times N}$$ 이고 $$F_{\mu_o}(Z_0) = Z_0$$ 를 만족하므로, reference $$Z_0$$ 의 embedding 을 원점으로 설정하기 위해, 각 LOT embedding $$F_{\mu_0}(Z_i)$$ 에서 $$Z_0$$ 를 빼주는 변환을 생각합니다. 
-
-또한 $$(5)$$ 의 weighted $$L^2$$-norm 계산을 일반적인 $$L^2$$-norm 으로 바꿔주기 위해, LOT embedding 대신 다음의 linear Wasserstein embedding $$\phi(Z_i)$$ 를 정의합니다.
+이 때 $$\mu_0$$ 와 $$\mu_0$$ 사이의 optimal transport plan 은 $$\frac{1}{N}I_{N\times N}$$ 이고 $$F_{\mu_o}(Z_0) = Z_0$$ 를 만족하므로, reference $$Z_0$$ 의 embedding 을 원점으로 설정하기 위해, 각 LOT embedding $$F_{\mu_0}(Z_i)$$ 에서 $$Z_0$$ 를 빼주는 변환을 생각합니다. 또한 $$(5)$$ 의 weighted $$L^2$$-norm 계산을 일반적인 $$L^2$$-norm 으로 바꿔주기 위해, LOT embedding 대신 다음의 linear Wasserstein embedding $$\phi(Z_i)$$ 를 정의합니다.
 
 $$
 \phi(Z_i) = (F_i-Z_0)/\sqrt{N}\in\mathbb{R}^{N\times d}
@@ -203,13 +205,14 @@ WEGL 모델의 input 은 graph dataset, diffusion layer 의 수, final node embe
     <img src='/assets/post/Wasserstein-Embedding-For-Graph-Learning/WEGL.PNG' style='max-width: 100%; height:auto'>
 </p>
 
+&nbsp;
 
 
 ### Node embedding
 
 WEGL 의 첫 번째 단계는 그래프들의 node embedding 을 구하는 것입니다. 그래프의 node embedding 에는 다양한 방법이 존재하며 크게 parametric 한 방법과 non-parametric 한 방법으로 나눌 수 있습니다. 만약 parametric embedding 을 사용한다면, 학습 과정에서 node embedding 이 달라질 때마다 linear Wasserstein embedding 을 계산해야합니다. 따라서 WEGL 에서는 복잡한 계산을 줄이기 위해 non-parametric diffusion layer 를 사용합니다.
 
-
+&nbsp;
 
 주어진 그래프 $$G=(\mathcal{V},\mathcal{E})$$ 의 node feature $$\{x_v\}_{v\in\mathcal{V}}$$ 들과 scalar edge feature $$\{w_{uv}\}_{(u,v)\in\mathcal{E}}$$ 에 대해, diffusion layer 는 다음과 같이 정의됩니다.
 
@@ -220,7 +223,7 @@ $$
 
 Self-loop $$(v,v)$$ 를 포함해 scalar edge feature 가 주어지지 않은 edge $$(u,v)$$ 들에 대해서는 모두 1 로 설정해줍니다. 특히 $$(11)$$ 에서 $$\sqrt{\text{deg}(u)\text{deg}(v)}$$ 를 통해 noramlize 해주는 방법은  GCN 의 propagation rule 에서도 볼 수 있습니다.
 
-
+&nbsp;
 
 만약 edge feature 가 scalar 가 아닌 multiple features $$w_{uv}\in\mathbb{R}^{F}$$ 로 주어진다면, $$(11)$$ 의 diffusion layer 를 다음과 같이 바꿔줍니다. 여기서 $$\text{deg}_f(u) = \sum_{v\in\mathcal{V}}w_{uv,f}$$ 로 정의합니다.
 
@@ -229,7 +232,7 @@ x^{(l)}_v = \sum_{u\in N(v)\cup\{v\}}\left( \sum^F_{f=1}\frac{w_{uv,f}}{\sqrt{\t
 \tag{12}
 $$
 
-
+&nbsp;
 
 마지막으로 node feature $$\{x^{(l)}_v\}^{L}_{l=0}$$ 들에 대한 local pooling $$g$$ 로 최종 node embedding 을 구합니다. 
 
@@ -251,7 +254,7 @@ z_1,\;\cdots\;,\;z_{\vert \mathcal{V}_i\vert}
 \end{bmatrix}^T \in \mathbb{R}^{\vert\mathcal{V}_i\vert\times d}
 $$
 
-
+&nbsp;
 
 ### Reference Distribution
 
@@ -261,13 +264,13 @@ LOT embedding 을 위한 reference embedding 을 정하는 방법에는 여러 �
 
 또한 node embedding $$\{Z_i\}^{M}_{i=1}$$ 들에 대한 Wasserstein barycenter, 혹은 normal distribution 으로부터 뽑은 $$N$$ 개의 sample 들로도 reference embedding 을 구성할 수 있습니다. 이론적으로 linear Wasserstein embedding 의 결과는 reference 에 따라 달라지지만, 실험적으로 WEGL 의 성능은 reference 에 따라 큰 차이를 보이지 않습니다.
 
-
+&nbsp;
 
 ### Linear Wasserstein Embedding
 
 $$(9)$$ 와 $$(10)$$ 를 통해 reference embedding $$Z_0$$ 에 대한 linear Wasserstein embedding $$\phi(Z_i)\in\mathbb{R}^{N\times d}$$ 를 계산합니다. 이 때 $$(9)$$ 를 계산하기 위해 총 $$M$$ 개의 LP 를 풀어야합니다. 기존의 Wasserstein distance 를 사용한 방법들은 그래프의 쌍마다 LP 를 풀어야하기 때문에 총 $$M(M-1)/2$$ 개의 LP 를 풀어야하므로, linear Wasserstein Embedding 을 사용하면 필요한 계산량이 훨씬 줄어듭니다. 
 
-
+&nbsp;
 
 ### Classifier
 
@@ -305,7 +308,7 @@ WEGL 에 AutoML classifier 를 사용했을 때 state-of-the-art performance 를
 
 또한 linear Wasserstein embedding 의 효과를 입증하기 위한 ablatin study 를 진행했습니다. WEGL 에서 Wasserstein embedding 대신 global average pooling (GAP) 를 사용한 경우 test ROC-AUC 가 확연히 줄어드는 것을 확인할 수 있습니다.
 
-
+&nbsp;
 
 
 ### TUD Benchmark
@@ -318,7 +321,7 @@ WEGL 에 AutoML classifier 를 사용했을 때 state-of-the-art performance 를
 
 WEGL 은 거의 state-of-the-art performance 에 근접한 성능을 가지는 것을 볼 수 있으며, 특히 모든 dataset 에 대해 top-3 performance 를 보여줍니다. 이로부터 WEGL 이 다양한 domain 에서의 graph 들을 잘 학습함을 알 수 있습니다.
 
-
+&nbsp;
 
 
 ### Computation Time
