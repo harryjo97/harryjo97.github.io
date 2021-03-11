@@ -72,6 +72,7 @@ $$
 $$
 
 Lebesgue measure 에 대해 absolutely continuous 한 measure $$\sigma\in\mathcal{P}_2(\mathbb{R}^n)$$ 에 대해, probability measure space 에서 function space 로의 LOT embedding $$F_{\sigma} : \mathcal{P}_2(\mathbb{R}^n) \rightarrow L^2(\mathbb{R}^n,\sigma)$$ 를 다음과 같이 정의합니다 [7, 3].
+
 $$
 F_{\sigma}(\nu) = T^{\nu}_{\sigma}
 \tag{3}
@@ -91,7 +92,6 @@ $$
 \end{align}
 $$
 
-&nbsp;
 
 특히 measure 들 사이의 2-Wasserstein distance 는 LOT embedding 사이의 거리로 근사할 수 있습니다 [7].
 
@@ -145,6 +145,7 @@ $$
 $$
 
 $$(8)$$ 을 정리하면 다음과 같이 쓸 수 있습니다.
+
 $$
 F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
 \tag{9}
@@ -161,6 +162,7 @@ $$
 &nbsp;
 
 이 때 $$\mu_0$$ 와 $$\mu_0$$ 사이의 optimal transport plan 은 $$\frac{1}{N}I_{N\times N}$$ 이고 $$F_{\mu_o}(Z_0) = Z_0$$ 를 만족하므로, reference $$Z_0$$ 의 embedding 을 원점으로 설정하기 위해, 각 LOT embedding $$F_{\mu_0}(Z_i)$$ 에서 $$Z_0$$ 를 빼주는 변환을 생각합니다. 또한 $$(5)$$ 의 weighted $$L^2$$-norm 계산을 일반적인 $$L^2$$-norm 으로 바꿔주기 위해, LOT embedding 대신 다음의 linear Wasserstein embedding $$\phi(Z_i)$$ 를 정의합니다.
+
 $$
 \phi(Z_i) = (F_i-Z_0)/\sqrt{N}\in\mathbb{R}^{N\times d}
 \tag{10}
