@@ -11,35 +11,19 @@ tag:
 
 
 
-## Related Study
-
-&nbsp;
-
-주어진 그래프들을 분류하는 graph classification 은 화학, 생물학, 사회인문학 등 다양한 분야에서 사용됩니다. 하지만 두 그래프가 얼마나 다른지를 측정하는 것은 생각보다 어려운 과제입니다. 
-
-
-
-단순한 방법으로는 두 그래프가 같은 그래프인지를 graph isomorphism 을 통해 구분할 수 있습니다. Graph isomorphism 에 대해서는 다양한 연구가 이루어졌으며, 대표적인 방법으로는 Weisfeiler-Lehman test 가 있습니다. 특히 GIN 은 graph isomorphism 과 GNN 의 expressive power 
-
-
-
-하지만 graph isomorphism 을 통해 알 수 있는 것은 두 그래프가 동일한지 아닌지 뿐입니다. 두 그래프가 다르다면 얼마나 다른지에 대한 정보를 얻을 수 없습니다. 최근 들어 optimal transportation 을 통해 그래프 사이의 dissimilarity 를 수치화하는 연구가 이루어지고 있습니다 [1,4,5]. 
-
-&nbsp;
-
 ## Introduction
 
 &nbsp;
 
-기존에 graph-structured data 를 분석하는 방식에는 크게 두 가지가 있습니다. 첫 번째는 GNN 을 사용하는 방법입니다.  GNN 은 feature aggregation, graph pooling, classification 세 가지를 거쳐 그래프의 representation 을 학습합니다. 다양한 domain 에서 좋은 성능을 보여주고 있습니다.
+기존에 graph-structured data 를 분석하는 방식에는 크게 두 가지가 있습니다. 첫 번째는 GNN 을 사용하는 방법입니다.  GNN 은 feature aggregation, graph pooling, classification 세 가지를 거쳐 그래프의 representation 을 학습하며, 다양한 domain 에서 좋은 성능을 보여주고 있습니다.
 
 
 
-두 번째 방법은 graph kernel 을 이용해 두 그래프 사이의 similarity 를 표현하여 SVM 과 같은 classifier 를 통해 그래프를 학습하는 방법입니다. 대표적인 예로 random walk kernel, Weisfeiler-Lehman kernel 등이 있으며, 최근에는 Wasserstein distance 를 활용한 WWL kernel [4] 에 대한 연구가 진행되었습니다.
+두 번째 방법은 graph kernel 을 이용하는 방법입니다. kernel 을 통해 두 그래프 사이의 similarity 를 표현하여, SVM 과 같은 classifier 를 통해 그래프를 학습합니다. 대표적인 예로 random walk kernel, Weisfeiler-Lehman kernel 등이 있으며, 최근에는 Wasserstein distance 를 활용한 WWL kernel [4] 에 대한 연구가 진행되었습니다.
 
 
 
-기존의 GNN 과 graph kernel 모두 그래프의 크기가 커질수록 사용하기 힘들어지는 단점이 있습니다. GNN 은 그래프의 크기가 클수록 학습시 필요한 계산량이 많아져 학습이 어려워집니다. 또한 graph kernel 의 경우 그래프 쌍마다 similarity 를 계산해야하기 때문에 마찬가지로 크기가 큰 그래프 dataset 에 사용하기 어렵습니다.
+GNN 과 graph kernel 을 이용하여 그래프를 학습하는 경우, 모두 그래프의 크기가 커질수록 사용하기 힘들어지는 단점이 있습니다. GNN 은 그래프의 크기가 클수록 학습시 필요한 계산량이 많아져 학습이 어려워지며, graph kernel 의 경우 그래프 쌍마다 similarity 를 계산해야하기 때문에 마찬가지로 크기가 큰 그래프 dataset 에 사용하기 어렵습니다.
 
 
 
@@ -51,7 +35,7 @@ tag:
 
 
 
-### Wasserstein Distances
+### Wasserstein Distance
 
 $$\mathbb{R}^d$$ 에서 정의된 두 probability measure $$\mu$$ 와 $$\nu$$ 사이의 2-Wasserstein distance 는 다음과 같이 정의합니다 [7].
 
@@ -87,9 +71,7 @@ $$
 \Vert f\Vert^2_{\sigma} = \int \Vert f(z)\Vert^2_2\,d\sigma(z)
 $$
 
-
-Lebesgue measure 에 대해 absolutely continuous 한 measure $$\sigma\in\mathcal{P}_2(\mathbb{R}^n)$$ 에 대해, LOT embedding $$F_{\sigma} : \mathcal{P}_2(\mathbb{R}^n) \rightarrow L^2(\mathbb{R}^n,\sigma)$$ 를 다음과 같이 정의합니다 [7, 3].
-
+Lebesgue measure 에 대해 absolutely continuous 한 measure $$\sigma\in\mathcal{P}_2(\mathbb{R}^n)$$ 에 대해, probability measure space 에서 function space 로의 LOT embedding $$F_{\sigma} : \mathcal{P}_2(\mathbb{R}^n) \rightarrow L^2(\mathbb{R}^n,\sigma)$$ 를 다음과 같이 정의합니다 [7, 3].
 $$
 F_{\sigma}(\nu) = T^{\nu}_{\sigma}
 \tag{3}
@@ -128,9 +110,7 @@ LOT 는 크게 두 가지 장점이 있습니다. 먼저 measure 들의 거리 �
 
 &nbsp;
 
-
-
-기존의 연구들 [4, 5, 8, 9] 과 마찬가지로 논문에서는 그래프 (혹은 그래프의 embedding) 를 하나의 probability distribution 으로 고려합니다. 주어진 그래프들의 embedding $$\left\{ Z_i = \left[ z^i_1,\cdots,z^i_{N_i} \right]^T\in\mathbb{R}^{N_i\times d} \right\}^{M}_{i=1}$$ 와 reference embedding $$Z_0 = \left[ z^0_1,\cdots,z^0_{N} \right]^T\in\mathbb{R}^{N\times d}$$ 에 대해, 각 embedding $$Z_i$$ 를 다음과 같이 probability measure $$\mu_i$$ 로 나타냅니다.
+기존의 연구들 [4, 5, 8, 9] 과 마찬가지로 논문에서는 그래프 (혹은 그래프의 embedding) 를 하나의 probability distribution 으로 고려합니다. 주어진 그래프들의 embedding $$\left\{ Z_i = \left[ z^i_1,\cdots,z^i_{N_i} \right]^T\in\mathbb{R}^{N_i\times d} \right\}^{M}_{i=1}$$ 와 reference embedding $$Z_0 = \left[ z^0_1,\cdots,z^0_{N} \right]^T\in\mathbb{R}^{N\times d}$$ 에 대해, 각 embedding 을 다음과 같이 probability measure 로 나타냅니다.
 
 $$
 \mu_i=\frac{1}{N_i}\sum^{N_j}_{n=1}\delta_{z^i_n}\;,\;\;\mu_0=\frac{1}{N}\sum^N_{l=1}\delta_{z^0_l}
@@ -157,15 +137,14 @@ $$
 
 &nbsp;
 
-LOT embedding $$(3)$$ 을 계산하기 위해서는 $$\mu_0$$ 로부터 $$\mu_i$$ 로의 Monge map 을 찾아야합니다. 다음과 같이 barycentric projection [2, 7] 을 사용해,
+LOT embedding $$(3)$$ 을 계산하기 위해서는 $$\mu_0$$ 로부터 $$\mu_i$$ 로의 Monge map 을 찾아야합니다. 다음과 같이 barycentric projection [2, 7] 을 사용해, $$(7)$$ 의 optimal transportation plan 으로부터 $$\mu_0$$ 에서 $$\mu_i$$ 로의 Monge map  $$F_i:z^0_j \mapsto \bar{z^0_j}$$  를 근사할 수 있습니다.
 
 $$
 \bar{z^0_j} = N\sum^{N_i}_{k=1}\pi^{\ast}_{jk}z^i_{k}
 \tag{8}
 $$
 
-$$(7)$$ 의 optimal transportation plan 으로부터 $$\mu_0$$ 에서 $$\mu_i$$ 로의 Monge map  $$F_i:z^0_j \mapsto \bar{z^0_j}$$  를 근사할 수 있습니다. $$(8)$$ 을 정리하면 다음과 같이 쓸 수 있습니다.
-
+$$(8)$$ 을 정리하면 다음과 같이 쓸 수 있습니다.
 $$
 F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
 \tag{9}
@@ -179,9 +158,9 @@ $$
 F_{\mu_o}(Z_i) = F_i = N\left( \pi^{\ast}_iZ_i \right)\in\mathbb{R}^{N\times d}
 $$
 
+&nbsp;
 
 이 때 $$\mu_0$$ 와 $$\mu_0$$ 사이의 optimal transport plan 은 $$\frac{1}{N}I_{N\times N}$$ 이고 $$F_{\mu_o}(Z_0) = Z_0$$ 를 만족하므로, reference $$Z_0$$ 의 embedding 을 원점으로 설정하기 위해, 각 LOT embedding $$F_{\mu_0}(Z_i)$$ 에서 $$Z_0$$ 를 빼주는 변환을 생각합니다. 또한 $$(5)$$ 의 weighted $$L^2$$-norm 계산을 일반적인 $$L^2$$-norm 으로 바꿔주기 위해, LOT embedding 대신 다음의 linear Wasserstein embedding $$\phi(Z_i)$$ 를 정의합니다.
-
 $$
 \phi(Z_i) = (F_i-Z_0)/\sqrt{N}\in\mathbb{R}^{N\times d}
 \tag{10}

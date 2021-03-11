@@ -7,7 +7,7 @@ tag:
 - Knowledge Graph
 ---
 
-[paper review] CompGCN 이해하기
+[paper review] CompGCN, ICLR 2020
 
 
 

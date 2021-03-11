@@ -7,7 +7,7 @@ tag:
 - Attention
 ---
 
-[paper review] : Graph Attention Networks 이해하기
+[paper review] : GAT, ICLR 2018
 
 
 

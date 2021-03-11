@@ -5,10 +5,9 @@ category:
 - paper review
 tag:
 - Analysis
-published: false
 ---
 
-[paper review] : Invariant and Equivariant Graph Networks
+[paper review] : Invariant and Equivariant Graph Networks, ICLR 2019
 
 
 
@@ -17,10 +16,6 @@ published: false
 
 
 ### Translation Invariance 
-
-
-
-translation invariant
 
 
 
@@ -209,24 +204,25 @@ $$
 \tag{9}
 $$
 
-양변에 $$\text{vec}(\cdot)$$ 을 취하고 $$\text{vec}(p\cdot A) = P^{T\otimes k}\text{vec}(A)$$ 을 이용하면, $$(9)$$ 를 다음과 같이 쓸 수 있습니다.
-
 &nbsp;
 
+양변에 $$\text{vec}(\cdot)$$ 을 취하고 $$\text{vec}(p\cdot A) = P^{T\otimes k}\text{vec}(A)$$ 을 이용하면, $$(9)$$ 를 다음과 같이 쓸 수 있습니다.
 $$
 \mathbf{L}P^{T\otimes k}\text{vec}(A) = P^{T\otimes k}\mathbf{L}\text{vec}(A)
 \tag{10}
 $$
 
-$$(10)$$ 은 모든 $$A\in\mathbb{R}^{n^k}$$ 에 대해 성립해야하기 하며 $$P^{T\otimes k}$$ 의 역행렬이 $$P^{\otimes k}$$ 이므로,
+&nbsp;
 
+$$(10)$$ 은 모든 $$A\in\mathbb{R}^{n^k}$$ 에 대해 성립해야하며 $$P^{T\otimes k}$$ 의 역행렬이 $$P^{\otimes k}$$ 이므로,
 $$
 P^{\otimes k}\mathbf{L}P^{T\otimes k} = \mathbf{L}
 \tag{11}
 $$
 
-$$(11)$$ 의 양변에 $$\text{vec}(\cdot)$$ 을 취하고 Kronecker product 의 성질인 $$\text{vec}(XAY) = Y^T\otimes X\text{vec}(A)$$ 을 사용하면 다음의 fixed-point equation 을 얻을 수 있습니다.
+&nbsp;
 
+$$(11)$$ 의 양변에 $$\text{vec}(\cdot)$$ 을 취하고 Kronecker product 의 성질인 $$\text{vec}(XAY) = Y^T\otimes X\text{vec}(A)$$ 을 사용하면 다음의 fixed-point equation 을 얻을 수 있습니다.
 $$
 P^{\otimes 2k}\text{vec}(\mathbf{L}) = \text{vec}(\mathbf{L})
 \tag{12}

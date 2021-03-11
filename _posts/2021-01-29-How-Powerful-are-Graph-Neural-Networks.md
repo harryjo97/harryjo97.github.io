@@ -7,7 +7,7 @@ tag:
 - Analysis
 ---
 
-[paper review] Graph Isomorphism Network 이해하기
+[paper review] GIN, ICLR 2019
 
 
 

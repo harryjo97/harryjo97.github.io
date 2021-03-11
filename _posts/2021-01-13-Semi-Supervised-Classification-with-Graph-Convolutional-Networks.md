@@ -7,9 +7,7 @@ tag:
 - GCN
 ---
 
-[paper review] : Graph Convolutional Network 이해하기
-
-
+[paper review] : GCN, ICLR 2017
 
 ## Introduction
 

@@ -7,7 +7,7 @@ tag:
 - continuous-depth model
 ---
 
-[paper review] CGNN 이해하기
+[paper review] CGNN, ICML 2020
 
 
 
