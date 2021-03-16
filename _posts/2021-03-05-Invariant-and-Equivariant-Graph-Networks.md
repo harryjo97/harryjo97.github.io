@@ -24,8 +24,9 @@ CNN 의 translation invariant 한 특성은 이미지를 학습하는 데 큰 �
 &nbsp;
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
 
 &nbsp;
 
@@ -34,8 +35,9 @@ CNN 의 translation invariant 한 특성은 이미지를 학습하는 데 큰 �
 &nbsp;
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-invariant.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-invariant.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
 
 &nbsp;
 
@@ -54,8 +56,9 @@ $$
 &nbsp;
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-equivariant.PNG' style = 'max-width: 100%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/mlp-equivariant.PNG' style = 'max-width: 100%; height: auto'>
 </p>
+
 
 
 $$(1)$$ 에서 적절한 layer 들의 선택으로 다양한 invariant model 을 얻을 수 있습니다. 
@@ -103,8 +106,9 @@ $$
 이미지에서의 translation 은 symmetry 의 한 종류입니다. 그래프에 있어 symmetry 는 node 순서의 재배열 (re-ordering) 을 통해 해석할 수 있습니다.
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/symmetry.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/symmetry.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
 
 
 ### Permutation of Tensors
@@ -112,8 +116,9 @@ $$
 그래프 node 가 재배열되면, 그에 따라 그래프 tensor 또한 변하게 됩니다. 
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/permutation.PNG' style = 'max-width: 70%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/permutation.PNG' style = 'max-width: 70%; height: auto'>
 </p>
+
 
 
 Permutation $$p\in S_n$$ 와 $$k$$-tensor $$X\in\mathbb{R}^{n^k}$$ 에 대해, $$X$$ 에 대한 permutation $$p$$ 는 각 hyper-edge $$(i_1,\cdots,i_k)\in [n]^k$$ 에 대해 다음과 같이 쓸수 있습니다. 
@@ -284,7 +289,7 @@ $$(14)$$ 의 해 $$X$$ 에 대해 $$X$$ 가 각 equivalence class 내에서 상�
 $$n=5$$, $$k=2$$ 일 때 permutation equivariant linear operator 공간의 orthogonal basis 는 다음과 같습니다.
 
 <p align='center'>
-    <img src = '../assets/post/Invariant-and-Equivariant-Graph-Networks/basis.PNG' style = 'max-width: 100%; height: auto'>
+    <img src = '/assets/post/Invariant-and-Equivariant-Graph-Networks/basis.PNG' style = 'max-width: 100%; height: auto'>
 </p>
 
 
