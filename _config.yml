@@ -17,11 +17,11 @@ minimal_mistakes_skin    :  "default"
 
 # Site Settings
 locale                   : "en"
-title                    : "Graph ML review"
+title                    : "Jaehyeong Jo" #"Graph ML review"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "harryjo97 blog"
-description              : "about Graph ML"
+name                     : &name "Jaehyeong Jo" # "harryjo97 blog"
+description              : &description "PhD student at KAIST AI" #"about Graph ML"
 url                      : "https://harryjo97.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "harryjo97/harryjo97.github.io"
@@ -71,7 +71,7 @@ naver_site_verification  :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : "Jaehyeong_Jo"
 facebook:
   username               :
   app_id                 :
@@ -96,21 +96,22 @@ analytics:
 # Site Author
 author:
   name             : "Jaehyeong Jo"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "M.S in Mathematics at KAIST"
+  avatar           : "images/profile.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "PhD student at KAIST AI"
   location         : "S.Korea"
   email            : "harryjo97@kaist.ac.kr"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
+      url: "harryjo97@kaist.ac.kr"
       
       # - label: "Website"
       # icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
-      # - label: "Twitter"
-      # icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/Jaehyeong_Jo"
+
       # - label: "Facebook"
       # icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
@@ -206,6 +207,22 @@ kramdown:
   enable_coderay: false
 
 
+# # Collections
+# collections:
+#   teaching:
+#     output: true
+#     permalink: /:collection/:path/
+#   publications:
+#     output: true
+#     permalink: /:collection/:path/
+#   portfolio:
+#     output: true
+#     permalink: /:collection/:path/
+#   talks:
+#     output: true
+#     permalink: /:collection/:path/
+
+
 # Sass/SCSS
 sass:
   sass_dir: _sass
@@ -214,9 +231,9 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+timezone: Asia/Seoul # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins (previously gems:)
@@ -281,7 +298,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: false
+      author_profile: true 
       read_time: false
       comments: true
       share: true
@@ -289,3 +306,28 @@ defaults:
       mathjax: true
       toc: true
       toc-sticky: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+  # _publications
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comment: true
