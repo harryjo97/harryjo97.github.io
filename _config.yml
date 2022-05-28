@@ -20,8 +20,8 @@ locale                   : "en"
 title                    : "Jaehyeong Jo" #"Graph ML review"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : &name "Jaehyeong Jo" # "harryjo97 blog"
-description              : &description "PhD student at KAIST AI" #"about Graph ML"
+name                     : "Jaehyeong Jo" # "harryjo97 blog"
+description              : "PhD student at KAIST AI" #"about Graph ML"
 url                      : "https://harryjo97.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "harryjo97/harryjo97.github.io"
@@ -96,57 +96,34 @@ analytics:
 # Site Author
 author:
   name             : "Jaehyeong Jo"
-  avatar           : "images/profile.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/profile.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "PhD student at KAIST AI"
   location         : "S.Korea"
   email            : "harryjo97@kaist.ac.kr"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "harryjo97@kaist.ac.kr"
+    # - label: "Email"
+    #   icon: "fas fa-fw fa-envelope-square"
+    #   url: "harryjo97@kaist.ac.kr"
       
-      # - label: "Website"
-      # icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
-      - label: "Twitter"
+    - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/Jaehyeong_Jo"
 
-      # - label: "Facebook"
-      # icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
-    
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/harryjo97"
       
-        # - label: "Instagram"
-      # icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
 
 # Site Footer
 footer:
   links:
-      # - label: "Twitter"
-      # icon: "fab fa-fw fa-twitter-square"
-      # url:
-      # - label: "Facebook"
-      # icon: "fab fa-fw fa-facebook-square"
-      # url:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/Jaehyeong_Jo"
     
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/harryjo97"
-      
-        # - label: "GitLab"
-      # icon: "fab fa-fw fa-gitlab"
-      # url:
-      # - label: "Bitbucket"
-      # icon: "fab fa-fw fa-bitbucket"
-      # url:
-      # - label: "Instagram"
-      # icon: "fab fa-fw fa-instagram"
-      # url:
 
 
 # Reading Files
