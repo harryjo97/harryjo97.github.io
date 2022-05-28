@@ -10,7 +10,7 @@ redirect_from:
 
 <span style="color:darkred">Introduction</span>
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
-I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020, and 
+I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020.
 
 My research interest includes following topics:
 - Diffusion Generative Models
@@ -32,7 +32,7 @@ My research interest includes following topics:
 <span style="color:darkred">**NeurIPS**</span> 2021
 
 
-## Education
+<!-- ## Education
 - **Korea Advanced Institute of Science and Technology** \\
   <font size="3">Aug. 2021 - </font>
   Ph.d. in Graduate School of Artificial Intelligence
@@ -43,7 +43,7 @@ My research interest includes following topics:
 
 - **Korea Advanced Institute of Science and Technology** \\
   <font size="3">Mar. 2016 - Feb. 2020</font>
-  B.S. in Mathematical Sciences
+  B.S. in Mathematical Sciences -->
 
 
 
