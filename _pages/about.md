@@ -1,14 +1,15 @@
 ---
-permalink: /
 title: "About me"
-excerpt: "About me"
 author_profile: true
+permalink: /
 redirect_from:
   - /about/
   - /about.html
+layout: single
+classes: wide
 ---
 
-<span style="color:darkred">Introduction</span>
+<!-- <span style="color:darkred">Introduction</span> -->
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
 I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020.
 
