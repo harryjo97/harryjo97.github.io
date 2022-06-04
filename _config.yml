@@ -21,7 +21,7 @@ title                    : "Jaehyeong Jo" #"Graph ML review"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Jaehyeong Jo" # "harryjo97 blog"
-description              : "PhD student at KAIST AI" #"about Graph ML"
+description              : "PhD student at KAIST AI harryjo97 [at] kaist [dot] ac [dot] kr" #"about Graph ML"
 url                      : "https://harryjo97.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "harryjo97/harryjo97.github.io"
