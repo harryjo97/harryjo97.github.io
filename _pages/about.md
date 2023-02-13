@@ -11,6 +11,8 @@ classes: wide
 
 Jaehyeong Jo (<b>harryjo97</b>[at]<b>kaist</b>[dot]<b>ac</b>[dot]<b>kr</b>). Here is my [CV (Curriculum Vitae)](/assets/CV.pdf).
 
+TEST
+
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
@@ -21,7 +23,7 @@ My research interest mainly focuses on understanding physical systems through th
 - Geometric Deep Learning
 
 ## Preprints
-- <font size="4">Graph Generation with Destination-Driven Diffusion Mixture</font> [[paper]](https://arxiv.org/abs/2302.03596) \\
+- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) \\
 <U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang \\
 (\*: equal contribution) \\
 <span style="color:darkred">**Preprint**</span> 2023
