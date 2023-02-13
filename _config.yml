@@ -21,7 +21,7 @@ title                    : "Jaehyeong Jo" #"Graph ML review"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Jaehyeong Jo" # "harryjo97 blog"
-description              : "PhD student at KAIST AI harryjo97 [at] kaist [dot] ac [dot] kr" #"about Graph ML"
+description              : "" #"about Graph ML"
 url                      : "https://harryjo97.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "harryjo97/harryjo97.github.io"
@@ -99,11 +99,15 @@ author:
   avatar           : "/images/profile.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "PhD student at KAIST AI"
   location         : "S.Korea"
-  email            : "harryjo97@kaist.ac.kr"
+  # email            : "harryjo97@kaist.ac.kr"
   links:
     # - label: "Email"
     #   icon: "fas fa-fw fa-envelope-square"
     #   url: "harryjo97@kaist.ac.kr"
+
+    # - label: "Google Scholar"
+    #   icon: ""
+    #   url: "https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao"
       
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
