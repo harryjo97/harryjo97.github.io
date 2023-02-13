@@ -24,22 +24,22 @@ My research interest mainly focuses on understanding physical systems through th
 
 ## Preprints
 - <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) \\
-<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang \\
-(\*: equal contribution) \\
+<U>Jaehyeong Jo</U>\*\, Dongki Kim*, Sung Ju Hwang \\
+(\*\: equal contribution) \\
 <span style="color:darkred">**Preprint**</span> 2023
 
-- <font size="4">Exploring Chemical Space with Score-based Out-of-distribution Generation</font> [[paper]](https://arxiv.org/abs/2206.07632) \\
+- <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) \\
 Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang \\
 <span style="color:darkred">**Preprint**</span> 2022
 
 
 ## Conference Publications
-- <font size="4">Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations</font> [[paper]](https://arxiv.org/abs/2202.02514) \\
+- <font size="4"><b>Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations</b></font> [[paper]](https://arxiv.org/abs/2202.02514) \\
 <U>Jaehyeong Jo</U>\*, Seul Lee\*, Sung Ju Hwang \\
 (\*: equal contribution) \\
 <span style="color:darkred">**ICML**</span> 2022
 
-- <font size="4">Edge Representation Learning with Hypergraphs</font> [[paper]](https://arxiv.org/abs/2106.15845) \\
+- <font size="4"><b>Edge Representation Learning with Hypergraphs</b></font> [[paper]](https://arxiv.org/abs/2106.15845) \\
 <U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang \\
 (\*: equal contribution) \\
 <span style="color:darkred">**NeurIPS**</span> 2021
