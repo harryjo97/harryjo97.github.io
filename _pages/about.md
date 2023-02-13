@@ -11,7 +11,7 @@ classes: wide
 
 Jaehyeong Jo (<b>harryjo97</b>[at]<b>kaist</b>[dot]<b>ac</b>[dot]<b>kr</b>). Here is my [CV (Curriculum Vitae)](/assets/CV.pdf).
 
-test
+test math ast
 
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
@@ -24,8 +24,8 @@ My research interest mainly focuses on understanding physical systems through th
 
 ## Preprints
 - <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) \\
-<U>Jaehyeong Jo</U>*, Dongki Kim*, Sung Ju Hwang \\
-(*: equal contribution) \\
+<U>Jaehyeong Jo</U>$^*$, Dongki Kim$^*$, Sung Ju Hwang \\
+($^*$: equal contribution) \\
 <span style="color:darkred">**Preprint**</span> 2023
 
 - <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) \\
@@ -35,7 +35,7 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang \\
 
 ## Conference Publications
 - <font size="4"><b>Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations</b></font> [[paper]](https://arxiv.org/abs/2202.02514) \\
-<U>Jaehyeong Jo</U>\*, Seul Lee\*, Sung Ju Hwang \\
+<U>Jaehyeong Jo</U>$^*$, Seul Lee$^*$, Sung Ju Hwang \\
 (\*: equal contribution) \\
 <span style="color:darkred">**ICML**</span> 2022
 
