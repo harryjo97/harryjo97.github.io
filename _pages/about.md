@@ -23,14 +23,12 @@ My research interest includes following topics:
 My research interest mainly focuses on understanding physical systems through the lens of graph-structured data and its geometric symmetries. In particular, I've been focusing on the generation of the graph with diffusion models and its applications to real-world tasks, for example, drug discovery or protein design.
 
 ## Preprints
-- <font size="4">Graph Generation with Destination-Driven Diffusion Mixture</font>
-[[paper]](https://arxiv.org/abs/2302.03596) <br>
-<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
-(\*: equal contribution) <br>
+- <font size="4">Graph Generation with Destination-Driven Diffusion Mixture</font> [[paper]](https://arxiv.org/abs/2302.03596) 
+<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang 
+(\*: equal contribution)
 <span style="color:darkred">**Preprint**</span> 2023
 
-- <font size="4">Exploring Chemical Space with Score-based Out-of-distribution Generation</font>
-[[paper]](https://arxiv.org/abs/2206.07632) \\
+- <font size="4">Exploring Chemical Space with Score-based Out-of-distribution Generation</font> [[paper]](https://arxiv.org/abs/2206.07632) \\
 Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang \\
 <span style="color:darkred">**Preprint**</span> 2022
 
