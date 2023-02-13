@@ -12,7 +12,6 @@ Hi, I am Jaehyeong Jo (Jae for short). <br>
 Here is my [CV (Curriculum Vitae)](/assets/CV.pdf). <br>
 Email: harryjo97[at]kaist[dot]ac[dot]kr <br>
 
-testtest
 
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
@@ -24,7 +23,7 @@ My research interest mainly focuses on understanding physical systems through th
 - Geometric Deep Learning
 
 ## Preprints 
-- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) \
+- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) <br>
 <U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2023
 
@@ -42,7 +41,7 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
-(\*: equal contribution)
+<!-- (\*: equal contribution) -->
 
 
 <!-- ## Education
