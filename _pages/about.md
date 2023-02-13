@@ -12,7 +12,7 @@ Hi, I am Jaehyeong Jo (Jae for short). <br>
 Here is my [CV (Curriculum Vitae)](/assets/CV.pdf). <br>
 Email: harryjo97[at]kaist[dot]ac[dot]kr <br>
 
-test
+testtest
 
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
@@ -23,9 +23,9 @@ My research interest mainly focuses on understanding physical systems through th
 - Diffusion Generative Models
 - Geometric Deep Learning
 
-## Preprints
-- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) <br>
-<U>Jaehyeong Jo\*</U>, Dongki Kim\*, Sung Ju Hwang <br>
+## Preprints 
+- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) \
+<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2023
 
 - <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) <br>
