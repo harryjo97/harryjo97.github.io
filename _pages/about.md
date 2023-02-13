@@ -10,6 +10,7 @@ classes: wide
 ---
 Hi, I am Jaehyeong Jo (Jae for short). <br>
 Here is my [CV (Curriculum Vitae)](/assets/CV.pdf). <br>
+[Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao) <br>
 Email: harryjo97[at]kaist[dot]ac[dot]kr <br>
 
 
