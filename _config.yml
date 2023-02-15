@@ -104,10 +104,6 @@ author:
     # - label: "Email"
     #   icon: "fas fa-fw fa-envelope-square"
     #   url: "harryjo97@kaist.ac.kr"
-
-    # - label: "Google Scholar"
-    #   icon: ""
-    #   url: "https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao"
       
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
@@ -116,6 +112,10 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/harryjo97"
+
+    - label: "Google Scholar"
+      icon: "ai ai-google-scholar"
+      url: "https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao"
       
 
 # Site Footer
