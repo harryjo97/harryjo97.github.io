@@ -114,7 +114,7 @@ author:
       url: "https://github.com/harryjo97"
 
     - label: "Google Scholar"
-      icon: "ai ai-google-scholar"
+      icon: "ai ai-google-scholar-square ai-3x" #"ai ai-google-scholar"
       url: "https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao"
       
 
