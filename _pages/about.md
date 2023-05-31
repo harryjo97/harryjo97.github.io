@@ -13,7 +13,7 @@ Here is my [CV (Curriculum Vitae)](/assets/CV.pdf) and [Google Scholar](https://
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Mar 04, 2023
+Last updated: May 30, 2023
 
 
 ## Introduction
@@ -26,21 +26,29 @@ My research interest mainly focuses on understanding physical systems through th
 - Geometric Deep Learning
 
 ## Preprints 
-- <font size="4"><b>Graph Generation with Destination-Driven Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) <br>
-&#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
+- <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) <br>
+Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2023
 
-- <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) <br>
-Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2022
+- <font size="4"><b>Text-Conditioned Sampling Framework for Text-to-Image Generation with Masked Generative Models</b></font> [[paper]](https://arxiv.org/abs/2304.01515) <br>
+Jaewoong Lee\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Yunji Kim, Jin-Hwa Kim, Jung-Woo Ha, Sung Ju Hwang <br>
+<span style="color:darkred">**Preprint**</span> 2023
+
+- <font size="4"><b>Graph Generation with Destination-Predicting Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) <br>
+&#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
+<span style="color:darkred">**MLDD Workshop @ ICLR**</span> 2023
 
 
 ## Conference Publications
-- <font size="4"><b>Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations</b></font> [[paper]](https://arxiv.org/abs/2202.02514) <br>
+- <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) <br>
+Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
+<span style="color:darkred">**ICML**</span> 2023
+
+- <font size="4"><b>Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations</b></font> [[paper]](https://arxiv.org/abs/2202.02514) [[code]](https://github.com/harryjo97/GDSS) <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Seul Lee\*, Sung Ju Hwang <br>
 <span style="color:darkred">**ICML**</span> 2022
 
-- <font size="4"><b>Edge Representation Learning with Hypergraphs</b></font> [[paper]](https://arxiv.org/abs/2106.15845) <br>
+- <font size="4"><b>Edge Representation Learning with Hypergraphs</b></font> [[paper]](https://arxiv.org/abs/2106.15845) [[code]](https://github.com/harryjo97/EHGNN) <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
