@@ -13,7 +13,7 @@ Here is my [CV (Curriculum Vitae)](/assets/CV.pdf) and [Google Scholar](https://
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Oct 12, 2023
+Last updated: Oct 27, 2023
 
 
 ## Introduction
@@ -21,7 +21,8 @@ Last updated: Oct 12, 2023
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
 I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020.
 
-My research interest mainly focuses on understanding physical systems through the lens of graph-structured data and its geometric symmetries. In particular, I've been focusing on the generation of the graph with diffusion models and its applications to real-world tasks, for example, drug discovery or protein design. My research interest includes following topics:
+My research interest lies in understanding physical systems through the lens of geometrical structures including graphs and manifolds. Previous works focus on graph generation with diffusion models and their applications to real-world tasks, e.g., drug discovery and protein design, and further include generative modeling on Riemannian manifolds. 
+My research interest includes following topics:
 - Diffusion Generative Models
 - Geometric Deep Learning
 
