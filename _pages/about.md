@@ -36,7 +36,7 @@ My research interest includes following topics:
 Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2023
 
-- <font size="4"><b>Graph Generation with Destination-Predicting Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) [[code]]() <br>
+- <font size="4"><b>Graph Generation with Destination-Predicting Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) [[code]](https://github.com/harryjo97/DruM/) <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
 <span style="color:darkred">**MLDD Workshop @ ICLR**</span> 2023
 
@@ -59,21 +59,6 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
-<!-- (\*: equal contribution) -->
-
-
-<!-- ## Education
-- **Korea Advanced Institute of Science and Technology** \\
-  <font size="3">Aug. 2021 - </font>
-  Ph.d. in Graduate School of Artificial Intelligence
-
-- **Korea Advanced Institute of Science and Technology** \\
-  <font size="3">Mar. 2020 - Aug. 2021</font>
-  M.S. in Mathematical Sciences
-
-- **Korea Advanced Institute of Science and Technology** \\
-  <font size="3">Mar. 2016 - Feb. 2020</font>
-  B.S. in Mathematical Sciences -->
 
 
 
