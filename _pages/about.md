@@ -8,12 +8,12 @@ redirect_from:
 layout: single
 classes: wide
 ---
-Hi, I am Jaehyeong Jo (Jae for short). <br>
+Hi, I am Jaehyeong Jo. <br>
 Here is my [CV (Curriculum Vitae)](/assets/CV.pdf) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Oct 27, 2023
+Last updated: Dec 26, 2023
 
 
 ## Introduction
@@ -21,8 +21,7 @@ Last updated: Oct 27, 2023
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
 I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020.
 
-My research interest lies in understanding physical systems through the lens of geometrical structures including graphs and manifolds. Previous works focus on graph generation with diffusion models and their applications to real-world tasks, e.g., drug discovery and protein design, and further include generative modeling on Riemannian manifolds. 
-My research interest includes following topics:
+My research interest lies in understanding physical systems through the lens of geometrical structures, especially in the context of generative modeling. I am actively contributing to the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search. My research interest includes following topics:
 - Diffusion Generative Models
 - Geometric Deep Learning
 
