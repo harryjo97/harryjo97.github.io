@@ -13,7 +13,7 @@ Here is my [CV (Curriculum Vitae)](/assets/CV.pdf) and [Google Scholar](https://
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Dec 26, 2023
+Last updated: Jan 24, 2024
 
 
 ## Introduction
@@ -31,16 +31,16 @@ My research interest lies in understanding physical systems through the lens of 
 &#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2023
 
-- <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) <br>
-Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2023
-
 - <font size="4"><b>Graph Generation with Destination-Predicting Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) [[code]](https://github.com/harryjo97/DruM/) <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
 <span style="color:darkred">**MLDD Workshop @ ICLR**</span> 2023
 
 
 ## Conference Publications
+
+- <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) <br>
+Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
+<span style="color:darkred">**ICLR**</span> 2024
 
 - <font size="4"><b>Text-Conditioned Sampling Framework for Text-to-Image Generation with Masked Generative Models</b></font> [[paper]](https://arxiv.org/abs/2304.01515) [[project]](https://hello3196.github.io/TCTS_FAS/) <br>
 Jaewoong Lee\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Yunji Kim, Jin-Hwa Kim, Jung-Woo Ha, Sung Ju Hwang <br>
