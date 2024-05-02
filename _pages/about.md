@@ -30,7 +30,7 @@ My research interest lies in understanding physical systems through the lens of 
 &#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee\^, Sung Ju Hwang\^ <br>
 <span style="color:darkred">**Preprint**</span> 2024
 
-\*: Equal contribution, \^: Equal advising
+\*: Equal contribution, ^: Equal advising
 
 ## Conference Publications
 - <font size="4"><b>Generative Modeling on Manifolds Through Mixture of Riemannian Diffusion Processes</b></font> [[paper]](https://arxiv.org/abs/2310.07216) [[code]](https://github.com/harryjo97/riemannian-diffusion-mixture/) <br>
@@ -41,15 +41,15 @@ My research interest lies in understanding physical systems through the lens of 
 &#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
 <span style="color:darkred">**ICML**</span> 2024
 
-- <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) <br>
+- <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) [[code]](https://github.com/CownowAn/DiffusionNAG) <br>
 Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
 <span style="color:darkred">**ICLR**</span> 2024
 
-- <font size="4"><b>Text-Conditioned Sampling Framework for Text-to-Image Generation with Masked Generative Models</b></font> [[paper]](https://arxiv.org/abs/2304.01515) [[project]](https://hello3196.github.io/TCTS_FAS/) <br>
+- <font size="4"><b>Text-Conditioned Sampling Framework for Text-to-Image Generation with Masked Generative Models</b></font> [[project page]](https://hello3196.github.io/TCTS_FAS/) [[paper]](https://arxiv.org/abs/2304.01515) <br>
 Jaewoong Lee\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Yunji Kim, Jin-Hwa Kim, Jung-Woo Ha, Sung Ju Hwang <br>
 <span style="color:darkred">**ICCV**</span> 2023
 
-- <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) <br>
+- <font size="4"><b>Exploring Chemical Space with Score-based Out-of-distribution Generation</b></font> [[paper]](https://arxiv.org/abs/2206.07632) [[code]](https://github.com/SeulLee05/MOOD) <br>
 Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**ICML**</span> 2023
 
@@ -61,6 +61,4 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
-\*: Equal contribution, \^: Equal advising
-
-
+\*: Equal contribution, ^: Equal advising
