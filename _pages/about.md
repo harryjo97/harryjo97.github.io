@@ -27,7 +27,7 @@ My research interest lies in understanding physical systems through the lens of 
 
 ## Preprints 
 - <font size="4"><b>Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models</b></font> [[project page]](https://mudi-t2i.github.io/) [[paper]](https://arxiv.org/abs/2404.04243) [[code]](https://github.com/agwmon/MuDI) <br>
-&#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee\^, Sung Ju Hwang\^ <br>
+&#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2024
 
 \*: Equal contribution, ^: Equal advising
