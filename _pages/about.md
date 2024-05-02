@@ -13,7 +13,7 @@ Here is my [CV (Curriculum Vitae)](/assets/CV.pdf) and [Google Scholar](https://
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Jan 24, 2024
+Last updated: May 2, 2024
 
 
 ## Introduction
@@ -26,17 +26,20 @@ My research interest lies in understanding physical systems through the lens of 
 - Geometric Deep Learning
 
 ## Preprints 
+- <font size="4"><b>Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models</b></font> [[project page]](https://mudi-t2i.github.io/) [[paper]](https://arxiv.org/abs/2404.04243) [[code]](https://github.com/agwmon/MuDI) <br>
+&#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee\^, Sung Ju Hwang\^ <br>
+<span style="color:darkred">**Preprint**</span> 2024
 
-- <font size="4"><b>Generative Modeling on Manifolds Through Mixture of Riemannian Diffusion Processes</b></font> [[paper]](https://arxiv.org/abs/2310.07216) <br>
-&#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2023
-
-- <font size="4"><b>Graph Generation with Destination-Predicting Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) [[code]](https://github.com/harryjo97/DruM/) <br>
-&#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
-<span style="color:darkred">**MLDD Workshop @ ICLR**</span> 2023
-
+\*: Equal contribution, \^: Equal advising
 
 ## Conference Publications
+- <font size="4"><b>Generative Modeling on Manifolds Through Mixture of Riemannian Diffusion Processes</b></font> [[paper]](https://arxiv.org/abs/2310.07216) [[code]](https://github.com/harryjo97/riemannian-diffusion-mixture/) <br>
+&#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
+<span style="color:darkred">**ICML**</span> 2024
+
+- <font size="4"><b>Graph Generation with Diffusion Mixture</b></font> [[paper]](https://arxiv.org/abs/2302.03596) [[code]](https://github.com/harryjo97/DruM/) <br>
+&#x200B;<U>Jaehyeong Jo</U>\*, Dongki Kim\*, Sung Ju Hwang <br>
+<span style="color:darkred">**ICML**</span> 2024
 
 - <font size="4"><b>DiffusionNAG: Task-guided Neural Architecture Generation with Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2305.16943) <br>
 Sohyun An\*, Hayeon Lee\*, <U>Jaehyeong Jo</U>, Seanie Lee, Sung Ju Hwang <br>
@@ -58,6 +61,6 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Jinheon Baek\*, Seul Lee\*, Dongki Kim, Minki Kang, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
-
+\*: Equal contribution, \^: Equal advising
 
 
