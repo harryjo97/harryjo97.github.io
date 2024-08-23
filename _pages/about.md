@@ -19,7 +19,6 @@ Last updated: Aug 23, 2024
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
 I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
-# I recieved my B.S. (Mathematical Sciences) degrees at KAIST in 2020.
 
 My research interest lies in understanding physical systems through the lens of geometrical structures, especially in the context of generative modeling. I am actively contributing to the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search. My research interest includes following topics:
 - Diffusion Generative Models
