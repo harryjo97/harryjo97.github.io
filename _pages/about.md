@@ -9,22 +9,26 @@ layout: single
 classes: wide
 ---
 Hi, I am Jaehyeong Jo. <br>
-Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1fmP08RzZyES5cVbR0PRzmOpgkYtwvv-6/view?usp=sharing) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
+Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Aug 23, 2024
+Last updated: Sep 9, 2024
 
 
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
-I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
+I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
 
 My research interest lies in understanding physical systems through the lens of geometrical structures, especially in the context of generative modeling. I am actively contributing to the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search. My research interest includes following topics:
-- Diffusion Generative Models
+- Diffusion Models
 - Geometric Deep Learning
 
 ## Preprints 
+- <font size="4"><b>Conditional Synthesis of 3D Molecules with Time Correction Sampler</b></font><br>
+&#x200B;Hojung Jung, Youngrok Park, Laura Schmid, <U>Jaehyeong Jo</U>, Dongkyu Lee, Bongsang Kim, Se-Young Yun, Jinwoo Shin<br>
+<span style="color:darkred">**Preprint**</span> 2024
+
 - <font size="4"><b>Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models</b></font> [[project page]](https://mudi-t2i.github.io/) [[paper]](https://arxiv.org/abs/2404.04243) [[code]](https://github.com/agwmon/MuDI) <br>
 &#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2024
