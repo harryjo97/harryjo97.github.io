@@ -13,29 +13,33 @@ Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-Wl
 <br>
 Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
 <br>
-Last updated: Sep 9, 2024
+Last updated: Sep 26, 2024
 
 
 ## Introduction
 <!-- <span style="color:darkred">Introduction</span> -->
-I am a PhD student at [Machine Learning and Artificial Intelligence (MLAI) lab](https://www.mlai-kaist.com/) in KAIST, under the supervision of Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
+I am a PhD student in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), under the supervision of [Prof. Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
 
-My research interest lies in understanding physical systems through the lens of geometrical structures, especially in the context of generative modeling. I am actively contributing to the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search. My research interest includes following topics:
+My research interest lies in understanding the physical world through the lens of geometry and generative modeling. 
+Previous works focus on the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search.
+I am also interested in modeling discrete data (e.g., language) and temporal data, (e.g., video, time series) with diffusion models.
+<!-- My research interest includes following topics:
 - Diffusion Models
-- Geometric Deep Learning
+- Geometric Deep Learning -->
 
-## Preprints 
+<!-- ## Preprints 
+
+\*: Equal contribution, ^: Equal advising -->
+
+## Conference Publications
 - <font size="4"><b>Conditional Synthesis of 3D Molecules with Time Correction Sampler</b></font><br>
 &#x200B;Hojung Jung, Youngrok Park, Laura Schmid, <U>Jaehyeong Jo</U>, Dongkyu Lee, Bongsang Kim, Se-Young Yun, Jinwoo Shin<br>
-<span style="color:darkred">**Preprint**</span> 2024
+<span style="color:darkred">**NeurIPS**</span> 2024
 
 - <font size="4"><b>Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models</b></font> [[project page]](https://mudi-t2i.github.io/) [[paper]](https://arxiv.org/abs/2404.04243) [[code]](https://github.com/agwmon/MuDI) <br>
 &#x200B;Sangwon Jang\*, <U>Jaehyeong Jo</U>\*, Kimin Lee^, Sung Ju Hwang^ <br>
-<span style="color:darkred">**Preprint**</span> 2024
+<span style="color:darkred">**NeurIPS**</span> 2024
 
-\*: Equal contribution, ^: Equal advising
-
-## Conference Publications
 - <font size="4"><b>Generative Modeling on Manifolds Through Mixture of Riemannian Diffusion Processes</b></font> [[paper]](https://arxiv.org/abs/2310.07216) [[code]](https://github.com/harryjo97/riemannian-diffusion-mixture/) <br>
 &#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**ICML**</span> 2024
@@ -65,3 +69,10 @@ Seul Lee, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2021
 
 \*: Equal contribution, ^: Equal advising
+
+
+## Workshop Publications 
+
+- <font size="4"><b>Antibody-SGM: Antigen-Specific Joint Design of Antibody Sequence and Structure Using Diffusion Models/b></font> [[paper]](https://icml-compbio.github.io/2023/papers/WCBICML2023_paper143.pdf) <br>
+Xuezhi Xie, Jin Sub Lee, Dongki Kim, &#x200B;<U>Jaehyeong Jo</U>, Jisun Kim, Philip M. Kim <br>
+<span style="color:darkred">**ICML 2023 Workshop**</span> on Computational Biology
