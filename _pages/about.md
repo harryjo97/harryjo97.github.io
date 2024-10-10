@@ -11,7 +11,7 @@ classes: wide
 Hi, I am Jaehyeong Jo. <br>
 Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
 <br>
-Email: harryjo97 [at] kaist [dot] ac [dot] kr <br>
+Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Last updated: Sep 27, 2024
 
@@ -19,9 +19,9 @@ Last updated: Sep 27, 2024
 ## Introduction
 I am a PhD student in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), under the supervision of [Prof. Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
 
-My research interest lies in understanding the physical world through the lens of geometry and generative modeling. 
-Previous works focus on the generation of geometrical structures with diffusion models, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search.
-I am also interested in modeling discrete data (e.g., language) and temporal data, (e.g., video, time series) with diffusion models.
+My research interest lies in understanding the physical world through the lens of geometry. 
+Previous works focus on diffusion models incorporating geometry for the generation of geometrical structures, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search.
+I am also interested in modeling discrete data (e.g., language) and temporal data (e.g., video, time series) with diffusion models.
 
 <!-- ## Preprints 
 
@@ -29,7 +29,7 @@ I am also interested in modeling discrete data (e.g., language) and temporal dat
 
 ## Conference Publications
 - <font size="4"><b>Conditional Synthesis of 3D Molecules with Time Correction Sampler</b></font>
-&#x200B;Hojung Jung, Youngrok Park, Laura Schmid, <U>Jaehyeong Jo</U>, Dongkyu Lee, Bongsang Kim, Se-Young Yun, Jinwoo Shin<br>
+&#x200B;Hojung Jung\*, Youngrok Park\*, Laura Schmid, <U>Jaehyeong Jo</U>, Dongkyu Lee, Bongsang Kim, Se-Young Yun, Jinwoo Shin<br>
 <span style="color:darkred">**NeurIPS**</span> 2024
 
 - <font size="4"><b>Identity Decoupling for Multi-Subject Personalization of Text-to-Image Models</b></font> [[project page]](https://mudi-t2i.github.io/) [[paper]](https://arxiv.org/abs/2404.04243) [[code]](https://github.com/agwmon/MuDI) <br>
