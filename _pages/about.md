@@ -13,7 +13,7 @@ Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-Wl
 <br>
 Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
-Last updated: Sep 27, 2024
+Last updated: Feb 25, 2025
 
 
 ## Introduction
@@ -21,14 +21,18 @@ I am a PhD student in Graduate school of AI at KAIST ([MLAI lab](https://www.mla
 
 My research interest lies in understanding the physical world through the lens of geometry. 
 Previous works focus on diffusion models incorporating geometry for the generation of geometrical structures, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search.
-I am also interested in modeling discrete data (e.g., language) and temporal data (e.g., video, time series) with diffusion models.
+I am recently interested in diffusion language models and their reasoning abilities.
 
-<!-- ## Preprints 
 
-\*: Equal contribution, ^: Equal advising -->
+## Preprints 
+- <font size="4"><b>Continuous Diffusion Model for Language Modeling</b></font> [[paper]](https://arxiv.org/abs/2502.11564) [[code]](https://github.com/harryjo97/RDLM) <br>
+&#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
+<span style="color:darkred">**Preprint**</span> 2025
+
+<!-- \*: Equal contribution, ^: Equal advising -->
 
 ## Conference Publications
-- <font size="4"><b>Conditional Synthesis of 3D Molecules with Time Correction Sampler</b></font>
+- <font size="4"><b>Conditional Synthesis of 3D Molecules with Time Correction Sampler</b></font> [[paper]](https://arxiv.org/abs/2411.00551) <br>
 &#x200B;Hojung Jung\*, Youngrok Park\*, Laura Schmid, <U>Jaehyeong Jo</U>, Dongkyu Lee, Bongsang Kim, Se-Young Yun, Jinwoo Shin<br>
 <span style="color:darkred">**NeurIPS**</span> 2024
 
