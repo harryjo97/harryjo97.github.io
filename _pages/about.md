@@ -32,7 +32,8 @@ I am recently interested in diffusion language models and their reasoning/planni
 <!-- \*: Equal contribution, ^: Equal advising -->
 
 ## Conference Publications
-- <font size="4"><b>Silent Branding Attack: Trigger-free Data Poisoning Attack on Text-to-Image Diffusion Models</b></font> <br>
+- <font size="4"><b>Silent Branding Attack: Trigger-free Data Poisoning Attack on Text-to-Image Diffusion Models</b></font> 
+<!-- <br> -->
 &#x200B;Sangwon Jang, June Suk Choi, <U>Jaehyeong Jo</U>, Kimin Lee^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**CVPR**</span> 2025
 
