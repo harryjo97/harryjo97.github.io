@@ -13,18 +13,23 @@ Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-Wl
 <br>
 Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
-Last updated: Feb 27, 2025
+Last updated: Jun 11, 2025
 
 
 ## Introduction
 I am a PhD student in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), under the supervision of [Prof. Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
 
-My research interest lies in understanding the physical world through the lens of geometry. 
-Previous works focus on diffusion models incorporating geometry for the generation of geometrical structures, including graphs and data on Riemannian manifolds, and their applications to real-world tasks, e.g., drug discovery, protein design, and neural architecture search.
-I am recently interested in diffusion language models and their reasoning/planning abilities.
+My research focuses on exploring the physical world through the lens of geometry. 
+In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
+These models have been applied to a variety of real-world problems, including drug discovery, protein design, and neural architecture search.
+
+More recently, I have become interested in diffusion-based language models, particularly their capabilities in reasoning and planning.
 
 
 ## Preprints 
+- <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
+&#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
+<span style="color:darkred">**Preprint**</span> 2025
 - <font size="4"><b>Continuous Diffusion Model for Language Modeling</b></font> [[paper]](https://arxiv.org/abs/2502.11564) [[code]](https://github.com/harryjo97/RDLM) <br>
 &#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2025
