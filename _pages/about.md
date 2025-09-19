@@ -13,30 +13,28 @@ Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-Wl
 <br>
 Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
-Last updated: Jun 11, 2025
+Last updated: Sep 19, 2025
 
 
 ## Introduction
-I am a PhD student in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), under the supervision of [Prof. Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta Reality Labs](https://about.meta.com/realitylabs/).
+I am a PhD candidate in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), where I am fortunate to be advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
 
-My research focuses on exploring the physical world through the lens of geometry. 
-In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
-These models have been applied to a variety of real-world problems, including drug discovery, protein design, and neural architecture search.
-
-More recently, I have become interested in diffusion-based language models, particularly their capabilities in reasoning and planning.
+My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
+These models have been applied to a variety of real-world problems, including drug discovery, language modeling, and neural architecture search.
 
 
 ## Preprints 
 - <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2025
-- <font size="4"><b>Continuous Diffusion Model for Language Modeling</b></font> [[paper]](https://arxiv.org/abs/2502.11564) [[code]](https://github.com/harryjo97/RDLM) <br>
-&#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2025
 
 <!-- \*: Equal contribution, ^: Equal advising -->
 
 ## Conference Publications
+- <font size="4"><b>Continuous Diffusion Model for Language Modeling</b></font> [[paper]](https://arxiv.org/abs/2502.11564) [[code]](https://github.com/harryjo97/RDLM) <br>
+&#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
+<span style="color:darkred">**NeurIPS**</span> 2025
+
 - <font size="4"><b>Silent Branding Attack: Trigger-free Data Poisoning Attack on Text-to-Image Diffusion Models</b></font> [[project page]](https://silent-branding.github.io/) [[paper]](https://arxiv.org/abs/2503.09669) <br>
 &#x200B;Sangwon Jang, June Suk Choi, <U>Jaehyeong Jo</U>, Kimin Lee^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**CVPR**</span> 2025
