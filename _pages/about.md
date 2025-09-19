@@ -13,6 +13,8 @@ Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-Wl
 <br>
 Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
+Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
+<br>
 Last updated: Sep 19, 2025
 
 
