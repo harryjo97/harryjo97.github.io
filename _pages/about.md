@@ -15,17 +15,21 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
-Last updated: Sep 19, 2025
+Last updated: Jan. 05, 2026
 
 
 ## Introduction
 I am a PhD candidate in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), where I am fortunate to be advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
 
 My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
-These models have been applied to a variety of real-world problems, including drug discovery, language modeling, and neural architecture search.
+These models have been applied to a variety of real-world problems, including drug discovery, language modeling, and neural network generation.
 
 
 ## Preprints 
+- <font size="4"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
+&#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
+<span style="color:darkred">**Preprint**</span> 2025
+
 - <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
 <span style="color:darkred">**Preprint**</span> 2025
