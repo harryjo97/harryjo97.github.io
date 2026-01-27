@@ -15,7 +15,7 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
-Last updated: Jan. 05, 2026
+Last updated: Jan. 27, 2026
 
 
 ## Introduction
@@ -26,17 +26,25 @@ These models have been applied to a variety of real-world problems, including dr
 
 
 ## Preprints 
+- <font size="4"><b>Self-Refining Video Sampling</b></font> [[project page]](https://agwmon.github.io/self-refine-video/) [[paper]](https://arxiv.org/abs/2601.18577) [[code]](https://github.com/agwmon/self-refine-video) <br>
+&#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
+<span style="color:darkred">**Preprint**</span> 2026
+
 - <font size="4"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
 &#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2025
-
-- <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
-&#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2025
+<span style="color:darkred">**Preprint**</span> 2026
 
 <!-- \*: Equal contribution, ^: Equal advising -->
 
 ## Conference Publications
+- <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
+&#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
+<span style="color:darkred">**ICLR**</span> 2026
+
+- <font size="4"><b>LS-Merge: Merging Language Models in Latent Space</b></font> [[paper]](https://openreview.net/forum?id=VSDV0SWwOC) <br>
+&#x200B;Bedionita Soro, Aoxuan Silvia Zhang, Bruno Andreis, <U>Jaehyeong Jo</U>, Song Chong, Sung Ju Hwang <br>
+<span style="color:darkred">**ICLR**</span> 2026
+
 - <font size="4"><b>Continuous Diffusion Model for Language Modeling</b></font> [[paper]](https://arxiv.org/abs/2502.11564) [[code]](https://github.com/harryjo97/RDLM) <br>
 &#x200B;<U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
 <span style="color:darkred">**NeurIPS**</span> 2025
