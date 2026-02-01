@@ -7,6 +7,8 @@ redirect_from:
   - /about.html
 layout: single
 classes: wide
+header:
+  show_title: false
 ---
 Hi, I am Jaehyeong Jo. <br>
 Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
@@ -19,7 +21,7 @@ Last updated: Jan. 27, 2026
 
 
 ## Introduction
-I am a PhD candidate in Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), where I am fortunate to be advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
+I am a recent PhD graduate from the Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), where I am fortunate to be advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
 
 My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
 These models have been applied to a variety of real-world problems, including drug discovery, language modeling, and neural network generation.
