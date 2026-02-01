@@ -1,5 +1,5 @@
 ---
-title: "About me"
+title: "" # "About me"
 author_profile: true
 permalink: /
 redirect_from:
@@ -7,8 +7,6 @@ redirect_from:
   - /about.html
 layout: single
 classes: wide
-header:
-  show_title: false
 ---
 Hi, I am Jaehyeong Jo. <br>
 Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
@@ -17,7 +15,7 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
-Last updated: Jan. 27, 2026
+Last updated: Feb. 01, 2026
 
 
 ## Introduction
