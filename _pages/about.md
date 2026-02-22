@@ -15,14 +15,17 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
+<<<<<<< Updated upstream
 Last updated: Feb. 01, 2026
+=======
+Last updated: Feb. 22, 2026
+>>>>>>> Stashed changes
 
 
 ## Introduction
 I am a recent PhD graduate from the Graduate school of AI at KAIST ([MLAI lab](https://www.mlai-kaist.com/)), where I am fortunate to be advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/). Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
 
-My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles to generate structured data such as graphs and data on Riemannian manifolds.
-These models have been applied to a variety of real-world problems, including drug discovery, language modeling, and neural network generation.
+My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles for a variety of real-world problems, including language modeling, drug discovery, protein design, and neural network generation.
 
 
 ## Preprints 
@@ -30,13 +33,13 @@ These models have been applied to a variety of real-world problems, including dr
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2026
 
-- <font size="4"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
-&#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
-<span style="color:darkred">**Preprint**</span> 2026
-
-<!-- \*: Equal contribution, ^: Equal advising -->
+\*: Equal contribution, ^: Equal advising
 
 ## Conference Publications
+- <font size="4"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
+&#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
+<span style="color:darkred">**CVPR**</span> 2026
+
 - <font size="4"><b>Frame Guidance: Training-Free Guidance for Frame-Level Control in Video Diffusion Models</b></font> [[project page]](https://frame-guidance-video.github.io/) [[paper]](https://arxiv.org/abs/2506.07177) [[code]](https://github.com/agwmon/frame-guidance) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Soo Ye Kim, Zhe Lin, Sung Ju Hwang <br>
 <span style="color:darkred">**ICLR**</span> 2026
