@@ -15,11 +15,7 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
-<<<<<<< Updated upstream
-Last updated: Feb. 01, 2026
-=======
 Last updated: Feb. 22, 2026
->>>>>>> Stashed changes
 
 
 ## Introduction
