@@ -15,7 +15,7 @@ Email: harryjo97 [at] kaist.ac.kr <br>
 <br>
 Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
 <br>
-Last updated: Feb. 22, 2026
+Last updated: Feb. 24, 2026
 
 
 ## Introduction
@@ -25,6 +25,10 @@ My research focuses on exploring the physical world through the lens of geometry
 
 
 ## Preprints 
+- <font size="4"><b>MolHIT: Advancing Molecular-Graph Generation with Hierarchical Discrete Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2602.17602) <br>
+&#x200B;Hojung Jung, Rodrigo Hormazabal, <U>Jaehyeong Jo</U>, Youngrok Park, Kyunggeun Roh, Se-Young Yun, Sehui Han, Dae-Woong Jeong <br>
+<span style="color:darkred">**Preprint**</span> 2026
+
 - <font size="4"><b>Self-Refining Video Sampling</b></font> [[project page]](https://agwmon.github.io/self-refine-video/) [[paper]](https://arxiv.org/abs/2601.18577) [[code]](https://github.com/agwmon/self-refine-video) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2026
