@@ -10,9 +10,9 @@ classes: wide
 ---
 <font size="5"><b>Jaehyeong Jo</b></font>
 
-[Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao) <b>|</b> [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) <br>
+[Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao) | [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) <br>
 
-Contact: harryjo97 [at] kaist.ac.kr <br>
+Contact: harryjo97 [at] kaist.ac.kr
 
 <!-- Hi, I am Jaehyeong Jo. <br>
 Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
