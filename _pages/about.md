@@ -14,29 +14,19 @@ classes: wide
 
 Contact: harryjo97 [at] kaist.ac.kr
 
-<!-- Hi, I am Jaehyeong Jo. <br>
-Here is my [CV (Curriculum Vitae)](https://drive.google.com/file/d/1vFng6i3KV-WlSxZPBgkhrqZ4vGX4YZZS/view?usp=drive_link) and [Google Scholar](https://scholar.google.com/citations?user=sB2n9ncAAAAJ&hl=ko&oi=ao). <br>
-<br>
-Contact: harryjo97 [at] kaist.ac.kr <br>
-<br>
-Twitter: [JaehyeongJo](https://twitter.com/Jaehyeong_Jo) <br>
-<br>
-Last updated: Mar. 18, 2026 -->
-
 
 ## About
 I am a postdoctoral researcher at KAIST, working with Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/) and his research group [MLAI lab](https://www.mlai-kaist.com/). I recieved my PhD in Artificial Intelligence at KAIST in 2026, advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
-Previously, I was a Research Intern at [Meta](https://ai.meta.com/research/).
+Previously, I was a Research Intern at <b>Meta AI</b>.
 
 My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles for a variety of real-world problems, including language modeling, drug discovery, protein design, and neural network generation.
 
 
-<!-- ## Preprints  -->
 ## Publications
 
-<font size="3"><b>Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech</b></font> [[paper]](https://scontent-ssn1-1.xx.fbcdn.net/v/t39.2365-6/653708461_776946831802909_5860622253438220368_n.pdf?_nc_cat=101&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=DuEfxhVxN5IQ7kNvwFGbptU&_nc_oc=Adk_wZGEw52icN5X-BnVFMnXA7Sc62GsLV_f3I3YUferd5tVzGbg-OIKT6aFJw2jE0Y&_nc_zt=14&_nc_ht=scontent-ssn1-1.xx&_nc_gid=prs-Fh0CLQheLbXn6zryCA&_nc_ss=8&oh=00_AfwAR8H6DBT2575jlaOw_MaO1C6fwKtMEf-rra9ihq-yVA&oe=69BF0830) <br>
+<font size="3"><b>Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech</b>[[paper]](https://arxiv.org/abs/2603.16606) <br>
 &#x200B;Omnilingual SONAR Team, João Maria Janeiro, Pere-Lluís Huguet Cabot, Ioannis Tsiamas, Yen Meng, Vivek Iyer, Guillem Ramírez, Loic Barrault, Belen Alastruey, Yu-An Chung, Marta R. Costa-Jussa, David Dale, Kevin Heffernan, <U>Jaehyeong Jo</U>, Artyom Kozhevnikov, Alexandre Mourachko, Christophe Ropers, Holger Schwenk, Paul-Ambroise Duquenne<br>
-<span style="color:darkred">**Technical report**</span> 2026
+<span style="color:darkred">**Technical report**</span> 2026</font> 
 
 <font size="3"><b>MolHIT: Advancing Molecular-Graph Generation with Hierarchical Discrete Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2602.17602) <br>
 &#x200B;Hojung Jung, Rodrigo Hormazabal, <U>Jaehyeong Jo</U>, Youngrok Park, Kyunggeun Roh, Se-Young Yun, Sehui Han, Dae-Woong Jeong <br>
@@ -45,10 +35,6 @@ My research focuses on exploring the physical world through the lens of geometry
 <font size="3"><b>Self-Refining Video Sampling</b></font> [[project page]](https://agwmon.github.io/self-refine-video/) [[paper]](https://arxiv.org/abs/2601.18577) [[code]](https://github.com/agwmon/self-refine-video) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2026
-
-<!-- \*: Equal contribution, ^: Equal advising
-
-## Conference Publications -->
 
 <font size="3"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
 &#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
@@ -111,13 +97,6 @@ Xuezhi Xie, Jin Sub Lee, Dongki Kim, &#x200B;<U>Jaehyeong Jo</U>, Jisun Kim, Phi
 <span style="color:darkred">**NeurIPS**</span> 2021
 
 \*: Equal contribution, ^: Equal advising
-
-
-<!-- ## Workshop Publications 
-
-<font size="3"><b>Antibody-SGM: Antigen-Specific Joint Design of Antibody Sequence and Structure Using Diffusion Models</b></font> [[paper]](https://icml-compbio.github.io/2023/papers/WCBICML2023_paper143.pdf) <br>
-Xuezhi Xie, Jin Sub Lee, Dongki Kim, &#x200B;<U>Jaehyeong Jo</U>, Jisun Kim, Philip M. Kim <br>
-<span style="color:darkred">**ICML 2023 Workshop**</span> on Computational Biology -->
 
 ## Work Experience
 
