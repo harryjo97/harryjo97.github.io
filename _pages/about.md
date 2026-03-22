@@ -24,9 +24,12 @@ My research focuses on exploring the physical world through the lens of geometry
 
 ## Publications
 
-<font size="3"><b>Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech</b>[[paper]](https://arxiv.org/abs/2603.16606) <br>
-&#x200B;Omnilingual SONAR Team, João Maria Janeiro, Pere-Lluís Huguet Cabot, Ioannis Tsiamas, Yen Meng, Vivek Iyer, Guillem Ramírez, Loic Barrault, Belen Alastruey, Yu-An Chung, Marta R. Costa-Jussa, David Dale, Kevin Heffernan, <U>Jaehyeong Jo</U>, Artyom Kozhevnikov, Alexandre Mourachko, Christophe Ropers, Holger Schwenk, Paul-Ambroise Duquenne<br>
-<span style="color:darkred">**Technical report**</span> 2026</font> 
+<font size="3">
+  <b>Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech</b>
+  [<a href="https://arxiv.org/abs/2603.16606">paper</a>] <br>
+  &#x200B;Omnilingual SONAR Team, João Maria Janeiro, Pere-Lluís Huguet Cabot, Ioannis Tsiamas, Yen Meng, Vivek Iyer, Guillem Ramírez, Loic Barrault, Belen Alastruey, Yu-An Chung, Marta R. Costa-Jussa, David Dale, Kevin Heffernan, <U>Jaehyeong Jo</U>, Artyom Kozhevnikov, Alexandre Mourachko, Christophe Ropers, Holger Schwenk, Paul-Ambroise Duquenne<br>
+  <span style="color:darkred">**Technical report**</span> 2026
+</font> 
 
 <font size="3"><b>MolHIT: Advancing Molecular-Graph Generation with Hierarchical Discrete Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2602.17602) <br>
 &#x200B;Hojung Jung, Rodrigo Hormazabal, <U>Jaehyeong Jo</U>, Youngrok Park, Kyunggeun Roh, Se-Young Yun, Sehui Han, Dae-Woong Jeong <br>
