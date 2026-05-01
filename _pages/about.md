@@ -34,7 +34,7 @@ My research focuses on exploring the physical world through the lens of geometry
 
 <font size="4"><b>Self-Refining Video Sampling</b></font> [[project page]](https://agwmon.github.io/self-refine-video/) [[paper]](https://arxiv.org/abs/2601.18577) [[code]](https://github.com/agwmon/self-refine-video) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
-<span style="color:darkred">**Preprint**</span> 2026
+<span style="color:darkred">**ICML**</span> 2026
 
 <font size="4"><b>Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</b></font> [[project page]](https://taekyungki.github.io/AvatarForcing/) [[paper]](https://arxiv.org/abs/2601.00664) [[code]](https://github.com/TaekyungKi/AvatarForcing) <br>
 &#x200B;Taekyung Ki\*, Sangwon Jang\*, <U>Jaehyeong Jo</U>, Jaehong Yoon, Sung Ju Hwang <br>
