@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: http://harryjo97.github.io/sitemap.xml
+Sitemap: https://harryjo97.github.io/sitemap.xml

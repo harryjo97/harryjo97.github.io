@@ -1,11 +1,18 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.google.tracking_id }}"></script>
+{% assign google_analytics_id = site.analytics.google.measurement_id | default: site.analytics.google.tracking_id %}
+{% if google_analytics_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_id }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+  {% if site.analytics.google.tracking_id %}
   gtag('config', '{{ site.analytics.google.tracking_id }}', { 'anonymize_ip': {{ site.analytics.google.anonymize_ip | default: false }}});
+  {% endif %}
 
+  {% if site.analytics.google.measurement_id and site.analytics.google.measurement_id != site.analytics.google.tracking_id %}
   gtag('config', '{{ site.analytics.google.measurement_id }}');
+  {% endif %}
 </script>
+{% endif %}
