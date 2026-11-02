@@ -19,10 +19,22 @@ Contact: harryjo97 [at] kaist.ac.kr
 I am a postdoctoral researcher at KAIST, working with Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/) and his research group [MLAI lab](https://www.mlai-kaist.com/). I recieved my PhD in Artificial Intelligence at KAIST in 2026, advised by Prof. [Sung Ju Hwang](http://www.sungjuhwang.com/).
 Previously, I was a Research Intern at <b>Meta AI</b>.
 
-My research focuses on exploring the physical world through the lens of geometry. In my previous work, I developed diffusion models that incorporate geometric principles for a variety of real-world problems, including language modeling, drug discovery, protein design, and neural network generation.
+My research focuses on generative modeling and representation learning for understanding, predicting, and interacting with the physical world. I am interested in how models can learn the structure and dynamics of their environments to support reasoning, planning, and action. My background includes geometric approaches to diffusion models, with applications to language and scientific discovery.
 
 
 ## Publications
+
+<font size="4"><b>Future Representation Distillation for Imagination-free World Action Models</b></font> [[project page]](https://harryjo97.github.io/dreamfree/) [[paper]](https://drive.google.com/file/d/1WyfPt1ogHSlV1oDhNVypDbmIk93R-OLc/view?usp=drive_link) <br>
+&#x200B;<U>Jaehyeong Jo</U>\*, Sangwon Jang\*, Sihyun Yu, Seonghyeon Ye, Yekyung Nah, Hojung Jung, Kimin Lee^, Sung Ju Hwang^ <br>
+<span style="color:darkred">**Preprint**</span> 2026
+
+<font size="4"><b>BlendPO: Controlling Guidance Strength in Reinforcement Learning without Changing Guidance Content</b></font> [[paper]]() <br>
+&#x200B;Myeongkyun Cho, Hyeonyu Kim, Minki Kang, <U>Jaehyeong Jo</U>, Sung Ju Hwang <br>
+<span style="color:darkred">**Preprint**</span> 2026
+
+<font size="4"><b>R-DiT: Recursive Diffusion Transformer</b></font> [[paper]]() <br>
+&#x200B;Hojung Jung, Youngrok Park, Sihyun Yu, <U>Jaehyeong Jo</U>, Sangwon Jang, Juhyeong Kim, Sangmin Bae, Se-Young Yun <br>
+<span style="color:darkred">**Preprint**</span> 2026
 
 <font size="4"><b>Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech</b></font> [[paper]](https://arxiv.org/abs/2603.16606) <br>
 &#x200B;Omnilingual SONAR Team, João Maria Janeiro, Pere-Lluís Huguet Cabot, Ioannis Tsiamas, Yen Meng, Vivek Iyer, Guillem Ramírez, Loic Barrault, Belen Alastruey, Yu-An Chung, Marta R. Costa-Jussa, David Dale, Kevin Heffernan, <U>Jaehyeong Jo</U>, Artyom Kozhevnikov, Alexandre Mourachko, Christophe Ropers, Holger Schwenk, Paul-Ambroise Duquenne<br>
@@ -30,7 +42,7 @@ My research focuses on exploring the physical world through the lens of geometry
 
 <font size="4"><b>MolHIT: Advancing Molecular-Graph Generation with Hierarchical Discrete Diffusion Models</b></font> [[paper]](https://arxiv.org/abs/2602.17602) <br>
 &#x200B;Hojung Jung, Rodrigo Hormazabal, <U>Jaehyeong Jo</U>, Youngrok Park, Kyunggeun Roh, Se-Young Yun, Sehui Han, Dae-Woong Jeong <br>
-<span style="color:darkred">**Preprint**</span> 2026
+<span style="color:darkred">**NeurIPS**</span> 2026
 
 <font size="4"><b>Self-Refining Video Sampling</b></font> [[project page]](https://agwmon.github.io/self-refine-video/) [[paper]](https://arxiv.org/abs/2601.18577) [[code]](https://github.com/agwmon/self-refine-video) <br>
 &#x200B;Sangwon Jang\*, Taekyung Ki\*, <U>Jaehyeong Jo</U>\*, Saining Xie, Jaehong Yoon^, Sung Ju Hwang^ <br>
