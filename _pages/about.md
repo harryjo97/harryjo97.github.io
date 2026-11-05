@@ -24,7 +24,7 @@ My research focuses on generative modeling and representation learning for under
 
 ## Publications
 
-<font size="4"><b>Future Representation Distillation for Imagination-free World Action Models</b></font> [[project page]](https://harryjo97.github.io/dreamfree/) [[paper]](https://drive.google.com/file/d/1WyfPt1ogHSlV1oDhNVypDbmIk93R-OLc/view?usp=drive_link) <br>
+<font size="4"><b>Future Representation Distillation for Imagination-free World Action Models</b></font> [[project page]](https://harryjo97.github.io/dreamfree/) [[paper]](https://arxiv.org/abs/2611.04527) [[code]](https://github.com/harryjo97/dreamfree) <br>
 &#x200B;<U>Jaehyeong Jo</U>\*, Sangwon Jang\*, Sihyun Yu, Seonghyeon Ye, Yekyung Nah, Hojung Jung, Kimin Lee^, Sung Ju Hwang^ <br>
 <span style="color:darkred">**Preprint**</span> 2026
 
